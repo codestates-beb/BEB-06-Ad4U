@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 
 import Nav from './component/Nav';
 import Main from './pages/main/Main';
-import List from './pages/list/List';
+import ListPage from './pages/list/ListPage';
 import ClientDetail from './pages/client/Detail';
 import ClientMypage from './pages/client/Mypage';
 import SupplierDetail from './pages/supplier/Detail';
@@ -19,7 +19,7 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="list/*" element={<List />} />
+        <Route path="list/*" element={<ListPage />} />
         <Route path="client/mypage" element={<ClientMypage />} />
         <Route path="client/detail/:clientId" element={<ClientDetail />} />
         <Route path="supplier/mypage" element={<SupplierMypage />} />
