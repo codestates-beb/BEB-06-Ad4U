@@ -46,16 +46,7 @@ const Sidebar = () => {
         </Row>
       </Container>
     </Navbar>
-  )
+  );
 }
 
 export default Sidebar;
-
-
-
-// <div>
-// <div>Sidebar</div>
-// <Link to="/list">AD List</Link>
-// <Link to="/list/client">Client List</Link>
-// <Link to="/list/supplier">Creater List</Link>
-// </div>

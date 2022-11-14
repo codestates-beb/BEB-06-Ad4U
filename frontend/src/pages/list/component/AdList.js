@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 
@@ -33,7 +34,7 @@ const AdList = () => {
         </tbody>
       </Table>
     </Container>
-  )
+  );
 }
 
 export default AdList;

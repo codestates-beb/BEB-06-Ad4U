@@ -27,6 +27,6 @@ const List = () => {
         </Col>
       </Row>
     </Container>
-  )
+  );
 }
 export default List;
