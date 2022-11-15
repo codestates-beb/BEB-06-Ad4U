@@ -47,7 +47,7 @@ module.exports = {
                 include: [
                     {
                         model: Client, as: "Client",
-                        attributes: ['userId', 'company_name', 'company_number', 'email'],
+                        attributes: ['id', 'userId', 'company_name', 'company_number', 'email'],
                     },
                     {
                         model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",
@@ -105,5 +105,8 @@ module.exports = {
             }
         }
     },
+    apply: async (req, res) => {
+        const authorization = req.headers.authorization;
+    }
     
 }

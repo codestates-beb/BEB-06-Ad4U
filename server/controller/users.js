@@ -5,8 +5,8 @@ const jwt = require('jsonwebtoken');
 const {
     OAuth2Client,
   } = require('google-auth-library');
-const client_attributes = ['userId', 'company_name', 'company_number', 'email'];
-const supplier_attributes = ['userId', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address'];
+const client_attributes = ['id', 'userId', 'company_name', 'company_number', 'email'];
+const supplier_attributes = ['id', 'userId', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address'];
 const axios = require("axios");
 const oAuth2Client = new OAuth2Client(
     process.env.CLIENT_ID,
@@ -125,7 +125,7 @@ module.exports = {
         } else {
             try {
                 const data = jwt.verify(req.cookies.jwt_refreshToken, process.env.REFRESH_SECRET);
-                if (isClient) {
+                if (isClient == "true") {
                     user = await Client.findOne({
                         attributes: client_attributes,
                         where: { userId: data.userId },
@@ -156,14 +156,16 @@ module.exports = {
     mypage: async (req, res) => {
         const authorization = req.headers.authorization;
         const { isClient } = req.query;
+        console.log(isClient)
+        const token = authorization.split(' ')[1];
+        const data = jwt.verify(token, process.env.ACCESS_SECRET);
         if (!authorization) {
             res.status(404).send({ data: null, message: 'invalid access token' });
+            
         } else {
-            if (isClient) {
-                try {
-                    const token = authorization.split(' ')[1];
-                    const data = jwt.verify(token, process.env.ACCESS_SECRET);
 
+            if(isClient == "true") { 
+                try {
                     const user = await Client.findOne({
                         attributes: client_attributes,
                         where: { userId: data.userId },
@@ -192,24 +194,19 @@ module.exports = {
                 }
             } else {
                 try {
-                    const token = authorization.split(' ')[1];
-                    const data = jwt.verify(token, process.env.ACCESS_SECRET);
-
                     const user = await Supplier.findOne({
                         attributes: supplier_attributes,
                         where: { userId: data.userId },
                         include: [
                             {
-                                model: Advertisement_has_Supplier, as: "Advertisement_has_Supplier",
+                                model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",
                                 include: [
                                     {
-                                        model: Advertisement, as: "Advertisements",
+                                        model: Advertisement, as: "Advertisement",
                                         attributes: ['id', 'title', 'AdimgUrl', 'cost', 'createdAt'],
-
                                     },
                                 ]
                             }
-
                         ]
 
                     });
