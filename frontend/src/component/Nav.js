@@ -8,14 +8,14 @@ import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
 import Avatar from 'react-avatar';
 import Login from './Login';
-import Signup from './SignUp';
+import Signup from './Signup';
 
 const Nav = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   const LoggedIn = () => {
     return (
-      <Stack direction="horizontal" gap={4} justifyContent='flex-end'>
+      <Stack direction="horizontal" gap={4} justify='flex-end'>
         <Link to='/mypage/client'>
           <Avatar size="50" round={true}/>
         </Link>
@@ -25,7 +25,7 @@ const Nav = () => {
 
   const Logout = () => {
     return (
-      <Stack direction="horizontal" gap={4} justifyContent='flex-end'>
+      <Stack direction="horizontal" gap={4} justify='flex-end' >
         <Login />
         <Signup />
       </Stack>
@@ -38,7 +38,7 @@ const Nav = () => {
         <Link to="/">
           <img className="nav_logo" src = {Logo} alt = "Ad4U logo" width={100} height={70}/>
         </Link>
-        <Stack direction="horizontal" gap={4} justifyContent='flex-end'>
+        <Stack direction="horizontal" gap={4} justify='flex-end'>
           {isLogin ? <LoggedIn /> : <Logout />}
           <NavDropdown id="basic-nav-dropdown">
           <NavDropdown.Item href="/mypage/client">clientmypage</NavDropdown.Item>
