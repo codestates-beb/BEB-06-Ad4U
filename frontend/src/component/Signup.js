@@ -1,18 +1,15 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import axios from 'axios';
-import { GoogleLogin } from '@react-oauth/google';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-const SignUp = ({ onSuccess, onError, email }) => {
-  const [show, setShow] = useState(false);
+const SignUp = ({ show, setShow, email }) => {
   let idRef = useRef(null);
   let passwordRef = useRef(null);
   let confirmRef = useRef(null);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const onSubmit = async (e) => {
     const id = idRef.current.value;
@@ -36,7 +33,7 @@ const SignUp = ({ onSuccess, onError, email }) => {
       //   })
       // })
       // .then(res => {
-      //     navigate('/');
+      //     navigate('/mypage');
       // })
       // .catch(err => alert(err));
     }
@@ -44,9 +41,6 @@ const SignUp = ({ onSuccess, onError, email }) => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        SignUp
-      </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>SignUp</Modal.Title>
@@ -62,34 +56,41 @@ const SignUp = ({ onSuccess, onError, email }) => {
                 disabled
                 autoFocus
               />
-              <GoogleLogin 
-                onSuccess={(e) => onSuccess(e)}
-                onError={(e) => onError(e)}
-               />
             </Form.Group>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>ID</Form.Label>
-              <Form.Control as="textarea" rows={1} ref={idRef}/>
+              <Form.Control 
+                type="id" 
+                rows={1} 
+                ref={idRef}/>
             </Form.Group>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Password</Form.Label>
-              <Form.Control as="textarea" rows={1} ref={passwordRef}/>
+              <Form.Control 
+                type="password"
+                rows={1} 
+                ref={passwordRef}
+              />
             </Form.Group>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Confirm Password</Form.Label>
-              <Form.Control as="textarea" rows={1} ref={confirmRef}/>
+              <Form.Control 
+                type="password"
+                rows={1} 
+                ref={confirmRef}
+              />
             </Form.Group>
             <Button variant="primary" type="submit">
-              Submit
+              Si
             </Button>
           </Form>
         </Modal.Body>

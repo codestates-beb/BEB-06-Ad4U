@@ -9,6 +9,7 @@ import SupplierMypage from './pages/mypage/Supplier';
 import ClientDetail from './pages/detail/Client';
 import SupplierDetail from './pages/detail/Supplier';
 import AdDetail from './pages/detail/Ad';
+import LoginPage from './component/LoginPage';
 import UploadPage from './pages/detail/Upload';
 import Emptypage from './component/Emptypage';
 import Footer from './component/Footer';
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/detail/client/:clientId" element={<ClientDetail />} />
         <Route path="/detail/supplier/:supplierId" element={<SupplierDetail />} />
         <Route path="/detail/ad/:adId" element={<AdDetail />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="*" element={<Emptypage />} />
       </Routes>
