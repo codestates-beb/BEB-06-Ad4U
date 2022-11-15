@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Nav from './component/Nav';
@@ -15,10 +15,12 @@ import Footer from './component/Footer';
 
 import './App.css';
 
-function App() {
+const App = () => {
+  const [ userData, setUserData ] = useState([]);
+  
   return (
-    <div>
-      <Nav />
+    <>
+      <Nav userData={userData} />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/list/*" element={<ListPage />} />
@@ -31,7 +33,7 @@ function App() {
         <Route path="*" element={<Emptypage />} />
       </Routes>
       <Footer />
-    </div>
+    </>
   );
 }
 
