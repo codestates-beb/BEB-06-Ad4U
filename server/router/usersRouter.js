@@ -1,4 +1,4 @@
-const { signup, login, refresh } = require('../controller/user');
+const { signup, login, refresh } = require('../controller/users');
 const express = require('express');
 const router = express.Router();
 
