@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Toast from 'react-bootstrap/Toast';
 import { Stack, ToastContainer } from 'react-bootstrap';
-import styled from "styled-components";
 
 const Emptypage = () => {
   const navigate = useNavigate();

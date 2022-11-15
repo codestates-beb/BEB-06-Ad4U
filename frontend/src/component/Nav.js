@@ -8,7 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
 import Avatar from 'react-avatar';
 import Login from './Login';
-import Signup from './Signup';
+import Signup from './SignUp';
 
 const Nav = () => {
   const [isLogin, setIsLogin] = useState(true);

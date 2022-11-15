@@ -1,6 +1,6 @@
 import React from 'react';
 
-import altImg from '../../dummyfiles/img1.png'
+import altImg from '../../../dummyfiles/img1.png'
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Avatar from 'react-avatar';

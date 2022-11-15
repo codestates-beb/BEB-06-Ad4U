@@ -9,7 +9,7 @@ import SupplierMypage from './pages/mypage/Supplier';
 import ClientDetail from './pages/detail/Client';
 import SupplierDetail from './pages/detail/Supplier';
 import AdDetail from './pages/detail/Ad';
-import UploadPage from './pages/component/Upload';
+import UploadPage from './pages/detail/Upload';
 import Emptypage from './component/Emptypage';
 import Footer from './component/Footer';
 

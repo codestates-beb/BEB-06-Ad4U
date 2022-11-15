@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Profile from '../component/Profile';
+import Profile from './component/Profile';
 import Status from './component/Status';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';

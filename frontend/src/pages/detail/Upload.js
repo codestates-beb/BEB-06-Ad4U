@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Profile from './Profile';
+import Profile from '../mypage/component/Profile';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
