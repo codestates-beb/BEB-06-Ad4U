@@ -6,7 +6,7 @@ module.exports = {
     main: async (req, res) => { //최근 10개만
         try {
             let main_client = await Client.findAll({
-                attributes: ['company_name', 'company_number', 'email'],
+                attributes: ['id', 'company_name', 'company_number', 'email'],
                 order: [['id', 'DESC']],
                 limit: 10,
                 // offset: 5,
@@ -20,7 +20,7 @@ module.exports = {
     list: async (req, res) => {
         try {
             let client_list = await Client.findAll({
-                attributes: ['company_name', 'company_number', 'email'],
+                attributes: ['id', 'company_name', 'company_number', 'email'],
                 order: [['id', 'DESC']],
                 include: [
                     { model: Advertisement, as: "Advertisements", attributes: ["id"],  where: {
@@ -34,12 +34,11 @@ module.exports = {
         } catch (error) {
             res.status(400).json(error);
         }
-
     },
     detail: async (req, res) => {
         try{
-            let supplier_datail = await Supplier.findOne({
-                attributes: ['company_name', 'company_number', 'email'],
+            let client_datail = await Client.findOne({
+                attributes: ['id', 'company_name', 'company_number', 'email'],
                 where: {
                     id: req.query.id
                 },
@@ -55,7 +54,7 @@ module.exports = {
                 //limit: 10,
                 // offset: 5,
             });
-            res.status(200).json(supplier_datail);
+            res.status(200).json(client_datail);
         }catch(error){
             res.status(400).json(error);
         }

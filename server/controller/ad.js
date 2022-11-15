@@ -1,4 +1,4 @@
-const { Client, Advertisement } = require('../models/index');
+const { Client, Advertisement, Advertisement_has_Supplier, Supplier } = require('../models/index');
 const jwt = require('jsonwebtoken');
 
 
@@ -47,11 +47,18 @@ module.exports = {
                 include: [
                     {
                         model: Client, as: "Client",
-                        attributes: ['company_name', 'company_number', 'email'],
-                        where: {
-                            status: 0
-                        }
+                        attributes: ['userId', 'company_name', 'company_number', 'email'],
                     },
+                    {
+                        model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",
+                        include: [
+                            {
+                                model: Supplier, as: "Supplier",
+                                attributes: ['userId'],
+                            }
+                        ]
+                    }
+                   
                 ]
                 //limit: 10,
                 // offset: 5,
@@ -97,5 +104,6 @@ module.exports = {
                 res.status(400).json(error);
             }
         }
-    }
+    },
+    
 }

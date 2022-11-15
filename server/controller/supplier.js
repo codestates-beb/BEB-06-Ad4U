@@ -7,7 +7,7 @@ module.exports = {
     main: async(req, res) => { //최근 10개만
         try{
             let main_supplier = await Supplier.findAll({
-                attributes: ['email', 'channelName', 'viewCount', 'subscriberCount', 'profileImgUrl'],
+                attributes: ['id', 'email', 'channelName', 'viewCount', 'subscriberCount', 'profileImgUrl'],
                 order: [['id', 'DESC']],
                 limit: 10,
                // offset: 5,
@@ -20,7 +20,7 @@ module.exports = {
     list: async (req, res) => {
         try{
             let supplier_list = await Supplier.findAll({
-                attributes: ['email', 'channelName', 'viewCount', 'subscriberCount', 'profileImgUrl'],
+                attributes: ['id', 'email', 'channelName', 'viewCount', 'subscriberCount', 'profileImgUrl'],
                 order: [['id', 'DESC']],
                 //limit: 10,
                // offset: 5,
@@ -34,7 +34,7 @@ module.exports = {
     detail: async (req, res)=> {
         try{
             let supplier_datail = await Supplier.findOne({
-                attributes: ['email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl'],
+                attributes: ['id', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl'],
                 where: {
                     id: req.query.id
                 },
