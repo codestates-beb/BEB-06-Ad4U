@@ -24,10 +24,17 @@ module.exports = {
         try {
             let main_ad = await Advertisement.findAll({
                 attributes: ['id', 'title', 'AdimgUrl', 'cost', 'createdAt'],
+
                 where: {
                     status: 0,
                 },
                 order: [['id', 'DESC']],
+                include: [
+                    {
+                        model: Client, as: "Client",
+                        attributes: ['id', 'company_name', 'company_number', 'email'],
+                    },
+                ]
                 //limit: 10,
                 // offset: 5,
             });

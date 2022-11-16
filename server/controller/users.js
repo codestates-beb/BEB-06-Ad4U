@@ -2,17 +2,9 @@ require("dotenv").config();
 const { Client, Supplier, Advertisement, Advertisement_has_Supplier } = require('../models/index');
 const { Op } = require('sequelize');
 const jwt = require('jsonwebtoken');
-const {
-    OAuth2Client,
-  } = require('google-auth-library');
 const client_attributes = ['id', 'userId', 'company_name', 'company_number', 'email'];
 const supplier_attributes = ['id', 'userId', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address'];
 const axios = require("axios");
-const oAuth2Client = new OAuth2Client(
-    process.env.CLIENT_ID,
-    process.env.CLIENT_SECRET,
-    'postmessage',
-  );
 
 module.exports = {
     login: async (req, res) => {
@@ -47,26 +39,22 @@ module.exports = {
     },
     auth: async (req, res) => {
         const { code } = req.body;
-        // axios.post("https://oauth2.googleapis.com/token", {
-        //     client_id: process.env.CLIENT_ID,
-        //     client_secret: CLIENT_PASSWORD,
-        //     code: authorizationCode,
-        //     grant_type: "authorization_code"
-        // }).then((response) => {
-        //     res.cookie('google_refreshToken', response.refresh_token, {
-        //         maxAge: 60 * 60 * 1000
-        //     });
-        //     const access_token = response.access_token;
-        //     res.status(200).json({ access_token: access_token });
-        // }).catch((err) => {
-        //     res.status(401).json(err);
-        // })
         try{
-            const { tokens } = await oAuth2Client.getToken(code); // exchange code for tokens
-            console.log(tokens);
-                  res.cookie('google_refreshToken', tokens.refresh_token, {
+        axios.post("https://oauth2.googleapis.com/token", {
+            client_id: process.env.CLIENT_ID,
+            client_secret: process.env.CLIENT_PASSWORD,
+            code: code,
+            grant_type: "authorization_code"
+        }).then((response) => {
+            res.cookie('google_refreshToken', response.refresh_token, {
                 maxAge: 60 * 60 * 1000
             });
+            const access_token = response.access_token;
+            res.status(200).json({ access_token: access_token });
+        }).catch((err) => {
+            res.status(401).json(err);
+        })
+       
             res.status(200).json(tokens);
         }catch(err){
             res.status(401).json(err);
@@ -208,7 +196,6 @@ module.exports = {
                                 ]
                             }
                         ]
-
                     });
                     res.status(200).json(user);
 
