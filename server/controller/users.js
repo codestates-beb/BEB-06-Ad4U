@@ -40,22 +40,30 @@ module.exports = {
     auth: async (req, res) => {
         const { code } = req.body;
         try{
-        axios.post("https://oauth2.googleapis.com/token", {
+            console.log(code);
+       axios.post("https://oauth2.googleapis.com/token", null, {
+        headers: {
+        "Content-Type": `application/x-www-form-urlencoded`
+       }, params : {
             client_id: process.env.CLIENT_ID,
             client_secret: process.env.CLIENT_PASSWORD,
             code: code,
+            redirect_uri: "http://localhost:3000/login",
             grant_type: "authorization_code"
-        }).then((response) => {
-            res.cookie('google_refreshToken', response.refresh_token, {
+        }
+    }).then((response) => {
+        console.log(response.data)
+            res.cookie('google_refreshToken', response.data.refresh_token, {
                 maxAge: 60 * 60 * 1000
             });
-            const access_token = response.access_token;
+
+            const access_token = response.data.access_token;
+
+
             res.status(200).json({ access_token: access_token });
         }).catch((err) => {
             res.status(401).json(err);
         })
-       
-            res.status(200).json(tokens);
         }catch(err){
             res.status(401).json(err);
         }
@@ -80,7 +88,7 @@ module.exports = {
                     .then(data => {
                         res.status(201).json("complete");
                     }).catch(err => {
-                        res.status(400).json("DB error")
+                        res.status(400).json("DB error");
                     })
             }
         } else {
@@ -95,7 +103,7 @@ module.exports = {
             } else {
 
                 //body에 userId, password, email, address, 정보 다 가져옴..
-                //body에 refreshToken, channelName, subscriberCount, viewCount, profileImgUrl, channelUrl
+                //body에  refreshtoken, channelName, subscriberCount, viewCount, profileImgUrl, channelUrl
                 Supplier.create(body)
                     .then(data => {
                         res.status(201).json("complete");
