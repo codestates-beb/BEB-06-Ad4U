@@ -90,7 +90,7 @@ const SignUp = ({ show, setShow, email }) => {
               />
             </Form.Group>
             <Button variant="primary" type="submit">
-              Si
+              SignUp
             </Button>
           </Form>
         </Modal.Body>

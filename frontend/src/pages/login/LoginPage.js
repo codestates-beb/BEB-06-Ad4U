@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { decodeToken }from 'react-jwt';
 import env from "react-dotenv";
-import Signup from './Signup';
+import Signup from './component/Signup';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -19,6 +19,7 @@ const LoginPage = () => {
 
   const onSuccess = async(res) => {
     const token = decodeToken(res.credential);
+    console.log(res);
     console.log(token);
     setEmail(token.email);
     setShow(true);
