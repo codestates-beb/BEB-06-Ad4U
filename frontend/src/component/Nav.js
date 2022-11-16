@@ -48,7 +48,7 @@ const Nav = ({ userData }) => {
   }
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" className='navbar'>
       <Container>
         <Link to="/">
           <img className="nav_logo" src = {Logo} alt = "Ad4U logo" width={100} height={70}/>
