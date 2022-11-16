@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { decodeToken } from 'react-jwt';
 import axios from 'axios';
 import Signup from './component/Signup';
@@ -33,10 +33,13 @@ const LoginPage = () => {
         data:{ code: authorizationCode }
       }
       axios.request(options)
-        .then(res => console.log(res))
+        .then(res => {
+          setEmail("email");
+          console.log(res)
+        })
         .catch(err => console.log(err))
     }
-  },[])
+  },[]);
 
   const googleOath = async () => {
     const url = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code`+
@@ -50,15 +53,17 @@ const LoginPage = () => {
   }
 
   const sendLoginData = async (loginData) => {
-    loginData.isClient = isClient
+    loginData.isClient = isClient;
+    console.log("LoginData", loginData);
+
+    const { id, password } = loginData;
     const options = {
       url: "http://localhost:3001/users/login",
       method: 'POST',
       headers: {"Content-Type": "application/json"},
       withcredential: true,
-      data:{ loginData }
+      data:{ id, password, isClient }
     }
-    console.log("LoginData", loginData)
     // const result = await axios.request(options)
   }
       
@@ -92,7 +97,10 @@ const LoginPage = () => {
           email={email}
           show={show} 
           setShow={setShow}
+          isClient={isClient}
+          handleIsClient={handleIsClient}
         />
+        <Button onClick={() => setShow(true)}>SignupTest</Button>
       </Container>
     </>
   );
