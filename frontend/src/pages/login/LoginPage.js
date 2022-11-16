@@ -41,7 +41,7 @@ const LoginPage = () => {
     `&access_type=offline`+
     `&state=state_parameter_passthrough_value`+
     `&include_granted_scopes=true`+
-    `&client_id=${env.OATH_CLIENTID}`+
+    `&client_id=${REACT_APP_CLIENT_ID}`+
     `&scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly`+
     `&redirect_uri=http://localhost:3000/login`;
     window.location.href=url;
@@ -119,4 +119,4 @@ const LoginPage = () => {
 
 }
 
-export default LoginPage;
+export default LoginPage;g_state
