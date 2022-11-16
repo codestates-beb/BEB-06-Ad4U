@@ -13,6 +13,7 @@ import LoginPage from './pages/login/LoginPage';
 import UploadPage from './pages/detail/Upload';
 import Emptypage from './component/Emptypage';
 import Footer from './component/Footer';
+import TestApiPage from './pages/testAPI/testapi';
 
 import './App.css';
 
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="*" element={<Emptypage />} />
+        <Route path="/testapi" element={<TestApiPage />} />
       </Routes>
       <Footer />
     </>
