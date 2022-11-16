@@ -14,14 +14,10 @@ import UploadPage from './pages/detail/Upload';
 import Emptypage from './component/Emptypage';
 import Footer from './component/Footer';
 
-
 import './App.css';
 
 const App = () => {
   const [ userData, setUserData ] = useState([]);
-  console.log(process.env.REACT_APP_OATH_CLIENTID)
-  console.log(process.env.REACT_APP_OATH_PASSWORD)
-  console.log(process.env.REACT_APP_YOUTUBE_APIKEY)
   
   return (
     <>
