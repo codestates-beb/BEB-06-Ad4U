@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     AdImgBuf: {
-      type: DataTypes.BLOB,
+      type: DataTypes.STRING(300),
       allowNull: true
     },
     cost: {
