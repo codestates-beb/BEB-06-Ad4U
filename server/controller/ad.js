@@ -76,11 +76,11 @@ module.exports = {
         }
 
     },
-    create: async (req, res) => {
+    create: async (req, res) => { //광고 생성 - client
         const authorization = req.headers.authorization;
         const { title, content, AdImgUrl, cost, isClient } = req.body;
         if (!authorization || !isClient) {
-            res.status(404).send({ data: null, message: 'invalid access' });
+            res.status(401).send({ data: null, message: 'invalid access' });
         } else {
             try {
                 const token = authorization.split(' ')[1];
@@ -90,6 +90,7 @@ module.exports = {
                     attributes: ['id'],
                     where: { userId: data.userId },
                 });
+                console.log(user)
 
                 const body = {
                     title: title,
@@ -105,42 +106,52 @@ module.exports = {
                         res.status(201).json("complete");
                     }).catch(err => {
 
-                        res.status(400).json("DB error")
+                        res.status(400).json("DB error");
                     });
             } catch (error) {
                 res.status(400).json(error);
             }
         }
     },
-    apply: async (req, res) => {
+    _delete: async (req, res) => { //광고 삭제 -client
         const authorization = req.headers.authorization;
-        const { isClient, advertisement_id } = req.body;
+        const { advertisement_id, isClient } = req.body;
+        try {
+            const token = authorization.split(' ')[1];
+            const data = jwt.verify(token, process.env.ACCESS_SECRET);
 
-        if (!authorization || isClient) {
-            res.status(404).send({ data: null, message: 'invalid access' });
+            const user = await Client.findOne({
+                attributes: ['id'],
+                where: { userId: data.userId },
+            });
+            const ad = await Advertisement.findOne({
+                attributes: ['Client_id'],
+                where: { id: advertisement_id },
+            })
+        if (!authorization || !isClient || ad.Client_id != user.id) {
+            res.status(401).send({ data: null, message: 'invalid access' });
+        } else {
+                    Advertisement_has_Supplier.destroy({
+                        where: {
+                            Advertisement_id: advertisement_id
+                        }
+                    }).then((data) => {
+                        Advertisement.destroy({
+                            where : {
+                                id: advertisement_id
+                        }})
+                        .then(data => {
+                            res.status(201).json("complete");
+                        }).catch(err => {
+                            res.status(400).json("DB error");
+                        });
+                    }).catch((err)=> {
+                        res.status(400).json("DB error");
+                    })
         }
-        else {
-            try{
-                const token = authorization.split(' ')[1];
-                const data = jwt.verify(token, process.env.ACCESS_SECRET);
-
-                const user = await Supplier.findOne({
-                    attributes: ['id'],
-                    where: { userId: data.userId },
-                });
-
-                Advertisement_has_Supplier.create({
-                    Advertisement_id: advertisement_id,
-                    Supplier_id: user.id
-                }).then((res) => {
-                    res.status(201).json(res)
-                }).catch((err) => {
-                    res.status(400).json("db error")
-                })
-            }catch(error){
-                res.status(400).json(err)
-            }
-        }
+    } catch (error) {
+        res.status(400).json(error);
     }
+    },
 
 }

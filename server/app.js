@@ -10,6 +10,7 @@ const usersRouter = require('./router/usersRouter');
 const adRouter = require("./router/adRouter");
 const supplierRouter = require("./router/supplierRouter");
 const clientRouter = require("./router/clientRouter");
+const functionRouter = require("./router/functionRouter");
 
 app.use(cors({
     origin: true,
@@ -23,6 +24,7 @@ app.use('/users', usersRouter);
 app.use('/ad', adRouter);
 app.use('/client', clientRouter);
 app.use('/supplier', supplierRouter);
+app.use('/function', functionRouter)
 
 
 
