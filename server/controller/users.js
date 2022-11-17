@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const client_attributes = ['id', 'userId', 'company_name', 'company_number', 'email'];
 const supplier_attributes = ['id', 'userId', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address'];
 const axios = require("axios");
+const jwt_decode = require('jwt-decode');
 
 module.exports = {
     login: async (req, res) => {
@@ -39,38 +40,69 @@ module.exports = {
     },
     auth: async (req, res) => {
         const { code } = req.body;
-        try{
-            console.log(code);
-       axios.post("https://oauth2.googleapis.com/token", null, {
-        headers: {
-        "Content-Type": `application/x-www-form-urlencoded`
-       }, params : {
-            client_id: process.env.CLIENT_ID,
-            client_secret: process.env.CLIENT_PASSWORD,
-            code: code,
-            redirect_uri: "http://localhost:3000/login",
-            grant_type: "authorization_code"
-        }
-    }).then((response) => {
-        console.log(response.data)
-            res.cookie('google_refreshToken', response.data.refresh_token, {
-                maxAge: 60 * 60 * 1000
-            });
+            axios.post("https://oauth2.googleapis.com/token", null, {
+                headers: {
+                    "Content-Type": `application/x-www-form-urlencoded`
+                }, params: {
+                    client_id: process.env.CLIENT_ID,
+                    client_secret: process.env.CLIENT_PASSWORD,
+                    code: code,
+                    redirect_uri: "http://localhost:3000/login",
+                    grant_type: "authorization_code"
+                }
+            }).then(async (response) => {
+                res.cookie('google_refreshToken', response.data.refresh_token, {
+                    maxAge: 60 * 60 * 1000
+                });
+                const user_info = jwt_decode(response.data.id_token);
+                const access_token = response.data.access_token;
 
-            const access_token = response.data.access_token;
+                const youtube_info = await axios.get(`https://www.googleapis.com/youtube/v3/channels?access_token=${access_token}&part=snippet,statistics&mine=true&fields=items&2Fsnippet%2Fthumbnails`)
+                    .then((res) => {
+                        return res.data
+                    }).catch(err => console.log(err))
 
+                const user = await Supplier.findOne({
+                    where: { email: user_info.email },
+                });
 
-            res.status(200).json({ access_token: access_token });
-        }).catch((err) => {
-            res.status(401).json(err);
-        })
-        }catch(err){
-            res.status(401).json(err);
-        }
- 
+                if (user) {
+                    const body = {
+                        channelName: youtube_info.items[0].snippet.title,
+                        subscriberCount: youtube_info.items[0].statistics.subscriberCount,
+                        viewCount: youtube_info.items[0].statistics.viewCount,
+                        channelUrl: `https://www.youtube.com/channel/${youtube_info.items[0].id}`,
+                        profileImgUrl: youtube_info.items[0].snippet.thumbnails.default.url,
+                    }
 
-        
-     
+                    Supplier.update(body, {
+                        where: { email: user_info.email },
+                    }).then(data => {
+                        res.status(201).json({ email: user_info.email });
+                    }).catch(err => {
+                        res.status(400).json("DB error")
+                    })
+
+                } else {
+                    const body = {
+                        channelName: youtube_info.items[0].snippet.title,
+                        subscriberCount: youtube_info.items[0].statistics.subscriberCount,
+                        viewCount: youtube_info.items[0].statistics.viewCount,
+                        channelUrl: `https://www.youtube.com/channel/${youtube_info.items[0].id}`,
+                        profileImgUrl: youtube_info.items[0].snippet.thumbnails.default.url,
+                        email: user_info.email,
+                        refreshToken: response.data.refresh_token,
+                    }
+                    Supplier.create(body)
+                        .then(data => {
+                            res.status(201).json({ email: user_info.email });
+                        }).catch(err => {
+                            res.status(400).json("DB error")
+                        })
+                }
+            }).catch((err) => {
+                res.status(401).json(err);
+            })
     },
     signup: async (req, res) => {
         let isClient = req.body.isClient;
@@ -101,10 +133,9 @@ module.exports = {
             if (user) {
                 res.status(400).json("아이디 중복")
             } else {
-
-                //body에 userId, password, email, address, 정보 다 가져옴..
-                //body에  refreshtoken, channelName, subscriberCount, viewCount, profileImgUrl, channelUrl
-                Supplier.create(body)
+                Supplier.update(body, {
+                    where: { email: req.body.email },
+                })
                     .then(data => {
                         res.status(201).json("complete");
                     }).catch(err => {
@@ -135,7 +166,7 @@ module.exports = {
                 }
 
                 const userId = user.userId;
-                
+
                 if (user) {
                     const jwt_accessToken = jwt.sign({ userId }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
                     res.status(200).json({ jwt_accessToken, user, isClient });
@@ -157,10 +188,10 @@ module.exports = {
         const data = jwt.verify(token, process.env.ACCESS_SECRET);
         if (!authorization) {
             res.status(404).send({ data: null, message: 'invalid access token' });
-            
+
         } else {
 
-            if(isClient == "true") { 
+            if (isClient == "true") {
                 try {
                     const user = await Client.findOne({
                         attributes: client_attributes,
@@ -169,17 +200,17 @@ module.exports = {
                             {
                                 model: Advertisement, as: "Advertisements",
                                 attributes: ['id', 'title', 'AdimgUrl', 'cost', 'createdAt', 'status'],
-                                include : [
+                                include: [
                                     {
-                                    model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",
-                                    include: [
-                                        {
-                                            model: Supplier, as: "Supplier",
-                                            attributes: ['id', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl'],
-                                        }
-                                    ],
-                                }
-                            ]
+                                        model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",
+                                        include: [
+                                            {
+                                                model: Supplier, as: "Supplier",
+                                                attributes: ['id', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl'],
+                                            }
+                                        ],
+                                    }
+                                ]
                             },
                         ]
                     });
