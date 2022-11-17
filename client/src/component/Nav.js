@@ -38,9 +38,9 @@ const Nav = ({ userData }) => {
           <img className="nav_logo" src = {Logo} alt = "Ad4U logo" width={100} height={70}/>
         </Link>
         <Stack direction="horizontal" gap={4} justify='flex-end'>
-            {userData.length === 0 
-              ? <Logout />
-              : <LoggedIn userData={userData}/> 
+            {userData.isClient 
+              ? <LoggedIn userData={userData} />  
+              : <Logout />
             }
           <NavDropdown id="basic-nav-dropdown">
           <NavDropdown.Item href="/mypage/client">clientmypage</NavDropdown.Item>

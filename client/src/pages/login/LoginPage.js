@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
-const LoginPage = () => {
+const LoginPage = ({ setUserData }) => {
   const [isClient, setIsClient] = useState(false);
   const [email, setEmail] = useState("");
   const [show, setShow] = useState(false);
@@ -29,12 +29,11 @@ const LoginPage = () => {
         url: "http://localhost:3001/users/auth",
         method: 'POST',
         headers: {"Content-Type": "application/json"},
-        withcredentials: true,
+        withCredentials: true,
         data:{ code: authorizationCode }
       }
       axios.request(options)
         .then(res => {
-          setEmail("email");
           console.log(res)
         })
         .catch(err => console.log(err))
@@ -44,7 +43,7 @@ const LoginPage = () => {
   const googleOath = async () => {
     const url = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code`+
     `&access_type=offline`+
-    `&state=state_parameter_passthrough_value`+
+    `&state=ad4u_oauth_login`+
     `&include_granted_scopes=true`+
     `&client_id=${process.env.REACT_APP_CLIENT_ID}`+
     `&scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly`+
@@ -56,15 +55,18 @@ const LoginPage = () => {
     loginData.isClient = isClient;
     console.log("LoginData", loginData);
 
-    const { id, password } = loginData;
+    const { userId, password } = loginData;
     const options = {
       url: "http://localhost:3001/users/login",
       method: 'POST',
       headers: {"Content-Type": "application/json"},
-      withcredential: true,
-      data:{ id, password, isClient }
+      withCredentials: true,
+      data:{ userId, password, isClient }
     }
-    // const result = await axios.request(options)
+    const result = await axios.request(options)
+    const { user } = result.data;
+    user.isClient = result.data.isClient;
+    setUserData(user)
   }
   
   return (

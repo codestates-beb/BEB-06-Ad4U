@@ -18,7 +18,8 @@ import TestApiPage from './pages/testAPI/testapi';
 import './App.css';
 
 const App = () => {
-  const [ userData, setUserData ] = useState([]);
+  const [ userData, setUserData ] = useState({});
+  console.log("userData", userData)
   
   return (
     <>
@@ -31,7 +32,7 @@ const App = () => {
         <Route path="/detail/client/:clientId" element={<ClientDetail />} />
         <Route path="/detail/supplier/:supplierId" element={<SupplierDetail />} />
         <Route path="/detail/ad/:adId" element={<AdDetail />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage setUserData={setUserData} />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="*" element={<Emptypage />} />
         <Route path="/testapi" element={<TestApiPage />} />
