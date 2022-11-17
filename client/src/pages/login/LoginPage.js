@@ -29,7 +29,7 @@ const LoginPage = () => {
         url: "http://localhost:3001/users/auth",
         method: 'POST',
         headers: {"Content-Type": "application/json"},
-        withcredentials: true,
+        withCredentials: true,
         data:{ code: authorizationCode }
       }
       axios.request(options)
