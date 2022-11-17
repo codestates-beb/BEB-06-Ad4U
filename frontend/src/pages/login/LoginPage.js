@@ -1,105 +1,110 @@
-import React, { useState, useRef } from 'react';
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import { decodeToken }from 'react-jwt';
-import env from "react-dotenv";
+import React, { useState, useEffect } from 'react';
+import { decodeToken } from 'react-jwt';
+import axios from 'axios';
 import Signup from './component/Signup';
+import LoginForm  from './component/LoginForm';
 
+import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import { Container } from 'react-bootstrap';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 
 const LoginPage = () => {
-
+  const [isClient, setIsClient] = useState(false);
   const [email, setEmail] = useState("");
   const [show, setShow] = useState(false);
-  const [isclient, setIsClient] = useState(false);
 
-  let idRef = useRef(null);
-  let passwordRef = useRef(null);
-
-  const onSuccess = async(res) => {
-    const token = decodeToken(res.credential);
-    console.log(res);
-    console.log(token);
-    setEmail(token.email);
-    setShow(true);
+  const handleIsClient = (e) => {
+    if (e === "client") {
+      setIsClient(true);
+    } else setIsClient(false);
   }
 
-  const onError = (error) => {
-    alert(error);
-  }
-
-  const onSubmit = async (e) => {
-    const id = idRef.current.value;
-    const password = passwordRef.current.value;
-
-    e.preventDefault(); //버튼을 눌러도 새로고침 되지않도록 함
-    if (id && password) {
-      console.log(id)
-      console.log(password)
-      // axios({
-      //   url: ""
-      //   method: "GET",
-      //   headers: {
-      //     "Content-Type": "application/json"
-      //   },
-      //   body: JSON.stringify({
-      //     id,
-      //     password,
-      //   })
-      // })
-      // .then(res => {
-      //     navigate('/mypage');
-      // })
-      // .catch(err => alert(err));
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const authorizationCode = url.searchParams.get('code');
+    console.log("authorizationCode", authorizationCode)
+    if (authorizationCode) {
+      const options = {
+        url: "http://localhost:3001/users/auth",
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        withcredentials: true,
+        data:{ code: authorizationCode }
+      }
+      axios.request(options)
+        .then(res => {
+          setEmail("email");
+          console.log(res)
+        })
+        .catch(err => console.log(err))
     }
+  },[]);
+
+  const googleOath = async () => {
+    const url = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code`+
+    `&access_type=offline`+
+    `&state=state_parameter_passthrough_value`+
+    `&include_granted_scopes=true`+
+    `&client_id=${process.env.REACT_APP_CLIENT_ID}`+
+    `&scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly`+
+    `&redirect_uri=http://localhost:3000/login`;
+    window.location.href=url;
   }
 
+  const sendLoginData = async (loginData) => {
+    loginData.isClient = isClient;
+    console.log("LoginData", loginData);
+
+    const { id, password } = loginData;
+    const options = {
+      url: "http://localhost:3001/users/login",
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      withcredential: true,
+      data:{ id, password, isClient }
+    }
+    // const result = await axios.request(options)
+  }
+      
   return (
     <>
       <Container>
-        <GoogleOAuthProvider clientId={env.OATH_CLIENTID}>
-          <Form onSubmit={onSubmit}>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>ID</Form.Label>
-              <Form.Control
-                type="id"
-                // placeholder="ID"
-                autoFocus
-                ref={idRef}
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Password</Form.Label>
-              <Form.Control 
-               rows={1} 
-               type="password"
-               placeholder="Password"
-               ref={passwordRef}
-              />
-            </Form.Group>
-            <Button variant="primary" type='submit'>
-              LogIn
-            </Button>
-          </Form>
-          <div>또는</div>
-          <GoogleLogin 
-            onSuccess={(e) => onSuccess(e)}
-            onError={(e) => onError(e)}
-          />
-          <Signup 
-            email={email}
-            show={show} 
-            setShow={setShow}
-          />
-        </GoogleOAuthProvider>
+        <Tabs
+        defaultActiveKey="supplier"
+        className="mb-3"
+        onSelect={handleIsClient}
+        justify
+         >
+          <Tab 
+            eventKey="supplier" 
+            title="크리에이터"
+          >
+            <LoginForm sendLoginData={sendLoginData}/>
+          </Tab>
+          <Tab 
+            eventKey="client" 
+            title="광고주"
+          >
+            <LoginForm sendLoginData={sendLoginData} />
+          </Tab>
+        </Tabs>
+        <div>또는</div>
+        <Button onClick={googleOath}>
+          Google 계정으로 간편 로그인
+        </Button>
+        <Signup 
+          email={email}
+          show={show} 
+          setShow={setShow}
+          isClient={isClient}
+          handleIsClient={handleIsClient}
+        />
+        <Button onClick={() => setShow(true)}>SignupTest</Button>
       </Container>
     </>
   );
-
 }
+
 
 export default LoginPage;
