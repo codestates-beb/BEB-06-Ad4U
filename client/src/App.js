@@ -32,7 +32,7 @@ const App = () => {
         <Route path="/detail/supplier/:supplierId" element={<SupplierDetail />} />
         <Route path="/detail/ad/:adId" element={<AdDetail />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/upload" element={<UploadPage />} />
+        <Route path="/upload" userData={userData} element={<UploadPage />} />
         <Route path="*" element={<Emptypage />} />
         <Route path="/testapi" element={<TestApiPage />} />
       </Routes>
