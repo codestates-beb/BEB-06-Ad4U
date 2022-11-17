@@ -1,12 +1,15 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
-import SupplierSignupForm  from './ClientSignupForm'
+import SupplierSignupForm  from './SupplierSignupForm'
 import ClientSignupForm  from './ClientSignupForm'
 
+import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+
+import '../Loginpage.css';
 
 const SignUp = ({ show, setShow, email }) => {
   const [isClient, setIsClient] = useState(false);
@@ -31,26 +34,30 @@ const SignUp = ({ show, setShow, email }) => {
         data: signupData
       }
       const result = await axios.request(options);
-      console.log(result)
       if (result.data === 'complete') {
         alert("회원가입이 완료되었습니다. 로그인을 해주세요");
         handleClose();
       }
-    } catch {
-      alert("중복된 아이디입니다.")
+    } catch (err) {
+      alert(err.response.data);
     }
   }
 
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal 
+        className="signup_container"
+        as={Container} 
+        show={show} 
+        onHide={handleClose}
+      >
         <Modal.Header closeButton>
           <Modal.Title>SignUp</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <Tabs
           defaultActiveKey="supplier"
-          className="mb-3"
+          className="signup_tab"
           onSelect={handleIsClient}
           justify
         >
@@ -58,21 +65,25 @@ const SignUp = ({ show, setShow, email }) => {
             eventKey="supplier" 
             title="크리에이터"
           >
-            <SupplierSignupForm email={email} sendSignupData={sendSignupData}/>
+            <SupplierSignupForm 
+              email={email} 
+              sendSignupData={sendSignupData}
+              handleClose={handleClose}
+            />
           </Tab>
           <Tab 
             eventKey="client" 
             title="광고주"
           >
-            <ClientSignupForm email={email} sendSignupData={sendSignupData}/>
+            <ClientSignupForm 
+              email={email} 
+              sendSignupData={sendSignupData}
+              handleClose={handleClose}
+            />
           </Tab>
         </Tabs>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
+        <Modal.Footer></Modal.Footer>
       </Modal>
     </>
   );

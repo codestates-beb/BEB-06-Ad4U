@@ -1,0 +1,43 @@
+/* login */
+.loginPage_container {
+  box-sizing: border-box;
+  background-color: white;
+  width: 800px;
+  margin-top: 100px;
+  margin-bottom: 500px;
+}
+
+.login_inputArea {
+  margin-top: 40px;
+}
+
+.login_button {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+/* signup */
+.signup_container {
+  box-sizing: border-box;
+}
+
+.signup_tab {
+  margin-top: 30px;
+}
+
+.signup_inputArea {
+  margin-top: 30px;
+}
+
+.signup_button {
+  margin-right: 5px;
+}
+
+.signup_close_button {
+  margin-left: 5px;
+}
+
+.signup_lowerArea {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}

@@ -6,9 +6,13 @@ import Signup from './component/Signup';
 import LoginForm  from './component/LoginForm';
 
 import Container from 'react-bootstrap/esm/Container';
+import Row from 'react-bootstrap/esm/Row';
+import Col from 'react-bootstrap/esm/Col';
 import Button from 'react-bootstrap/Button';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+
+import './Loginpage.css'
 
 const LoginPage = ({ setUserData }) => {
   const [isClient, setIsClient] = useState(false);
@@ -39,7 +43,7 @@ const LoginPage = ({ setUserData }) => {
           setEmail(res.data.email);
           setShow(true);
         })
-        .catch(err => console.log(err))
+        .catch(err => alert(err.response.data.message))
     }
   },[]);
 
@@ -75,18 +79,19 @@ const LoginPage = ({ setUserData }) => {
       } else {
         alert("아이디와 비밀번호를 입력해주세요");
       }
-    } catch {
-      alert("아이디 또는 비밀번호가 잘 못 되었습니다.");
+    } catch (err) {
+      alert(err.response.data);
     }
   }
   
   return (
     <>
-      <Container>
+      <Container className='loginPage_container'>
         <Tabs
+          as={Row}
           defaultActiveKey="supplier"
-          className="mb-3"
           onSelect={handleIsClient}
+          className="mb-3"
           justify
         >
           <Tab 
@@ -102,18 +107,23 @@ const LoginPage = ({ setUserData }) => {
             <LoginForm sendLoginData={sendLoginData} />
           </Tab>
         </Tabs>
-        <div>또는</div>
-        <Button onClick={googleOath}>
-          Google 계정으로 간편 회원가입
-        </Button>
-        <Signup 
+        <Row>
+          <Button 
+            as={Col}
+            xs={{ span: 4, offset: 8 }}
+            onClick={googleOath} 
+          >
+            Google 계정으로 간편회원가입
+          </Button>
+        </Row>
+      </Container>
+      <Signup 
           email={email}
           show={show} 
           setShow={setShow}
           isClient={isClient}
           handleIsClient={handleIsClient}
         />
-      </Container>
     </>
   );
 }

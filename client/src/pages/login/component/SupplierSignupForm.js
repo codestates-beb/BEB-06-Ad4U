@@ -1,9 +1,14 @@
 import React, { useState, useRef } from 'react';
 
+import Container from 'react-bootstrap/esm/Container';
+import Row from 'react-bootstrap/esm/Row';
+import Col from 'react-bootstrap/esm/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-const SupplierSignupForm = ({ email, sendSignupData }) => {
+import '../Loginpage.css'
+
+const SupplierSignupForm = ({ email, sendSignupData, handleClose }) => {
   
   const [isCorrect, setIsClient] = useState(true);
 
@@ -35,61 +40,70 @@ const SupplierSignupForm = ({ email, sendSignupData }) => {
 
   return(
     <>
-      <Form onSubmit={onSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            placeholder="Google Email" 
-            type="email"
-            value={email}
-            disabled
-            autoFocus
-          />
-        </Form.Group>
-        <Form.Group
-          className="mb-3"
-        >
-          <Form.Label>ID</Form.Label>
-          <Form.Control 
-            type="id" 
-            rows={1} 
-            ref={idRef}/>
-        </Form.Group>
-        <Form.Group
-          className="mb-3"
-        >
-          <Form.Label>Password</Form.Label>
-          <Form.Control 
-            type="password"
-            rows={1} 
-            ref={passwordRef}
-          />
-        </Form.Group>
-        <Form.Group
-          className="mb-3"
-        >
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control 
-            type="password"
-            rows={1} 
-            ref={confirmRef}
-          />
-          <div>{isCorrect ? "" : "비밀번호가 일치하지 않습니다."}</div>
-        </Form.Group>
-        <Form.Group
-          className="mb-3"
-        >
-          <Form.Label>WalletAddress</Form.Label>
-          <Form.Control 
-            type="id"
-            rows={1} 
-            ref={addressRef}
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          SignUp
-        </Button>
-      </Form>
+      <Container>
+        <Form onSubmit={onSubmit}>
+          <Form.Group className="signup_inputArea" as={Row}>
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              placeholder="Google Email" 
+              type="email"
+              value={email}
+              disabled
+              autoFocus
+            />
+          </Form.Group>
+          <Form.Group className="signup_inputArea" as={Row}>
+            <Form.Label>ID</Form.Label>
+            <Form.Control 
+              type="id" 
+              rows={1} 
+              ref={idRef}/>
+          </Form.Group>
+          <Form.Group className="signup_inputArea" as={Row}>
+            <Form.Label>Password</Form.Label>
+            <Form.Control 
+              type="password"
+              rows={1} 
+              ref={passwordRef}
+            />
+          </Form.Group>
+          <Form.Group className="signup_inputArea" as={Row}>
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control 
+              type="password"
+              rows={1} 
+              ref={confirmRef}
+            />
+            <div>{isCorrect ? "" : "비밀번호가 일치하지 않습니다."}</div>
+          </Form.Group>
+          <Form.Group className="signup_inputArea" as={Row}>
+            <Form.Label>WalletAddress</Form.Label>
+            <Form.Control 
+              type="id"
+              rows={1} 
+              ref={addressRef}
+            />
+          </Form.Group>
+          <Row>
+            <Col className="signup_lowerArea"  xs={{ span: 6, offset: 7 }}>
+              <Button 
+                className="signup_button" 
+                variant="primary" 
+                type="submit"
+              >
+                SignUp
+              </Button>
+              <Button
+                className="signup_close_button" 
+                variant="secondary" 
+                onClick={handleClose}
+              >
+                Close
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </Container>
     </>
   )
 }

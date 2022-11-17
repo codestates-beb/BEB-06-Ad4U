@@ -25,7 +25,7 @@ const Nav = ({ userData }) => {
     return (
       <Stack direction="horizontal" gap={4}  justify='flex-end'>
         <Button href='./login'>
-          Login        
+          LoginPage        
         </Button>
       </Stack>
     )

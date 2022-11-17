@@ -14,7 +14,7 @@ const ClientMypage = () => {
   return (
     <Container>
       <Row xs={2}>
-        <Col xs={2}>
+        <Col >
           <Profile />
         </Col>
         <Col xs={10}>
