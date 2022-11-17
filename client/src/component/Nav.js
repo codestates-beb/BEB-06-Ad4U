@@ -66,12 +66,12 @@ const Nav = ({ userData }) => {
         </Stack>
       </Container>
       <div className='menubar'>
-      <Row className="justify-content-md-center" >
-      <Col xs lg="2"><Button variant="link" onClick={onHomeClick}>Home</Button></Col>
-      <Col xs lg="2"><Button variant="link" onClick={onAboutClick}>About</Button></Col>
-      <Col xs lg="2"><Button variant="link" onClick={onAdClick}>Ad</Button></Col>
-      <Col xs lg="2"><Button variant="link" onClick={onCreatorClick}>Creator</Button></Col>
-      </Row>
+        <Row className="justify-content-md-center" >
+        <Col xs lg="2"><Button variant="link" onClick={onHomeClick}>Home</Button></Col>
+        <Col xs lg="2"><Button variant="link" onClick={onAboutClick}>About</Button></Col>
+        <Col xs lg="2"><Button variant="link" onClick={onAdClick}>Ad</Button></Col>
+        <Col xs lg="2"><Button variant="link" onClick={onCreatorClick}>Creator</Button></Col>
+        </Row>
       </div>
     </Navbar>
    
