@@ -161,7 +161,6 @@ module.exports = {
                     user = await Supplier.findOne({
                         attributes: supplier_attributes,
                         where: { userId: data.userId },
-
                     });
                 }
 
