@@ -29,7 +29,7 @@ const LoginPage = () => {
         url: "http://localhost:3001/users/auth",
         method: 'POST',
         headers: {"Content-Type": "application/json"},
-        withCredentials: true,
+        withcredentials: true,
         data:{ code: authorizationCode }
       }
       axios.request(options)
@@ -66,16 +66,16 @@ const LoginPage = () => {
     }
     // const result = await axios.request(options)
   }
-      
+  
   return (
     <>
       <Container>
         <Tabs
-        defaultActiveKey="supplier"
-        className="mb-3"
-        onSelect={handleIsClient}
-        justify
-         >
+          defaultActiveKey="supplier"
+          className="mb-3"
+          onSelect={handleIsClient}
+          justify
+        >
           <Tab 
             eventKey="supplier" 
             title="크리에이터"

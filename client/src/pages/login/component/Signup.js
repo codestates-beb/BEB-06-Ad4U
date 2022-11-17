@@ -7,21 +7,27 @@ import Modal from 'react-bootstrap/Modal';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
-const SignUp = ({ show, setShow, isClient, handleIsClient, email }) => {
+const SignUp = ({ show, setShow, email }) => {
+  const [isClient, setIsClient] = useState(false);
 
   const handleClose = () => setShow(false);
 
+  const handleIsClient = (e) => {
+    if (e === "client") {
+      setIsClient(true);
+    } else setIsClient(false);
+  }
+  
   const sendSignupData = async (signupData) => {
     signupData.isClient = isClient;
     console.log("SignupData", signupData);
-
-    const { email, id, password } = signupData;
+    const { email, id, password, address } = signupData;
     const options = {
       url: "http://localhost:3001/users/signup",
       method: 'POST',
       headers: {"Content-Type": "application/json"},
       withcredential: true,
-      data:{ email, id, password, isClient }
+      data:{ email, id, password, address, isClient }
     }
     // const result = await axios.request(options)
   }
@@ -34,11 +40,11 @@ const SignUp = ({ show, setShow, isClient, handleIsClient, email }) => {
         </Modal.Header>
         <Modal.Body>
         <Tabs
-        defaultActiveKey="supplier"
-        className="mb-3"
-        onSelect={handleIsClient}
-        justify
-         >
+          defaultActiveKey="supplier"
+          className="mb-3"
+          onSelect={handleIsClient}
+          justify
+        >
           <Tab 
             eventKey="supplier" 
             title="크리에이터"
