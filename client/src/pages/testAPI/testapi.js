@@ -4,12 +4,12 @@ import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 import { Button } from 'react-bootstrap';
-import { multiSigWalletDeploy } from '../../apis/multiSigWalletDeploy';
-import { supplierSignWallet } from '../../apis/supplierSignWallet';
-import { submitTransaction } from '../../apis/submitTransaction';
-import { confirmTransaction } from '../../apis/confirmTransaction';
-import { executeTransaction } from '../../apis/executeTransaction';
-import { revokeConfirmation } from '../../apis/revokeTransaction';
+import { multiSigWalletDeploy } from '../../hooks/web3/multiSigWalletDeploy';
+import { supplierSignWallet } from '../../hooks/web3/supplierSignWallet';
+import { submitTransaction } from '../../hooks/web3/submitTransaction';
+import { confirmTransaction } from '../../hooks/web3/confirmTransaction';
+import { executeTransaction } from '../../hooks/web3/executeTransaction';
+import { revokeConfirmation } from '../../hooks/web3/revokeTransaction';
 
 
 const TestApiPage = () => {
