@@ -66,7 +66,7 @@ const LoginPage = () => {
     }
     // const result = await axios.request(options)
   }
-      
+  
   return (
     <>
       <Container>
@@ -97,6 +97,8 @@ const LoginPage = () => {
           email={email}
           show={show} 
           setShow={setShow}
+          isClient={isClient}
+          handleIsClient={handleIsClient}
         />
         <Button onClick={() => setShow(true)}>SignupTest</Button>
       </Container>

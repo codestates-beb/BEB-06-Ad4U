@@ -45,7 +45,7 @@ module.exports = {
 
     },
     detail: async (req, res) => {
-        try{
+        try {
             let ad_datail = await Advertisement.findOne({
                 attributes: ['id', 'title', 'content', 'AdimgUrl', 'cost', 'createdAt'],
                 where: {
@@ -65,13 +65,13 @@ module.exports = {
                             }
                         ]
                     }
-                   
+
                 ]
                 //limit: 10,
                 // offset: 5,
             });
             res.status(200).json(ad_datail);
-        }catch(error){
+        } catch (error) {
             res.status(400).json(error);
         }
 
@@ -86,7 +86,7 @@ module.exports = {
                 const token = authorization.split(' ')[1];
                 const data = jwt.verify(token, process.env.ACCESS_SECRET);
 
-                user = await Client.findOne({
+                const user = await Client.findOne({
                     attributes: ['id'],
                     where: { userId: data.userId },
                 });
@@ -114,6 +114,33 @@ module.exports = {
     },
     apply: async (req, res) => {
         const authorization = req.headers.authorization;
+        const { isClient, advertisement_id } = req.body;
+
+        if (!authorization || isClient) {
+            res.status(404).send({ data: null, message: 'invalid access' });
+        }
+        else {
+            try{
+                const token = authorization.split(' ')[1];
+                const data = jwt.verify(token, process.env.ACCESS_SECRET);
+
+                const user = await Supplier.findOne({
+                    attributes: ['id'],
+                    where: { userId: data.userId },
+                });
+
+                Advertisement_has_Supplier.create({
+                    Advertisement_id: advertisement_id,
+                    Supplier_id: user.id
+                }).then((res) => {
+                    res.status(201).json(res)
+                }).catch((err) => {
+                    res.status(400).json("db error")
+                })
+            }catch(error){
+                res.status(400).json(err)
+            }
+        }
     }
-    
+
 }
