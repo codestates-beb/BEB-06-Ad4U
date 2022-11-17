@@ -187,9 +187,7 @@ module.exports = {
         const data = jwt.verify(token, process.env.ACCESS_SECRET);
         if (!authorization) {
             res.status(404).send({ data: null, message: 'invalid access token' });
-
         } else {
-
             if (isClient == "true") {
                 try {
                     const user = await Client.findOne({
