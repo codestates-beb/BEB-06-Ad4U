@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal';
@@ -21,10 +23,17 @@ const AdUpload = () => {
     isClient : true
   });
 
+  const [vsCurrencies, setVsCurrencies] = useState("krw");
+  const [ethPrice,setEthPrice] = useState(0);
+  const [curCost, setCurCost] = useState("");
+
+
 
   useEffect(() => {
-    console.log(AdInfo);
-  },[AdInfo])
+    vsChange(curCost)
+  },[vsCurrencies])
+
+  useEffect(() => {},[AdInfo,ethPrice])
 
   const handleAdTitle = async (e) => {
     AdInfo.title = e.target.value;
@@ -37,7 +46,61 @@ const AdUpload = () => {
   }
 
   const handleAdCost = async (e) => {
-    AdInfo.cost = e.target.value;
+    setCurCost(e.target.value);
+    const cost =  e.target.value;
+    const coinGeckoUrl = `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=${vsCurrencies}`;
+    const options = {
+      url: coinGeckoUrl,
+      method: 'GET',
+      headers: {"Content-Type": "application/json"}
+    }
+    var toEth = 0;
+    await axios.request(options)
+        .then(res => {
+          if(vsCurrencies == "krw") {
+            toEth = (1/res.data.ethereum.krw)*cost;
+            console.log(toEth)
+            setEthPrice(toEth)
+          } else if (vsCurrencies == "usd") {
+            toEth = (1/res.data.ethereum.usd)*cost;
+            setEthPrice(toEth)
+          } else if (vsCurrencies == "eur") {
+            toEth = (1/res.data.ethereum.eur)*cost;
+            setEthPrice(toEth)
+          }
+        })
+        .catch(err => console.log(err))
+
+    AdInfo.cost = toEth;
+    setAdInfo(AdInfo)
+  }
+
+  const vsChange = async (curCost) => {
+    const cost =  curCost;
+    const coinGeckoUrl = `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=${vsCurrencies}`;
+    const options = {
+      url: coinGeckoUrl,
+      method: 'GET',
+      headers: {"Content-Type": "application/json"}
+    }
+    var toEth = 0;
+    await axios.request(options)
+        .then(res => {
+          if(vsCurrencies == "krw") {
+            toEth = (1/res.data.ethereum.krw)*cost;
+            console.log(toEth)
+            setEthPrice(toEth)
+          } else if (vsCurrencies == "usd") {
+            toEth = (1/res.data.ethereum.usd)*cost;
+            setEthPrice(toEth)
+          } else if (vsCurrencies == "eur") {
+            toEth = (1/res.data.ethereum.eur)*cost;
+            setEthPrice(toEth)
+          }
+        })
+        .catch(err => console.log(err))
+
+    AdInfo.cost = toEth;
     setAdInfo(AdInfo)
   }
 
@@ -114,8 +177,6 @@ const AdUpload = () => {
 
   }
 
-  
-
   return (
     <Form>
       <Form.Group controlId="formFile" className="mb-3">
@@ -133,7 +194,20 @@ const AdUpload = () => {
         <Form.Label><h5>제안 금액<span className="red"> *</span></h5></Form.Label>
         <InputGroup className="mb-3">
             <Form.Control type='text' placeholder="Enter Advertisement Cost" onChange={handleAdCost}/>
-            <InputGroup.Text>ETH</InputGroup.Text>
+            <Dropdown>
+              <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
+                {vsCurrencies.toUpperCase()}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu variant="dark">
+                <Dropdown.Item onClick={() => setVsCurrencies("krw")}>KRW</Dropdown.Item>
+                <Dropdown.Item onClick={() => setVsCurrencies("usd")}>USD</Dropdown.Item>
+                <Dropdown.Item onClick={() => setVsCurrencies("eur")}>EUR</Dropdown.Item>
+              </Dropdown.Menu>
+          </Dropdown>
+           <img src='https://beb-project3-s3-bucket.s3.ap-northeast-2.amazonaws.com/exchange.png' className='exchange'></img>
+          <Form.Control type='text' placeholder={ethPrice} disabled></Form.Control>
+          <InputGroup.Text id="basic-addon2">ETH</InputGroup.Text>
         </InputGroup>
         <p id="cost-message" className="costMessage">Cost Field Required!!</p>
       </Form.Group>
