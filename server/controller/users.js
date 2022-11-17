@@ -227,7 +227,7 @@ module.exports = {
                                 include: [
                                     {
                                         model: Advertisement, as: "Advertisement",
-                                        attributes: ['id', 'title', 'AdimgUrl', 'cost', 'createdAt'],
+                                        attributes: ['id', 'title', 'AdimgUrl', 'cost', 'createdAt', 'status'],
                                     },
                                 ]
                             }
