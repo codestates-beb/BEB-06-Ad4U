@@ -1,3 +1,10 @@
 .adContent {
     white-space: pre-wrap;
+    font-size: small;
+}
+
+.adImg {
+    width: 50%;
+    height: 50%;
+    
 }
