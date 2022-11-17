@@ -1,9 +1,11 @@
-const { apply, cancel} = require('../controller/function');
+const { apply, cancel, conference, proceed} = require('../controller/function');
 const express = require('express');
 const router = express.Router();
 
 
-router.get('/apply', apply);
-router.get('/cancel', cancel);
+router.post('/apply', apply);
+router.post('/cancel', cancel);
+router.post('/conference', conference);
+router.post('/proceed', proceed);
 
 module.exports = router;
