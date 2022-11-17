@@ -1,0 +1,18 @@
+.navbar {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  width: 100%;
+  display: flex; 
+  background-color: rgb(62,71,80);
+}
+
+.nav_logo {
+  display: flex;
+}
+
+.menubar Button {
+  text-decoration: none;
+  color: unset;
+  display: inline-block;
+}

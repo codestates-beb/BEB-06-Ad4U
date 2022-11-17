@@ -1,0 +1,28 @@
+.creator_container {
+  position: relative;
+  height: 1000px;
+}
+
+.creator-content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 150px));
+  padding:20px 0;
+  gap: 40px;
+  justify-content: center;
+}
+
+.creator-content_card-container {
+  text-align: center;
+  padding: 20px 20px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 4px 4px #0c0b1473;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+}
+.creator-content_card-container:hover {
+  transform: scale(1.1);
+}
+.creator-content_card-container Avatar {
+  margin-bottom: 10px;
+}

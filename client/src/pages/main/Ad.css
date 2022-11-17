@@ -1,0 +1,27 @@
+.ad_container {
+  position: relative;
+  height: 1000px;
+}
+.ad-content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(150px, 220px));
+  padding:20px 0;
+  gap: 40px;
+  justify-content: center;
+}
+
+.ad-content_card-container {
+  text-align: center;
+  padding: 20px 20px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 4px 4px #0c0b1473;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+}
+.ad-content_card-container:hover {
+  transform: scale(1.1);
+}
+.ad-content_card-container img {
+  margin-bottom: 10px;
+}

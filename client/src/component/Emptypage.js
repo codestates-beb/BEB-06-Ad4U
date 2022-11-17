@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import Toast from 'react-bootstrap/Toast';
-import { Stack, ToastContainer } from 'react-bootstrap';
+import { ToastContainer } from 'react-bootstrap';
 
 const Emptypage = () => {
   const navigate = useNavigate();

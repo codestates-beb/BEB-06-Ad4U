@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Nav from './component/Nav';
+import Menuvar from './component/Menubar'
 import Main from './pages/main/Main';
 import ListPage from './pages/list/ListPage';
 import ClientMypage from './pages/mypage/Client';
@@ -23,6 +24,7 @@ const App = () => {
   return (
     <>
       <Nav userData={userData} />
+      <Menuvar />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/list/*" element={<ListPage />} />
