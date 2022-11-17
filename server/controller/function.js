@@ -81,7 +81,7 @@ module.exports = {
                 attributes: ['Client_id'],
                 where: { id: advertisement_id },
             })
-            if (!authorization || !isClient || ad.Client_id != user.id) {
+            if (!isClient || ad.Client_id != user.id) {
                 res.status(401).send({ data: null, message: 'invalid access' });
             } else {
                 Advertisement_has_Supplier.destroy({
@@ -115,7 +115,6 @@ module.exports = {
         try {
             const token = authorization.split(' ')[1];
             const data = jwt.verify(token, process.env.ACCESS_SECRET);
-
             const ad_info = await Advertisement.findOne({
                 attributes: ['id'],
                 where: { id: advertisement_id },
@@ -131,8 +130,7 @@ module.exports = {
                     },
                 ]
             })
-
-            if (!authorization || isClient || ad_info.Advertisement_has_Suppliers.Supplier.userId != data.userId) {
+            if (isClient || ad_info.Advertisement_has_Suppliers.Supplier.userId != data.userId) {
                 res.status(401).send({ data: null, message: 'invalid access' });
             }
             else {
@@ -149,5 +147,26 @@ module.exports = {
         } catch (error) {
             res.status(400).json(err)
         }
+    },
+    contract: async (req, res) => { //광고 계약서 작성 - client
+        const authorization = req.headers.authorization;
+        const { advertisement_id, isClient } = req.body;
+        try{
+            const token = authorization.split(' ')[1];
+            const data = jwt.verify(token, process.env.ACCESS_SECRET);
+
+            const user = await Client.findOne({
+                attributes: ['id'],
+                where: { userId: data.userId },
+            });
+
+            const ad = await Advertisement.findOne({
+                attributes: ['Client_id'],
+                where: { id: advertisement_id },
+            })
+        }catch(err){
+
+        }
+        
     }
 }

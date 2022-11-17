@@ -128,7 +128,7 @@ module.exports = {
                 attributes: ['Client_id'],
                 where: { id: advertisement_id },
             })
-        if (!authorization || !isClient || ad.Client_id != user.id) {
+        if (!isClient || ad.Client_id != user.id) {
             res.status(401).send({ data: null, message: 'invalid access' });
         } else {
                     Advertisement_has_Supplier.destroy({
