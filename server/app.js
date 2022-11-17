@@ -11,7 +11,10 @@ const adRouter = require("./router/adRouter");
 const supplierRouter = require("./router/supplierRouter");
 const clientRouter = require("./router/clientRouter");
 
-app.use(cors());
+app.use(cors({
+    origin: true,
+    credentials: true
+  }));
 app.use(express.json());
 app.use(cookieParser());
 

@@ -21,7 +21,6 @@ const SignUp = ({ show, setShow, email }) => {
   const sendSignupData = async (signupData) => {
     signupData.isClient = isClient;
     console.log("SignupData", signupData);
-
     const { email, id, password, address } = signupData;
     const options = {
       url: "http://localhost:3001/users/signup",
