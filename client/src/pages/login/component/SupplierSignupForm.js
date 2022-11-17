@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-const SignupForm = ({ email, sendSignupData }) => {
+const SupplierSignupForm = ({ email, sendSignupData }) => {
   
   const [isCorrect, setIsClient] = useState(true);
 
@@ -14,15 +14,20 @@ const SignupForm = ({ email, sendSignupData }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault(); //버튼을 눌러도 새로고침 되지않도록 함
-    const id = idRef.current.value;
+    const userId = idRef.current.value;
     const password = passwordRef.current.value;
     const confirm = confirmRef.current.value;
     const address = addressRef.current.value;
 
     if (password === confirm) {
-      const signupData = { email, id, password, address };
-      setIsClient(true);
-      sendSignupData(signupData);
+      const signupData = { email, userId, password, address };
+      
+      if ( email && userId && password, address ) {
+        setIsClient(true);
+        sendSignupData(signupData);
+      } else {
+        alert("입력되지않은 정보가 있습니다.")
+      }
     } else {
       setIsClient(false);
     }
@@ -89,4 +94,4 @@ const SignupForm = ({ email, sendSignupData }) => {
   )
 }
 
-export default SignupForm;
+export default SupplierSignupForm ;

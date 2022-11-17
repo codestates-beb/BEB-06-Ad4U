@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
-import SignupForm  from './SignupForm'
+import SupplierSignupForm  from './ClientSignupForm'
+import ClientSignupForm  from './ClientSignupForm'
 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -21,15 +22,23 @@ const SignUp = ({ show, setShow, email }) => {
   const sendSignupData = async (signupData) => {
     signupData.isClient = isClient;
     console.log("SignupData", signupData);
-    const { email, id, password, address } = signupData;
-    const options = {
-      url: "http://localhost:3001/users/signup",
-      method: 'POST',
-      headers: {"Content-Type": "application/json"},
-      withcredential: true,
-      data:{ email, id, password, address, isClient }
+    try {
+      const options = {
+        url: "http://localhost:3001/users/signup",
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        withcredential: true,
+        data: signupData
+      }
+      const result = await axios.request(options);
+      console.log(result)
+      if (result.data === 'complete') {
+        alert("회원가입이 완료되었습니다. 로그인을 해주세요");
+        handleClose();
+      }
+    } catch {
+      alert("중복된 아이디입니다.")
     }
-    // const result = await axios.request(options)
   }
 
   return (
@@ -49,13 +58,13 @@ const SignUp = ({ show, setShow, email }) => {
             eventKey="supplier" 
             title="크리에이터"
           >
-            <SignupForm email={email} sendSignupData={sendSignupData}/>
+            <SupplierSignupForm email={email} sendSignupData={sendSignupData}/>
           </Tab>
           <Tab 
             eventKey="client" 
             title="광고주"
           >
-            <SignupForm email={email} sendSignupData={sendSignupData}/>
+            <ClientSignupForm email={email} sendSignupData={sendSignupData}/>
           </Tab>
         </Tabs>
         </Modal.Body>

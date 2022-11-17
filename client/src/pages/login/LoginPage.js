@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { decodeToken } from 'react-jwt';
 import axios from 'axios';
 import Signup from './component/Signup';
@@ -13,6 +14,7 @@ const LoginPage = ({ setUserData }) => {
   const [isClient, setIsClient] = useState(false);
   const [email, setEmail] = useState("");
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   const handleIsClient = (e) => {
     if (e === "client") {
@@ -30,11 +32,12 @@ const LoginPage = ({ setUserData }) => {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
         withCredentials: true,
-        data:{ code: authorizationCode }
+        data: { code: authorizationCode }
       }
       axios.request(options)
         .then(res => {
-          console.log(res)
+          setEmail(res.data.email);
+          setShow(true);
         })
         .catch(err => console.log(err))
     }
@@ -54,19 +57,27 @@ const LoginPage = ({ setUserData }) => {
   const sendLoginData = async (loginData) => {
     loginData.isClient = isClient;
     console.log("LoginData", loginData);
-
     const { userId, password } = loginData;
-    const options = {
-      url: "http://localhost:3001/users/login",
-      method: 'POST',
-      headers: {"Content-Type": "application/json"},
-      withCredentials: true,
-      data:{ userId, password, isClient }
+    try { 
+      if ( userId && password ) {
+        const options = {
+          url: "http://localhost:3001/users/login",
+          method: 'POST',
+          headers: {"Content-Type": "application/json"},
+          withCredentials: true,
+          data:{ userId, password, isClient }
+        }
+        const result = await axios.request(options);
+        const { user } = result.data;
+        user.isClient = result.data.isClient;
+        setUserData(user);
+        navigate('/');
+      } else {
+        alert("아이디와 비밀번호를 입력해주세요");
+      }
+    } catch {
+      alert("아이디 또는 비밀번호가 잘 못 되었습니다.");
     }
-    const result = await axios.request(options)
-    const { user } = result.data;
-    user.isClient = result.data.isClient;
-    setUserData(user)
   }
   
   return (
@@ -93,7 +104,7 @@ const LoginPage = ({ setUserData }) => {
         </Tabs>
         <div>또는</div>
         <Button onClick={googleOath}>
-          Google 계정으로 간편 로그인
+          Google 계정으로 간편 회원가입
         </Button>
         <Signup 
           email={email}
@@ -102,7 +113,6 @@ const LoginPage = ({ setUserData }) => {
           isClient={isClient}
           handleIsClient={handleIsClient}
         />
-        <Button onClick={() => setShow(true)}>SignupTest</Button>
       </Container>
     </>
   );
