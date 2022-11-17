@@ -66,16 +66,19 @@ const LoginPage = () => {
     }
     // const result = await axios.request(options)
   }
+  const openSignup = () => {
+    
+  } 
       
   return (
     <>
       <Container>
         <Tabs
-        defaultActiveKey="supplier"
-        className="mb-3"
-        onSelect={handleIsClient}
-        justify
-         >
+          defaultActiveKey="supplier"
+          className="mb-3"
+          onSelect={handleIsClient}
+          justify
+        >
           <Tab 
             eventKey="supplier" 
             title="크리에이터"
@@ -97,8 +100,6 @@ const LoginPage = () => {
           email={email}
           show={show} 
           setShow={setShow}
-          isClient={isClient}
-          handleIsClient={handleIsClient}
         />
         <Button onClick={() => setShow(true)}>SignupTest</Button>
       </Container>
