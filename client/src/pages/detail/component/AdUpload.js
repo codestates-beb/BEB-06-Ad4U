@@ -155,7 +155,7 @@ const AdUpload = () => {
     const options = {
         url: "http://localhost:3001/ad/create",
         method: 'POST',
-        headers: {"Content-Type": "application/json"},
+        headers: {"Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNjY4NzM2Njc3LCJleHAiOjE2Njg3NDAyNzd9.dGA0uxZN9sYonI74waNCgYyAKx4V8lvukyKJMC49pHQ"},
         data:{ 
             title: AdInfo.title,
             content: AdInfo.content,
