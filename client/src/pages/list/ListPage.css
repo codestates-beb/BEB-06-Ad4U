@@ -1,4 +1,17 @@
 .list_container {
-  margin-top: 100px;
-  color: white;
+  margin-top: 200px;
+  height: 1000px;
+}
+
+.list_container h5 {
+  color: black;
+  text-align: center;
+}
+
+.list_card {
+  margin-top: 75px;
+}
+
+.item {
+  text-align: center;
 }

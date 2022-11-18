@@ -2,11 +2,12 @@ import React from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
+import './ClientList.css';
 
 const ClientList = () => {
   return (
-    <Container>
-      <div>ClientList</div>
+    <Container className='clientList_container'>
+      <h1>ClientList</h1>
       <Table hover>
         <thead>
           <tr>

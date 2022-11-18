@@ -4,10 +4,19 @@
   height: 2000px;
 }
 
-.supplierMypage_row {
-  justify-content: center;
-}
-
 .supplierMypage_row h1 {
   color: white;
+  margin-bottom: 30px;
+}
+
+.supplier_header {
+  width: 930px;
+}
+
+.accordion {
+  margin-top: 20px;
+}
+
+.supplierMypage_accordion {
+  margin-top: 20px;
 }

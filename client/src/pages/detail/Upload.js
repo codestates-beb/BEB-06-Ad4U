@@ -12,11 +12,11 @@ const UploadPage = ({ userData }) => {
   return (
     <div className='upload_container'>
     <Container>
-      <Row xs={2}>
-        <Col xs={2}>
+      <Row>
+        <Col xl={3}>
           <Profile />
         </Col>
-        <Col xs={10}>
+        <Col xl={9} >
           <AdUpload/>
         </Col>          
       </Row>

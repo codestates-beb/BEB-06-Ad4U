@@ -3,10 +3,12 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 
+import './AdList.css';
+
 const AdList = () => {
   return (
-    <Container>
-      <div>AdList</div>
+    <Container className='adList_container'>
+      <h1>AdList</h1>
       <Table hover>
         <thead>
           <tr>

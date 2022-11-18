@@ -26,8 +26,6 @@ const AdUpload = () => {
   const [ethPrice,setEthPrice] = useState(0);
   const [curCost, setCurCost] = useState("");
 
-
-
   useEffect(() => {
     vsChange(curCost)
   },[vsCurrencies])
@@ -180,7 +178,7 @@ const AdUpload = () => {
   }
 
   return (
-    <Form>
+    <Form className='form'>
       <Form.Group controlId="formFile" className="mb-3">
         <Form.Label><h5>이미지 업로드</h5></Form.Label>
         <Form.Control type="file" onChange={handleFileInput}/>
@@ -223,11 +221,17 @@ const AdUpload = () => {
       <Button variant="primary" onClick={() => setModalShow(true)}>
         미리보기
       </Button>
+      {/* <div>
+        <button className='upload_btn' onClick={() => setModalShow(true)}><span>미리보기</span></button>
+      </div> */}
       <br></br>
       <br></br>
       <Button variant="primary" type="submit" onClick={handleSubmit}>
         Submit
       </Button>
+      {/* <div>
+        <button className='upload_btn' onClick={() => setModalShow(true)}><span>Submit</span></button>
+      </div> */}
 
 
       <Modal

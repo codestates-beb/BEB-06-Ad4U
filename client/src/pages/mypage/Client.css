@@ -4,10 +4,34 @@
   height: 2000px;
 }
 
-.clientMypage_row {
-  justify-content: center;
-}
-
 .clientMypage_row h1 {
   color: white;
+  margin-bottom: 30px;
+}
+
+
+.clientupload span {  
+  color: white;
+}
+
+.clientupload_btn {
+  padding: 10px 50px;
+  margin-left: 35px;
+  margin-top: 10px;
+  border-radius: 15px;
+  background: none;
+  color: inherit;
+  border: 3px solid white;
+}
+
+.clientupload_btn:hover {
+  transform: scale(1.1);
+}
+
+.accordion {
+  margin-top: 20px;
+}
+
+.clientMypage_accordion {
+  margin-top: 20px;
 }

@@ -8,7 +8,7 @@ import './Status.css'
 
 const Status = () => {
   return (
-      <Container className='status_container'> 
+    <Container className='status_container'> 
       <div className="status-content_card-container">     
         <Row className='status_name'>
           <Col>전체</Col>
@@ -26,8 +26,8 @@ const Status = () => {
           <Col>4</Col>
           <Col>5</Col>
         </Row>
-        </div>
-      </Container>
+      </div>
+    </Container>
   );
 }
 

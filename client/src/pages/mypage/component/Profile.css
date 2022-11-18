@@ -1,6 +1,6 @@
 .profile-content {
   display: grid;
-  grid-template-columns: repeat(3, minmax(220px, 500px));
+  grid-template-columns: repeat(3, minmax(270px, 500px));
   padding:20px 0;
 }
 
