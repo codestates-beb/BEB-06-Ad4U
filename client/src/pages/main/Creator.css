@@ -3,15 +3,18 @@
   height: 1000px;
 }
 
+.creator_title {
+  color: #ffffff;
+}
 .creator-content {
   display: grid;
-  grid-template-columns: repeat(3, minmax(220px, 150px));
+  grid-template-columns: repeat(3, minmax(240px, 150px));
   padding:20px 0;
   gap: 40px;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
-.creator-content_card-container {
+.creator-content_card-container  {
   text-align: center;
   padding: 20px 20px;
   border-radius: 4px;
@@ -19,10 +22,34 @@
   cursor: pointer;
   font-size: 14px;
   position: relative;
+  background-color: #ffffff;
 }
+
 .creator-content_card-container:hover {
   transform: scale(1.1);
 }
-.creator-content_card-container Avatar {
-  margin-bottom: 10px;
+
+.viewall {  
+  display: flex; 
+  justify-content: center;
+  margin-top: 15px;
 }
+
+.viewall span {  
+  color: white;
+}
+
+.viewall_btn {
+  padding: 10px 30px;
+  border-radius: 15px;
+  background: none;
+  color: inherit;
+  border: 3px solid white;
+}
+
+.viewall_btn:hover {
+  transform: scale(1.1);
+}
+
+
+

@@ -1,4 +1,5 @@
 import React from 'react';
+import './Client.css';
 
 import Profile from './component/Profile';
 import Status from './component/Status';
@@ -12,6 +13,7 @@ import Button from 'react-bootstrap/esm/Button';
 
 const ClientMypage = () => {
   return (
+    <div className='supplierMupage_container'>
     <Container>
       <Row xs={2}>
         <Col xs={2}>
@@ -52,6 +54,7 @@ const ClientMypage = () => {
         </Col>          
       </Row>
     </Container>
+    </div>
   );
 }
 

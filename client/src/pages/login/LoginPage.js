@@ -3,6 +3,7 @@ import { decodeToken } from 'react-jwt';
 import axios from 'axios';
 import Signup from './component/Signup';
 import LoginForm  from './component/LoginForm';
+import './LoginPage.css';
 
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
@@ -68,7 +69,7 @@ const LoginPage = () => {
   }
   
   return (
-    <>
+    <div className='loginpage_container'>
       <Container>
         <Tabs
           defaultActiveKey="supplier"
@@ -102,7 +103,7 @@ const LoginPage = () => {
         />
         <Button onClick={() => setShow(true)}>SignupTest</Button>
       </Container>
-    </>
+    </div>
   );
 }
 

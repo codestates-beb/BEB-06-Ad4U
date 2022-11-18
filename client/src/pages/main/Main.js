@@ -1,7 +1,7 @@
 import React from 'react';
 import About from './About';
 import Home from './Home';
-import { Container, Button } from 'react-bootstrap';
+import { Col, Row, Container, Button } from 'react-bootstrap';
 import './Main.css';
 import Ad from './Ad';
 import Creator from './Creator';
@@ -15,13 +15,35 @@ const Main = () => {
   const topClick = () => {
     window.scrollTo(0, 0, { behavior : "smooth" })
   }
+  const onHomeClick = () => {
+    window.scrollTo(0, 0, { behavior : "smooth" })
+      };
+  const onAboutClick = () => {
+    window.scrollTo(0, 1000, { behavior : "smooth" })
+      };
+  const onAdClick = () => {
+    window.scrollTo(0, 2000, { behavior : "smooth" })
+      };
+  const onCreatorClick = () => {
+    window.scrollTo(0, 3000, { behavior : "smooth" })
+      };
 
   return (
   <Container className='main_container'>
-    <Home />
-    <About />
-    <Ad />
-    <Creator />
+    <header className='header'>
+      <Row>
+        <Col><Button variant="link" onClick={onHomeClick}>Home</Button></Col>
+        <Col><Button variant="link" onClick={onAboutClick}>About</Button></Col>
+        <Col><Button variant="link" onClick={onAdClick}>Ads</Button></Col>
+        <Col><Button variant="link" onClick={onCreatorClick}>Creator</Button></Col>
+      </Row>
+    </header>
+    <main>
+      <Home />
+      <About />
+      <Ad />
+      <Creator />
+    </main>
     <Button variant="light" className='upbutton' onClick={topClick}>
       <IoIosArrowDropupCircle />
     </Button>

@@ -2,13 +2,9 @@ import React from 'react';
 import './Ad.css';
 import { Row, Col, Card, Button } from 'react-bootstrap';
 import img from '../../dummyfiles/img3.png'
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Ad = () => {
-
-  const fetchData = async () => {
-    const data = await axios.get("https://www.googleapis.com/youtube/v3/channels")
-  }
 
   return (
     <div className='ad_container'>
@@ -45,7 +41,10 @@ const Ad = () => {
               </Card.Text>
             </Card.Body>
           </div>
-          <Button href="/list">View all</Button>
+    </div>
+    <div className='viewall'>
+      {/* div,a 태그도 고려 */}
+      <Link to="/list"><button className='viewall_btn'><span>View all</span></button></Link>
     </div>
 </div>
   );

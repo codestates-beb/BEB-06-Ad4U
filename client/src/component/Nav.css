@@ -4,15 +4,12 @@
   top: 0;
   width: 100%;
   display: flex; 
-  background-color: rgb(62,71,80);
 }
 
 .nav_logo {
   display: flex;
+  margin-left: 40px;
 }
 
-.menubar Button {
-  text-decoration: none;
-  color: unset;
-  display: inline-block;
-}
+
+
