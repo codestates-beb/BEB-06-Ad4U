@@ -72,10 +72,12 @@ const LoginPage = ({ setUserData }) => {
           data:{ userId, password, isClient }
         }
         const result = await axios.request(options);
-        const { user } = result.data;
-        user.isClient = result.data.isClient;
-        setUserData(user);
-        navigate('/');
+        if (result) {
+          const { user } = result.data;
+          user.isClient = result.data.isClient;
+          setUserData(user);
+          navigate('/');
+        }
       } else {
         alert("아이디와 비밀번호를 입력해주세요");
       }
