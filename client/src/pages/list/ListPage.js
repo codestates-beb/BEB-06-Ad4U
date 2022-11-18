@@ -9,24 +9,27 @@ import Sidebar from './component/Sidebar';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
+import './ListPage.css';
 
 const List = () => {
   return (
-    <Container>
-      <Row>
-        <Col xs={2}>
-          <Sidebar />
-        </Col>
-        <Col xs={10}>
-          <Routes>
-            <Route path="/" element={<AdList />} />
-            <Route path="/client" element={<ClientList />} />
-            <Route path="/supplier" element={<SupplierList />} />
-            <Route path="*" element={<Emptypage />} />
-          </Routes>
-        </Col>
-      </Row>
-    </Container>
+    <div className='list_container'>
+      <Container>
+        <Row>
+          <Col xs={2}>
+            <Sidebar />
+          </Col>
+          <Col xs={10}>
+            <Routes>
+              <Route path="/" element={<AdList />} />
+              <Route path="/client" element={<ClientList />} />
+              <Route path="/supplier" element={<SupplierList />} />
+              <Route path="*" element={<Emptypage />} />
+            </Routes>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 }
 export default List;

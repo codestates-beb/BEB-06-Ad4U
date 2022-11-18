@@ -1,4 +1,5 @@
 import React from 'react';
+import './Upload.css';
 
 import Profile from '../mypage/component/Profile';
 import Container from 'react-bootstrap/esm/Container';
@@ -7,6 +8,7 @@ import Col from 'react-bootstrap/esm/Col';
 
 const UploadPage = () => {
   return (
+    <div className='upload_container'>
     <Container>
       <Row xs={2}>
         <Col xs={2}>
@@ -21,6 +23,7 @@ const UploadPage = () => {
         </Col>          
       </Row>
     </Container>
+    </div>
   );
 }
 

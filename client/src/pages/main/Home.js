@@ -1,28 +1,19 @@
 import React from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, Button } from 'react-bootstrap';
 import './Home.css';
-
-
+import { motion } from 'framer-motion'
 
 const Home = () => {
+
   return (
     <section className='home_cantainer'>
-      <div className='home_background'>
-        <div className='home_container'>
           <Row>
             <Col sn={{ size: 1, offset: 100}}>
-              <h1>Hi<br/>
-              We Create trustworthy contracts with Blockchain.
-              </h1>
-              
+              <div className='home_text1'>JOIN</div>
+              <div className='home_text2'>We Create trustworthy contracts with Blockchain.</div>
             </Col>
-            
           </Row>
-          
-        </div>
-      </div>
     </section>
-
   );
 }
 
