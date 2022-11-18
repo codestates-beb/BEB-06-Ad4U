@@ -1,7 +1,7 @@
 import React from 'react';
 import './Upload.css';
 
-import Profile from '../mypage/component/Profile';
+import Profile from '../common/Profile';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';

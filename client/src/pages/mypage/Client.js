@@ -1,7 +1,7 @@
 import React from 'react';
 import './Client.css';
 
-import Profile from './component/Profile';
+import Profile from '../common/Profile';
 import Status from './component/Status';
 import { Link } from 'react-router-dom';
 import {Accordion, Col, Row, Container} from 'react-bootstrap';

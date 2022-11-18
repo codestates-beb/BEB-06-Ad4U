@@ -1,7 +1,7 @@
 import React from 'react';
 import './Supplier.css';
 
-import Profile from './component/Profile';
+import Profile from '../common/Profile';
 import Status from './component/Status';
 import { Container, Accordion, Row, Col } from 'react-bootstrap';
 
