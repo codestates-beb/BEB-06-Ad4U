@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
 import Logo from './clear_logo.png';
-import { logout } from '../hooks/axios/axios';
+import auth from '../hooks/axios/auth';
 
 import { Button, Navbar, NavDropdown, Container,DropdownButton,Dropdown  } from 'react-bootstrap';
 import Stack from 'react-bootstrap/Stack';
@@ -17,7 +16,7 @@ const Nav = ({ userData, setUserData }) => {
 
   const deleteUserData = async () => {
     try {
-      const result = await logout();
+      const result = await auth.logout();
       if (result) {
         setUserData({});
         alert("로그아웃 되었습니다.");
