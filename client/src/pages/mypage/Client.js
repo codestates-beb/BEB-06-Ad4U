@@ -6,32 +6,29 @@ import Status from './component/Status';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
-import Button from 'react-bootstrap/esm/Button';
+import { Link } from 'react-router-dom';
 
 const ClientMypage = () => {
   return (
-    <Container className='supplierMypage_container'>
-      {/* <Row xs={2}>
-        <Col xs={2}>
-          <Profile />
+    <Container className='clientMypage_container'>
+      <Row className='clientMypage_row' >
+        <Col xl={1}></Col>
+        <Col xl={3} sm={5}  >
+          <Row>
+            <Profile />
+            <div className='viewall'>
+              <Link to="/upload"><button className='viewall_btn'><span>광고 업로드</span></button></Link>
+            </div>
+          </Row>
         </Col>
-        <Col xs={10}>
+        <Col xl={7} sm={7} >
         <Row>
-          <div> Client Mypage</div>
+          <h1> Client Mypage</h1>
           <Status />
         </Row>
-        <Row>
-          Content
-        </Row>
-        </Col>          
-      </Row> */}
-      <Row>
-        <Col><Profile /></Col>
-        <Col>
-        <Row><Status /></Row>
-        </Col>
+        </Col>  
+        <Col xl={1}></Col>        
       </Row>
-
     </Container>
   );
 }

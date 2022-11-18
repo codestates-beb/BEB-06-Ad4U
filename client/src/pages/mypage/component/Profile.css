@@ -1,20 +1,18 @@
 .profile-content {
   display: grid;
-  grid-template-columns: repeat(3, minmax(150px, 220px));
+  grid-template-columns: repeat(3, minmax(220px, 500px));
   padding:20px 0;
-  gap: 40px;
-  justify-content: center;
 }
 
 .profile-content_card-container {
   text-align: center;
   padding: 20px 20px;
-  border-radius: 4px;
-  box-shadow: 2px 2px 4px 4px #0c0b1473;
+  border-radius: 20px;
   cursor: pointer;
   font-size: 14px;
   position: relative;
   background-color: white;
 }
+
 
 

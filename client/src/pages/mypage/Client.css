@@ -1,5 +1,13 @@
-.supplierMypage_container {
-  margin-top: 100px;
-  height: 1000px;
+.clientMypage_container {
+  position: relative;
+  margin-top: 200px;
+  height: 2000px;
+}
 
+.clientMypage_row {
+  justify-content: center;
+}
+
+.clientMypage_row h1 {
+  color: white;
 }

@@ -6,7 +6,6 @@ import './Profile.css';
 
 const Profile = () => {
   return (
-    <Container>
       <div className="profile-content">
         <div className="profile-content_card-container">
           <Avatar size="100" round={true}/>
@@ -19,7 +18,6 @@ const Profile = () => {
           </Card.Body>
         </div>
       </div>
-    </Container>
   );
 }
 
