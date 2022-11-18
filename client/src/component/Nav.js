@@ -1,6 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 import Logo from './clear_logo.png';
+import { logout } from '../hooks/axios/axios';
 
 import { Button, Navbar, NavDropdown, Container } from 'react-bootstrap';
 import Stack from 'react-bootstrap/Stack';
@@ -8,11 +10,27 @@ import Avatar from 'react-avatar';
 
 import './Nav.css';
 
-const Nav = ({ userData }) => {
+const Nav = ({ userData, setUserData }) => {
+
+  const navigate = useNavigate();
+
+  const deleteUserData = async () => {
+    try {
+      const result = await logout();
+      if (result) {
+        setUserData({});
+        alert("로그아웃 되었습니다.");
+        navigate('/');
+      } 
+    } catch (err) {
+      alert(err.response.data);
+    }
+  }
 
   const LoggedIn = ({ userData }) => {
     return (
       <Stack direction="horizontal" gap={4} justify='flex-end'>
+        <button onClick={deleteUserData}>logout</button>
         <Link to='/mypage/client'>
           <Avatar size="50" round={true}/>
         </Link>
