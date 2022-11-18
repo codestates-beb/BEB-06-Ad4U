@@ -41,7 +41,7 @@ const App = () => {
   
   return (
     <>
-      <Nav userData={userData} />
+      <Nav userData={userData} setUserData={setUserData} />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/list/*" element={<ListPage />} />

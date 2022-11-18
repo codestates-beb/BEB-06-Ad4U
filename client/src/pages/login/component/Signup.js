@@ -42,7 +42,7 @@ const SignUp = ({ show, setShow, email }) => {
         data: signupData
       }
       const result = await axios.request(options);
-      if (result.data === 'complete') {
+      if (result) {
         alert("회원가입이 완료되었습니다. 로그인을 해주세요");
         handleClose();
       }
