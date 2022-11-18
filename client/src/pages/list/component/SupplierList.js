@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import supplier from '../../../hooks/axios/supplier';
 
 import { Container, Row, Col, Table, Card } from 'react-bootstrap';
 import Avatar from 'react-avatar';
@@ -8,108 +10,47 @@ import { RiUserFollowFill } from "react-icons/ri";
 import './SupplierList.css'
 
 const SupplierList = () => {
+  const [list, setList] = useState([]);
+
+  const navigate = useNavigate();
+  console.log(list)
+
+  useEffect(() => {
+    supplier.getList()
+    .then(res => setList(res.data))
+    .catch(err => console.log(err.response.data))
+  }, [])
+
+  const SupplierCard = ({ idx, data }) => {
+    console.log(data)
+    return (
+      <div 
+        className="supplierList-content_card-container"
+        onClick={() => navigate(`/detail/supplier/${data.id}`)}
+      >
+        <Row>
+          <Col><Avatar src={data.profileImgUrl} alt="profile_img" size="100" round={true}/></Col>
+          <Col><Card.Body>
+            <Card.Title>{data.channelName}</Card.Title>
+            <Card.Text>
+              <RiUserFollowFill/> 
+              subscribe {data.subscriberCount} <br/>
+              <GoPlay />
+              viewer
+            </Card.Text>
+            </Card.Body>
+          </Col>
+        </Row>
+    </div>
+    );
+  }
+
   return (
-    // <Container className='supplierList_container'>
-    //   <h1>SupplierList</h1>
-    //   <Table hover>
-    //     <thead>
-    //       <tr>
-    //         <th></th>
-    //         <th colSpan={3}>title</th>
-    //         <th>Username</th>
-    //       </tr>
-    //     </thead>
-    //     <tbody>
-    //       <tr>
-    //         <td>1</td>
-    //         <td colSpan={3}>test1</td>
-    //         <td>user1</td>
-    //       </tr>
-    //       <tr>
-    //         <td>2</td>
-    //         <td colSpan={3}>test2</td>
-    //         <td>user1</td>
-    //       </tr>
-    //       <tr>
-    //         <td>3</td>
-    //         <td colSpan={3}>test3</td>
-    //         <td>user1</td>
-    //       </tr>
-    //     </tbody>
-    //   </Table>
-    // </Container>  
     <Container className='supplierList_container'>
       <h1>SupplierList</h1>
       <div className="supplierList-content">
-        <div className="supplierList-content_card-container">
-          <Row>
-            <Col><Avatar size="100" round={true}/></Col>
-            <Col><Card.Body>
-              <Card.Title>creator name</Card.Title>
-              <Card.Text>
-                <RiUserFollowFill/> sub<br/>
-                <GoPlay />
-                viewer
-              </Card.Text>
-            </Card.Body></Col>
-          </Row>
-        </div>
-
-        <div className="supplierList-content_card-container">
-          <Row>
-            <Col><Avatar size="100" round={true}/></Col>
-            <Col><Card.Body>
-              <Card.Title>creator name</Card.Title>
-              <Card.Text>
-                <RiUserFollowFill/> sub<br/>
-                <GoPlay />
-                viewer
-              </Card.Text>
-            </Card.Body></Col>
-          </Row>
-        </div>
-
-        <div className="supplierList-content_card-container">
-          <Row>
-            <Col><Avatar size="100" round={true}/></Col>
-            <Col><Card.Body>
-              <Card.Title>creator name</Card.Title>
-              <Card.Text>
-                <RiUserFollowFill/> sub<br/>
-                <GoPlay />
-                viewer
-              </Card.Text>
-            </Card.Body></Col>
-          </Row>
-        </div>
-        <div className="supplierList-content_card-container">
-          <Row>
-            <Col><Avatar size="100" round={true}/></Col>
-            <Col><Card.Body>
-              <Card.Title>creator name</Card.Title>
-              <Card.Text>
-                <RiUserFollowFill/> sub<br/>
-                <GoPlay />
-                viewer
-              </Card.Text>
-            </Card.Body></Col>
-          </Row>
-        </div>
-        <div className="supplierList-content_card-container">
-          <Row>
-            <Col><Avatar size="100" round={true}/></Col>
-            <Col><Card.Body>
-              <Card.Title>creator name</Card.Title>
-              <Card.Text>
-                <RiUserFollowFill/> sub<br/>
-                <GoPlay />
-                viewer
-              </Card.Text>
-            </Card.Body></Col>
-          </Row>
-        </div>
+        {list.map((data, idx) => <SupplierCard key={idx} idx={idx} data={data} />)}
       </div>
-
     </Container>
   );
 }

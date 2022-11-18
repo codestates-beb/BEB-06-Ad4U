@@ -31,7 +31,7 @@ const App = () => {
         user.isClient = res.data.isClient;
         setUserData(user);
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err.response.data))
   }, []);
   
   return (

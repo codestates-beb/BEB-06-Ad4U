@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ad from '../../../hooks/axios/ad';
 
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
@@ -6,6 +8,27 @@ import Table from 'react-bootstrap/Table';
 import './AdList.css';
 
 const AdList = () => {
+  const [list, setList] = useState([]);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    ad.getList()
+    .then(res => setList(res.data))
+    .catch(err => console.log(err.response.data))
+  }, [])
+
+  const AdTable = ({ idx, data }) => {
+    console.log(data)
+    return (
+      <tr onClick={() => navigate(`/detail/ad/${data.id}`)}>
+        <td>{idx+1}</td>
+        <td colSpan={3}>{data.title}</td>
+        <td>{data.Client.company_name}</td>
+      </tr>
+    );
+  }
+
   return (
     <Container className='adList_container'>
       <h1>AdList</h1>
@@ -14,25 +37,11 @@ const AdList = () => {
           <tr>
             <th></th>
             <th colSpan={3}>title</th>
-            <th>Username</th>
+            <th>Company</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td colSpan={3}>test1</td>
-            <td>user1</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td colSpan={3}>test2</td>
-            <td>user1</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td colSpan={3}>test3</td>
-            <td>user1</td>
-          </tr>
+          {list.map((data, idx) => <AdTable key={idx} idx={idx} data={data} />)}
         </tbody>
       </Table>
     </Container>
