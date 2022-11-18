@@ -145,28 +145,35 @@ module.exports = {
         }
     },
     refresh: async (req, res) => {
-        const { isClient } = req.query;
         let user;
         if (!req.cookies.jwt_refreshToken) {
-            res.status(400).send({ data: null, message: "refresh token not provided" });
+            res.status(200).send({ data: null, message: "refresh token not provided" });
         } else {
             try {
                 const data = jwt.verify(req.cookies.jwt_refreshToken, process.env.REFRESH_SECRET);
-                if (isClient == "true") {
-                    user = await Client.findOne({
-                        attributes: client_attributes,
-                        where: { userId: data.userId },
-                    });
-                } else {
-                    user = await Supplier.findOne({
-                        attributes: supplier_attributes,
-                        where: { userId: data.userId },
-                    });
+                const client_user = await Client.findOne({
+                    attributes: client_attributes,
+                    where: { userId : data.userId},
+                });
+                const supplier_user = await Supplier.findOne({
+                    attributes: supplier_attributes,
+                    where: { userId : data.userId},
+                });
+                
+                if(client_user){
+                    const userId = client_user.userId;
+                    const user = client_user;
+                    const jwt_accessToken = jwt.sign({ userId }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
+                    res.status(200).json({ jwt_accessToken, user, isClient: true });
+                }else if(supplier_user){
+                    const user = supplier_user;
+                    const userId = supplier_user.userId;
+                    const jwt_accessToken = jwt.sign({ userId }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
+                    res.status(200).json({ jwt_accessToken, user, isClient: false });
                 }
-                const userId = user.userId;
 
-                const jwt_accessToken = jwt.sign({ userId }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
-                res.status(200).json({ jwt_accessToken, user, isClient });
+
+
 
             } catch (error) {
                 res.status(400).json("Invalid refreshToken, login again")
