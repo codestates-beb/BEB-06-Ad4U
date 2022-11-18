@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import SupplierSignupForm  from './SupplierSignupForm';
 import ClientSignupForm  from './ClientSignupForm';
-import { getCurrentAccount } from '../../../hooks/web3/common';
+import { loadWeb3, getCurrentAccount } from '../../../hooks/web3/common';
 
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
@@ -25,6 +25,7 @@ const SignUp = ({ show, setShow, email }) => {
   }
 
   const inputAccount = async () => {
+    await loadWeb3();
     const currentAccount = await getCurrentAccount();
     setAccount(currentAccount);
   }

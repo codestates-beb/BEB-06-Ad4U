@@ -5,7 +5,12 @@ import { ABI } from './contractInfo';
 const loadWeb3 = async () => {
   if (window.ethereum) {
     window.web3 = new Web3(window.ethereum);
-    window.ethereum.enable();
+    window.ethereum.request({ method: 'eth_accounts' });
+  } else {
+    alert("메타마스크가 설치되어있지않습니다");
+    if (window.confirm("메타마스크를 설치하시겠습니까?")) {
+      window.open("https://metamask.io/");
+    }  
   }
 }
 
