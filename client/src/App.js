@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import axios from 'axios';
+import auth from './hooks/axios/auth';
 
 import Nav from './component/Nav';
 import Main from './pages/main/Main';
@@ -24,13 +24,8 @@ const App = () => {
 
   //세션유지
   useEffect(() => {
-    const options = {
-      url: "http://localhost:3001/users/refresh",
-      method: 'GET',
-      headers: {"Content-Type": "application/json"},
-      withCredentials: true,
-    }
-    axios.request(options)
+
+    auth.refresh()
       .then(res => {
         const { user } = res.data;
         user.isClient = res.data.isClient;
