@@ -1,11 +1,15 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
-import SignupForm  from './SignupForm'
+import SupplierSignupForm  from './SupplierSignupForm'
+import ClientSignupForm  from './ClientSignupForm'
 
+import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+
+import '../Loginpage.css';
 
 const SignUp = ({ show, setShow, email }) => {
   const [isClient, setIsClient] = useState(false);
@@ -21,27 +25,39 @@ const SignUp = ({ show, setShow, email }) => {
   const sendSignupData = async (signupData) => {
     signupData.isClient = isClient;
     console.log("SignupData", signupData);
-    const { email, id, password, address } = signupData;
-    const options = {
-      url: "http://localhost:3001/users/signup",
-      method: 'POST',
-      headers: {"Content-Type": "application/json"},
-      withcredential: true,
-      data:{ email, id, password, address, isClient }
+    try {
+      const options = {
+        url: "http://localhost:3001/users/signup",
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        withcredential: true,
+        data: signupData
+      }
+      const result = await axios.request(options);
+      if (result.data === 'complete') {
+        alert("회원가입이 완료되었습니다. 로그인을 해주세요");
+        handleClose();
+      }
+    } catch (err) {
+      alert(err.response.data);
     }
-    // const result = await axios.request(options)
   }
 
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal 
+        className="signup_container"
+        as={Container} 
+        show={show} 
+        onHide={handleClose}
+      >
         <Modal.Header closeButton>
           <Modal.Title>SignUp</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <Tabs
           defaultActiveKey="supplier"
-          className="mb-3"
+          className="signup_tab"
           onSelect={handleIsClient}
           justify
         >
@@ -49,21 +65,25 @@ const SignUp = ({ show, setShow, email }) => {
             eventKey="supplier" 
             title="크리에이터"
           >
-            <SignupForm email={email} sendSignupData={sendSignupData}/>
+            <SupplierSignupForm 
+              email={email} 
+              sendSignupData={sendSignupData}
+              handleClose={handleClose}
+            />
           </Tab>
           <Tab 
             eventKey="client" 
             title="광고주"
           >
-            <SignupForm email={email} sendSignupData={sendSignupData}/>
+            <ClientSignupForm 
+              email={email} 
+              sendSignupData={sendSignupData}
+              handleClose={handleClose}
+            />
           </Tab>
         </Tabs>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
+        <Modal.Footer></Modal.Footer>
       </Modal>
     </>
   );

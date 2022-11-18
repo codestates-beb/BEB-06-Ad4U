@@ -1,7 +1,11 @@
 import React, { useRef } from 'react';
 
+import Row from 'react-bootstrap/esm/Row';
+import Col from 'react-bootstrap/esm/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+
+import '../Loginpage.css';
 
 const LoginForm = ({ sendLoginData }) => {
 
@@ -19,7 +23,11 @@ const LoginForm = ({ sendLoginData }) => {
   return(
     <>
       <Form onSubmit={onSubmit}>
-      <Form.Group className="mb-3">
+        <Form.Group 
+          className="login_inputArea"
+          as={Col} 
+          xs={{ span: 7, offset: 2 }}
+        >
           <Form.Label>ID</Form.Label>
           <Form.Control
             type="id"
@@ -29,19 +37,26 @@ const LoginForm = ({ sendLoginData }) => {
           />
         </Form.Group>
         <Form.Group
-          className="mb-3"
+          className="login_inputArea"
+          as={Col} 
+          xs={{ span: 7, offset: 2 }}
         >
           <Form.Label>Password</Form.Label>
           <Form.Control 
-           rows={1} 
            type="password"
           //  placeholder="Password"
            ref={passwordRef}
           />
         </Form.Group>
-        <Button variant="primary" type='submit'>
-          LogIn
-        </Button>
+          <Col               
+            className="login_button" 
+            as={Col} 
+            xs={{ span: 2, offset: 5 }} 
+          >
+            <Button variant="primary" type='submit'>
+              LogIn
+            </Button>
+          </Col>
       </Form>
     </>
   )

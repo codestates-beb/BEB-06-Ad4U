@@ -1,0 +1,38 @@
+.adContent {
+    white-space: pre-wrap;
+    font-size: large;
+}
+
+.adImg {
+    width: 50%;
+    height: 50%;   
+}
+
+
+.titleMessage {
+    display: none;
+}
+.costMessage {
+    display: none;
+}
+.contentMessage {
+    display: none;
+}
+
+h5 {
+    font-weight: bold;
+}
+
+.red {
+    color: red;
+    font-size: small;
+}
+
+.exchange {
+    margin: auto;
+    align-items: center;
+    padding: auto 10px;
+    width: 20px;
+    height: 20px;
+}
+

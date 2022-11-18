@@ -1,16 +1,20 @@
-.main_container {
-  
-}
-
 .main_container Button {
   text-decoration: none;
   color: unset;
   display: inline-block;
+  margin-top: 66px;
+}
+
+.header {
+  position: fixed;
+  z-index: 1;
+  color: white;
+  margin-left: 60%;
 }
 
 .upbutton {
   position : fixed;
-  bottom : 150px;
+  bottom : 130px;
   right : 50px;
   width: 50px;
   height: 50px;
