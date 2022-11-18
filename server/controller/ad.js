@@ -90,7 +90,6 @@ module.exports = {
                     attributes: ['id'],
                     where: { userId: data.userId },
                 });
-                console.log(user)
 
                 const body = {
                     title: title,
@@ -116,42 +115,46 @@ module.exports = {
     _delete: async (req, res) => { //광고 삭제 -client
         const authorization = req.headers.authorization;
         const { advertisement_id, isClient } = req.body;
-        try {
-            const token = authorization.split(' ')[1];
-            const data = jwt.verify(token, process.env.ACCESS_SECRET);
-
-            const user = await Client.findOne({
-                attributes: ['id'],
-                where: { userId: data.userId },
-            });
-            const ad = await Advertisement.findOne({
-                attributes: ['Client_id'],
-                where: { id: advertisement_id },
-            })
-        if (!isClient || ad.Client_id != user.id) {
+        if(!authorization || !isClient){
             res.status(401).send({ data: null, message: 'invalid access' });
-        } else {
-                    Advertisement_has_Supplier.destroy({
-                        where: {
-                            Advertisement_id: advertisement_id
-                        }
-                    }).then((data) => {
-                        Advertisement.destroy({
-                            where : {
-                                id: advertisement_id
-                        }})
-                        .then(data => {
-                            res.status(201).json("complete");
-                        }).catch(err => {
+        }else{
+            try {
+                const token = authorization.split(' ')[1];
+                const data = jwt.verify(token, process.env.ACCESS_SECRET);
+    
+                const user = await Client.findOne({
+                    attributes: ['id'],
+                    where: { userId: data.userId },
+                });
+                const ad = await Advertisement.findOne({
+                    attributes: ['Client_id'],
+                    where: { id: advertisement_id },
+                })
+            if (ad.Client_id != user.id) {
+                res.status(401).send({ data: null, message: 'invalid access' });
+            } else {
+                        Advertisement_has_Supplier.destroy({
+                            where: {
+                                Advertisement_id: advertisement_id
+                            }
+                        }).then((data) => {
+                            Advertisement.destroy({
+                                where : {
+                                    id: advertisement_id
+                            }})
+                            .then(data => {
+                                res.status(201).json("complete");
+                            }).catch(err => {
+                                res.status(400).json("DB error");
+                            });
+                        }).catch((err)=> {
                             res.status(400).json("DB error");
-                        });
-                    }).catch((err)=> {
-                        res.status(400).json("DB error");
-                    })
+                        })
+            }
+        } catch (error) {
+            res.status(400).json(error);
         }
-    } catch (error) {
-        res.status(400).json(error);
-    }
+        }
+        
     },
-
 }
