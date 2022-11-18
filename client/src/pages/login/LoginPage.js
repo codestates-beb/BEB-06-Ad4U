@@ -29,7 +29,7 @@ const LoginPage = ({ setUserData }) => {
   useEffect(() => {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
-    console.log("authorizationCode", authorizationCode)
+    console.log("authorizationCode", authorizationCode);
     if (authorizationCode) {
       const options = {
         url: "http://localhost:3001/users/auth",
@@ -43,7 +43,7 @@ const LoginPage = ({ setUserData }) => {
           setEmail(res.data.email);
           setShow(true);
         })
-        .catch(err => alert(err.response.data.message))
+        .catch(err => alert(err.response.data))
     }
   },[]);
 
