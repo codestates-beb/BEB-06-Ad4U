@@ -5,8 +5,10 @@ import Profile from '../mypage/component/Profile';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
+import AdUpload from './component/AdUpload'
 
-const UploadPage = () => {
+const UploadPage = ({ userData }) => {
+
   return (
     <div className='upload_container'>
     <Container>
@@ -15,11 +17,7 @@ const UploadPage = () => {
           <Profile />
         </Col>
         <Col xs={10}>
-          <Row>
-            <div> upload</div>
-          </Row>
-          <Row>
-          </Row>
+          <AdUpload/>
         </Col>          
       </Row>
     </Container>
