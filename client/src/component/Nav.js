@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import Logo from './Logo.png';
+import Logo from './clear_logo.png';
 
-import { Button, Navbar, NavDropdown } from 'react-bootstrap';
-import Container from 'react-bootstrap/Container';
+import { Button, Navbar, NavDropdown, Container } from 'react-bootstrap';
 import Stack from 'react-bootstrap/Stack';
 import Avatar from 'react-avatar';
 
@@ -25,22 +24,22 @@ const Nav = ({ userData }) => {
     return (
       <Stack direction="horizontal" gap={4}  justify='flex-end'>
         <Button href='./login'>
-          Login        
+          LoginPage        
         </Button>
       </Stack>
     )
   }
 
   return (
-    <Navbar bg="light" expand="lg" className='navbar'>
+    <Navbar expand="lg" className='navbar'>
       <Container>
         <Link to="/">
-          <img className="nav_logo" src = {Logo} alt = "Ad4U logo" width={100} height={70}/>
+          <img className="nav_logo" src = {Logo} alt = "Ad4U logo" width={100} height={50}/>
         </Link>
         <Stack direction="horizontal" gap={4} justify='flex-end'>
-            {userData.length === 0 
-              ? <Logout />
-              : <LoggedIn userData={userData}/> 
+            {userData.isClient 
+              ? <LoggedIn userData={userData} />  
+              : <Logout />
             }
           <NavDropdown id="basic-nav-dropdown">
           <NavDropdown.Item href="/mypage/client">clientmypage</NavDropdown.Item>

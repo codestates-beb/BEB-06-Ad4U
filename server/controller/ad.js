@@ -79,6 +79,8 @@ module.exports = {
     create: async (req, res) => { //광고 생성 - client
         const authorization = req.headers.authorization;
         const { title, content, AdImgUrl, cost, isClient } = req.body;
+        console.log(req.headers.authorization)
+        console.log(req.body)
         if (!authorization || !isClient) {
             res.status(401).send({ data: null, message: 'invalid access' });
         } else {

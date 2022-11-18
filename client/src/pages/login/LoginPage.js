@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { decodeToken } from 'react-jwt';
+import { useNavigate } from 'react-router-dom';
+// import { decodeToken } from 'react-jwt';
 import axios from 'axios';
 import Signup from './component/Signup';
 import LoginForm  from './component/LoginForm';
 
 import Container from 'react-bootstrap/esm/Container';
+import Row from 'react-bootstrap/esm/Row';
+import Col from 'react-bootstrap/esm/Col';
 import Button from 'react-bootstrap/Button';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
-const LoginPage = () => {
+import './Loginpage.css'
+
+const LoginPage = ({ setUserData }) => {
   const [isClient, setIsClient] = useState(false);
   const [email, setEmail] = useState("");
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   const handleIsClient = (e) => {
     if (e === "client") {
@@ -23,28 +29,28 @@ const LoginPage = () => {
   useEffect(() => {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
-    console.log("authorizationCode", authorizationCode)
+    console.log("authorizationCode", authorizationCode);
     if (authorizationCode) {
       const options = {
         url: "http://localhost:3001/users/auth",
         method: 'POST',
         headers: {"Content-Type": "application/json"},
-        withcredentials: true,
-        data:{ code: authorizationCode }
+        withCredentials: true,
+        data: { code: authorizationCode }
       }
       axios.request(options)
         .then(res => {
-          setEmail("email");
-          console.log(res)
+          setEmail(res.data.email);
+          setShow(true);
         })
-        .catch(err => console.log(err))
+        .catch(err => alert(err.response.data))
     }
   },[]);
 
   const googleOath = async () => {
     const url = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code`+
     `&access_type=offline`+
-    `&state=state_parameter_passthrough_value`+
+    `&state=ad4u_oauth_login`+
     `&include_granted_scopes=true`+
     `&client_id=${process.env.REACT_APP_CLIENT_ID}`+
     `&scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly`+
@@ -55,25 +61,37 @@ const LoginPage = () => {
   const sendLoginData = async (loginData) => {
     loginData.isClient = isClient;
     console.log("LoginData", loginData);
-
-    const { id, password } = loginData;
-    const options = {
-      url: "http://localhost:3001/users/login",
-      method: 'POST',
-      headers: {"Content-Type": "application/json"},
-      withcredential: true,
-      data:{ id, password, isClient }
+    const { userId, password } = loginData;
+    try { 
+      if ( userId && password ) {
+        const options = {
+          url: "http://localhost:3001/users/login",
+          method: 'POST',
+          headers: {"Content-Type": "application/json"},
+          withCredentials: true,
+          data:{ userId, password, isClient }
+        }
+        const result = await axios.request(options);
+        const { user } = result.data;
+        user.isClient = result.data.isClient;
+        setUserData(user);
+        navigate('/');
+      } else {
+        alert("아이디와 비밀번호를 입력해주세요");
+      }
+    } catch (err) {
+      alert(err.response.data);
     }
-    // const result = await axios.request(options)
   }
   
   return (
     <>
-      <Container>
+      <Container className='loginPage_container'>
         <Tabs
+          as={Row}
           defaultActiveKey="supplier"
-          className="mb-3"
           onSelect={handleIsClient}
+          className="mb-3"
           justify
         >
           <Tab 
@@ -89,19 +107,23 @@ const LoginPage = () => {
             <LoginForm sendLoginData={sendLoginData} />
           </Tab>
         </Tabs>
-        <div>또는</div>
-        <Button onClick={googleOath}>
-          Google 계정으로 간편 로그인
-        </Button>
-        <Signup 
+        <Row>
+          <Button 
+            as={Col}
+            xs={{ span: 4, offset: 8 }}
+            onClick={googleOath} 
+          >
+            Google 계정으로 간편회원가입
+          </Button>
+        </Row>
+      </Container>
+      <Signup 
           email={email}
           show={show} 
           setShow={setShow}
           isClient={isClient}
           handleIsClient={handleIsClient}
         />
-        <Button onClick={() => setShow(true)}>SignupTest</Button>
-      </Container>
     </>
   );
 }
