@@ -12,7 +12,7 @@ import Button from 'react-bootstrap/Button';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
-import './Loginpage.css'
+import './LoginPage.css'
 
 const LoginPage = ({ setUserData }) => {
   const [isClient, setIsClient] = useState(false);
