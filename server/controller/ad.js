@@ -79,6 +79,8 @@ module.exports = {
     create: async (req, res) => {
         const authorization = req.headers.authorization;
         const { title, content, AdImgUrl, cost, isClient } = req.body;
+        console.log(req.headers.authorization)
+        console.log(req.body)
         if (!authorization || !isClient) {
             res.status(404).send({ data: null, message: 'invalid access' });
         } else {
