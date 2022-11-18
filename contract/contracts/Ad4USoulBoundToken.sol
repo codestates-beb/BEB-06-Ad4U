@@ -27,6 +27,9 @@ contract Ad4USoulBoundToken is ERC721URIStorage, Ownable {
         return newItemId;
     }
 
+    // 위에 까지는 NFT, 이 _beforeTokenTransfer에서 Require 때문에 SBT의 속성을 가짐
+    // 해당 함수는 ERC721 표준에서 _transfer전 로직을 생성할 수 있는 함수로, _transfer전 무조건 실행
+    // 따라서 override함으로써 from이나 to가 유효한 계정일 경우, transfer를 막음 => 즉, transfer기능 자체를 막음
     function _beforeTokenTransfer(address from, address to, uint256, uint256) pure internal override {
         require(from == address(0) || to == address(0), "This a Soulbound token. It cannot be transferred. It can only be burned by the token owner.");
     }
