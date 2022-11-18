@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/esm/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-import '../Loginpage.css'
+import '../LoginPage.css';
 
 const ClientSignupForm = ({ email, sendSignupData, handleClose }) => {
   

@@ -21,23 +21,23 @@ const Main = () => {
     window.scrollTo(0, 0, { behavior : "smooth" })
       };
   const onAboutClick = () => {
-    window.scrollTo(0, 1000, { behavior : "smooth" })
+    window.scrollTo(0, 700, { behavior : "smooth" })
       };
   const onAdClick = () => {
-    window.scrollTo(0, 2000, { behavior : "smooth" })
+    window.scrollTo(0, 1500, { behavior : "smooth" })
       };
   const onCreatorClick = () => {
-    window.scrollTo(0, 3000, { behavior : "smooth" })
+    window.scrollTo(0, 2300, { behavior : "smooth" })
       };
 
   return (
     <Container className='main_container'>
       <header className='header'>
-        <Row>
-          <Col><Button variant="link" onClick={onHomeClick}>Home</Button></Col>
-          <Col><Button variant="link" onClick={onAboutClick}>About</Button></Col>
-          <Col><Button variant="link" onClick={onAdClick}>Ads</Button></Col>
-          <Col><Button variant="link" onClick={onCreatorClick}>Creator</Button></Col>
+        <Row >
+          <Col xs={3}><Button variant="link" onClick={onHomeClick}><h3>Home</h3></Button></Col>
+          <Col xs={3}><Button variant="link" onClick={onAboutClick}><h3>About</h3></Button></Col>
+          <Col xs={2}><Button variant="link" onClick={onAdClick}><h3>Ads</h3></Button></Col>
+          <Col xs={1} ><Button variant="link" onClick={onCreatorClick}><h3>Creator</h3></Button></Col>
         </Row>
       </header>
       <main>

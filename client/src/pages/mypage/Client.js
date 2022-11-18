@@ -13,9 +13,7 @@ const ClientMypage = () => {
         <Col xl={3} >
           <Row>
             <Profile />
-            <div className='clientupload'>
-              <Link to="/upload"><button className='clientupload_btn'><span>광고 업로드</span></button></Link>
-            </div>
+            <Link to="/upload"><button className='clientupload_btn'><span>광고 업로드</span></button></Link>
           </Row>
         </Col>
         <Col xl={9}  >

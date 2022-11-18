@@ -9,7 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
-import '../Loginpage.css';
+import '../LoginPage.css';
 
 const SignUp = ({ show, setShow, email }) => {
   const [isClient, setIsClient] = useState(false);

@@ -221,17 +221,17 @@ const AdUpload = () => {
       <Button variant="primary" onClick={() => setModalShow(true)}>
         미리보기
       </Button>
-      {/* <div>
-        <button className='upload_btn' onClick={() => setModalShow(true)}><span>미리보기</span></button>
-      </div> */}
+     
+        {/* <button className='upload_btn' onClick={() => setModalShow(true)}><span>미리보기</span></button> */}
+     
       <br></br>
       <br></br>
       <Button variant="primary" type="submit" onClick={handleSubmit}>
         Submit
       </Button>
-      {/* <div>
-        <button className='upload_btn' onClick={() => setModalShow(true)}><span>Submit</span></button>
-      </div> */}
+
+        {/* <button className='upload_btn' onClick={() => setModalShow(true)}><span>Submit</span></button> */}
+   
 
 
       <Modal
