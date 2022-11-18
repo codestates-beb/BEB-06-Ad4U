@@ -4,12 +4,7 @@ import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 import { Button } from 'react-bootstrap';
-import { multiSigWalletDeploy } from '../../hooks/web3/multiSigWalletDeploy';
-import { supplierSignWallet } from '../../hooks/web3/supplierSignWallet';
-import { submitTransaction } from '../../hooks/web3/submitTransaction';
-import { confirmTransaction } from '../../hooks/web3/confirmTransaction';
-import { executeTransaction } from '../../hooks/web3/executeTransaction';
-import { revokeConfirmation } from '../../hooks/web3/revokeTransaction';
+import method from '../../hooks/web3/sendTransaction'
 
 
 const TestApiPage = () => {
@@ -18,14 +13,14 @@ const TestApiPage = () => {
 // 1. Multi-Sig Wallet Deploy
   const handleDeploy = async () => {
     const supplierAddr = "0xebF43eF8B387652A862DaFE5990f264336C58DB5";
-    const result = await multiSigWalletDeploy(supplierAddr);
+    const result = await method.multiSigWalletDeploy(supplierAddr);
     console.log(result)
   };
 
 // 2. Supplier Sign Wallet
   const handleSupplierSignWallet = async () => {
     let walletAddress = "0x6B22a196da91253c4a975E5217BB5dA0a1469e81";
-    const result = await supplierSignWallet(walletAddress);
+    const result = await method.supplierSignWallet(walletAddress);
     console.log(result)
   };
 
@@ -35,7 +30,7 @@ const TestApiPage = () => {
     let to = "0xebF43eF8B387652A862DaFE5990f264336C58DB5";
     let value = "0.1";
     let data = "web3 revoke test"
-    const result = await submitTransaction(walletAddress,to,value,data);
+    const result = await method.submitTransaction(walletAddress,to,value,data);
     console.log(result)
   };
 
@@ -43,7 +38,7 @@ const TestApiPage = () => {
   const handleConfirmTransaction = async () => {
     let walletAddress = "0x6B22a196da91253c4a975E5217BB5dA0a1469e81";
     let txIndex = 1;
-    const result = await confirmTransaction(walletAddress,txIndex);
+    const result = await method.confirmTransaction(walletAddress,txIndex);
     console.log(result)
   };
 
@@ -51,7 +46,7 @@ const TestApiPage = () => {
 const handleRevokeConfirmation = async () => {
     let walletAddress = "0x6B22a196da91253c4a975E5217BB5dA0a1469e81";
     let txIndex = 1;
-    const result = await revokeConfirmation(walletAddress,txIndex);
+    const result = await method.revokeConfirmation(walletAddress,txIndex);
     console.log(result)
   };
 
@@ -59,7 +54,7 @@ const handleRevokeConfirmation = async () => {
   const handleExecuteTransaction = async () => {
     let walletAddress = "0x6B22a196da91253c4a975E5217BB5dA0a1469e81";
     let txIndex = 0;
-    const result = await executeTransaction(walletAddress,txIndex);
+    const result = await method.executeTransaction(walletAddress,txIndex);
     console.log(result)
   };
 
