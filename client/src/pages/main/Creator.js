@@ -7,19 +7,6 @@ import { Link } from 'react-router-dom';
 const Creator = () => {
 
   return (
-    // <div className='creator_container'>
-    //   <div className='creator_title'>CREATOR</div>
-    //   <div className="creator-content">
-    //     <div className="creator-content_card-container">
-    //           <Avatar size="100" round={true}/>
-    //           <Card.Body>
-    //             <Card.Title>channels name</Card.Title>
-    //             <Card.Text>subscribers</Card.Text>
-    //           </Card.Body>
-    //     </div>
-    //   </div>
-    //   <Button href="/list/supplier">View all</Button>
-    // </div>
 <div className='creator_container'>
       <div className='creator_title'>CREATORS</div>
         <div className="creator-content">

@@ -1,12 +1,5 @@
 import React from 'react';
-import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
-
-import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/esm/Col';
-import Row from 'react-bootstrap/esm/Row';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Card, ListGroup } from 'react-bootstrap';
 
 const Sidebar = () => {
   return (

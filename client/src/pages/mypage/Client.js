@@ -11,7 +11,7 @@ import Button from 'react-bootstrap/esm/Button';
 const ClientMypage = () => {
   return (
     <Container className='supplierMypage_container'>
-      <Row xs={2}>
+      {/* <Row xs={2}>
         <Col xs={2}>
           <Profile />
         </Col>
@@ -24,7 +24,14 @@ const ClientMypage = () => {
           Content
         </Row>
         </Col>          
+      </Row> */}
+      <Row>
+        <Col><Profile /></Col>
+        <Col>
+        <Row><Status /></Row>
+        </Col>
       </Row>
+
     </Container>
   );
 }

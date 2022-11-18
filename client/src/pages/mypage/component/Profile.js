@@ -1,20 +1,25 @@
 import React from 'react';
-
-import altImg from '../../../dummyfiles/img1.png'
-import Container from 'react-bootstrap/esm/Container';
-import Row from 'react-bootstrap/esm/Row';
+import { Card, ListGroup, Container } from 'react-bootstrap';
 import Avatar from 'react-avatar';
 
 import './Profile.css';
 
 const Profile = () => {
   return (
-      <Container className='profile_container'>       
-        <Row>
-          <Avatar className='profile_img' src={altImg} round={true}/> 
-          <div className='profile_name'>My name</div>
-        </Row>
-      </Container>
+    <Container>
+      <div className="profile-content">
+        <div className="profile-content_card-container">
+          <Avatar size="100" round={true}/>
+          <Card.Body>
+            <Card.Title className='mt-3'>UserName</Card.Title>
+            <ListGroup variant="flush" className='mt-3'>
+              <ListGroup.Item >email</ListGroup.Item>
+              <ListGroup.Item >data</ListGroup.Item>
+            </ListGroup>
+          </Card.Body>
+        </div>
+      </div>
+    </Container>
   );
 }
 
