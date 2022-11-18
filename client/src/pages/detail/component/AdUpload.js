@@ -151,11 +151,14 @@ const AdUpload = () => {
     if(checkVaild > 0) {
         return;
     }
-    
+    // test용 access Token
+    var accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNjY4NzQ1ODA2LCJleHAiOjE2Njg3NDk0MDZ9.lXCyyuq6t-RCuEUf3oDb6arOA69_9IoSPB5p8SNKrNc";
     const options = {
         url: "http://localhost:3001/ad/create",
         method: 'POST',
-        headers: {"Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNjY4NzM2Njc3LCJleHAiOjE2Njg3NDAyNzd9.dGA0uxZN9sYonI74waNCgYyAKx4V8lvukyKJMC49pHQ"},
+        headers: {
+          "Authorization": `Bearer ${accessToken}`
+        },
         data:{ 
             title: AdInfo.title,
             content: AdInfo.content,
@@ -167,10 +170,10 @@ const AdUpload = () => {
     axios.request(options)
         .then(res => {
         if(res.status == 400) {
-
+          // 에러 로직
         }
         else {
-            
+          // 성공 로직
         }
         })
         .catch(err => console.log(err))
