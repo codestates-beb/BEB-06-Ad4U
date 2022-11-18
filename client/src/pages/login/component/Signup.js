@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
-import SupplierSignupForm  from './SupplierSignupForm'
-import ClientSignupForm  from './ClientSignupForm'
+import SupplierSignupForm  from './SupplierSignupForm';
+import ClientSignupForm  from './ClientSignupForm';
+import { getCurrentAccount } from '../../../hooks/web3/common';
 
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
@@ -13,6 +14,7 @@ import '../LoginPage.css';
 
 const SignUp = ({ show, setShow, email }) => {
   const [isClient, setIsClient] = useState(false);
+  const [account, setAccount] = useState("")
 
   const handleClose = () => setShow(false);
 
@@ -21,7 +23,12 @@ const SignUp = ({ show, setShow, email }) => {
       setIsClient(true);
     } else setIsClient(false);
   }
-  
+
+  const inputAccount = async () => {
+    const currentAccount = await getCurrentAccount();
+    setAccount(currentAccount);
+  }
+
   const sendSignupData = async (signupData) => {
     signupData.isClient = isClient;
     console.log("SignupData", signupData);
@@ -67,6 +74,8 @@ const SignUp = ({ show, setShow, email }) => {
           >
             <SupplierSignupForm 
               email={email} 
+              account={account}
+              inputAccount={inputAccount}
               sendSignupData={sendSignupData}
               handleClose={handleClose}
             />
@@ -76,7 +85,9 @@ const SignUp = ({ show, setShow, email }) => {
             title="광고주"
           >
             <ClientSignupForm 
-              email={email} 
+              email={email}
+              account={account}
+              inputAccount={inputAccount} 
               sendSignupData={sendSignupData}
               handleClose={handleClose}
             />
