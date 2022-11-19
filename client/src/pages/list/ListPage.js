@@ -24,6 +24,7 @@ const List = () => {
               </ListGroup>
             </Card.Body>
           </Card>
+          
         </Col>
         <Col xl={9}>
           <Routes>
