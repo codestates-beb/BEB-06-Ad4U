@@ -1,3 +1,12 @@
+.form {
+ height: 1000px;
+ margin-top: 20px;
+}
+
+.form h5 {
+    color: white;
+}
+
 .adContent {
     white-space: pre-wrap;
     font-size: large;
@@ -7,7 +16,6 @@
     width: 50%;
     height: 50%;   
 }
-
 
 .titleMessage {
     display: none;
@@ -36,3 +44,13 @@ h5 {
     height: 20px;
 }
 
+.upload_btn {
+  padding: 10px 30px;
+  border-radius: 15px;
+  background: none;
+  color: inherit;
+  border: 3px solid white;
+}
+.upload_btn span {
+  color: white;
+}

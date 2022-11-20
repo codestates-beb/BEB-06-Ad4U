@@ -2,14 +2,14 @@
   text-decoration: none;
   color: unset;
   display: inline-block;
-  margin-top: 66px;
+  margin-top: 70px;
 }
 
 .header {
   position: fixed;
   z-index: 1;
   color: white;
-  margin-left: 60%;
+  margin-left: 50%;
 }
 
 .upbutton {

@@ -182,7 +182,6 @@ module.exports = {
     mypage: async (req, res) => {
         const authorization = req.headers.authorization;
         const { isClient } = req.query;
-        console.log(isClient)
         const token = authorization.split(' ')[1];
         const data = jwt.verify(token, process.env.ACCESS_SECRET);
         if (!authorization) {

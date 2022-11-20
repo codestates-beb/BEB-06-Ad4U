@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import axios from 'axios';
+import auth from '../../../hooks/axios/auth';
 import SupplierSignupForm  from './SupplierSignupForm';
 import ClientSignupForm  from './ClientSignupForm';
 import { loadWeb3, getCurrentAccount } from '../../../hooks/web3/common';
@@ -34,14 +34,7 @@ const SignUp = ({ show, setShow, email }) => {
     signupData.isClient = isClient;
     console.log("SignupData", signupData);
     try {
-      const options = {
-        url: "http://localhost:3001/users/signup",
-        method: 'POST',
-        headers: {"Content-Type": "application/json"},
-        withcredential: true,
-        data: signupData
-      }
-      const result = await axios.request(options);
+      const result = await auth.signup(signupData);
       if (result) {
         alert("회원가입이 완료되었습니다. 로그인을 해주세요");
         handleClose();
