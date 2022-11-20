@@ -1,5 +1,6 @@
 const { Client, Advertisement, Advertisement_has_Supplier, Supplier } = require('../models/index');
 const jwt = require('jsonwebtoken');
+const { Op } = require('sequelize');
 
 module.exports = {
     apply: async (req, res) => { //광고 지원 - supplier
@@ -74,11 +75,14 @@ module.exports = {
                 if (ad.Client_id != data.user.id) {
                     res.status(401).send({ data: null, message: 'invalid access' });
                 } else {
+                    console.log(1)
                     Advertisement_has_Supplier.destroy({
                         where: {
-                            Supplier_id: { [Op.ne]: supplier_id }
+                            Supplier_id: {[Op.ne]: supplier_id },
+                            Advertisement_id: advertisement_id
                         }
                     }).then((data) => {
+                        console.log(2)
                         Advertisement.update({
                             status: 1
                         }, {
@@ -110,7 +114,6 @@ module.exports = {
             try {
                 const token = authorization.split(' ')[1];
                 const data = jwt.verify(token, process.env.ACCESS_SECRET);
-
                 const ad_info = await Advertisement.findOne({
                     attributes: ['id'],
                     where: { id: advertisement_id },
@@ -126,14 +129,15 @@ module.exports = {
                         },
                     ]
                 })
-                if (ad_info.Advertisement_has_Suppliers.Supplier.id != data.user.id) {
+                if (ad_info.Advertisement_has_Suppliers[0].Supplier.id != data.user.id) {
                     res.status(401).send({ data: null, message: 'invalid access' });
                 }
                 else {
+                    console.log(1)
                     Advertisement.update(
                         { status: 2 }, {
                         where: { id: advertisement_id }
-                    })
+                        })
                         .then((data) => {
                             res.status(201).json("complete")
                         }).catch((err) => {
@@ -142,7 +146,8 @@ module.exports = {
     
                 }
             } catch (error) {
-                res.status(400).json(err)
+                console.log("err")
+                res.status(400).json(error)
             }
         }
         
@@ -161,24 +166,31 @@ module.exports = {
                     attributes: ['Client_id'],
                     where: { id: advertisement_id },
                 })
+                console.log(ad)
     
                 if (data.user.id != ad.Client_id) {
                     res.status(401).send({ data: null, message: 'invalid access' });
-    
                 } else {
                     Advertisement.update(
                         { status: 3 },
                         { where: { id: advertisement_id } })
+                        .then((data) => {
+                            res.status(201).json("complete")
+                        }).catch((err) => {
+                            res.status(400).json("DB error")
+                        })
+
+                    
                 }
             } catch (err) {
                 res.status(400).json(err);
             }
         }
     },
-    complete: async (req, res) => {
+    complete: async (req, res) => { //광고 완료
         const authorization = req.headers.authorization;
         const { advertisement_id, isClient } = req.body;
-        if (!authorization ) {
+        if (!authorization) {
             res.status(401).send({ data: null, message: 'invalid access' });
         } else {
             try {
@@ -204,7 +216,7 @@ module.exports = {
                             })
                     }
                 } else {
-                    const ad_info = await Advertisement.findOne({
+                    const ad = await Advertisement.findOne({
                         attributes: ['id'],
                         where: { id: advertisement_id },
                         include: [
@@ -219,7 +231,7 @@ module.exports = {
                             },
                         ]
                     })
-                    if (data.user.id != ad_info.Advertisement_has_Suppliers.Supplier.id) {
+                    if (data.user.id != ad.Advertisement_has_Suppliers[0].Supplier.id) {
                         res.status(401).send({ data: null, message: 'invalid access' });
                     } else {
                         Advertisement.update(
@@ -238,7 +250,7 @@ module.exports = {
             }
         }
     },
-    break: async (req, res) => {
+    _break: async (req, res) => { //광고 파기
         const authorization = req.headers.authorization;
         const { advertisement_id, isClient } = req.body;
         if (!authorization) {
@@ -267,7 +279,7 @@ module.exports = {
                             })
                     }
                 } else {
-                    const ad_info = await Advertisement.findOne({
+                    const ad = await Advertisement.findOne({
                         attributes: ['id'],
                         where: { id: advertisement_id },
                         include: [
@@ -282,7 +294,7 @@ module.exports = {
                             },
                         ]
                     })
-                    if (data.user.id != ad_info.Advertisement_has_Suppliers.Supplier.id) {
+                    if (data.user.id != ad.Advertisement_has_Suppliers[0].Supplier.id) {
                         res.status(401).send({ data: null, message: 'invalid access' });
                     } else {
                         Advertisement.update(
