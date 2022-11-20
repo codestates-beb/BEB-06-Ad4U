@@ -6,12 +6,12 @@ import Status from './component/Status';
 import { Container, Accordion, Row, Col } from 'react-bootstrap';
 
 
-const SupplierMypage = () => {
+const SupplierMypage = ({ userData }) => {
   return (
     <Container className='supplierMypage_container'>
       <Row className='supplierMypage_row' >
         <Col xl={3} >
-          <Profile />
+          <Profile userData={userData}/>
         </Col>
         <Col xl={9} >
         <Row>

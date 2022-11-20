@@ -42,7 +42,7 @@ const App = () => {
         <Route path="/" element={<Main />} />
         <Route path="/list/*" element={<ListPage />} />
         <Route path="/mypage/client" element={<ClientMypage userData={userData}/>} />
-        <Route path="/mypage/supplier" element={<SupplierMypage />} />
+        <Route path="/mypage/supplier" element={<SupplierMypage userData={userData}/>} />
         <Route path="/detail/client/:clientId" element={<ClientDetail />} />
         <Route path="/detail/supplier/:supplierId" element={<SupplierDetail />} />
         <Route path="/detail/ad/:adId" element={<AdDetail />} />

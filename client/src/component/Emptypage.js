@@ -2,12 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Toast from 'react-bootstrap/Toast';
-import { ToastContainer } from 'react-bootstrap';
+import { Container, ToastContainer } from 'react-bootstrap';
+import './Footer.css';
 
 const Emptypage = () => {
   const navigate = useNavigate();
 
   return (
+    <Container className='emptypage'>
     <ToastContainer position="middle-center" >
       <Toast >
         <Toast.Header closeButton={false}>
@@ -19,6 +21,7 @@ const Emptypage = () => {
         </Toast.Body>
       </Toast>
     </ToastContainer>
+    </Container>
   );
 }
 

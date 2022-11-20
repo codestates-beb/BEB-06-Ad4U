@@ -9,6 +9,7 @@ import Avatar from 'react-avatar';
 import { RiStarSmileLine } from "react-icons/ri";
 
 import './Nav.css';
+import supplier from '../hooks/axios/supplier';
 
 const Nav = ({ userData, setUserData }) => {
 
@@ -28,10 +29,13 @@ const Nav = ({ userData, setUserData }) => {
   }
 
   const LoggedIn = ({ userData }) => {
+    
+    // let string ; 
+    // userData.isClient ?  string = 'client' : string = 'supplier'
     return (
       <Stack direction="horizontal" gap={4} justify='flex-end'>
         <button onClick={deleteUserData}>logout</button>
-        <Link to='/mypage/client'>
+        <Link to='./mypage/client'>
           <Avatar size="50" round={true} />
         </Link>
       </Stack>
@@ -53,8 +57,8 @@ const Nav = ({ userData, setUserData }) => {
           <img className="nav_logo" src = {Logo} alt = "Ad4U logo" width={100} height={50}/>
         </Link>
         <Stack direction="horizontal" gap={4} justify='flex-end'>
-          {userData.isClient 
-            ? <LoggedIn userData={userData} />  : <Logout />}
+          {userData.isClient === undefined 
+            ?  <Logout /> : <LoggedIn userData={userData} />  }
           <Dropdown>
             <Dropdown.Toggle variant="dark" id="dropdown-basic">
               < RiStarSmileLine color='white' size={30}/>
