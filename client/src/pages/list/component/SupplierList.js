@@ -8,7 +8,7 @@ import Avatar from 'react-avatar';
 import { GoPlay } from "react-icons/go";
 import { RiUserFollowFill } from "react-icons/ri";
 
-import './SupplierList.css'
+import '../ListPage.css';
 
 const SupplierList = () => {
   const [list, setList] = useState([]);

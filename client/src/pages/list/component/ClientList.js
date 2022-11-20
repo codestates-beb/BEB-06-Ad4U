@@ -5,7 +5,7 @@ import SearchBar from './SearchBar';
 
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
-import './ClientList.css';
+import '../ListPage.css';
 
 const ClientList = () => {
   const [list, setList] = useState([]);

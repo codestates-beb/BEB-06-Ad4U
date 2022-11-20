@@ -6,7 +6,7 @@ import SearchBar from './SearchBar';
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 
-import './AdList.css';
+import '../ListPage.css';
 
 const AdList = () => {
   const [list, setList] = useState([]);
@@ -60,7 +60,7 @@ const AdList = () => {
     <Container className='adList_container'>
       <h1>AdList</h1>
       <SearchBar filter={filter} refreshList={refreshList}/>
-      <Table hover>
+      {/* <Table hover>
         <thead>
           <tr>
             <th></th>
@@ -74,7 +74,7 @@ const AdList = () => {
             : list.map((data, idx) => <AdTable key={idx} idx={idx} data={data} />)
           }
         </tbody>
-      </Table>
+      </Table> */}
     </Container>
   );
 }

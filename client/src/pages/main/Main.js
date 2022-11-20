@@ -1,10 +1,10 @@
 import React from 'react';
-import About from './About';
-import Home from './Home';
-import { Col, Row, Container, Button } from 'react-bootstrap';
+import About from './component/About';
+import Home from './component/Home';
+import Ad from './component/Ad';
+import Supplier from './component/Supplier';
 
-import Ad from './Ad';
-import Creator from './Creator';
+import { Col, Row, Container, Button } from 'react-bootstrap';
 import smoothscroll from 'smoothscroll-polyfill';
 import { IoIosArrowDropupCircle } from "react-icons/io";
 
@@ -38,14 +38,14 @@ const Main = ( userData ) => {
           <Col xs={3}><Button variant="link" onClick={onHomeClick}><h3>Home</h3></Button></Col>
           <Col xs={3}><Button variant="link" onClick={onAboutClick}><h3>About</h3></Button></Col>
           <Col xs={2}><Button variant="link" onClick={onAdClick}><h3>Ads</h3></Button></Col>
-          <Col xs={1} ><Button variant="link" onClick={onCreatorClick}><h3>Creator</h3></Button></Col>
+          <Col xs={1} ><Button variant="link" onClick={onCreatorClick}><h3>Supplier</h3></Button></Col>
         </Row>
       </header>
       <main>
         <Home />
         <About />
         <Ad />
-        <Creator />
+        <Supplier />
       </main>
       <Button variant="light" className='upbutton' onClick={topClick}>
         <IoIosArrowDropupCircle />

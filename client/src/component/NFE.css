@@ -1,3 +1,4 @@
+/* Nav css */
 .navbar {
   position: fixed;
   z-index: 2;
@@ -11,11 +12,11 @@
   margin-left: 40px;
 }
 
-.login_btn span {  
+.navlogin_btn span {  
   color: white;
 }
 
-.login_btn {
+.navlogin_btn {
   padding: 8px 30px;
   margin-left: 35px;
   margin-top: 10px;
@@ -25,3 +26,14 @@
   border: 3px solid white;
 }
 
+/* Footer css */
+.footer {
+  padding: 40px;
+  text-align: center;
+  color: white;
+}
+
+/* Emptypage css */
+.emptypage {
+  height: 1000px;
+}

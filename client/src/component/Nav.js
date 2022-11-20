@@ -3,12 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo from './clear_logo.png';
 import auth from '../hooks/axios/auth';
 
-import { Button, Navbar, NavDropdown, Container,DropdownButton,Dropdown  } from 'react-bootstrap';
+import { Navbar, NavDropdown, Container,Dropdown  } from 'react-bootstrap';
 import Stack from 'react-bootstrap/Stack';
 import Avatar from 'react-avatar';
 import { RiStarSmileLine } from "react-icons/ri";
 
-import './Nav.css';
+import './NFE.css';
 import supplier from '../hooks/axios/supplier';
 
 const Nav = ({ userData, setUserData }) => {
@@ -45,7 +45,7 @@ const Nav = ({ userData, setUserData }) => {
   const Logout = () => {
     return (
       <Stack direction="horizontal" gap={4}  justify='flex-end'>
-          <Link to='./login'><button className='login_btn'><span>Login</span></button></Link>
+          <Link to='./login'><button className='navlogin_btn'><span>Login</span></button></Link>
       </Stack>
     )
   }

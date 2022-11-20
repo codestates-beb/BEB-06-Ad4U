@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Toast from 'react-bootstrap/Toast';
 import { Container, ToastContainer } from 'react-bootstrap';
-import './Footer.css';
+import './NFE.css';
 
 const Emptypage = () => {
   const navigate = useNavigate();

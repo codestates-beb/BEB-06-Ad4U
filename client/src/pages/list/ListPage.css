@@ -15,3 +15,63 @@
 .item {
   text-align: center;
 }
+
+/* supplierList css */
+.supplierList_container {
+  position: relative;
+  height: 1000px;
+}
+
+.supplierList_container h1 {
+  color: white;
+}
+
+.supplierList-content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(280px, 150px));
+  padding:20px 0;
+  gap: 40px;
+}
+
+.supplierList-content_card-container  {
+  text-align: center;
+  padding: 20px 20px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 4px 4px #0c0b1473;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+  background-color: #ffffff;
+}
+
+.supplierList-content_card-container:hover {
+  transform: scale(1.1);
+}
+
+/* clientList css */
+.clientList_container h1 {
+  color: white;
+}
+
+.clientList_container th {
+  color: white;
+}
+
+
+.clientList_container td {
+  color: white;
+}
+
+/* adList css */
+.adList_container h1 {
+  color: white;
+}
+
+.adList_container th {
+  color: white;
+}
+
+
+.adList_container td {
+  color: white;
+}
