@@ -25,7 +25,7 @@ module.exports = {
                 });
             }
             if (user) {
-                const jwt_accessToken = jwt.sign({ userId }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
+                const jwt_accessToken = jwt.sign({ user }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
                 const jwt_refreshToken = jwt.sign({ userId }, process.env.REFRESH_SECRET, { expiresIn: '3h' });
                 res.cookie('jwt_refreshToken', jwt_refreshToken, {
                     maxAge: 60 * 60 * 1000
@@ -161,20 +161,14 @@ module.exports = {
                 });
                 
                 if(client_user){
-                    const userId = client_user.userId;
                     const user = client_user;
-                    const jwt_accessToken = jwt.sign({ userId }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
+                    const jwt_accessToken = jwt.sign({ user }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
                     res.status(200).json({ jwt_accessToken, user, isClient: true });
                 }else if(supplier_user){
                     const user = supplier_user;
-                    const userId = supplier_user.userId;
-                    const jwt_accessToken = jwt.sign({ userId }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
+                    const jwt_accessToken = jwt.sign({ user }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
                     res.status(200).json({ jwt_accessToken, user, isClient: false });
                 }
-
-
-
-
             } catch (error) {
                 res.status(400).json("Invalid refreshToken, login again")
             }
@@ -191,11 +185,12 @@ module.exports = {
         } else {
             const token = authorization.split(' ')[1];
             const data = jwt.verify(token, process.env.ACCESS_SECRET);
+            console.log(data)
             if (isClient == "true") {
                 try {
                     const user = await Client.findOne({
                         attributes: client_attributes,
-                        where: { userId: data.userId },
+                        where: { userId: data.user.userId },
                         include: [
                             {
                                 model: Advertisement, as: "Advertisements",
@@ -223,7 +218,7 @@ module.exports = {
                 try {
                     const user = await Supplier.findOne({
                         attributes: supplier_attributes,
-                        where: { userId: data.userId },
+                        where: { userId: data.user.userId },
                         include: [
                             {
                                 model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",
