@@ -34,6 +34,7 @@ const SupplierList = () => {
     .then(res => res.data)
     .then(data => {
       return data.filter((el) => {
+        if (el[eventKey] === null) return null;
         if (el[eventKey].includes(input)) {
           return el;
         } 
@@ -48,7 +49,7 @@ const SupplierList = () => {
     
     const handleClick = (e) => { 
       //더블클릭시 이동
-      if (e.detail === 2) return navigate(`/detail/supplier/${data.id}`);
+      if (e.detail === 1) return navigate(`/detail/supplier/${data.id}`);
     }
 
     return (

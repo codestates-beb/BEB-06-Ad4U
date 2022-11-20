@@ -22,7 +22,17 @@ const getList = async () => {
   return result;
 }
 
+const getDetail = async (id) => {
+  const options = {
+    url: `http://localhost:3001/ad/detail?id=${id}`,
+    method: 'GET',
+    headers: {"Content-Type": "application/json"},
+    withCredentials: true,
+  }
+  const result = await axios.request(options)
+  return result;
+}
 
-const ad = { mainList, getList };
+const ad = { mainList, getList, getDetail };
 
 export default ad;

@@ -30,6 +30,7 @@ const ClientList = () => {
     .then(res => res.data)
     .then(data => {
       return data.filter((el) => {
+        if (el[eventKey] === null) return null;
         if (el[eventKey].includes(input)) {
           return el;
         } 
@@ -46,7 +47,7 @@ const ClientList = () => {
         <td>{idx+1}</td>
         <td 
           colSpan={3}
-          onClick={() => navigate(`/detail/ad/${data.id}`)}
+          onClick={() => navigate(`/detail/client/${data.id}`)}
         >
           {data.company_name}
         </td>
