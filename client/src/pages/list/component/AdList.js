@@ -31,6 +31,7 @@ const AdList = () => {
     .then(res => res.data)
     .then(data => {
       return data.filter((el) => {
+        if (el[eventKey] === null) return null;
         if (el[eventKey].includes(input)) {
           return el;
         } 

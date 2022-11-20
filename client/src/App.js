@@ -24,7 +24,6 @@ const App = () => {
 
   //세션유지
   useEffect(() => {
-
     auth.refresh()
       .then(res => {
         const { user } = res.data;
