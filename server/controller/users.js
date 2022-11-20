@@ -111,11 +111,12 @@ module.exports = {
 
         if (isClient) {
             const user = await Client.findOne({
-                where: { userId: body.userId, password: body.password },
+                where: { userId: body.userId },
             });
             if (user) { //아이디 중복확인
                 res.status(400).json("아이디 중복")
             } else {
+                console.log(body);
                 Client.create(body)
                     .then(data => {
                         res.status(201).json("complete");
@@ -128,7 +129,7 @@ module.exports = {
             body.refreshToken = refreshToken;
 
             const user = await Supplier.findOne({
-                where: { userId: body.userId, password: body.password },
+                where: { userId: body.userId },
             });
             if (user) {
                 res.status(400).json("아이디 중복")
