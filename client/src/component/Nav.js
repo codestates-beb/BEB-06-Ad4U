@@ -32,7 +32,7 @@ const Nav = ({ userData, setUserData }) => {
       <Stack direction="horizontal" gap={4} justify='flex-end'>
         <button onClick={deleteUserData}>logout</button>
         <Link to='/mypage/client'>
-          <Avatar size="50" round={true}/>
+          <Avatar size="50" round={true} />
         </Link>
       </Stack>
     )

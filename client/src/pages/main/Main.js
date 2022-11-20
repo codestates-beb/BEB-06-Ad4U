@@ -13,7 +13,7 @@ import './Main.css';
 // scrollTo 메서드를 사용 할 때, behavior 속성을 smooth로 설정 할 경우, 스크롤 이동시 부드럽게 이동하는 효과 
 smoothscroll.polyfill();
 
-const Main = () => {
+const Main = ( userData ) => {
   const topClick = () => {
     window.scrollTo(0, 0, { behavior : "smooth" })
   }
@@ -24,11 +24,12 @@ const Main = () => {
     window.scrollTo(0, 700, { behavior : "smooth" })
       };
   const onAdClick = () => {
-    window.scrollTo(0, 1500, { behavior : "smooth" })
+    window.scrollTo(0, 1550, { behavior : "smooth" })
       };
   const onCreatorClick = () => {
     window.scrollTo(0, 2300, { behavior : "smooth" })
       };
+      console.log(userData)
 
   return (
     <Container className='main_container'>

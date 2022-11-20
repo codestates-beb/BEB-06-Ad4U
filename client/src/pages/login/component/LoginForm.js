@@ -28,7 +28,7 @@ const LoginForm = ({ sendLoginData }) => {
           as={Col} 
           xs={{ span: 7, offset: 2 }}
         >
-          <Form.Label>ID</Form.Label>
+          <Form.Label className='login_text'>ID</Form.Label>
           <Form.Control
             type="id"
             // placeholder="ID"
@@ -41,7 +41,7 @@ const LoginForm = ({ sendLoginData }) => {
           as={Col} 
           xs={{ span: 7, offset: 2 }}
         >
-          <Form.Label>Password</Form.Label>
+          <Form.Label className='login_text'>Password</Form.Label>
           <Form.Control 
            type="password"
           //  placeholder="Password"

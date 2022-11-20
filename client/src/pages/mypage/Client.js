@@ -6,13 +6,13 @@ import Status from './component/Status';
 import { Link } from 'react-router-dom';
 import {Accordion, Col, Row, Container} from 'react-bootstrap';
 
-const ClientMypage = () => {
+const ClientMypage = ( userData ) => {
   return (
     <Container className='clientMypage_container'>
       <Row className='clientMypage_row' >
         <Col xl={3} >
           <Row>
-            <Profile />
+            <Profile userData={userData}/>
             <Link to="/upload"><button className='clientupload_btn'><span>광고 업로드</span></button></Link>
           </Row>
         </Col>

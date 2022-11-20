@@ -3,22 +3,21 @@
   height: 850px;
 }
 
-.ad_title {
+.ad_container h1 {
   color: #ffffff;
 }
 
 .ad-content {
   display: grid;
-  grid-template-columns: repeat(3, minmax(150px, 220px));
+  grid-template-columns: repeat(5, minmax(150px, 220px));
   padding:20px 0;
-  gap: 40px;
+  gap: 45px;
   justify-content: center;
-  
 }
 
 .ad-content_card-container {
   text-align: center;
-  padding: 20px 20px;
+  padding: 10px 10px;
   border-radius: 4px;
   box-shadow: 2px 2px 4px 4px #0c0b1473;
   cursor: pointer;
@@ -34,23 +33,23 @@
   margin-bottom: 10px;
 }
 
-.viewall {  
+.ad_viewall {  
   display: flex; 
   justify-content: center;
-  margin-top: 15px;
+
 }
 
-.viewall span {  
+.ad_viewall span {  
   color: white;
 }
 
-.viewall_btn {
+.adviewall_btn {
   padding: 10px 30px;
   border-radius: 15px;
   background: none;
   border: 3px solid white;
 }
 
-.viewall_btn:hover {
+.adviewall_btn:hover {
   transform: scale(1.1);
 }

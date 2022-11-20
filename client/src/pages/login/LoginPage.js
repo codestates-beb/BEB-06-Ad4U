@@ -80,7 +80,7 @@ const LoginPage = ({ setUserData }) => {
           as={Row}
           defaultActiveKey="supplier"
           onSelect={handleIsClient}
-          className="mb-3"
+          // className="mb-3"
           justify
         >
           <Tab 

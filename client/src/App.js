@@ -17,6 +17,7 @@ import Footer from './component/Footer';
 import TestApiPage from './pages/testAPI/testapi';
 
 import './App.css';
+import axios from 'axios';
 
 const App = () => {
   const [ userData, setUserData ] = useState({});
@@ -40,7 +41,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/list/*" element={<ListPage />} />
-        <Route path="/mypage/client" element={<ClientMypage />} />
+        <Route path="/mypage/client" element={<ClientMypage userData={userData}/>} />
         <Route path="/mypage/supplier" element={<SupplierMypage />} />
         <Route path="/detail/client/:clientId" element={<ClientDetail />} />
         <Route path="/detail/supplier/:supplierId" element={<SupplierDetail />} />

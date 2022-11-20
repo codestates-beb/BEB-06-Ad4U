@@ -16,7 +16,7 @@ const SupplierList = () => {
   console.log(list)
 
   useEffect(() => {
-    supplier.getList()
+    supplier.mainList()
     .then(res => setList(res.data))
     .catch(err => console.log(err.response.data))
   }, [])
@@ -36,7 +36,7 @@ const SupplierList = () => {
               <RiUserFollowFill/> 
               subscribe {data.subscriberCount} <br/>
               <GoPlay />
-              viewer
+              viewer {data.viewCount}
             </Card.Text>
             </Card.Body>
           </Col>
