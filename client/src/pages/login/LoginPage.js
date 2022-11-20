@@ -59,7 +59,7 @@ const LoginPage = ({ setUserData }) => {
       if ( userId && password ) {
       const result = await auth.login(loginData);
         if (result) {
-          const { user, jwt_accessToken, isClient } = result.data;
+          const { user } = result.data;
           user.jwt_accessToken = result.data.jwt_accessToken;
           user.isClient = result.data.isClient;
           setUserData(user);
