@@ -22,9 +22,8 @@ module.exports = {
     },
     list: async (req, res) => {
         try {
-            let main_ad = await Advertisement.findAll({
+            let list_ad = await Advertisement.findAll({
                 attributes: ['id', 'title', 'AdimgUrl', 'cost', 'createdAt'],
-
                 where: {
                     status: 0,
                 },
@@ -37,8 +36,13 @@ module.exports = {
                 ]
                 //limit: 10,
                 // offset: 5,
+                
             });
-            res.status(200).json(main_ad);
+            list_ad.forEach((el) => {
+                el.dataValues.company_name = el.Client.company_name;
+            });
+
+            res.status(200).json(list_ad);
         } catch (error) {
             res.status(400).json(error);
         }
@@ -88,18 +92,13 @@ module.exports = {
                 const token = authorization.split(' ')[1];
                 const data = jwt.verify(token, process.env.ACCESS_SECRET);
 
-                const user = await Client.findOne({
-                    attributes: ['id'],
-                    where: { userId: data.userId },
-                });
-
                 const body = {
                     title: title,
                     content: content,
                     AdImgUrl: AdImgUrl,
                     cost: cost,
                     status: 0,
-                    Client_id: user.id
+                    Client_id: data.user.id
                 }
                 Advertisement.create(body)
                     .then(data => {
@@ -123,16 +122,12 @@ module.exports = {
             try {
                 const token = authorization.split(' ')[1];
                 const data = jwt.verify(token, process.env.ACCESS_SECRET);
-    
-                const user = await Client.findOne({
-                    attributes: ['id'],
-                    where: { userId: data.userId },
-                });
+
                 const ad = await Advertisement.findOne({
                     attributes: ['Client_id'],
                     where: { id: advertisement_id },
                 })
-            if (ad.Client_id != user.id) {
+            if (ad.Client_id != data.user.id) {
                 res.status(401).send({ data: null, message: 'invalid access' });
             } else {
                         Advertisement_has_Supplier.destroy({

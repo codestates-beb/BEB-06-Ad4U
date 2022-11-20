@@ -14,13 +14,9 @@ module.exports = {
                 const token = authorization.split(' ')[1];
                 const data = jwt.verify(token, process.env.ACCESS_SECRET);
 
-                const user = await Supplier.findOne({
-                    attributes: ['id'],
-                    where: { userId: data.userId },
-                });
                 const body = {
                     Advertisement_id: advertisement_id,
-                    Supplier_id: user.id
+                    Supplier_id: data.user.id
                 }
                 Advertisement_has_Supplier.create(body)
                     .then((data) => {
@@ -45,15 +41,10 @@ module.exports = {
                 const token = authorization.split(' ')[1];
                 const data = jwt.verify(token, process.env.ACCESS_SECRET);
 
-                const user = await Supplier.findOne({
-                    attributes: ['id'],
-                    where: { userId: data.userId },
-                });
-
                 Advertisement_has_Supplier.destroy({
                     where: {
                         Advertisement_id: advertisement_id,
-                        Supplier_id: user.id
+                        Supplier_id: data.user.id
                     },
                 }).then((data) => {
                     res.status(201).json("complete")
@@ -76,15 +67,11 @@ module.exports = {
                 const token = authorization.split(' ')[1];
                 const data = jwt.verify(token, process.env.ACCESS_SECRET);
     
-                const user = await Client.findOne({
-                    attributes: ['id'],
-                    where: { userId: data.userId },
-                });
                 const ad = await Advertisement.findOne({
                     attributes: ['Client_id'],
                     where: { id: advertisement_id },
                 })
-                if (ad.Client_id != user.id) {
+                if (ad.Client_id != data.user.id) {
                     res.status(401).send({ data: null, message: 'invalid access' });
                 } else {
                     Advertisement_has_Supplier.destroy({
@@ -123,10 +110,7 @@ module.exports = {
             try {
                 const token = authorization.split(' ')[1];
                 const data = jwt.verify(token, process.env.ACCESS_SECRET);
-                const user = await Supplier.findOne({
-                    attributes: ['id'],
-                    where: { userId: data.userId },
-                });
+
                 const ad_info = await Advertisement.findOne({
                     attributes: ['id'],
                     where: { id: advertisement_id },
@@ -142,7 +126,7 @@ module.exports = {
                         },
                     ]
                 })
-                if (ad_info.Advertisement_has_Suppliers.Supplier.id != user.id) {
+                if (ad_info.Advertisement_has_Suppliers.Supplier.id != data.user.id) {
                     res.status(401).send({ data: null, message: 'invalid access' });
                 }
                 else {
@@ -172,17 +156,13 @@ module.exports = {
             try {
                 const token = authorization.split(' ')[1];
                 const data = jwt.verify(token, process.env.ACCESS_SECRET);
-    
-                const user = await Client.findOne({
-                    attributes: ['id'],
-                    where: { userId: data.userId },
-                });
+
                 const ad = await Advertisement.findOne({
                     attributes: ['Client_id'],
                     where: { id: advertisement_id },
                 })
     
-                if (user.id != ad.Client_id || !isClient) {
+                if (data.user.id != ad.Client_id) {
                     res.status(401).send({ data: null, message: 'invalid access' });
     
                 } else {
@@ -205,16 +185,12 @@ module.exports = {
                 const token = authorization.split(' ')[1];
                 const data = jwt.verify(token, process.env.ACCESS_SECRET);
                 if (isClient) {
-                    const user = await Client.findOne({
-                        attributes: ['id'],
-                        where: { userId: data.userId },
-                    });
                     const ad = await Advertisement.findOne({
                         attributes: ['Client_id'],
                         where: { id: advertisement_id },
                     })
 
-                    if (user.id != ad.Client_id) {
+                    if (data.user.id != ad.Client_id) {
                         res.status(401).send({ data: null, message: 'invalid access' });
                     } else {
                         Advertisement.update(
@@ -228,10 +204,6 @@ module.exports = {
                             })
                     }
                 } else {
-                    const user = await Supplier.findOne({
-                        attributes: ['id'],
-                        where: { userId: data.userId },
-                    });
                     const ad_info = await Advertisement.findOne({
                         attributes: ['id'],
                         where: { id: advertisement_id },
@@ -247,7 +219,7 @@ module.exports = {
                             },
                         ]
                     })
-                    if (user.id != ad_info.Advertisement_has_Suppliers.Supplier.id) {
+                    if (data.user.id != ad_info.Advertisement_has_Suppliers.Supplier.id) {
                         res.status(401).send({ data: null, message: 'invalid access' });
                     } else {
                         Advertisement.update(
@@ -276,16 +248,12 @@ module.exports = {
                 const token = authorization.split(' ')[1];
                 const data = jwt.verify(token, process.env.ACCESS_SECRET);
                 if (isClient) {
-                    const user = await Client.findOne({
-                        attributes: ['id'],
-                        where: { userId: data.userId },
-                    });
                     const ad = await Advertisement.findOne({
                         attributes: ['Client_id'],
                         where: { id: advertisement_id },
                     })
 
-                    if (user.id != ad.Client_id) {
+                    if (data.user.id != ad.Client_id) {
                         res.status(401).send({ data: null, message: 'invalid access' });
                     } else {
                         Advertisement.update(
@@ -299,10 +267,6 @@ module.exports = {
                             })
                     }
                 } else {
-                    const user = await Supplier.findOne({
-                        attributes: ['id'],
-                        where: { userId: data.userId },
-                    });
                     const ad_info = await Advertisement.findOne({
                         attributes: ['id'],
                         where: { id: advertisement_id },
@@ -318,7 +282,7 @@ module.exports = {
                             },
                         ]
                     })
-                    if (user.id != ad_info.Advertisement_has_Suppliers.Supplier.id) {
+                    if (data.user.id != ad_info.Advertisement_has_Suppliers.Supplier.id) {
                         res.status(401).send({ data: null, message: 'invalid access' });
                     } else {
                         Advertisement.update(
