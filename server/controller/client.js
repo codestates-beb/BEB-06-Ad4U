@@ -51,8 +51,6 @@ module.exports = {
                         }
                     },
                 ]
-                //limit: 10,
-                // offset: 5,
             });
             res.status(200).json(client_datail);
         }catch(error){
