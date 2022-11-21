@@ -114,6 +114,7 @@ module.exports = {
                     channelUrl: `https://www.youtube.com/channel/${youtube_info.items[0].id}`,
                     profileImgUrl: youtube_info.items[0].snippet.thumbnails.default.url,
                 }
+
                 Supplier.update(body, {
                     where: { email: user_info.email },
                 }).then(data => {
@@ -148,10 +149,13 @@ module.exports = {
         delete body.isClient;
 
         if (isClient) {
-            const user = await Client.findOne({
+            const client_user = await Client.findOne({
                 where: { userId: body.userId },
             });
-            if (user) { //아이디 중복확인
+            const supplier_user = await Supplier.findOne({
+                where: { userId: body.userId },
+            });
+            if (client_user||supplier_user) { //아이디 중복확인
                 res.status(400).json("아이디 중복")
             } else {
                 console.log(body);
@@ -163,11 +167,13 @@ module.exports = {
                     })
             }
         } else {
-
-            const user = await Supplier.findOne({
+            const client_user = await Client.findOne({
                 where: { userId: body.userId },
             });
-            if (user) {
+            const supplier_user = await Supplier.findOne({
+                where: { userId: body.userId },
+            });
+            if (client_user|| supplier_user) {
                 res.status(400).json("아이디 중복")
             } else {
                 Supplier.update(body, {
@@ -188,6 +194,7 @@ module.exports = {
         } else {
             try {
                 const data = jwt.verify(req.cookies.jwt_refreshToken, process.env.REFRESH_SECRET);
+                console.log(data)
                 const client_user = await Client.findOne({
                     attributes: client_attributes,
                     where: { userId: data.userId },
