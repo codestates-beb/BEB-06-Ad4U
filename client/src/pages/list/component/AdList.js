@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Card } from 'react-bootstrap';
+import { Container, Card, Row } from 'react-bootstrap';
 
 import ad from '../../../hooks/axios/ad';
 import SearchBar from './SearchBar';
 import '../ListPage.css';
+import nullImg from '../../../component/null.png';
 
 const AdList = () => {
   const [list, setList] = useState([]);
@@ -43,7 +44,7 @@ const AdList = () => {
   return (
     <Container className='adList_container'>
       <h1>AdList</h1>
-      <SearchBar filter={filter} refreshList={refreshList}/>
+      <SearchBar className='searchbar' filter={filter} refreshList={refreshList}/>
       {list.length === 0 
       ? <div className='noresultant'>검색결과가 없습니다</div> 
       : <div className="adList-content">
@@ -52,13 +53,16 @@ const AdList = () => {
             className="adList-content_card-container"
             onClick={() => navigate(`/detail/ad/${data.id}`)}
             >
-              <Card.Img variant="top" src={data.AdimgUrl}/>
-              <Card.Body>
-                <Card.Title>{data.title}</Card.Title>
-                <Card.Text>
-                  {data.createdAt}
-                </Card.Text>
-              </Card.Body>
+              <Row className='adList_img'>
+                {data.AdimgUrl 
+                ? <Card.Img variant="top" src={data.AdimgUrl}/> 
+                : <Card.Img variant='top' src={nullImg}/> }
+              </Row>
+              <Row>
+                <Card.Body>
+                  <Card.Title>{data.title}</Card.Title>
+                </Card.Body>
+              </Row>
             </div>
           )})}
         </div>

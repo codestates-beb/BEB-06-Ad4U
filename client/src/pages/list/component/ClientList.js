@@ -53,6 +53,7 @@ const ClientList = () => {
             <div 
             className="clientList-content_card-container"
             onClick={() => navigate(`/detail/client/${data.id}`)}
+            key={idx}
             >
               <Row>
                 <Col><Avatar src={data.profileImgUrl} size="100" round={true}/></Col>
