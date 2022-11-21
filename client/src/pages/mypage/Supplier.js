@@ -27,8 +27,6 @@ const SupplierMypage = ({ userData }) => {
     .catch(err => console.log(err.response.data))
   }, [])
 
-
-
   return (
     <Container className='supplierMypage_container'>
       <Row className='supplierMypage_row' >
