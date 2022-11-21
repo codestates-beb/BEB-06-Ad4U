@@ -4,6 +4,7 @@ const { Op } = require('sequelize');
 const jwt = require('jsonwebtoken');
 const client_attributes = ['id', 'userId', 'company_name', 'company_number', 'email'];
 const supplier_attributes = ['id', 'userId', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address'];
+const login_supplier_attributes = ['id', 'userId', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address', 'refreshToken'];
 const axios = require("axios");
 const jwt_decode = require('jwt-decode');
 
@@ -23,7 +24,9 @@ module.exports = {
                     attributes: supplier_attributes,
                     where: { userId: userId, password: password },
                 });
+                console.log(user)
             }
+
             if (user) {
                 const jwt_accessToken = jwt.sign({ user }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
                 const jwt_refreshToken = jwt.sign({ userId }, process.env.REFRESH_SECRET, { expiresIn: '3h' });
@@ -37,6 +40,10 @@ module.exports = {
         } catch (error) {
             res.status(400).json(error);
         }
+    },
+    logout: async(req, res)=> {
+        res.clearCookie('jwt_refreshToken'); //쿠키삭제
+        res.status(200).json("logout");
     },
     auth: async (req, res) => {
         const { code } = req.body;
