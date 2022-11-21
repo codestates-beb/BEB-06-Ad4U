@@ -1,11 +1,9 @@
 import React from 'react';
-import {Accordion, Col, Row, Container} from 'react-bootstrap';
+import { Accordion, Col, Row, Container } from 'react-bootstrap';
 
 import './Status.css'
 
 const Status = ({ adList, setStatus }) => {
-  console.log("adList", adList)
-
   const count = (arr, status) => {
     let result = 0;
     arr.forEach(el => {

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from './clear_logo.png';
 import auth from '../hooks/axios/auth';
+import { getLocalData, clearLocalData } from '../config/localStrage';
 
 import { Navbar, NavDropdown, Container,Dropdown  } from 'react-bootstrap';
 import Stack from 'react-bootstrap/Stack';
@@ -9,9 +10,9 @@ import Avatar from 'react-avatar';
 import { RiStarSmileLine } from "react-icons/ri";
 
 import './NFE.css';
-import supplier from '../hooks/axios/supplier';
 
 const Nav = ({ userData, setUserData }) => {
+  const isClient = getLocalData("isClient");
 
   const navigate = useNavigate();
 
@@ -20,6 +21,7 @@ const Nav = ({ userData, setUserData }) => {
       const result = await auth.logout();
       if (result) {
         setUserData({});
+        clearLocalData();
         alert("로그아웃 되었습니다.");
         navigate('/');
       } 
@@ -29,13 +31,10 @@ const Nav = ({ userData, setUserData }) => {
   }
 
   const LoggedIn = ({ userData }) => {
-    
-    // let string ; 
-    // userData.isClient ?  string = 'client' : string = 'supplier'
     return (
       <Stack direction="horizontal" gap={4} justify='flex-end'>
         <button onClick={deleteUserData}>logout</button>
-        <Link to={`/mypage/${userData.isClient ? "client" : "supplier"}`}>
+        <Link to={`/mypage/${isClient === 'true' ? "client" : "supplier"}`}>
           <Avatar size="50" round={true}/>
         </Link>
       </Stack>
@@ -57,8 +56,7 @@ const Nav = ({ userData, setUserData }) => {
           <img className="nav_logo" src = {Logo} alt = "Ad4U logo" width={100} height={50}/>
         </Link>
         <Stack direction="horizontal" gap={4} justify='flex-end'>
-          {userData.isClient=== undefined 
-            ? <Logout /> : <LoggedIn userData={userData} /> }
+          {isClient ? <LoggedIn userData={userData}/> : <Logout /> }
           <Dropdown>
             <Dropdown.Toggle variant="dark" id="dropdown-basic">
               < RiStarSmileLine color='white' size={30}/>

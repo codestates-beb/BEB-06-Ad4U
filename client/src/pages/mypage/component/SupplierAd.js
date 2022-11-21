@@ -4,7 +4,7 @@ import { Accordion, Col, Row, Container } from 'react-bootstrap';
 import method from '../../../hooks/web3/sendTransaction';
 import '../Client.css';
 
-const ClientAd = ({ idx, adList }) => {
+const SupplierAd = ({ idx, adList }) => {
   console.log(idx, adList)
 
   const RenderButton = ({ adList }) => {
@@ -17,7 +17,7 @@ const ClientAd = ({ idx, adList }) => {
         <Accordion.Item>
         <Accordion.Header>광고 #1</Accordion.Header>
         <Accordion.Body>
-         <RenderButton adList={adList} />
+          <RenderButton adList={adList} />
         </Accordion.Body>
         </Accordion.Item>
       </Accordion>
@@ -25,4 +25,4 @@ const ClientAd = ({ idx, adList }) => {
   );
 }
 
-export default ClientAd;
+export default SupplierAd;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import auth from './hooks/axios/auth';
+import { setLocalData } from './config/localStrage';
 
 import Nav from './component/Nav';
 import Main from './pages/main/Main';
@@ -17,7 +18,6 @@ import Footer from './component/Footer';
 import TestApiPage from './pages/testAPI/testapi';
 
 import './App.css';
-import axios from 'axios';
 
 const App = () => {
   const [ userData, setUserData ] = useState({});
@@ -26,10 +26,11 @@ const App = () => {
   //세션유지
   useEffect(() => {
     auth.refresh()
-      .then(res => {
-        const { user } = res.data;
-        user.accessToken = res.data.jwt_accessToken;
-        user.isClient = res.data.isClient;
+      .then(res => res.data)
+      .then(data => {
+        const { user, jwt_accessToken, isClient } = data;
+        setLocalData("accessToken", jwt_accessToken);
+        setLocalData("isClient", isClient);
         setUserData(user);
       })
       .catch(err => console.log(err.response.data))

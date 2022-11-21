@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../hooks/axios/auth';
+import { getLocalData } from '../../config/localStrage';
 import ClientAd from './component/ClientAd';
 import './Client.css';
 
@@ -11,16 +12,16 @@ import {Accordion, Col, Row, Container} from 'react-bootstrap';
 import ClientAdBar from './component/ClientAd';
 
 const ClientMypage = ({ userData }) => {
-  const { isClient, accessToken } = userData;
+  const accessToken = getLocalData("accessToken");
+  const isClient = getLocalData("isClient");
   const [myInfo, setMyInfo] = useState({});
   const [adList, setAdlist] = useState([]);
   const [status, setStatus] = useState(0);
 
   const navigate = useNavigate();
-  //supplier는 접근할 수 없음
-  if(isClient === false) navigate('./*');
 
   useEffect(() => {
+    if(accessToken && isClient === "true") {
       auth.getMypage(isClient, accessToken)
       .then(res => res.data)
       .then(data => {
@@ -29,14 +30,15 @@ const ClientMypage = ({ userData }) => {
           setMyInfo(data);
       })
       .catch(err => console.log(err.response.data))
+    } else return navigate('*');
   }, []);
 
   const FilterAd = ({ adList, status }) => {
     //status가 초기값(0)인경우 필터링 하지않음
     if (status > 0) {
       const filteredAdList = adList.filter((el) => el.status === status);
-      return filteredAdList.map((el, idx) => <ClientAd key={idx} adList={filteredAdList} />);
-    } else return adList.map((el, idx) => <ClientAd key={idx} adList={adList} />);
+      return filteredAdList.map((adList, idx) => <ClientAd key={idx} idx={idx} adList={adList} />);
+    } else return adList.map((adList, idx) => <ClientAd key={idx} idx={idx} adList={adList} />);
   }
 
   return (
@@ -53,7 +55,7 @@ const ClientMypage = ({ userData }) => {
           <h1> Client Mypage</h1>
           <Status adList={adList} setStatus={setStatus} />
           <Container className='clientMypage_accordion'>
-            <FilterAd adList={adList} status={status}/>
+            <FilterAd adList={adList} status={status} />
           </Container>
         </Row>
         </Col>       
