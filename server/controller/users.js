@@ -26,7 +26,8 @@ module.exports = {
 
                 if (user) {
                     const refreshToken = user.refreshToken;
-                    delete user.refreshToken
+                    delete user.dataValues.refreshToken;
+
 
                     axios.post("https://oauth2.googleapis.com/token", null, {
                         headers: {
