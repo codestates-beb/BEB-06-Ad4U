@@ -59,6 +59,21 @@ const signup = async (signupData) => {
   return result;
 }
 
-const auth = { refresh, oauth, login, logout, signup };
+const getMypage = async (isClient, accessToken) => {
+  const options = {
+    url: `http://localhost:3001/users/mypage?isClient=${isClient}`,
+    method: 'GET',
+    headers: {
+      "Authorization": `Bearer ${accessToken}`,
+      "Content-Type": "application/json"
+    },
+    withCredentials: true,
+  }
+  const result = await axios.request(options)
+  return result;
+
+}
+
+const auth = { refresh, oauth, login, logout, signup, getMypage };
 
 export default auth;
