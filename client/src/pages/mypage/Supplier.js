@@ -20,7 +20,7 @@ const SupplierMypage = ({ userData }) => {
     auth.getMypage(isClient, accessToken)
     .then(res => res.data)
     .then(data => {
-      setAdlist([data.Advertisement_has_Suppliers]);
+      setAdlist(data.Advertisement_has_Suppliers);
       delete data.Advertisement_has_Suppliers;
       setMyInfo(data);
     })
@@ -36,7 +36,7 @@ const SupplierMypage = ({ userData }) => {
         <Col xl={9} >
         <Row>
           <h1> Supplier Mypage</h1>
-          <Status />
+          <Status adList={adList} />
           <Container className='supplierMypage_accordion'>
             <Accordion defaultActiveKey={['0']}>
               <Accordion.Item>
