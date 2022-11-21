@@ -18,15 +18,22 @@ const SupplierMypage = ({ userData }) => {
 
   const navigate = useNavigate();
 
-  const dummy = [{id: 0, status: 0},{id: 1, status: 1},{id: 2, status: 2},{id: 3, status: 3}];
+  const dummy = [
+    {id: 0, status: 0},
+    {id: 1, status: 1},
+    {id: 2, status: 2},
+    {id: 3, status: 3},
+    {id: 3, status: 4},
+    {id: 3, status: 5}
+  ];
 
   useEffect(() => {
     if(accessToken && isClient === "false") {
       auth.getMypage(isClient, accessToken)
       .then(res => res.data)
       .then(data => {
-          setAdlist(data.Advertisement_has_Suppliers);
-          // setAdlist(dummy);
+          // setAdlist(data.Advertisement_has_Suppliers);
+          setAdlist(dummy);
           delete data.Advertisement_has_Suppliers;
           setMyInfo(data);
       })
