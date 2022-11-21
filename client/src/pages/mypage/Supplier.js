@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import auth from '../../hooks/axios/auth';
 import './Supplier.css';
 
 import Profile from '../common/Profile';
 import Status from './component/Status';
 import { Container, Accordion, Row, Col } from 'react-bootstrap';
 
-
 const SupplierMypage = ({ userData }) => {
+  const { isClient, accessToken } = userData;
+  const [myInfo, setMyInfo] = useState({});
+  const [adList, setAdlist] = useState([]);
+
+  const navigate = useNavigate();
+  //client는 접근할 수 없음
+  if(isClient === true) navigate('./*');
+
+  useEffect(() => {
+    auth.getMypage(isClient, accessToken)
+    .then(res => res.data)
+    .then(data => {
+      setAdlist([data.Advertisement_has_Suppliers]);
+      delete data.Advertisement_has_Suppliers;
+      setMyInfo(data);
+    })
+    .catch(err => console.log(err.response.data))
+  }, [])
+
   return (
     <Container className='supplierMypage_container'>
       <Row className='supplierMypage_row' >

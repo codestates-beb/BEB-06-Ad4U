@@ -28,6 +28,7 @@ const App = () => {
     auth.refresh()
       .then(res => {
         const { user } = res.data;
+        user.accessToken = res.data.jwt_accessToken;
         user.isClient = res.data.isClient;
         setUserData(user);
       })
