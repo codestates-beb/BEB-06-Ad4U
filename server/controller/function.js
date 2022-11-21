@@ -60,7 +60,7 @@ module.exports = {
     },
     conference: async (req, res) => {// 광고 협의 - client
         const authorization = req.headers.authorization;
-        const { supplier_id, advertisement_id, isClient } = req.body;
+        const { supplier_id, advertisement_id, multisigAddress ,isClient } = req.body;
         if(!authorization || !isClient){
             res.status(401).send({ data: null, message: 'invalid access' });
         }else{
@@ -84,7 +84,8 @@ module.exports = {
                     }).then((data) => {
                         console.log(2)
                         Advertisement.update({
-                            status: 1
+                            status: 1,
+                            multisigAddress: multisigAddress
                         }, {
                             where: {
                                 id: advertisement_id
@@ -154,7 +155,7 @@ module.exports = {
     },
     contract: async (req, res) => { //광고 계약서 작성 - client
         const authorization = req.headers.authorization;
-        const { advertisement_id, isClient } = req.body;
+        const { advertisement_id, isClient, token_uri, token_id, token_address } = req.body;
         if(!authorization||!isClient){
             res.status(401).send({ data: null, message: 'invalid access' });
         }else{
@@ -166,13 +167,15 @@ module.exports = {
                     attributes: ['Client_id'],
                     where: { id: advertisement_id },
                 })
-                console.log(ad)
     
                 if (data.user.id != ad.Client_id) {
                     res.status(401).send({ data: null, message: 'invalid access' });
                 } else {
                     Advertisement.update(
-                        { status: 3 },
+                        { status: 3 ,
+                            token_uri: token_uri,
+                            token_id: token_id,
+                            token_address: token_address},
                         { where: { id: advertisement_id } })
                         .then((data) => {
                             res.status(201).json("complete")
