@@ -4,7 +4,7 @@ import supplier from '../../hooks/axios/supplier';
 
 import { Container, Row, Col } from 'react-bootstrap/esm';
 
-import './detail.css';
+import './Detail.css';
 
 const SupplierDetail = () => {
   const { supplierId } = useParams();
@@ -19,7 +19,7 @@ const SupplierDetail = () => {
 
   return (
     <>
-      <Container className='detail_container'>
+      <Container className='supplierDetail_container'>
         <div> supplier Detail</div>
         <div>채널명 {detail.channelName}</div>
         <div>채널 주소{detail.channelUrl}</div>

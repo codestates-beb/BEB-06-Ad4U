@@ -19,12 +19,47 @@ module.exports = {
                     where: { userId: userId, password: password },
                 });
             } else {
-                //google_refresh token으로 유저 정보 DB업데이트 구현해야함
                 user = await Supplier.findOne({
-                    attributes: supplier_attributes,
+                    attributes: login_supplier_attributes,
                     where: { userId: userId, password: password },
                 });
-                console.log(user)
+
+                if (user) {
+                    const refreshToken = user.refreshToken;
+                    delete user.refreshToken
+
+                    axios.post("https://oauth2.googleapis.com/token", null, {
+                        headers: {
+                            "Content-Type": `application/x-www-form-urlencoded`
+                        }, params: {
+                            client_id: process.env.CLIENT_ID,
+                            client_secret: process.env.CLIENT_PASSWORD,
+                            refresh_token: refreshToken,
+                            grant_type: "refresh_token"
+                        }
+                    }).then(async (data) => {
+                        const youtube_info = await axios.get(`https://www.googleapis.com/youtube/v3/channels?access_token=${data.data.access_token}&part=snippet,statistics&mine=true&fields=items&2Fsnippet%2Fthumbnails`)
+                            .then((data) => {
+                                return data.data
+                            }).catch(err => console.log(err));
+
+                        const body = {
+                            channelName: youtube_info.items[0].snippet.title,
+                            subscriberCount: youtube_info.items[0].statistics.subscriberCount,
+                            viewCount: youtube_info.items[0].statistics.viewCount,
+                            channelUrl: `https://www.youtube.com/channel/${youtube_info.items[0].id}`,
+                            profileImgUrl: youtube_info.items[0].snippet.thumbnails.default.url,
+                        }
+
+                        Supplier.update(body, {
+                            where: { userId: userId },
+                        })
+                    }).catch((err) => {
+                        res.status(401).json(err);
+                    })
+                }else{
+                    res.status(401).json("no authorization.. check id, password");
+                }
             }
 
             if (user) {
@@ -41,7 +76,7 @@ module.exports = {
             res.status(400).json(error);
         }
     },
-    logout: async(req, res)=> {
+    logout: async (req, res) => {
         res.clearCookie('jwt_refreshToken'); //쿠키삭제
         res.status(200).json("logout");
     },
@@ -58,9 +93,7 @@ module.exports = {
                 grant_type: "authorization_code"
             }
         }).then(async (response) => {
-            res.cookie('google_refreshToken', response.data.refresh_token, {
-                maxAge: 60 * 60 * 1000
-            });
+
             const user_info = jwt_decode(response.data.id_token);
             const access_token = response.data.access_token;
 
@@ -73,7 +106,7 @@ module.exports = {
                 where: { email: user_info.email },
             });
 
-            if (user) {
+            if (user) { //auth 시도하다가 취소했을경우
                 const body = {
                     channelName: youtube_info.items[0].snippet.title,
                     subscriberCount: youtube_info.items[0].statistics.subscriberCount,
@@ -81,7 +114,6 @@ module.exports = {
                     channelUrl: `https://www.youtube.com/channel/${youtube_info.items[0].id}`,
                     profileImgUrl: youtube_info.items[0].snippet.thumbnails.default.url,
                 }
-
                 Supplier.update(body, {
                     where: { email: user_info.email },
                 }).then(data => {
@@ -89,8 +121,7 @@ module.exports = {
                 }).catch(err => {
                     res.status(400).json("DB error")
                 })
-
-            } else {
+            } else { //첫 auth - refresh token save
                 const body = {
                     channelName: youtube_info.items[0].snippet.title,
                     subscriberCount: youtube_info.items[0].statistics.subscriberCount,
@@ -132,8 +163,6 @@ module.exports = {
                     })
             }
         } else {
-            const refreshToken = req.cookies.google_refreshToken;
-            body.refreshToken = refreshToken;
 
             const user = await Supplier.findOne({
                 where: { userId: body.userId },
@@ -161,18 +190,18 @@ module.exports = {
                 const data = jwt.verify(req.cookies.jwt_refreshToken, process.env.REFRESH_SECRET);
                 const client_user = await Client.findOne({
                     attributes: client_attributes,
-                    where: { userId : data.userId},
+                    where: { userId: data.userId },
                 });
                 const supplier_user = await Supplier.findOne({
                     attributes: supplier_attributes,
-                    where: { userId : data.userId},
+                    where: { userId: data.userId },
                 });
-                
-                if(client_user){
+
+                if (client_user) {
                     const user = client_user;
                     const jwt_accessToken = jwt.sign({ user }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
                     res.status(200).json({ jwt_accessToken, user, isClient: true });
-                }else if(supplier_user){
+                } else if (supplier_user) {
                     const user = supplier_user;
                     const jwt_accessToken = jwt.sign({ user }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
                     res.status(200).json({ jwt_accessToken, user, isClient: false });

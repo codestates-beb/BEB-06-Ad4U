@@ -1,7 +1,7 @@
 import React from 'react';
-import { Col, Row, Button, Container } from 'react-bootstrap';
-import './Home.css';
-import { motion } from 'framer-motion'
+import { Col, Row, Container } from 'react-bootstrap';
+
+import '../Main.css';
 
 const Home = () => {
 

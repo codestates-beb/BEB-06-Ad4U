@@ -1,13 +1,12 @@
 /* login */
 .loginPage_container {
   box-sizing: border-box;
-  background-color: white;
   width: 800px;
   padding-top: 10px;
   padding-right: 30px;
   padding-left: 30px;
   padding-bottom: 50px;
-  margin-top: 100px;
+  margin-top: 150px;
   margin-bottom: 500px;
 }
 
@@ -44,4 +43,8 @@
 .signup_lowerArea {
   margin-top: 40px;
   margin-bottom: 40px;
+}
+
+.login_text {
+  color: white;
 }
