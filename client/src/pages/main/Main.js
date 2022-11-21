@@ -35,10 +35,10 @@ const Main = ( userData ) => {
     <Container className='main_container'>
       <header className='header'>
         <Row >
-          <Col xs={3}><Button variant="link" onClick={onHomeClick}><h3>Home</h3></Button></Col>
-          <Col xs={3}><Button variant="link" onClick={onAboutClick}><h3>About</h3></Button></Col>
-          <Col xs={2}><Button variant="link" onClick={onAdClick}><h3>Ads</h3></Button></Col>
-          <Col xs={1} ><Button variant="link" onClick={onCreatorClick}><h3>Supplier</h3></Button></Col>
+          <Col xs={3}><Button variant="link" onClick={onHomeClick}><h5>Home</h5></Button></Col>
+          <Col xs={3}><Button variant="link" onClick={onAboutClick}><h5>About</h5></Button></Col>
+          <Col xs={2}><Button variant="link" onClick={onAdClick}><h5>Ads</h5></Button></Col>
+          <Col xs={1} ><Button variant="link" onClick={onCreatorClick}><h5>Supplier</h5></Button></Col>
         </Row>
       </header>
       <main>

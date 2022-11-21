@@ -1,3 +1,4 @@
+/* ListPage css */
 .list_container {
   margin-top: 200px;
   height: 1000px;
@@ -14,6 +15,12 @@
 
 .item {
   text-align: center;
+}
+
+.noresultant {
+  color: white;
+  text-align: center;
+  margin-top: 30px;
 }
 
 /* supplierList css */
@@ -53,13 +60,29 @@
   color: white;
 }
 
-.clientList_container th {
-  color: white;
+.clientList-content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(230px, 150px));
+  padding:20px 0;
+  gap: 40px;
 }
 
+.clientList-content_card-container  {
+  text-align: center;
+  padding: 20px 20px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 4px 4px #0c0b1473;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+  background-color: #ffffff;
+}
 
-.clientList_container td {
-  color: white;
+.clientList-content_card-container:hover {
+  transform: scale(1.1);
+}
+.clientList_companyname {
+  margin-top: 10px;
 }
 
 /* adList css */
@@ -67,11 +90,29 @@
   color: white;
 }
 
-.adList_container th {
-  color: white;
+.adList-content {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 220px));
+  padding:20px 0;
+  gap: 45px;
+  justify-content: center;
 }
 
-
-.adList_container td {
-  color: white;
+.adList-content_card-container {
+  text-align: center;
+  padding: 10px 10px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 4px 4px #0c0b1473;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+  background: -webkit-linear-gradient(#ece9e6, #ffffff);
 }
+.adList-content_card-container:hover {
+  transform: scale(1.1);
+}
+
+.adList-content_card-container img {
+  margin-bottom: 10px;
+}
+

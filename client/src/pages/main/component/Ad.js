@@ -8,6 +8,7 @@ import ad from '../../../hooks/axios/ad'
 
 const Ad = () => {
   const [list, setList] = useState([]);
+  console.log(list)
 
   const navigate = useNavigate();
 
@@ -19,7 +20,7 @@ const Ad = () => {
 
   return (
     <div className='ad_container'>
-      <h1>ADBERTISMENT</h1>
+      <h2>최신 광고</h2>
       <div className="ad-content">
         {list.map((data, idx) => { return (
             <div 
@@ -29,10 +30,7 @@ const Ad = () => {
               <Card.Img variant="top" src={data.AdimgUrl}/>
               <Card.Body>
                 <Card.Title>{data.title}</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up the
-                  bulk of the card's content.
-                </Card.Text>
+                <Card.Text>{}</Card.Text>
                 <Card.Text>
                   {data.createdAt}
                 </Card.Text>

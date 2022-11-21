@@ -4,7 +4,7 @@ import client from '../../hooks/axios/client';
 
 import { Container, Row, Col } from 'react-bootstrap/esm';
 
-import './detail.css';
+import './Detail.css';
 
 const ClientDetail = () => {
   const { clientId } = useParams();
@@ -19,7 +19,7 @@ const ClientDetail = () => {
 
   return (
     <>
-      <Container className='detail_container'>
+      <Container className='ClientDetail_container'>
         <div> client Detail</div>
         <div> 회사명 {detail.company_name} </div>
         <div> 회사명 {detail.email} </div>

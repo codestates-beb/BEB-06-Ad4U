@@ -45,47 +45,66 @@ const SupplierList = () => {
     .catch(err => console.log(err.response.data))
   }
 
-  const SupplierCard = ({ idx, data }) => {
+  // const SupplierCard = ({ idx, data }) => {
     
-    const handleClick = (e) => { 
-      //더블클릭시 이동
-      if (e.detail === 1) return navigate(`/detail/supplier/${data.id}`);
-    }
+  //   const handleClick = (e) => { 
+  //     //더블클릭시 이동
+  //     if (e.detail === 1) return navigate(`/detail/supplier/${data.id}`);
+  //   }
 
-    return (
-      <div className="supplierList_container">
-        <Container 
-          className="supplierList-content_card-container"
-          onClick={(e) => handleClick(e)}
-        >
-          <Row>
-            <Col><Avatar src={data.profileImgUrl} alt="profile_img" size="100" round={true}/></Col>
-            <Col><Card.Body>
-              <Card.Title>{data.channelName}</Card.Title>
-              <Card.Text>
-                <RiUserFollowFill/> 
-                subscribe {data.subscriberCount} <br/>
-                <GoPlay />
-                viewer
-              </Card.Text>
-              </Card.Body>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    );
-  }
+  //   return (
+  //       <div 
+  //         className="supplierList-content_card-container"
+  //         onClick={(e) => navigate(`/detail/supplier/${data.id}`)}
+  //       >
+  //         <Row>
+  //           <Col><Avatar src={data.profileImgUrl} alt="profile_img" size="100" round={true}/></Col>
+  //           <Col><Card.Body>
+  //             <Card.Title>{data.channelName}</Card.Title>
+  //             <Card.Text>
+  //               <RiUserFollowFill/> 
+  //               subscribe {data.subscriberCount} <br/>
+  //               <GoPlay />
+  //               viewer
+  //             </Card.Text>
+  //             </Card.Body>
+  //           </Col>
+  //         </Row>
+  //       </div>
+
+  //   );
+  // }
 
   return (
     <Container className='supplierList_container'>
       <h1>SupplierList</h1>
       <SearchBar filter={filter} refreshList={refreshList}/>
-      <div className="supplierList-content">
-        {list.length === 0 
-          ? <div className="supplierList_container">검색결과가 없습니다</div>
-          : list.map((data, idx) => <SupplierCard key={idx} idx={idx} data={data} />)
-        }
-      </div>
+      {list.length === 0 
+      ? <div className="noresultant">검색결과가 없습니다</div>
+      : <div className="supplierList-content">
+        {list.map((data, idx) => {
+          return (
+            <div 
+            className="supplierList-content_card-container"
+            onClick={(e) => navigate(`/detail/supplier/${data.id}`)}
+            >
+              <Row>
+                <Col><Avatar src={data.profileImgUrl} alt="profile_img" size="100" round={true}/></Col>
+                <Col><Card.Body>
+                  <Card.Title>{data.channelName}</Card.Title>
+                  <Card.Text>
+                    <RiUserFollowFill/> 
+                    subscribe {data.subscriberCount} <br/>
+                    <GoPlay />
+                    viewer
+                  </Card.Text>
+                  </Card.Body>
+                </Col>
+              </Row>
+            </div>
+          )})}
+        </div>
+      }
     </Container>
   );
 }

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Container, Row, Col, Card } from 'react-bootstrap';
+import Avatar from 'react-avatar';
+
 import client from '../../../hooks/axios/client';
 import SearchBar from './SearchBar';
-
-import Container from 'react-bootstrap/Container';
-import Table from 'react-bootstrap/Table';
 import '../ListPage.css';
 
 const ClientList = () => {
@@ -41,40 +41,29 @@ const ClientList = () => {
     .catch(err => console.log(err.response.data))
   }
 
-  const ClientTable = ({ idx, data }) => {
-    return (
-      <tr>
-        <td>{idx+1}</td>
-        <td 
-          colSpan={3}
-          onClick={() => navigate(`/detail/client/${data.id}`)}
-        >
-          {data.company_name}
-        </td>
-        <td>{data.Advertisements.length}</td>
-      </tr>
-    );
-  }
-
   return (
     <Container className='clientList_container'>
       <h1>ClientList</h1>
       <SearchBar filter={filter} refreshList={refreshList}/>
-      <Table hover>
-        <thead>
-          <tr>
-            <th></th>
-            <th colSpan={3}>업체명</th>
-            <th>모집중인 광고</th>
-          </tr>
-        </thead>
-        <tbody>
-          {list.length === 0 
-            ? <div className='clientList_container'>검색결과가 없습니다</div>
-            : list.map((data, idx) => <ClientTable key={idx} idx={idx} data={data} />)
-          }
-        </tbody>
-      </Table>
+      {list.length === 0 
+      ? <div className='noresultant'>검색결과가 없습니다</div> 
+      : <div className="clientList-content">
+          {list.map((data, idx) => {
+            return (
+            <div 
+            className="clientList-content_card-container"
+            onClick={() => navigate(`/detail/client/${data.id}`)}
+            >
+              <Row>
+                <Col><Avatar src={data.profileImgUrl} size="100" round={true}/></Col>
+                <Col><Card.Body>
+                  <Card.Title className='clientList_companyname'>{data.company_name}</Card.Title>
+                </Card.Body></Col>
+              </Row>
+            </div>
+          )})}
+        </div>
+      }
     </Container>
   );
 }
