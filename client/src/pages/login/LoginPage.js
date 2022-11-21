@@ -60,7 +60,7 @@ const LoginPage = ({ setUserData }) => {
       const result = await auth.login(loginData);
         if (result) {
           const { user } = result.data;
-          user.jwt_accessToken = result.data.jwt_accessToken;
+          user.accessToken = result.data.jwt_accessToken;
           user.isClient = result.data.isClient;
           setUserData(user);
           navigate('/');
@@ -80,7 +80,7 @@ const LoginPage = ({ setUserData }) => {
           as={Row}
           defaultActiveKey="supplier"
           onSelect={handleIsClient}
-          className="mb-3"
+          // className="mb-3"
           justify
         >
           <Tab 

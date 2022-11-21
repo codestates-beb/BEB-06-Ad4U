@@ -1,5 +1,5 @@
 import React from 'react';
-import './About.css';
+import '../Main.css';
 const ReactRotatingText = require("react-rotating-text");
 
 const About = () => {

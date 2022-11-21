@@ -40,6 +40,7 @@ const SearchBar = ({ filter, refreshList }) => {
           // placeholder=""
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={onKeyPress}
+          autoFocus
         />
         <Button 
           className="searchBar_button"

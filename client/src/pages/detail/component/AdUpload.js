@@ -6,7 +6,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal';
 import './AdUpload.css';
 
-// import { myBucket, S3_BUCKET } from '../../../config/awsS3';
+import { myBucket, S3_BUCKET } from '../../../config/awsS3';
 import axios from 'axios';
 
 
@@ -110,20 +110,20 @@ const AdUpload = () => {
       const params = {
           ACL: 'public-read',
           Body: file,
-          // Bucket: S3_BUCKET,
+          Bucket: S3_BUCKET,
           Key: file.name
       };
       
 
-      // myBucket.upload(params, function (err, data) {
-      //   console.log(data)
-      //   if (err) {
-      //       throw err
-      //   }
-      //   console.log(`File uploaded successfully.`);
-      //   AdInfo.imgUrl = data.Location;
-      //   setAdInfo(AdInfo)
-      // });
+      myBucket.upload(params, function (err, data) {
+        console.log(data)
+        if (err) {
+            throw err
+        }
+        console.log(`File uploaded successfully.`);
+        AdInfo.imgUrl = data.Location;
+        setAdInfo(AdInfo)
+      });
   }
 
   const handleSubmit = async (e) => {
