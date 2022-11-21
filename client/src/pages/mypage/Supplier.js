@@ -1,29 +1,75 @@
 import React from 'react';
 import './Supplier.css';
 
-import Profile from './component/Profile';
+import Profile from '../common/Profile';
 import Status from './component/Status';
-import Container from 'react-bootstrap/esm/Container';
-import Row from 'react-bootstrap/esm/Row';
-import Col from 'react-bootstrap/esm/Col';
-import Button from 'react-bootstrap/esm/Button';
+import { Container, Accordion, Row, Col } from 'react-bootstrap';
+
 
 const SupplierMypage = () => {
   return (
     <Container className='supplierMypage_container'>
-      <Row xs={2}>
-        <Col xs={2}>
+      <Row className='supplierMypage_row' >
+        <Col xl={3} >
           <Profile />
         </Col>
-        <Col xs={10}>
-          <Row>
-            <div> Supplier Mypage</div>
-            <Status />
-          </Row>
-          <Row>
-            Content
-          </Row>
-        </Col>          
+        <Col xl={9} >
+        <Row>
+          <h1> Supplier Mypage</h1>
+          <Status />
+          <Container className='supplierMypage_accordion'>
+            <Accordion defaultActiveKey={['0']}>
+              <Accordion.Item>
+                <Accordion.Header>
+                  <Row className='supplier_header'>
+                    <Col>지원회사</Col>
+                    <Col>광고title</Col>
+                    <Col>진행상태</Col>
+                    <Col>tokenId</Col>
+                    <Col>Mint</Col>
+                  </Row>
+                </Accordion.Header>
+              <Accordion.Body>
+
+              </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+            <Accordion defaultActiveKey={['0']}>
+              <Accordion.Item>
+                <Accordion.Header>
+                  <Row className='supplier_header'>
+                    <Col>지원회사</Col>
+                    <Col>광고title</Col>
+                    <Col>진행상태</Col>
+                    <Col>tokenId</Col>
+                    <Col>Mint</Col>
+                  </Row>
+                </Accordion.Header>
+              <Accordion.Body>
+
+              </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+            <Accordion defaultActiveKey={['0']}>
+              <Accordion.Item>
+                <Accordion.Header>
+                  <Row className='supplier_header'>
+                    <Col>지원회사</Col>
+                    <Col>광고title</Col>
+                    <Col>진행상태</Col>
+                    <Col>tokenId</Col>
+                    <Col>Mint</Col>
+                  </Row>
+                </Accordion.Header>
+              <Accordion.Body>
+
+              </Accordion.Body>
+              </Accordion.Item>
+            </Accordion>
+         
+          </Container>
+        </Row>
+        </Col>       
       </Row>
     </Container>
   );

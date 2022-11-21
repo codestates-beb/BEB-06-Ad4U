@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal';
 import './AdUpload.css';
 
-import { myBucket, S3_BUCKET } from '../../../config/awsS3';
+// import { myBucket, S3_BUCKET } from '../../../config/awsS3';
 import axios from 'axios';
 
 
@@ -26,8 +25,6 @@ const AdUpload = () => {
   const [vsCurrencies, setVsCurrencies] = useState("krw");
   const [ethPrice,setEthPrice] = useState(0);
   const [curCost, setCurCost] = useState("");
-
-
 
   useEffect(() => {
     vsChange(curCost)
@@ -113,20 +110,20 @@ const AdUpload = () => {
       const params = {
           ACL: 'public-read',
           Body: file,
-          Bucket: S3_BUCKET,
+          // Bucket: S3_BUCKET,
           Key: file.name
       };
       
 
-      myBucket.upload(params, function (err, data) {
-        console.log(data)
-        if (err) {
-            throw err
-        }
-        console.log(`File uploaded successfully.`);
-        AdInfo.imgUrl = data.Location;
-        setAdInfo(AdInfo)
-      });
+      // myBucket.upload(params, function (err, data) {
+      //   console.log(data)
+      //   if (err) {
+      //       throw err
+      //   }
+      //   console.log(`File uploaded successfully.`);
+      //   AdInfo.imgUrl = data.Location;
+      //   setAdInfo(AdInfo)
+      // });
   }
 
   const handleSubmit = async (e) => {
@@ -181,7 +178,7 @@ const AdUpload = () => {
   }
 
   return (
-    <Form>
+    <Form className='form'>
       <Form.Group controlId="formFile" className="mb-3">
         <Form.Label><h5>이미지 업로드</h5></Form.Label>
         <Form.Control type="file" onChange={handleFileInput}/>
@@ -224,11 +221,17 @@ const AdUpload = () => {
       <Button variant="primary" onClick={() => setModalShow(true)}>
         미리보기
       </Button>
+     
+        {/* <button className='upload_btn' onClick={() => setModalShow(true)}><span>미리보기</span></button> */}
+     
       <br></br>
       <br></br>
       <Button variant="primary" type="submit" onClick={handleSubmit}>
         Submit
       </Button>
+
+        {/* <button className='upload_btn' onClick={() => setModalShow(true)}><span>Submit</span></button> */}
+   
 
 
       <Modal

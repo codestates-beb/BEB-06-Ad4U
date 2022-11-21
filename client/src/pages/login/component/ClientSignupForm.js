@@ -6,17 +6,16 @@ import Col from 'react-bootstrap/esm/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-import '../Loginpage.css'
+import '../LoginPage.css';
 
-const ClientSignupForm = ({ email, sendSignupData, handleClose }) => {
+const ClientSignupForm = ({ email, account, inputAccount, sendSignupData, handleClose }) => {
   
   const [isCorrect, setIsClient] = useState(true);
 
   let companyNameRef = useRef(null);
   let idRef = useRef(null);
   let passwordRef = useRef(null);
-  let confirmRef = useRef(null);
-  let addressRef = useRef(null);
+  let confirmRef = useRef(null);;
 
   const onSubmit = async (e) => {
     e.preventDefault(); //버튼을 눌러도 새로고침 되지않도록 함
@@ -24,12 +23,11 @@ const ClientSignupForm = ({ email, sendSignupData, handleClose }) => {
     const userId = idRef.current.value;
     const password = passwordRef.current.value;
     const confirm = confirmRef.current.value;
-    const address = addressRef.current.value;
 
     if (password === confirm) {
-      const signupData = { companyName, email, userId, password, address };
+      const signupData = { companyName, email, userId, password, account };
 
-      if ( companyName && email && userId && password, address ) {
+      if ( companyName && email && userId && password && account ) {
         setIsClient(true);
         sendSignupData(signupData);
       } else {
@@ -50,6 +48,7 @@ const ClientSignupForm = ({ email, sendSignupData, handleClose }) => {
               placeholder="Google Email" 
               type="email"
               value={email}
+              rows={1}
               disabled
               autoFocus
             />
@@ -90,12 +89,19 @@ const ClientSignupForm = ({ email, sendSignupData, handleClose }) => {
             <Form.Label>WalletAddress</Form.Label>
             <Form.Control 
               type="id"
+              value={account}
+              disabled
               rows={1} 
-              ref={addressRef}
             />
+            <button
+              type="button"
+              onClick={inputAccount}
+            >
+              getAccount
+            </button>
           </Form.Group>
           <Row>
-            <Col className="signup_lowerArea" xs={{ span: 6, offset: 7 }}>
+            <Col className="signup_lowerArea">
               <Button 
                 className="signup_button" 
                 variant="primary" 

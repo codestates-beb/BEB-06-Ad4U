@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { decodeToken } from 'react-jwt';
-import axios from 'axios';
+import auth from '../../hooks/axios/auth'; 
 import Signup from './component/Signup';
 import LoginForm  from './component/LoginForm';
 
@@ -12,7 +12,7 @@ import Button from 'react-bootstrap/Button';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
-import './Loginpage.css'
+import './LoginPage.css';
 
 const LoginPage = ({ setUserData }) => {
   const [isClient, setIsClient] = useState(false);
@@ -31,14 +31,7 @@ const LoginPage = ({ setUserData }) => {
     const authorizationCode = url.searchParams.get('code');
     console.log("authorizationCode", authorizationCode);
     if (authorizationCode) {
-      const options = {
-        url: "http://localhost:3001/users/auth",
-        method: 'POST',
-        headers: {"Content-Type": "application/json"},
-        withCredentials: true,
-        data: { code: authorizationCode }
-      }
-      axios.request(options)
+      auth.oauth(authorizationCode)
         .then(res => {
           setEmail(res.data.email);
           setShow(true);
@@ -64,18 +57,14 @@ const LoginPage = ({ setUserData }) => {
     const { userId, password } = loginData;
     try { 
       if ( userId && password ) {
-        const options = {
-          url: "http://localhost:3001/users/login",
-          method: 'POST',
-          headers: {"Content-Type": "application/json"},
-          withCredentials: true,
-          data:{ userId, password, isClient }
+      const result = await auth.login(loginData);
+        if (result) {
+          const { user } = result.data;
+          user.jwt_accessToken = result.data.jwt_accessToken;
+          user.isClient = result.data.isClient;
+          setUserData(user);
+          navigate('/');
         }
-        const result = await axios.request(options);
-        const { user } = result.data;
-        user.isClient = result.data.isClient;
-        setUserData(user);
-        navigate('/');
       } else {
         alert("아이디와 비밀번호를 입력해주세요");
       }

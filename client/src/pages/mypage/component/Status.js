@@ -8,24 +8,26 @@ import './Status.css'
 
 const Status = () => {
   return (
-      <Container className='status_container'>        
+    <Container className='status_container'> 
+      <div className="status-content_card-container">     
         <Row className='status_name'>
-          <Col xs={2}>전체</Col>
-          <Col xs={2}>요청중</Col>
-          <Col xs={2}>협의중</Col>
-          <Col xs={2}>진행중</Col>
-          <Col xs={2}>종료</Col>
-          <Col xs={2}>파기</Col>
+          <Col>전체</Col>
+          <Col>요청중</Col>
+          <Col>협의중</Col>
+          <Col>진행중</Col>
+          <Col>종료</Col>
+          <Col>파기</Col>
         </Row>
         <Row className='status_count'>
-          <Col xs={2}>0</Col>
-          <Col xs={2}>1</Col>
-          <Col xs={2}>2</Col>
-          <Col xs={2}>3</Col>
-          <Col xs={2}>4</Col>
-          <Col xs={2}>5</Col>
+          <Col>0</Col>
+          <Col>1</Col>
+          <Col>2</Col>
+          <Col>3</Col>
+          <Col>4</Col>
+          <Col>5</Col>
         </Row>
-      </Container>
+      </div>
+    </Container>
   );
 }
 

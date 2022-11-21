@@ -11,5 +11,17 @@
   margin-left: 40px;
 }
 
+.login_btn span {  
+  color: white;
+}
 
+.login_btn {
+  padding: 8px 30px;
+  margin-left: 35px;
+  margin-top: 10px;
+  border-radius: 15px;
+  background: none;
+  color: inherit;
+  border: 3px solid white;
+}
 

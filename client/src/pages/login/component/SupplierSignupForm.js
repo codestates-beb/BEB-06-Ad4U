@@ -6,28 +6,26 @@ import Col from 'react-bootstrap/esm/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-import '../Loginpage.css'
+import '../LoginPage.css';
 
-const SupplierSignupForm = ({ email, sendSignupData, handleClose }) => {
+const SupplierSignupForm = ({ email, account, inputAccount, sendSignupData, handleClose }) => {
   
   const [isCorrect, setIsClient] = useState(true);
 
   let idRef = useRef(null);
   let passwordRef = useRef(null);
   let confirmRef = useRef(null);
-  let addressRef = useRef(null);
 
   const onSubmit = async (e) => {
     e.preventDefault(); //버튼을 눌러도 새로고침 되지않도록 함
     const userId = idRef.current.value;
     const password = passwordRef.current.value;
     const confirm = confirmRef.current.value;
-    const address = addressRef.current.value;
 
     if (password === confirm) {
-      const signupData = { email, userId, password, address };
+      const signupData = { email, userId, password, account };
       
-      if ( email && userId && password, address ) {
+      if ( email && userId && password && account ) {
         setIsClient(true);
         sendSignupData(signupData);
       } else {
@@ -80,12 +78,19 @@ const SupplierSignupForm = ({ email, sendSignupData, handleClose }) => {
             <Form.Label>WalletAddress</Form.Label>
             <Form.Control 
               type="id"
+              value={account}
+              disabled
               rows={1} 
-              ref={addressRef}
             />
+            <button
+              type="button"
+              onClick={inputAccount}
+            >
+              getAccount
+            </button>
           </Form.Group>
           <Row>
-            <Col className="signup_lowerArea"  xs={{ span: 6, offset: 7 }}>
+            <Col className="signup_lowerArea">
               <Button 
                 className="signup_button" 
                 variant="primary" 

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import auth from './hooks/axios/auth';
 
 import Nav from './component/Nav';
 import Main from './pages/main/Main';
@@ -19,11 +20,22 @@ import './App.css';
 
 const App = () => {
   const [ userData, setUserData ] = useState({});
-  console.log("userData", userData)
+  console.log("userData", userData);
+
+  //세션유지
+  useEffect(() => {
+    auth.refresh()
+      .then(res => {
+        const { user } = res.data;
+        user.isClient = res.data.isClient;
+        setUserData(user);
+      })
+      .catch(err => console.log(err.response.data))
+  }, []);
   
   return (
     <>
-      <Nav userData={userData} />
+      <Nav userData={userData} setUserData={setUserData} />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/list/*" element={<ListPage />} />
