@@ -5,8 +5,9 @@ import { Row, Col, Card, Button } from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
 import ad from '../../../hooks/axios/ad'
+import nullImg from '../../../component/null.png';
 
-const Ad = () => {
+const Ad = ({ data }) => {
   const [list, setList] = useState([]);
   console.log(list)
 
@@ -26,8 +27,11 @@ const Ad = () => {
             <div 
             className="ad-content_card-container"
             onClick={() => navigate(`/detail/ad/${data.id}`)}
+            key={idx}
             >
-              <Card.Img variant="top" src={data.AdimgUrl}/>
+              {data.AdimgUrl 
+              ? <Card.Img variant="top" src={data.AdimgUrl}/> 
+              : <Card.Img variant='top' src={nullImg}/> }
               <Card.Body>
                 <Card.Title>{data.title}</Card.Title>
                 <Card.Text>{}</Card.Text>

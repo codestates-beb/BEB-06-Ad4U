@@ -20,13 +20,15 @@ const [list, setList] = useState([]);
 
   return (
     <div className='supplier_container'>
-      <h1>Supplier</h1>
+      <h1>Business Partner with us</h1>
+      <h3>파트너사</h3>
       <div className="supplier-content">
         {list.map((data, idx) => {
           return (
           <div 
           className="supplier-content_card-container"
           onClick={() => navigate(`/detail/supplier/${data.id}`)}
+          key={idx}
           >
             <Row>
               <Col><Avatar src={data.profileImgUrl} size="100" round={true}/></Col>
