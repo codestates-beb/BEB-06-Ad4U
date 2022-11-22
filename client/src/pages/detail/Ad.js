@@ -30,8 +30,6 @@ const AdDetail = ({ userData }) => {
     .catch(err => err.response.data)
   }, [])
 
-  
-
   return (
     <>
       <Container className='adDetail_container'>
