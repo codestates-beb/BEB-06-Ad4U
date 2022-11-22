@@ -12,28 +12,32 @@ const refresh = async () => {
 }
 
 const oauth = async (authorizationCode) => {
-  const options = {
-    url: "http://localhost:3001/users/auth",
-    method: 'POST',
-    headers: {"Content-Type": "application/json"},
-    withCredentials: true,
-    data: { code: authorizationCode }
-  }
-  const result = await axios.request(options)
-  return result;
+  if (authorizationCode) {
+    const options = {
+      url: "http://localhost:3001/users/auth",
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      withCredentials: true,
+      data: { code: authorizationCode }
+    }
+    const result = await axios.request(options)
+    return result;
+  } else throw new Error("authorizationCode not provided");
 }
 
 const login = async (loginData) => {
   const { userId, password, isClient} = loginData;
-  const options = {
-    url: "http://localhost:3001/users/login",
-    method: 'POST',
-    headers: {"Content-Type": "application/json"},
-    withCredentials: true,
-    data:{ userId, password, isClient }
-  }
-  const result = await axios.request(options)
-  return result;
+    if (userId && password && typeof(isClient) === 'boolean') {
+    const options = {
+      url: "http://localhost:3001/users/login",
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      withCredentials: true,
+      data:{ userId, password, isClient }
+    }
+    const result = await axios.request(options)
+    return result;
+  } else throw new Error("insufficient loginData");
 }
 
 const logout = async () => {
@@ -48,30 +52,33 @@ const logout = async () => {
 }
 
 const signup = async (signupData) => {
-  const options = {
-    url: "http://localhost:3001/users/signup",
-    method: 'POST',
-    headers: {"Content-Type": "application/json"},
-    withcredential: true,
-    data: signupData
-  }
-  const result = await axios.request(options);
-  return result;
+  if (signupData) {
+    const options = {
+      url: "http://localhost:3001/users/signup",
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      withcredential: true,
+      data: signupData
+    }
+    const result = await axios.request(options);
+    return result;
+  } else throw new Error("insufficient signupData");
 }
 
 const getMypage = async (isClient, accessToken) => {
-  const options = {
-    url: `http://localhost:3001/users/mypage?isClient=${isClient}`,
-    method: 'GET',
-    headers: {
-      "Authorization": `Bearer ${accessToken}`,
-      "Content-Type": "application/json"
-    },
-    withCredentials: true,
-  }
-  const result = await axios.request(options)
-  return result;
-
+  if (isClient && accessToken) {
+    const options = {
+      url: `http://localhost:3001/users/mypage?isClient=${isClient}`,
+      method: 'GET',
+      headers: {
+        "Authorization": `Bearer ${accessToken}`,
+        "Content-Type": "application/json"
+      },
+      withCredentials: true,
+    }
+    const result = await axios.request(options)
+    return result;
+  } else throw new Error("insufficient localData");
 }
 
 const auth = { refresh, oauth, login, logout, signup, getMypage };

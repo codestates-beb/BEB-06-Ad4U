@@ -14,6 +14,7 @@ const AdList = () => {
   //필요시 추가, data에 null값이 있을시 에러발생
   const filter = [
     { item: "제목", eventKey: "title" },
+    { item: "회사명", eventKey: "company_name" },
   ]
 
   const navigate = useNavigate();

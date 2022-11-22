@@ -22,15 +22,17 @@ const getList = async () => {
   return result;
 }
 
-const getDetail = async (id) => {
-  const options = {
-    url: `http://localhost:3001/supplier/detail?id=${id}`,
-    method: 'GET',
-    headers: {"Content-Type": "application/json"},
-    withCredentials: true,
-  }
-  const result = await axios.request(options)
-  return result;
+const getDetail = async (supplierId) => {
+  if (supplierId) {
+    const options = {
+      url: `http://localhost:3001/supplier/detail?id=${supplierId}`,
+      method: 'GET',
+      headers: {"Content-Type": "application/json"},
+      withCredentials: true,
+    }
+    const result = await axios.request(options)
+    return result;
+  } else throw new Error("supplierId is undefind!");
 }
 
 const supplier = { mainList, getList, getDetail };

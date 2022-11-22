@@ -85,6 +85,7 @@ const SupplierList = () => {
         {list.map((data, idx) => {
           return (
             <div 
+            key={idx}
             className="supplierList-content_card-container"
             onClick={(e) => navigate(`/detail/supplier/${data.id}`)}
             >

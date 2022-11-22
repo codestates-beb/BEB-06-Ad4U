@@ -27,10 +27,8 @@ const AdDetail = ({ userData }) => {
   useEffect(() => {
     ad.getDetail(adId)
     .then(res=> setDetail(res.data))
-    .catch(err => err.response.data)
+    .catch(err => console.log(err.response.data))
   }, [])
-
-  
 
   return (
     <>

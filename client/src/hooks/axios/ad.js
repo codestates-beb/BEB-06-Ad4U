@@ -22,15 +22,19 @@ const getList = async () => {
   return result;
 }
 
-const getDetail = async (id) => {
-  const options = {
-    url: `http://localhost:3001/ad/detail?id=${id}`,
-    method: 'GET',
-    headers: {"Content-Type": "application/json"},
-    withCredentials: true,
+const getDetail = async (adId) => {
+  if (adId) {
+    const options = {
+      url: `http://localhost:3001/ad/detail?id=${adId}`,
+      method: 'GET',
+      headers: {"Content-Type": "application/json"},
+      withCredentials: true,
+    }
+    const result = await axios.request(options)
+    return result;
+  } else {
+    throw new Error('adId is undefind!');
   }
-  const result = await axios.request(options)
-  return result;
 }
 
 const apply = async (accessToken, isClient, adId) => {
@@ -71,8 +75,8 @@ const callApply = async (accessToken, isClient, adId) => {
   try {
     if (isClient === "true") return alert("크리에이터 계정으로만 지원가능합니다.");
     if (accessToken && isClient) {
-      const result = await apply(accessToken, isClient, adId)
-      if (result) alert("신청이 완료되었습니다!!")
+      const result = await apply(accessToken, isClient, adId);
+      if (result) alert("신청이 완료되었습니다!!");
       window.location.reload();
     } else {
       alert("로그인후 이용가능합니다.");
@@ -86,8 +90,8 @@ const callApplyCancel = async (accessToken, isClient, adId) => {
   try {
       if (isClient === "true") return alert("크리에이터 계정으로만 지원가능합니다.");
       if (accessToken && isClient) {
-      const result = await applyCancel(accessToken, isClient, adId)
-      if (result) alert("신청이 취소되었습니다!!") ;
+      const result = await applyCancel(accessToken, isClient, adId);
+      if (result) alert("신청이 취소되었습니다!!");
       window.location.reload();
     } else {
       alert("로그인후 이용가능합니다.");
