@@ -29,9 +29,11 @@ const App = () => {
       .then(res => res.data)
       .then(data => {
         const { user, jwt_accessToken, isClient } = data;
-        setLocalData("accessToken", jwt_accessToken);
-        setLocalData("isClient", isClient);
-        setUserData(user);
+        if (user && jwt_accessToken && isClient) { 
+          setLocalData("accessToken", jwt_accessToken);
+          setLocalData("isClient", isClient);
+          setUserData(user);
+        };
       })
       .catch(err => console.log(err.response.data))
   }, []);
