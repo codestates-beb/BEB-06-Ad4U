@@ -67,6 +67,42 @@ const applyCancel = async (accessToken, isClient, adId) => {
   return result;
 }
 
-const ad = { mainList, getList, getDetail, apply, applyCancel };
+const callApply = async (accessToken, isClient, adId) => {
+  try {
+    if (isClient === "true") return alert("크리에이터 계정으로만 지원가능합니다.");
+    if (accessToken && isClient) {
+      const result = await apply(accessToken, isClient, adId)
+      if (result) alert("신청이 완료되었습니다!!")
+      window.location.reload();
+    } else {
+      alert("로그인후 이용가능합니다.");
+    }
+  } catch (err) {
+    console.log(err.response.data);
+  }
+}
+
+const callApplyCancel = async (accessToken, isClient, adId) => {
+  try {
+      if (isClient === "true") return alert("크리에이터 계정으로만 지원가능합니다.");
+      if (accessToken && isClient) {
+      const result = await applyCancel(accessToken, isClient, adId)
+      if (result) alert("신청이 취소되었습니다!!") ;
+      window.location.reload();
+    } else {
+      alert("로그인후 이용가능합니다.");
+    }
+  } catch (err) {
+    console.log(err.response.data);
+  }
+}
+
+const ad = { 
+  mainList, 
+  getList, 
+  getDetail, 
+  callApply, 
+  callApplyCancel 
+};
 
 export default ad;
