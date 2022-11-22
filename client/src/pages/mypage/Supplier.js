@@ -4,10 +4,10 @@ import auth from '../../hooks/axios/auth';
 import { getLocalData } from '../../config/localStrage';
 import SupplierAd from './component/SupplierAd';
 import './Supplier.css';
+import Avatar from 'react-avatar';
 
-import Profile from '../common/Profile';
 import Status from './component/Status';
-import { Container, Accordion, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
 
 const SupplierMypage = ({ userData }) => {
   const accessToken = getLocalData("accessToken");
@@ -49,11 +49,24 @@ const SupplierMypage = ({ userData }) => {
     } else return adList.map((adList, idx) => <SupplierAd key={idx} idx={idx} adList={adList} />);
   }
 
+  console.log(userData)
+
   return (
     <Container className='supplierMypage_container'>
       <Row className='supplierMypage_row' >
         <Col xl={3} >
-          <Profile userData={userData}/>
+          <div className="profile-content">
+            <div className="profile-content_card-container">
+              <Avatar src={userData.profileImgUrl} size="100" round={true}/>
+              <Card.Body>
+                <Card.Title className='mt-3'>{userData.channelName}</Card.Title>
+                <ListGroup variant="flush" className='mt-3'>
+                <ListGroup.Item >{userData.email}</ListGroup.Item>
+                <ListGroup.Item >{userData.userId}</ListGroup.Item>
+                </ListGroup>
+              </Card.Body>
+            </div>
+          </div>
         </Col>
         <Col xl={9} >
         <Row>

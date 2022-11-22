@@ -5,7 +5,7 @@ import { Row, Col, Card, Button } from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
 import ad from '../../../hooks/axios/ad'
-import nullImg from '../../../component/null.png';
+import nullImg from '../../../dummyfiles/img1.png';
 
 const Ad = ({ data }) => {
   const [list, setList] = useState([]);
@@ -21,7 +21,7 @@ const Ad = ({ data }) => {
 
   return (
     <div className='ad_container'>
-      <h2>최신 광고</h2>
+      <h3>어떤 광고를 찾고계신가요?</h3>
       <div className="ad-content">
         {list.map((data, idx) => { return (
             <div 

@@ -70,7 +70,7 @@ const AdDetail = ({ userData }) => {
             </Card.Body>
           </Card>
           <div className='adGo'>
-            {filter.length 
+            {filter.length
               ? (<button className='adGo_btn' onClick={() => applyCancelBtn(accessToken, isClient, adId)} ><span>취소하기</span></button>)
               : (<button className='adGo_btn' onClick={() => applyBtn(accessToken, isClient, adId)} ><span>지원하기</span></button>)
             } 

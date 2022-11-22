@@ -5,7 +5,7 @@ import { Container, Card, Row } from 'react-bootstrap';
 import ad from '../../../hooks/axios/ad';
 import SearchBar from './SearchBar';
 import '../ListPage.css';
-import nullImg from '../../../component/null.png';
+import nullImg from '../../../dummyfiles/img1.png';
 
 const AdList = () => {
   const [list, setList] = useState([]);
