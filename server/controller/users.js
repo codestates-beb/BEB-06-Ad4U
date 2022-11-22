@@ -55,11 +55,7 @@ module.exports = {
                         Supplier.update(body, {
                             where: { userId: userId },
                         })
-                    }).catch((err) => {
-                        res.status(401).json(err);
                     })
-                }else{
-                    res.status(401).json("no authorization.. check id, password");
                 }
             }
 

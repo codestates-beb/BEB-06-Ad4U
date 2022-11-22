@@ -6,8 +6,8 @@ module.exports = {
     apply: async (req, res) => { //광고 지원 - supplier
         const authorization = req.headers.authorization;
         const { isClient, advertisement_id } = req.body;
-
-        if (!authorization || isClient) {
+        // || isClient 를 지워야만 제대로 작동한다!!
+        if (!authorization) {
             res.status(401).send({ data: null, message: 'invalid access' });
         }
         else {
@@ -34,7 +34,7 @@ module.exports = {
         const authorization = req.headers.authorization;
         const { isClient, advertisement_id } = req.body;
 
-        if (!authorization || isClient) {
+        if (!authorization) {
             res.status(401).send({ data: null, message: 'invalid access' });
         }
         else {
