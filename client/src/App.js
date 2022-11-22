@@ -18,7 +18,6 @@ import Footer from './component/Footer';
 import TestApiPage from './pages/testAPI/testapi';
 
 import './App.css';
-import axios from 'axios';
 
 const App = () => {
   const [ userData, setUserData ] = useState({});
@@ -30,7 +29,7 @@ const App = () => {
       .then(res => res.data)
       .then(data => {
         const { user, jwt_accessToken, isClient } = data;
-        if (user && jwt_accessToken && isClient !== undefined) { 
+        if (user && jwt_accessToken && typeof(isClient) === 'boolean') { 
           setLocalData("accessToken", jwt_accessToken);
           setLocalData("isClient", isClient);
           setUserData(user);

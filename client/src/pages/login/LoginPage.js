@@ -61,7 +61,7 @@ const LoginPage = ({ setUserData }) => {
       const result = await auth.login(loginData);
         if (result) {
           const { user, jwt_accessToken, isClient } = result.data;  
-          if (user && jwt_accessToken && isClient !== undefined) {   
+          if (user && jwt_accessToken && typeof(isClient) === 'boolean') {   
             setLocalData("accessToken", jwt_accessToken);
             setLocalData("isClient", isClient);
             setUserData(user);

@@ -14,7 +14,7 @@ const SupplierMypage = ({ userData }) => {
   const isClient = getLocalData("isClient");
   const [myInfo, setMyInfo] = useState({});
   const [adList, setAdlist] = useState([]);
-  const [status, setStatus] = useState(0);
+  const [status, setStatus] = useState("");
 
   const navigate = useNavigate();
 
@@ -42,8 +42,8 @@ const SupplierMypage = ({ userData }) => {
   }, []);
 
   const FilterAd = ({ adList, status }) => {
-    //status가 초기값(0)인경우 필터링 하지않음
-    if (status > 0) {
+    //status가 초기값("")인경우 필터링 하지않음
+    if (typeof(status) === 'number') {
       const filteredAdList = adList.filter((el) => el.status === status);
       return filteredAdList.map((adList, idx) => <SupplierAd key={idx} idx={idx} adList={adList} />);
     } else return adList.map((adList, idx) => <SupplierAd key={idx} idx={idx} adList={adList} />);

@@ -9,14 +9,13 @@ import Profile from '../common/Profile';
 import Status from './component/Status';
 import { Link } from 'react-router-dom';
 import {Accordion, Col, Row, Container} from 'react-bootstrap';
-import ClientAdBar from './component/ClientAd';
 
 const ClientMypage = ({ userData }) => {
   const accessToken = getLocalData("accessToken");
   const isClient = getLocalData("isClient");
   const [myInfo, setMyInfo] = useState({});
   const [adList, setAdlist] = useState([]);
-  const [status, setStatus] = useState(0);
+  const [status, setStatus] = useState("");
 
   const navigate = useNavigate();
 
@@ -34,8 +33,8 @@ const ClientMypage = ({ userData }) => {
   }, []);
 
   const FilterAd = ({ adList, status }) => {
-    //status가 초기값(0)인경우 필터링 하지않음
-    if (status > 0) {
+    //status가 초기값("")인경우 필터링 하지않음
+    if (typeof(status) === 'number') {
       const filteredAdList = adList.filter((el) => el.status === status);
       return filteredAdList.map((adList, idx) => <ClientAd key={idx} idx={idx} adList={adList} />);
     } else return adList.map((adList, idx) => <ClientAd key={idx} idx={idx} adList={adList} />);
