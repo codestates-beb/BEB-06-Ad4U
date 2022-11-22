@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { decodeToken } from 'react-jwt';
 import auth from '../../hooks/axios/auth'; 
+import { setLocalData, getLocalData, clearLocalData } from '../../config/localStrage';
 import Signup from './component/Signup';
 import LoginForm  from './component/LoginForm';
 
@@ -59,11 +60,13 @@ const LoginPage = ({ setUserData }) => {
       if ( userId && password ) {
       const result = await auth.login(loginData);
         if (result) {
-          const { user } = result.data;
-          user.accessToken = result.data.jwt_accessToken;
-          user.isClient = result.data.isClient;
-          setUserData(user);
-          navigate('/');
+          const { user, jwt_accessToken, isClient } = result.data;  
+          if (user && jwt_accessToken && typeof(isClient) === 'boolean') {   
+            setLocalData("accessToken", jwt_accessToken);
+            setLocalData("isClient", isClient);
+            setUserData(user);
+            navigate('/');
+          }
         }
       } else {
         alert("아이디와 비밀번호를 입력해주세요");
