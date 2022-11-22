@@ -11,8 +11,6 @@ const BusinessPartner = () => {
   const [clientList, setClientList] = useState([]);
   const [supplierList, setSupplierList] = useState([]);
 
-  console.log(clientList)
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,7 +31,6 @@ const BusinessPartner = () => {
       <h3>파트너사</h3>
       <div className="supplier-content">
         {clientList.map((data, idx) => {
-          console.log(data)
           return (
           <div 
           className="supplier-content_card-container"

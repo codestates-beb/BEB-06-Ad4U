@@ -19,6 +19,8 @@ const AdDetail = ({ userData }) => {
 
   const accessToken = getLocalData('accessToken');
   const isClient = getLocalData('isClient');
+  const data = detail.Advertisement_has_Suppliers;
+  const isApply = data.filter(data => data.Supplier_id === userData.id);
 
   console.log("Detail", detail)
   
@@ -28,27 +30,7 @@ const AdDetail = ({ userData }) => {
     .catch(err => err.response.data)
   }, [])
 
-  const applyBtn = async (accessToken, isClient, adId) => {
-    try{
-      const result = await ad.apply(accessToken, isClient, adId)
-      console.log(result)
-      if(result) alert("신청이 완료되었습니다!!")
-      window.location.reload()
-    } catch (err){console.log(err)}
-  }
-
-  const applyCancelBtn = async (accessToken, isClient, adId) => {
-    try{
-      const result = await ad.applyCancel(accessToken, isClient, adId)
-      console.log(result)
-      if(result) alert("신청이 취소되었습니다!!") 
-      window.location.reload()
-    } catch (err){console.log(err)}
-  }
-
-  // console.log(detail.Advertisement_has_Suppliers)
-    const data = detail.Advertisement_has_Suppliers;
-    const filter = data.filter(data => data.Supplier_id === userData.id);
+  
 
   return (
     <>
@@ -56,7 +38,6 @@ const AdDetail = ({ userData }) => {
       <Row>
         <Col xl={3} className="adDetail_company_card">
           <Card style={{ width: '259px' }}>
-            {/* detail.Client가 null일때 detail.Client.company_name를 불러오려고 하면 오류남 */}
             <Card.Header 
             as="h5"
             onClick={() => navigate(`/detail/client/${detail.Client.id}`)}
@@ -70,9 +51,9 @@ const AdDetail = ({ userData }) => {
             </Card.Body>
           </Card>
           <div className='adGo'>
-            {filter.length
-              ? (<button className='adGo_btn' onClick={() => applyCancelBtn(accessToken, isClient, adId)} ><span>취소하기</span></button>)
-              : (<button className='adGo_btn' onClick={() => applyBtn(accessToken, isClient, adId)} ><span>지원하기</span></button>)
+            {isApply.length 
+              ? (<button className='adGo_btn' onClick={() => ad.callApplyCancel(accessToken, isClient, adId)} ><span>취소하기</span></button>)
+              : (<button className='adGo_btn' onClick={() => ad.callApply(accessToken, isClient, adId)} ><span>지원하기</span></button>)
             } 
           </div>
         </Col>
