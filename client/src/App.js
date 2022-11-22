@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import auth from './hooks/axios/auth';
-import { setLocalData } from './config/localStrage';
+import { setLocalData, clearLocalData } from './config/localStrage';
 
 import Nav from './component/Nav';
 import Main from './pages/main/Main';
@@ -33,9 +33,15 @@ const App = () => {
           setLocalData("accessToken", jwt_accessToken);
           setLocalData("isClient", isClient);
           setUserData(user);
-        };
+        }
       })
-      .catch(err => console.log(err.response.data))
+      .catch(err => {
+        clearLocalData();
+        console.log(err.response.data);
+        return auth.logout()
+        .then(res => alert("쿠키가 만료되었습니다 다시 로그인 해주세요."))
+        .catch(err => console.log("logoutErr", err))
+      })
   }, []);
   
   return (
