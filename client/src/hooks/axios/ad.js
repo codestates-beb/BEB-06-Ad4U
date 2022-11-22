@@ -38,8 +38,8 @@ const apply = async (accessToken, isClient, adId) => {
     url: "http://localhost:3001/function/apply",
     method: 'POST',
     headers: {
-      "Content-Type": "application/json", 
       "Authorization": `Bearer ${accessToken}`},
+      "Content-Type": "application/json", 
     withCredentials: true,
     data : {
       isClient: isClient,
@@ -55,8 +55,8 @@ const applyCancel = async (accessToken, isClient, adId) => {
     url: "http://localhost:3001/function/cancel",
     method: 'POST',
     headers: {
-      "Content-Type": "application/json", 
       "Authorization": `Bearer ${accessToken}`},
+      "Content-Type": "application/json", 
     withCredentials: true,
     data : {
       isClient: isClient,
