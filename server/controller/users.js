@@ -55,8 +55,6 @@ module.exports = {
                         Supplier.update(body, {
                             where: { userId: userId },
                         })
-                    }).catch((err) => {
-                        res.status(401).json(err);
                     })
                 }
             }

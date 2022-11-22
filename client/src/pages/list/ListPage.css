@@ -98,7 +98,7 @@
 .adList-content {
   margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(4, minmax(150px, 220px));
+  grid-template-columns: repeat(4, minmax(200px, 220px));
   padding:20px 0;
   gap: 45px;
   justify-content: center;

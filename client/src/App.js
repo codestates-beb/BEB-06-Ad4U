@@ -48,7 +48,7 @@ const App = () => {
         <Route path="/mypage/supplier" element={<SupplierMypage userData={userData}/>} />
         <Route path="/detail/client/:clientId" element={<ClientDetail />} />
         <Route path="/detail/supplier/:supplierId" element={<SupplierDetail />} />
-        <Route path="/detail/ad/:adId" element={<AdDetail />} />
+        <Route path="/detail/ad/:adId" element={<AdDetail userData={userData}/>} />
         <Route path="/login" element={<LoginPage setUserData={setUserData} />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="*" element={<Emptypage />} />

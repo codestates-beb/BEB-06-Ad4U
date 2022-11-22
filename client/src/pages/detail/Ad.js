@@ -1,28 +1,54 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ad from '../../hooks/axios/ad';
 import nullImg from '../../component/null.png';
 import { useNavigate } from 'react-router-dom';
+import { getLocalData } from '../../config/localStrage'; 
 
 import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap/esm';
 
 import './Detail.css';
 
-const AdDetail = () => {
+const AdDetail = ({ userData }) => {
   const navigate = useNavigate();
   const { adId } = useParams();
   const [detail, setDetail] = useState({
-    Client : {company_name: "", email: ""}
+    Client : {company_name: "", email: ""},
+    Advertisement_has_Suppliers: []
   });
+
+  const accessToken = getLocalData('accessToken');
+  const isClient = getLocalData('isClient');
+
   console.log("Detail", detail)
-  console.log(detail.Client)
   
   useEffect(() => {
     ad.getDetail(adId)
     .then(res=> setDetail(res.data))
     .catch(err => err.response.data)
   }, [])
-  
+
+  const applyBtn = async (accessToken, isClient, adId) => {
+    try{
+      const result = await ad.apply(accessToken, isClient, adId)
+      console.log(result)
+      if(result) alert("신청이 완료되었습니다!!")
+      window.location.reload()
+    } catch (err){console.log(err)}
+  }
+
+  const applyCancelBtn = async (accessToken, isClient, adId) => {
+    try{
+      const result = await ad.applyCancel(accessToken, isClient, adId)
+      console.log(result)
+      if(result) alert("신청이 취소되었습니다!!") 
+      window.location.reload()
+    } catch (err){console.log(err)}
+  }
+
+  // console.log(detail.Advertisement_has_Suppliers)
+    const data = detail.Advertisement_has_Suppliers;
+    const filter = data.filter(data => data.Supplier_id === userData.id);
 
   return (
     <>
@@ -44,7 +70,10 @@ const AdDetail = () => {
             </Card.Body>
           </Card>
           <div className='adGo'>
-            <Link to="/list"><button className='adGo_btn'><span>지원하기</span></button></Link>
+            {filter.length 
+              ? (<button className='adGo_btn' onClick={() => applyCancelBtn(accessToken, isClient, adId)} ><span>취소하기</span></button>)
+              : (<button className='adGo_btn' onClick={() => applyBtn(accessToken, isClient, adId)} ><span>지원하기</span></button>)
+            } 
           </div>
         </Col>
         <Col xl={9} className="adDetail_card">

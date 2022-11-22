@@ -33,6 +33,40 @@ const getDetail = async (id) => {
   return result;
 }
 
-const ad = { mainList, getList, getDetail };
+const apply = async (accessToken, isClient, adId) => {
+  const options = {
+    url: "http://localhost:3001/function/apply",
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json", 
+      "Authorization": `Bearer ${accessToken}`},
+    withCredentials: true,
+    data : {
+      isClient: isClient,
+      advertisement_id: adId
+    }
+  }
+  const result = await axios.request(options)
+  return result;
+}
+
+const applyCancel = async (accessToken, isClient, adId) => {
+  const options = {
+    url: "http://localhost:3001/function/cancel",
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json", 
+      "Authorization": `Bearer ${accessToken}`},
+    withCredentials: true,
+    data : {
+      isClient: isClient,
+      advertisement_id: adId
+    }
+  }
+  const result = await axios.request(options)
+  return result;
+}
+
+const ad = { mainList, getList, getDetail, apply, applyCancel };
 
 export default ad;
