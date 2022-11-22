@@ -4,6 +4,7 @@ const { Op } = require('sequelize');
 const jwt = require('jsonwebtoken');
 const client_attributes = ['id', 'userId', 'company_name', 'company_number', 'email'];
 const supplier_attributes = ['id', 'userId', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address'];
+const login_supplier_attributes = ['id', 'userId', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address', 'refreshToken'];
 const axios = require("axios");
 const jwt_decode = require('jwt-decode');
 
@@ -18,12 +19,50 @@ module.exports = {
                     where: { userId: userId, password: password },
                 });
             } else {
-                //google_refresh token으로 유저 정보 DB업데이트 구현해야함
                 user = await Supplier.findOne({
-                    attributes: supplier_attributes,
+                    attributes: login_supplier_attributes,
                     where: { userId: userId, password: password },
                 });
+
+                if (user) {
+                    const refreshToken = user.refreshToken;
+                    delete user.dataValues.refreshToken;
+
+
+                    axios.post("https://oauth2.googleapis.com/token", null, {
+                        headers: {
+                            "Content-Type": `application/x-www-form-urlencoded`
+                        }, params: {
+                            client_id: process.env.CLIENT_ID,
+                            client_secret: process.env.CLIENT_PASSWORD,
+                            refresh_token: refreshToken,
+                            grant_type: "refresh_token"
+                        }
+                    }).then(async (data) => {
+                        const youtube_info = await axios.get(`https://www.googleapis.com/youtube/v3/channels?access_token=${data.data.access_token}&part=snippet,statistics&mine=true&fields=items&2Fsnippet%2Fthumbnails`)
+                            .then((data) => {
+                                return data.data
+                            }).catch(err => console.log(err));
+
+                        const body = {
+                            channelName: youtube_info.items[0].snippet.title,
+                            subscriberCount: youtube_info.items[0].statistics.subscriberCount,
+                            viewCount: youtube_info.items[0].statistics.viewCount,
+                            channelUrl: `https://www.youtube.com/channel/${youtube_info.items[0].id}`,
+                            profileImgUrl: youtube_info.items[0].snippet.thumbnails.default.url,
+                        }
+
+                        Supplier.update(body, {
+                            where: { userId: userId },
+                        })
+                    }).catch((err) => {
+                        res.status(401).json(err);
+                    })
+                }else{
+                    res.status(401).json("no authorization.. check id, password");
+                }
             }
+
             if (user) {
                 const jwt_accessToken = jwt.sign({ user }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
                 const jwt_refreshToken = jwt.sign({ userId }, process.env.REFRESH_SECRET, { expiresIn: '3h' });
@@ -38,6 +77,10 @@ module.exports = {
             res.status(400).json(error);
         }
     },
+    logout: async (req, res) => {
+        res.clearCookie('jwt_refreshToken'); //쿠키삭제
+        res.status(200).json("logout");
+    },
     auth: async (req, res) => {
         const { code } = req.body;
         axios.post("https://oauth2.googleapis.com/token", null, {
@@ -51,9 +94,7 @@ module.exports = {
                 grant_type: "authorization_code"
             }
         }).then(async (response) => {
-            res.cookie('google_refreshToken', response.data.refresh_token, {
-                maxAge: 60 * 60 * 1000
-            });
+
             const user_info = jwt_decode(response.data.id_token);
             const access_token = response.data.access_token;
 
@@ -66,7 +107,7 @@ module.exports = {
                 where: { email: user_info.email },
             });
 
-            if (user) {
+            if (user) { //auth 시도하다가 취소했을경우
                 const body = {
                     channelName: youtube_info.items[0].snippet.title,
                     subscriberCount: youtube_info.items[0].statistics.subscriberCount,
@@ -82,8 +123,7 @@ module.exports = {
                 }).catch(err => {
                     res.status(400).json("DB error")
                 })
-
-            } else {
+            } else { //첫 auth - refresh token save
                 const body = {
                     channelName: youtube_info.items[0].snippet.title,
                     subscriberCount: youtube_info.items[0].statistics.subscriberCount,
@@ -110,10 +150,13 @@ module.exports = {
         delete body.isClient;
 
         if (isClient) {
-            const user = await Client.findOne({
+            const client_user = await Client.findOne({
                 where: { userId: body.userId },
             });
-            if (user) { //아이디 중복확인
+            const supplier_user = await Supplier.findOne({
+                where: { userId: body.userId },
+            });
+            if (client_user||supplier_user) { //아이디 중복확인
                 res.status(400).json("아이디 중복")
             } else {
                 console.log(body);
@@ -125,13 +168,13 @@ module.exports = {
                     })
             }
         } else {
-            const refreshToken = req.cookies.google_refreshToken;
-            body.refreshToken = refreshToken;
-
-            const user = await Supplier.findOne({
+            const client_user = await Client.findOne({
                 where: { userId: body.userId },
             });
-            if (user) {
+            const supplier_user = await Supplier.findOne({
+                where: { userId: body.userId },
+            });
+            if (client_user|| supplier_user) {
                 res.status(400).json("아이디 중복")
             } else {
                 Supplier.update(body, {
@@ -152,20 +195,21 @@ module.exports = {
         } else {
             try {
                 const data = jwt.verify(req.cookies.jwt_refreshToken, process.env.REFRESH_SECRET);
+                console.log(data)
                 const client_user = await Client.findOne({
                     attributes: client_attributes,
-                    where: { userId : data.userId},
+                    where: { userId: data.userId },
                 });
                 const supplier_user = await Supplier.findOne({
                     attributes: supplier_attributes,
-                    where: { userId : data.userId},
+                    where: { userId: data.userId },
                 });
-                
-                if(client_user){
+
+                if (client_user) {
                     const user = client_user;
                     const jwt_accessToken = jwt.sign({ user }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
                     res.status(200).json({ jwt_accessToken, user, isClient: true });
-                }else if(supplier_user){
+                } else if (supplier_user) {
                     const user = supplier_user;
                     const jwt_accessToken = jwt.sign({ user }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
                     res.status(200).json({ jwt_accessToken, user, isClient: false });

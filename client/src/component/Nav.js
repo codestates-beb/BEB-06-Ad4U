@@ -31,6 +31,9 @@ const Nav = ({ userData, setUserData }) => {
   }
 
   const LoggedIn = ({ userData }) => {
+    
+    // let string ; 
+    // userData.isClient ?  string = 'client' : string = 'supplier'
     return (
       <Stack direction="horizontal" gap={4} justify='flex-end'>
         <button onClick={deleteUserData}>logout</button>

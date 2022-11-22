@@ -39,7 +39,7 @@ const login = async (loginData) => {
 const logout = async () => {
     const options = {
       url: "http://localhost:3001/users/logout",
-      method: 'GET',
+      method: 'POST',
       headers: {"Content-Type": "application/json"},
       withCredentials: true,
     }
