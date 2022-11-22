@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import ad from '../../hooks/axios/ad';
 import nullImg from '../../component/null.png';
 import { useNavigate } from 'react-router-dom';
+import apply from '../../hooks/axios/function';
 
 import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap/esm';
 
@@ -23,7 +24,6 @@ const AdDetail = () => {
     .catch(err => err.response.data)
   }, [])
   
-
   return (
     <>
       <Container className='adDetail_container'>
@@ -44,7 +44,7 @@ const AdDetail = () => {
             </Card.Body>
           </Card>
           <div className='adGo'>
-            <Link to="/list"><button className='adGo_btn'><span>지원하기</span></button></Link>
+            <button className='adGo_btn' onClick={apply} ><span>지원하기</span></button>
           </div>
         </Col>
         <Col xl={9} className="adDetail_card">

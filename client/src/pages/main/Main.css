@@ -71,7 +71,7 @@
 
 .ad-content {
   display: grid;
-  grid-template-columns: repeat(5, minmax(150px, 220px));
+  grid-template-columns: repeat(5, minmax(220px, 220px));
   padding:20px 0;
   gap: 45px;
   justify-content: center;
@@ -117,7 +117,7 @@
   transform: scale(1.1);
 }
 
-/* Supplier css */
+/* BusinessPartner css */
 .supplier_container {
   position: relative;
   height: 850px;

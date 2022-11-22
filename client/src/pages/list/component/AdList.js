@@ -52,6 +52,7 @@ const AdList = () => {
             <div 
             className="adList-content_card-container"
             onClick={() => navigate(`/detail/ad/${data.id}`)}
+            key={idx}
             >
               <Row className='adList_img'>
                 {data.AdimgUrl 

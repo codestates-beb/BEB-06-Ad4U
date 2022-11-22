@@ -2,7 +2,7 @@ import React from 'react';
 import About from './component/About';
 import Home from './component/Home';
 import Ad from './component/Ad';
-import Supplier from './component/Supplier';
+import BusinessPartner from './component/BusinessPartner';
 
 import { Col, Row, Container, Button } from 'react-bootstrap';
 import smoothscroll from 'smoothscroll-polyfill';
@@ -38,14 +38,14 @@ const Main = ( userData ) => {
           <Col xs={3}><Button variant="link" onClick={onHomeClick}><h5>Home</h5></Button></Col>
           <Col xs={3}><Button variant="link" onClick={onAboutClick}><h5>About</h5></Button></Col>
           <Col xs={2}><Button variant="link" onClick={onAdClick}><h5>Ads</h5></Button></Col>
-          <Col xs={1} ><Button variant="link" onClick={onCreatorClick}><h5>Supplier</h5></Button></Col>
+          <Col xs={1} ><Button variant="link" onClick={onCreatorClick}><h5>Partner</h5></Button></Col>
         </Row>
       </header>
       <main>
         <Home />
         <About />
         <Ad />
-        <Supplier />
+        <BusinessPartner />
       </main>
       <Button variant="light" className='upbutton' onClick={topClick}>
         <IoIosArrowDropupCircle />

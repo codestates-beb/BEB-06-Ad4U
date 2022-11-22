@@ -26,7 +26,10 @@ const Ad = ({ data }) => {
         {list.map((data, idx) => { return (
             <div 
             className="ad-content_card-container"
-            onClick={() => navigate(`/detail/ad/${data.id}`)}
+            onClick = {() => {
+              navigate(`/detail/ad/${data.id}`)
+              window.scrollTo(0,0)
+            }}
             key={idx}
             >
               {data.AdimgUrl 
