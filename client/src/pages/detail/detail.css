@@ -2,8 +2,8 @@
 .adDetail_container {
   position: relative;
   color: white;
-  height: 1000px;
-  margin-top: 200px;
+  height: 2000px;
+  margin-top: 150px;
 }
 
 .adDetail_company_card {
@@ -13,13 +13,7 @@
 
 .adDetail_card {
   color: black;
-  text-align: center;
 }
-
-.adDetail_card img {
-  justify-content: center;
-}
-
 
 .adGo span {  
   color: white;
@@ -27,7 +21,7 @@
 
 .adGo_btn {
   margin-top: 30px;
-  margin-right: 40px;
+  margin-right: 47px;
   padding: 10px 30px;
   border-radius: 15px;
   background: none;
@@ -38,18 +32,94 @@
   transform: scale(1.1);
 }
 
+.adDetail_Img {
+  margin : 0px 0px 20px 65px ;
+}
+
+.adDetail_card_img {
+  width: 750px;
+  height: 550px;
+}
+
 /* Client css */
-.ClientDetail_container {
+.clientDetail_container {
+  position: relative;
+  height: 2000px;
+  margin-top: 180px;
+  width: 800px;
   color: white;
 }
 
+.clientDetail_card-container {
+  color: black;
+  text-align: center;
+  padding: 20px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  position: relative;
+  background-color:#ffffff;
+}
+
+.clientDetail_title {
+  margin: 20px;
+}
+
+.clientDetail_text {
+  margin: 25px 25px;
+}
+
+.clientDetail-content {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(100px, 300px));
+  padding:20px 0;
+  gap: 45px;
+  justify-content: center;
+}
+
+.clientDetail-content_card-container  {
+  color: black;
+  text-align: center;
+  padding: 20px 20px;
+  border-radius: 4px;
+  box-shadow: 1px 1px 2px 2px #0c0b1473;
+  cursor: pointer;
+  font-size: 18px;
+  position: relative;
+  background-color:#ffffff;
+}
+
+.clientDetail-content_card-container:hover {
+  transform: scale(1.1);
+}
+
+
 /* Supplier css */
 .supplierDetail_container {
-  color: white;
+  position: relative;
+  height: 2000px;
+  margin-top: 180px;
+  width: 800px;
+}
+
+.supplierDetail-content_card-container  {
+  color: black;
+  text-align: center;
+  padding: 20px 20px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 4px 4px #0c0b1473;
+  box-shadow: 1px 1px 8px 8px #0c0b1473;
+  cursor: pointer;
+  font-size: 18px;
+  position: relative;
+  background-color:#ffffff;
+}
+
+.supplierDetail_title {
+  margin: 20px;
 }
 
 /* Upload css */
 .upload_container {
   margin-top: 100px;
 }
-
