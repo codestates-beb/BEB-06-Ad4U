@@ -1,30 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Accordion, Col, Row, Container } from 'react-bootstrap';
-import Stage_0 from './ClientManageMent/Stage_0';
-import Stage_1 from './ClientManageMent/Stage_1';
-import Stage_2 from './ClientManageMent/Stage_2';
-import Stage_3 from './ClientManageMent/Stage_3';
-import Stage_4 from './ClientManageMent/Stage_4';
+import Stage0 from './ClientManageMent/Stage0';
+import Stage1 from './ClientManageMent/Stage1';
+import Stage2 from './ClientManageMent/Stage2';
+import Stage3 from './ClientManageMent/Stage3';
+import Stage4 from './ClientManageMent/Stage4';
 import '../Client.css';
 
 const ClientAd = ({ idx, adList }) => {
-  const { title, status } = adList;
+  const { id, title, status } = adList;
  
   const Rendering = () => {
-    if(status === 0) return <Stage_0 adList={adList} />; 
-    if(status === 1) return <Stage_1 adList={adList} />;
-    if(status === 2) return <Stage_2 adList={adList} />;
-    if(status === 3) return <Stage_3 adList={adList} />;
-    if(status === 4) return <Stage_4 adList={adList} />;
+    if(adList && status === 0) return <Stage0 adList={adList} />; 
+    if(adList && status === 1) return <Stage1 adList={adList} />;
+    if(adList && status === 2) return <Stage2 adList={adList} />;
+    if(adList && status === 3) return <Stage3 adList={adList} />;
+    if(adList && status === 4) return <Stage4 adList={adList} />;
     else return <div></div>;
+  }
+
+  const showStatus = (status) => {
+    if(status === 0) return "요청중"; 
+    if(status === 1) return "협의중";
+    if(status === 2) return "진행중";
+    if(status === 3) return "종료";
+    if(status === 4) return "파기";
   }
 
   return (
     <>
       <Accordion defaultActiveKey={['0']}>
         <Accordion.Item>
-          <Accordion.Header>{idx+1}.{title} STATUS-{status}</Accordion.Header>
+          <Accordion.Header>
+            <span>{idx+1}. 광고명 {title}</span>
+            <span>___________</span>
+            <span>AdvertisementID - {id}</span>
+            <span>---{showStatus(status)}</span>
+          </Accordion.Header>
           <Accordion.Body>
             <Rendering />
           </Accordion.Body>

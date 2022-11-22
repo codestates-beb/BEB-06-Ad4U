@@ -28,7 +28,7 @@ const AdDetail = ({ userData }) => {
     ad.getDetail(adId)
     .then(res=> setDetail(res.data))
     .catch(err => console.log(err.response.data))
-  }, [])
+  }, [adId])
 
   return (
     <>

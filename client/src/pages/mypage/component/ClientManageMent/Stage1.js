@@ -4,7 +4,7 @@ import { Accordion, Col, Row, Container } from 'react-bootstrap';
 import method from '../../../../hooks/web3/sendTransaction';
 import '../../Client.css';
 
-const Stage_1 = ({ adList }) => {
+const Stage1 = ({ adList }) => {
 
   // 1. Multi-Sig Wallet Deploy
   const handleDeploy = async () => {
@@ -22,4 +22,4 @@ const Stage_1 = ({ adList }) => {
   );
 }
 
-export default Stage_1;
+export default Stage1;

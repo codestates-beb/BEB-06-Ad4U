@@ -4,13 +4,13 @@ import { Accordion, Col, Row, Container } from 'react-bootstrap';
 import method from '../../../../hooks/web3/sendTransaction';
 import '../../Client.css';
 
-const Stage_4 = ({ adList }) => {
+const Stage3 = ({ adList }) => {
 
   return (
     <>
-      <div>파기됨</div>
+      <div>종료</div>
     </>
   );
 }
 
-export default Stage_4;
+export default Stage3;

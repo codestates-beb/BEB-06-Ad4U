@@ -18,7 +18,7 @@ const SupplierDetail = () => {
     supplier.getDetail(supplierId)
     .then(res=> setDetail(res.data))
     .catch(err => err.response.data)
-  }, [])
+  }, [supplierId])
 
   // useEffect(() => {
   //   axios

@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Accordion, Col, Row, Container } from 'react-bootstrap';
 import method from '../../../../hooks/web3/sendTransaction';
-import '../../Supplier.css';
+import '../../Client.css';
 
-const Stage_3 = ({ adList }) => {
+const Stage4 = ({ adList }) => {
 
   return (
     <>
-      <div>종료</div>
+      <div>파기됨</div>
     </>
   );
 }
 
-export default Stage_3;
+export default Stage4;

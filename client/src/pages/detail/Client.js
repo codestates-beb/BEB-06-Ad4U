@@ -16,10 +16,10 @@ const ClientDetail = () => {
     client.getDetail(clientId)
     .then(res=> setDetail(res.data))
     .catch(err => err.response.data)
-  }, [])
+  }, [clientId])
 
   const navigate = useNavigate();
-
+  
   return (
     <Container className='clientDetail_container'>
       <div className="clientDetail_card-container">

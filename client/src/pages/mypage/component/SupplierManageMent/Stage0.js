@@ -4,13 +4,16 @@ import { Accordion, Col, Row, Container } from 'react-bootstrap';
 import method from '../../../../hooks/web3/sendTransaction';
 import '../../Supplier.css';
 
-const Stage_4 = ({ adList }) => {
+const Stage0 = ({ adList }) => {
+
+  // console.log("지원자명단", adList.Advertisement_has_Suppliers)
 
   return (
     <>
-      <div>파기됨</div>
+      <div>요청중</div>
+      <div>지원 취소</div>
     </>
   );
 }
 
-export default Stage_4;
+export default Stage0;

@@ -4,7 +4,7 @@ import { Accordion, Col, Row, Container } from 'react-bootstrap';
 import method from '../../../../hooks/web3/sendTransaction';
 import '../../Client.css';
 
-const Stage_2 = ({ adList }) => {
+const Stage2 = ({ adList }) => {
 
   // 4. Confirm Transaction
   const handleConfirmTransaction = async () => {
@@ -42,4 +42,4 @@ const Stage_2 = ({ adList }) => {
   );
 }
 
-export default Stage_2;
+export default Stage2;
