@@ -53,7 +53,7 @@ module.exports = {
       isCookieIn: (req, res, next) => {
         try {
           if (!req.cookies.jwt_refreshToken) {
-              res.status(401).json("login again");
+              res.status(200).json("login again");
           } else {
               const data = jwt.verify(req.cookies.jwt_refreshToken, process.env.REFRESH_SECRET);
               req.data = data;
