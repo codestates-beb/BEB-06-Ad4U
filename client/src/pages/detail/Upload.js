@@ -1,5 +1,5 @@
 import React from 'react';
-import './Detail.css';
+import './detail.css';
 
 import Profile from '../common/Profile';
 import Container from 'react-bootstrap/esm/Container';

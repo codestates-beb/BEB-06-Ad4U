@@ -15,8 +15,8 @@ const loadWeb3 = async () => {
 }
 
 // contract 객체 생성
-const loadContract = async () => {
-  return await new window.web3.eth.Contract(ABI);
+const loadContract = async (walletAddress) => {
+  return await new window.web3.eth.Contract(ABI,walletAddress);
 }
 
 

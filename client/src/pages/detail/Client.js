@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap/esm';
 
-import './Detail.css';
+import './detail.css';
 
 const ClientDetail = () => {
   const { clientId } = useParams();

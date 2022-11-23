@@ -5,7 +5,7 @@ import Avatar from 'react-avatar';
 
 import { Container, Card } from 'react-bootstrap/esm';
 
-import './Detail.css';
+import './detail.css';
 import axios from 'axios';
 
 const SupplierDetail = () => {
