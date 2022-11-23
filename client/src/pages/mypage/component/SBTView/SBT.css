@@ -1,5 +1,8 @@
 .sbtContainer {
     margin-top: 30px;
+    display: block;
+    margin-bottom: auto;
+    padding: 10px;
 }
 
 .sbtTitle {
