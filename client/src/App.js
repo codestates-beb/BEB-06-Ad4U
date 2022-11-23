@@ -16,6 +16,7 @@ import UploadPage from './pages/detail/Upload';
 import Emptypage from './component/Emptypage';
 import Footer from './component/Footer';
 import TestApiPage from './pages/testAPI/testapi';
+import ContractPage from './pages/mypage/component/Contract';
 
 import './App.css';
 
@@ -59,6 +60,7 @@ const App = () => {
         <Route path="/upload" element={<UploadPage />} />
         <Route path="*" element={<Emptypage />} />
         <Route path="/testapi" element={<TestApiPage />} />
+        <Route path="/contract" element={<ContractPage />} />
       </Routes>
       <Footer />
     </>
