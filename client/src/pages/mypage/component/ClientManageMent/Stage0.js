@@ -13,11 +13,11 @@ const Stage0 = ({ adList }) => {
   const isClient = getLocalData('isClient');
 
     // 1. Multi-Sig Wallet Deploy
-    const handleDeploy = async (supplierId) => {
+    const handleDeploy = async (supplierId, supplierAddr) => {
+      //광고주 지갑주소랑, 크리에이터 지갑주소가 같을 시 에러남, 다른주소로!
       try {
         if (isClient === "false") return alert("광고주 계정으로만 이용가능합니다.");
         if (accessToken && isClient && supplierId && adId) {
-          const supplierAddr = "0xebF43eF8B387652A862DaFE5990f264336C58DB5"; //더미
           const tx = await method.multiSigWalletDeploy(supplierAddr);
           const contractAddress = tx._address;
           if (contractAddress) {
@@ -51,7 +51,7 @@ const Stage0 = ({ adList }) => {
             <div>구독자수{applicant.subscriberCount}</div> 
             <div>조회수{applicant.viewCount}</div>
           </div>
-          <button onClick={() => handleDeploy(applicant.id)}>{applicant.channelName}을 선택</button>
+          <button onClick={() => handleDeploy(applicant.id, applicant.address)}>{applicant.channelName}을 선택</button>
         </>
       );
     }
