@@ -1,0 +1,16 @@
+.sbtContainer {
+    margin-top: 30px;
+}
+
+.sbtTitle {
+    color: white;
+    font-weight: bold;
+}
+
+.sbt-content {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(220px, 220px));
+    padding:20px 0;
+    gap: 100px;
+    justify-content: center;
+}

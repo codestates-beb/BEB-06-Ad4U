@@ -15,6 +15,7 @@ import ContractPrint from './ContractPrint';
 import method from '../../../hooks/web3/sendTransaction';
 import { getContractOwner } from '../../../hooks/web3/queryContract';
 import contract from '../../../hooks/axios/contract'
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -24,6 +25,8 @@ const AdContract = ({ userData, adList }) => {
   const isClient = getLocalData('isClient');
 
   var AdInfo = {};
+
+  const navigate = useNavigate();
 
   
   adList.forEach( async (element)  => {
@@ -205,7 +208,9 @@ const AdContract = ({ userData, adList }) => {
     console.log(tokenInfo);
 
     //DB 상태 업데이트
-    contract.contract_create(accessToken,isClient,adId,tokenInfo);
+    const db_result = await contract.contract_create(accessToken,isClient,adId,tokenInfo);
+    alert(db_result);
+    navigate(`/mypage/client`)
 
 
   }

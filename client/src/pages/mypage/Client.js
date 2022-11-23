@@ -12,6 +12,7 @@ import Status from './component/Status';
 import { Link } from 'react-router-dom';
 import { Col, Row, Container, Spinner, Card, ListGroup} from 'react-bootstrap';
 import axios from 'axios';
+import SBTView from './component/SBTView/SBTView';
 
 const ClientMypage = ({ userData }) => {
   const accessToken = getLocalData("accessToken");
@@ -96,6 +97,9 @@ const ClientMypage = ({ userData }) => {
             <Route path="/" element={<Mypage adList={adList} setStatus={setStatus} />} />        
             <Route path="/contract/:adId" element={<Contract userData={userData} adList={adList} />} />
           </Routes>
+        </Row>
+        <Row>
+          <SBTView userData={userData} adList={adList}/>
         </Row>
         </Col>        
       </Row>
