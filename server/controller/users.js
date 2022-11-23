@@ -239,7 +239,7 @@ module.exports = {
                                         include: [
                                             {
                                                 model: Supplier, as: "Supplier",
-                                                attributes: ['id', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl'],
+                                                attributes: ['id', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address'],
                                             }
                                         ],
                                     }
