@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import auth from './hooks/axios/auth';
 import { setLocalData, clearLocalData } from './config/localStrage';
 
@@ -22,6 +22,8 @@ const App = () => {
   const [ userData, setUserData ] = useState({});
   console.log("userData", userData);
 
+  const navigate = useNavigate();
+
   //세션유지
   useEffect(() => {
     auth.refresh()
@@ -33,12 +35,16 @@ const App = () => {
           setLocalData("isClient", isClient);
           setUserData(user);
         }
+        if (data.message === 'refresh token not provided') return clearLocalData();
       })
       .catch(err => {
         clearLocalData();
         console.log(err.response.data);
         return auth.logout()
-        .then(res => alert("쿠키가 만료되었습니다 다시 로그인 해주세요."))
+        .then(res => {
+          alert("쿠키가 만료되었습니다 다시 로그인 해주세요.");
+          navigate('/');
+        })
         .catch(err => console.log("logoutErr", err))
       })
   }, []);
