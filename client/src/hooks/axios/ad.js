@@ -46,7 +46,7 @@ const apply = async (accessToken, isClient, adId) => {
       "Content-Type": "application/json", 
     withCredentials: true,
     data : {
-      isClient: isClient,
+      isClient: JSON.parse(isClient),
       advertisement_id: adId
     }
   }
@@ -63,7 +63,7 @@ const applyCancel = async (accessToken, isClient, adId) => {
       "Content-Type": "application/json", 
     withCredentials: true,
     data : {
-      isClient: isClient,
+      isClient: JSON.parse(isClient),
       advertisement_id: adId
     }
   }

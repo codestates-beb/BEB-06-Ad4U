@@ -33,7 +33,7 @@ const proceed = async (accessToken, isClient, adId) => {
         "Content-Type": "application/json", 
       withCredentials: true,
       data : {
-        isClient,
+        isClient: JSON.parse(isClient),
         advertisement_id: adId,
       }
     }
@@ -55,7 +55,7 @@ const confirm = async (accessToken, isClient, adId) => {
         "Content-Type": "application/json", 
       withCredentials: true,
       data : {
-        isClient,
+        isClient: JSON.parse(isClient),
         advertisement_id: adId,
       }
     }
@@ -77,7 +77,7 @@ const complete = async (accessToken, isClient, adId) => {
         "Content-Type": "application/json", 
       withCredentials: true,
       data : {
-        isClient,
+        isClient: JSON.parse(isClient),
         advertisement_id: adId,
       }
     }
@@ -99,7 +99,7 @@ const cancel = async (accessToken, isClient, adId) => {
         "Content-Type": "application/json", 
       withCredentials: true,
       data : {
-        isClient,
+        isClient: JSON.parse(isClient),
         advertisement_id: adId,
       }
     }
