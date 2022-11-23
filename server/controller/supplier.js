@@ -1,6 +1,5 @@
-const { Client, Advertisement, Supplier } = require('../models/index');
-const supplier_attributes = ['userId', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address'];
-const jwt = require('jsonwebtoken');
+const { Supplier } = require('../models/index');
+
 
 module.exports = {
     main: async(req, res) => { //최근 10개만
