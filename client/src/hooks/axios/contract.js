@@ -45,8 +45,8 @@ const proceed = async (accessToken, isClient, adId) => {
 }
 
 //계약
-const confirm = async (accessToken, isClient, adId) => {
-  if (accessToken && isClient && adId) {
+const contract_create = async (accessToken, isClient, adId, tokenInfo) => {
+  if (accessToken && isClient && adId && tokenInfo) {
     const options = {
       url: "http://localhost:3001/function/contract",
       method: 'POST',
@@ -57,6 +57,9 @@ const confirm = async (accessToken, isClient, adId) => {
       data : {
         isClient: JSON.parse(isClient),
         advertisement_id: adId,
+        token_uri: tokenInfo.token_uri,
+        token_id: tokenInfo.token_id,
+        token_address: tokenInfo.token_address
       }
     }
     const result = await axios.request(options)
@@ -113,7 +116,7 @@ const cancel = async (accessToken, isClient, adId) => {
 const contract = { 
   conference, 
   proceed, 
-  confirm, 
+  contract_create, 
   complete, 
   cancel 
 };

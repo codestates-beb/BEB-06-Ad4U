@@ -7,7 +7,7 @@ import { getLocalData } from '../../config/localStrage';
 
 import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap/esm';
 
-import './detail.css';
+import './Detail.css';
 
 const AdDetail = ({ userData }) => {
   const navigate = useNavigate();

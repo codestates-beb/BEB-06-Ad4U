@@ -13,16 +13,28 @@ import { getLocalData } from '../../../config/localStrage';
 import { Container } from 'react-bootstrap';
 import ContractPrint from './ContractPrint';
 import method from '../../../hooks/web3/sendTransaction';
+import { getContractOwner } from '../../../hooks/web3/queryContract';
+import contract from '../../../hooks/axios/contract'
+
 
 
 const AdContract = ({ userData, adList }) => {
   const { adId } = useParams();
   const accessToken = getLocalData('accessToken');
   const isClient = getLocalData('isClient');
-  console.log(adList);
-  console.log(adId);
-  //isClient는 axios로 보낼때 JSON.parse(isClient)로 보내주세요
-  console.log(accessToken, isClient); 
+
+  var AdInfo = {};
+
+  
+  adList.forEach( async (element)  => {
+      if(element.id === parseInt(adId)) {
+        AdInfo = element;
+        AdInfo.owner = await getContractOwner(element.multisigAddress);
+      }
+  });
+  
+
+  console.log(AdInfo);
 
   const [modalShow, setModalShow] = useState(false);
 
@@ -32,8 +44,8 @@ const AdContract = ({ userData, adList }) => {
     date2 : "",
     value : "",
     content : "",
-    clientAddr : "",
-    supplierAddr : "",
+    clientAddr : AdInfo.owner[0],
+    supplierAddr : AdInfo.owner[1],
     isClient : true
   });
 
@@ -178,14 +190,22 @@ const AdContract = ({ userData, adList }) => {
     }
 
     //walletAddress 가져오기 : props
-
-    const walletAddress = "0x473ec14B04a56F02066FF34D4C3799295F4aA0C9"
+    const walletAddress = AdInfo.multisigAddress;
 
     //submit Transaction : (walletAddress, _to, _value, _data)
     const result = await method.submitTransaction(walletAddress,contractInfo.supplierAddr,contractInfo.value,tokenURI);
-    console.log(result)
+    var tokenInfo = {
+      token_uri: "",
+      token_id: 0,
+      token_address: ""
+    }
+    tokenInfo.token_uri = result.events.SubmitTransaction.returnValues.data;
+    tokenInfo.token_address = result.events[0].address;
+    tokenInfo.token_id = parseInt(result.events.Response.returnValues[1],16);
+    console.log(tokenInfo);
 
     //DB 상태 업데이트
+    contract.contract_create(accessToken,isClient,adId,tokenInfo);
 
 
   }
@@ -246,9 +266,12 @@ const AdContract = ({ userData, adList }) => {
       <Form.Label><h5>계약자 지갑 주소<span className="red"> *</span></h5></Form.Label>
       <InputGroup className="mb-3">
         <h6>&ensp;Advertiser&ensp;</h6>
-        <Form.Control type="text" placeholder="Enter Your Address" onChange={handleContractAddr1}/>
+        <Form.Control type="text" placeholder="Enter Your Address" defaultValue={AdInfo.owner[0]} onChange={handleContractAddr1} disabled/>
+      </InputGroup>
+
+      <InputGroup className="mb-3">
         <h6>&ensp;Creator&ensp;</h6>
-        <Form.Control type="text" placeholder="Enter Your Contractor Address" onChange={handleContractAddr2}/>
+        <Form.Control type="text" placeholder="Enter Your Contractor Address" defaultValue={AdInfo.owner[1]} onChange={handleContractAddr2} disabled/>
       </InputGroup>
       <p id="address-message" className="addressMessage">Address Field Required!!</p>
 
@@ -258,16 +281,11 @@ const AdContract = ({ userData, adList }) => {
         미리보기
       </Button>
      
-        {/* <button className='upload_btn' onClick={() => setModalShow(true)}><span>미리보기</span></button> */}
-     
       <br></br>
       <br></br>
       <Button variant="primary" type="submit" onClick={handleSubmit} disabled={!previewCheck}>
         Submit
       </Button>
-
-        {/* <button className='upload_btn' onClick={() => setModalShow(true)}><span>Submit</span></button> */}
-   
 
 
       <Modal

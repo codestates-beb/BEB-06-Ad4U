@@ -106,10 +106,11 @@
     color: white;
 }
 
-h7 {
+h6 {
+    display: block;
     color: white;
     font-weight: bold;
-    width: 10%;
+    width: auto;
     text-align: center;
 }
 
