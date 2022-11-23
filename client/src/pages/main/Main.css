@@ -55,6 +55,9 @@
 .about_container h2 {
   color: white;
 }
+.about_container h1 {
+  color: white;
+}
 
 /* Ads css */
 .ad_container {
@@ -89,6 +92,7 @@
 }
 
 .ad-content_card-container img {
+  height: 201px;
   margin-bottom: 10px;
 }
 

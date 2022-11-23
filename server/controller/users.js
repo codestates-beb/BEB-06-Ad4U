@@ -23,12 +23,9 @@ module.exports = {
                     attributes: login_supplier_attributes,
                     where: { userId: userId, password: password },
                 });
-
-                if (user) {
-                    const refreshToken = user.refreshToken;
+                const refreshToken = user.refreshToken;
+                if (refreshToken) {
                     delete user.dataValues.refreshToken;
-
-
                     axios.post("https://oauth2.googleapis.com/token", null, {
                         headers: {
                             "Content-Type": `application/x-www-form-urlencoded`
@@ -55,11 +52,7 @@ module.exports = {
                         Supplier.update(body, {
                             where: { userId: userId },
                         })
-                    }).catch((err) => {
-                        res.status(401).json(err);
                     })
-                }else{
-                    res.status(401).json("no authorization.. check id, password");
                 }
             }
 
@@ -239,7 +232,7 @@ module.exports = {
                         include: [
                             {
                                 model: Advertisement, as: "Advertisements",
-                                attributes: ['id', 'title', 'AdimgUrl', 'cost', 'createdAt', 'status'],
+                                attributes: ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_uri', 'token_address', 'createdAt', 'status'],
                                 include: [
                                     {
                                         model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",
@@ -270,7 +263,7 @@ module.exports = {
                                 include: [
                                     {
                                         model: Advertisement, as: "Advertisement",
-                                        attributes: ['id', 'title', 'AdimgUrl', 'cost', 'createdAt', 'status'],
+                                        attributes: ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_uri', 'token_address', 'createdAt', 'status'],
                                     },
                                 ]
                             }
