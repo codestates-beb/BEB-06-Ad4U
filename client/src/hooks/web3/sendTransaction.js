@@ -34,7 +34,7 @@ const submitTransaction = async (walletAddress, _to, _value, _data) => {
   window.contract = await loadContract(walletAddress); // 컨트랙 객체 생성
   const account = await getCurrentAccount(); // 계정 정보 가져오기
   
-  const valToWei = Web3.utils.toWei(_value, "ether");
+  const valToWei = Web3.utils.toWei(String(_value), "ether");
   
   let result = await window.contract.methods
     .submitTransaction(_to, valToWei, _data)
