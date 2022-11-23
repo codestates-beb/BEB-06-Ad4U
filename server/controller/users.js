@@ -232,7 +232,7 @@ module.exports = {
                         include: [
                             {
                                 model: Advertisement, as: "Advertisements",
-                                attributes: ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_uri', 'token_address', 'createdAt', 'status'],
+                                attributes: ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_id', 'token_address', 'createdAt', 'status'],
                                 include: [
                                     {
                                         model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",
@@ -263,7 +263,7 @@ module.exports = {
                                 include: [
                                     {
                                         model: Advertisement, as: "Advertisement",
-                                        attributes: ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_uri', 'token_address', 'createdAt', 'status'],
+                                        attributes: ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_id', 'token_address', 'createdAt', 'status'],
                                     },
                                 ]
                             }
