@@ -4,11 +4,12 @@ import { Accordion, Col, Row, Container } from 'react-bootstrap';
 import '../../Client.css';
 
 const Stage1 = ({ adList }) => {
+  const adId = adList.id;
 
   return (
     <>
       <div>협의중</div>
-      <Link to="/contract">계약서 작성</Link>
+      <Link to={`/mypage/client/contract/${adId}`}>계약서 작성하러가기</Link>
     </>
   );
 }

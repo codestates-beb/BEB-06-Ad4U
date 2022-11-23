@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
@@ -8,12 +9,20 @@ import Modal from 'react-bootstrap/Modal';
 import './Contract.css';
 
 import axios from 'axios';
+import { getLocalData } from '../../../config/localStrage';
 import { Container } from 'react-bootstrap';
 import ContractPrint from './ContractPrint';
 import method from '../../../hooks/web3/sendTransaction';
 
 
-const AdContract = () => {
+const AdContract = ({ userData, adList }) => {
+  const { adId } = useParams();
+  const accessToken = getLocalData('accessToken');
+  const isClient = getLocalData('isClient');
+  console.log(adList);
+  console.log(adId);
+  //isClient는 axios로 보낼때 JSON.parse(isClient)로 보내주세요
+  console.log(accessToken, isClient); 
 
   const [modalShow, setModalShow] = useState(false);
 
@@ -236,9 +245,9 @@ const AdContract = () => {
 
       <Form.Label><h5>계약자 지갑 주소<span className="red"> *</span></h5></Form.Label>
       <InputGroup className="mb-3">
-        <h7>&ensp;Advertiser&ensp;</h7>
+        <h6>&ensp;Advertiser&ensp;</h6>
         <Form.Control type="text" placeholder="Enter Your Address" onChange={handleContractAddr1}/>
-        <h7>&ensp;Creator&ensp;</h7>
+        <h6>&ensp;Creator&ensp;</h6>
         <Form.Control type="text" placeholder="Enter Your Contractor Address" onChange={handleContractAddr2}/>
       </InputGroup>
       <p id="address-message" className="addressMessage">Address Field Required!!</p>

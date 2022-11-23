@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../hooks/axios/auth';
 import { getLocalData } from '../../config/localStrage';
+import Contract from './component/Contract';
 import ClientAd from './component/ClientAd';
 import './Client.css';
 import Avatar from 'react-avatar';
@@ -54,6 +56,19 @@ const ClientMypage = ({ userData }) => {
   //   }))
   // }
 
+  //default
+  const Mypage = ({ adList, setStatus }) => {
+    return (
+      <>
+        <h1> Client Mypage</h1>
+        <Status adList={adList} setStatus={setStatus} />
+        <Container className='clientMypage_accordion'>
+          <FilterAd adList={adList} status={status} />
+        </Container>
+      </>
+    );
+  } 
+
   return (
     <Container className='clientMypage_container'>
       <Row className='clientMypage_row' >
@@ -77,13 +92,12 @@ const ClientMypage = ({ userData }) => {
         </Col>
         <Col xl={9}  >
         <Row>
-          <h1> Client Mypage</h1>
-          <Status adList={adList} setStatus={setStatus} />
-          <Container className='clientMypage_accordion'>
-            <FilterAd adList={adList} status={status} />
-          </Container>
+          <Routes>
+            <Route path="/" element={<Mypage adList={adList} setStatus={setStatus} />} />        
+            <Route path="/contract/:adId" element={<Contract userData={userData} adList={adList} />} />
+          </Routes>
         </Row>
-        </Col>       
+        </Col>        
       </Row>
     </Container>
   );
