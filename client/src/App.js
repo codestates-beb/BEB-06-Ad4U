@@ -6,8 +6,7 @@ import { setLocalData, clearLocalData } from './config/localStrage';
 import Nav from './component/Nav';
 import Main from './pages/main/Main';
 import ListPage from './pages/list/ListPage';
-import ClientMypage from './pages/mypage/Client';
-import SupplierMypage from './pages/mypage/Supplier';
+import Mypage from './pages/mypage/Mypage';
 import ClientDetail from './pages/detail/Client';
 import SupplierDetail from './pages/detail/Supplier';
 import AdDetail from './pages/detail/Ad';
@@ -50,8 +49,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/list/*" element={<ListPage />} />
-        <Route path="/mypage/client/*" element={<ClientMypage userData={userData}/>} />
-        <Route path="/mypage/supplier" element={<SupplierMypage userData={userData}/>} />
+        <Route path="/mypage/*" element={<Mypage userData={userData}/>} />
         <Route path="/detail/client/:clientId" element={<ClientDetail />} />
         <Route path="/detail/supplier/:supplierId" element={<SupplierDetail />} />
         <Route path="/detail/ad/:adId" element={<AdDetail userData={userData}/>} />
