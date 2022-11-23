@@ -14,7 +14,7 @@ import '../LoginPage.css';
 
 const SignUp = ({ show, setShow, email }) => {
   const [isClient, setIsClient] = useState(false);
-  const [account, setAccount] = useState("")
+  const [address, setAddress] = useState("")
 
   const handleClose = () => setShow(false);
 
@@ -24,10 +24,10 @@ const SignUp = ({ show, setShow, email }) => {
     } else setIsClient(false);
   }
 
-  const inputAccount = async () => {
+  const inputAddress = async () => {
     await loadWeb3();
-    const currentAccount = await getCurrentAccount();
-    setAccount(currentAccount);
+    const currentAddress = await getCurrentAccount();
+    setAddress(currentAddress);
   }
 
   const sendSignupData = async (signupData) => {
@@ -68,8 +68,8 @@ const SignUp = ({ show, setShow, email }) => {
           >
             <SupplierSignupForm 
               email={email} 
-              account={account}
-              inputAccount={inputAccount}
+              address={address}
+              inputAddress={inputAddress}
               sendSignupData={sendSignupData}
               handleClose={handleClose}
             />
@@ -80,8 +80,8 @@ const SignUp = ({ show, setShow, email }) => {
           >
             <ClientSignupForm 
               email={email}
-              account={account}
-              inputAccount={inputAccount} 
+              // address={address}
+              // inputAddress={inputAddress} 
               sendSignupData={sendSignupData}
               handleClose={handleClose}
             />

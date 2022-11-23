@@ -113,8 +113,6 @@ const LoginPage = ({ setUserData }) => {
           email={email}
           show={show} 
           setShow={setShow}
-          isClient={isClient}
-          handleIsClient={handleIsClient}
         />
     </>
   );
