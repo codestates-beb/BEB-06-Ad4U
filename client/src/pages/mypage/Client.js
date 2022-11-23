@@ -4,11 +4,12 @@ import auth from '../../hooks/axios/auth';
 import { getLocalData } from '../../config/localStrage';
 import ClientAd from './component/ClientAd';
 import './Client.css';
-
-import Profile from '../common/Profile';
+import Avatar from 'react-avatar';
+import img from '../../dummyfiles/img1.png';
 import Status from './component/Status';
 import { Link } from 'react-router-dom';
-import {Accordion, Col, Row, Container} from 'react-bootstrap';
+import { Col, Row, Container, Spinner, Card, ListGroup} from 'react-bootstrap';
+import axios from 'axios';
 
 const ClientMypage = ({ userData }) => {
   const accessToken = getLocalData("accessToken");
@@ -16,6 +17,7 @@ const ClientMypage = ({ userData }) => {
   const [myInfo, setMyInfo] = useState({});
   const [adList, setAdlist] = useState([]);
   const [status, setStatus] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -40,12 +42,36 @@ const ClientMypage = ({ userData }) => {
     } else return adList.map((adList, idx) => <ClientAd key={idx} idx={idx} adList={adList} />);
   }
 
+  // const handleLoading = () => {
+  //   setIsLoading(true);
+  //   axios.post("")
+  //   .then(() => )
+  //   .then(() => {setIsLoading(false)
+  //   }
+  //   .catch(() => {
+  //     console.log(err)
+  //     setIsLoading(false);
+  //   }))
+  // }
+
   return (
     <Container className='clientMypage_container'>
       <Row className='clientMypage_row' >
         <Col xl={3} >
           <Row>
-            <Profile userData={userData}/>
+            <div className="profile-content">
+              <div className="profile-content_card-container">
+                <Avatar src={img} size="100" round={true}/>
+                <Card.Body>
+                  <Card.Title className='mt-3'>{userData.company_name}</Card.Title>
+                  <ListGroup variant="flush" className='mt-3'>
+                  <ListGroup.Item >{userData.email}</ListGroup.Item>
+                  <ListGroup.Item >{userData.company_number}</ListGroup.Item>
+                  <ListGroup.Item >{userData.userId}</ListGroup.Item>
+                  </ListGroup>
+                </Card.Body>
+              </div>
+            </div>
             <Link to="/upload"><button className='clientupload_btn'><span>광고 업로드</span></button></Link>
           </Row>
         </Col>

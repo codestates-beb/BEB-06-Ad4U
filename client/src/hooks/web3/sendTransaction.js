@@ -4,7 +4,7 @@ import { loadWeb3, loadContract, getCurrentAccount } from './common';
 
 // 1. Multi-Sig Wallet Deploy
 const multiSigWalletDeploy = async (supplierAddr) => {
-  console.log(supplierAddr);
+  console.log("supplierAddr", supplierAddr);
   await loadWeb3(); // 메타마스크 연결
   window.contract = await loadContract(); // 컨트랙 객체 생성
   const account = await getCurrentAccount(); // 계정 정보 가져오기

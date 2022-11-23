@@ -8,6 +8,7 @@ import { Navbar, NavDropdown, Container,Dropdown  } from 'react-bootstrap';
 import Stack from 'react-bootstrap/Stack';
 import Avatar from 'react-avatar';
 import { RiStarSmileLine } from "react-icons/ri";
+import img from '../dummyfiles/img1.png';
 
 import './NFE.css';
 
@@ -31,12 +32,14 @@ const Nav = ({ userData, setUserData }) => {
   }
 
   const LoggedIn = ({ userData }) => {
-    
     return (
       <Stack direction="horizontal" gap={4} justify='flex-end'>
-        <button onClick={deleteUserData}>logout</button>
-        <Link to={`/mypage/${isClient === 'true' ? "client" : "supplier"}`}>
-          <Avatar size="50" round={true}/>
+        <button className='navllgout_btn' onClick={deleteUserData}><span>logout</span></button>
+        {/* window.scrollTo(0,0) 넣어야함 */}
+        <Link to={`/mypage/${isClient === 'true' ? "client" : "supplier"}`} >
+          {isClient === 'true'
+            ? <Avatar src={img} size="50" round={true}/> 
+            : <Avatar src={userData.profileImgUrl} size="50" round={true}/> }
         </Link>
       </Stack>
     )

@@ -11,7 +11,7 @@ const conference = async (accessToken, isClient, supplierId, adId, contractAddre
         "Content-Type": "application/json", 
       withCredentials: true,
       data : {
-        isClient,
+        isClient: JSON.parse(isClient),
         advertisement_id: adId,
         supplier_id: supplierId,
         multisigAddress: contractAddress,
@@ -19,10 +19,7 @@ const conference = async (accessToken, isClient, supplierId, adId, contractAddre
     }
     const result = await axios.request(options)
     return result;
-  } 
-  if (isClient === "false") return alert("광고주 계정으로만 지원가능합니다.");
-  if (!(isClient && accessToken)) return  alert("로그인후 이용가능합니다.");
-  else return alert("서버와의 연결이 실패하였습니다.");
+  } else throw new Error("insufficient data");
 }
 
 //진행

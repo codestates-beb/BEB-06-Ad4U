@@ -17,8 +17,20 @@
 }
 
 .navlogin_btn {
-  padding: 8px 30px;
-  margin-left: 35px;
+  padding: 6px 25px;
+  margin-top: 10px;
+  border-radius: 15px;
+  background: none;
+  color: inherit;
+  border: 3px solid white;
+}
+
+.navllgout_btn span {  
+  color: white;
+}
+
+.navllgout_btn {
+  padding: 6px 25px;
   margin-top: 10px;
   border-radius: 15px;
   background: none;
