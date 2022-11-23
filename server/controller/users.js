@@ -1,6 +1,5 @@
 require("dotenv").config();
 const { Client, Supplier, Advertisement, Advertisement_has_Supplier } = require('../models/index');
-const { Op } = require('sequelize');
 const jwt = require('jsonwebtoken');
 const client_attributes = ['id', 'userId', 'company_name', 'company_number', 'email'];
 const supplier_attributes = ['id', 'userId', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address'];
@@ -36,26 +35,20 @@ module.exports = {
                             grant_type: "refresh_token"
                         }
                     }).then(async (data) => {
-                        const youtube_info = await axios.get(`https://www.googleapis.com/youtube/v3/channels?access_token=${data.data.access_token}&part=snippet,statistics&mine=true&fields=items&2Fsnippet%2Fthumbnails`)
-                            .then((data) => {
-                                return data.data
-                            }).catch(err => console.log(err));
-
+                        const youtube_info = await axios.get(`https://www.googleapis.com/youtube/v3/channels?access_token=${data.data.access_token}&part=snippet,statistics&mine=true&fields=items&2Fsnippet%2Fthumbnails`);
                         const body = {
-                            channelName: youtube_info.items[0].snippet.title,
-                            subscriberCount: youtube_info.items[0].statistics.subscriberCount,
-                            viewCount: youtube_info.items[0].statistics.viewCount,
-                            channelUrl: `https://www.youtube.com/channel/${youtube_info.items[0].id}`,
-                            profileImgUrl: youtube_info.items[0].snippet.thumbnails.default.url,
+                            channelName: youtube_info.data.items[0].snippet.title,
+                            subscriberCount: youtube_info.data.items[0].statistics.subscriberCount,
+                            viewCount: youtube_info.data.items[0].statistics.viewCount,
+                            channelUrl: `https://www.youtube.com/channel/${youtube_info.data.items[0].id}`,
+                            profileImgUrl: youtube_info.data.items[0].snippet.thumbnails.default.url,
                         }
-
                         Supplier.update(body, {
                             where: { userId: userId },
                         })
                     })
                 }
             }
-
             if (user) {
                 const jwt_accessToken = jwt.sign({ user }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
                 const jwt_refreshToken = jwt.sign({ userId }, process.env.REFRESH_SECRET, { expiresIn: '3h' });
@@ -87,194 +80,146 @@ module.exports = {
                 grant_type: "authorization_code"
             }
         }).then(async (response) => {
-
             const user_info = jwt_decode(response.data.id_token);
             const access_token = response.data.access_token;
 
-            const youtube_info = await axios.get(`https://www.googleapis.com/youtube/v3/channels?access_token=${access_token}&part=snippet,statistics&mine=true&fields=items&2Fsnippet%2Fthumbnails`)
-                .then((res) => {
-                    return res.data
-                }).catch(err => console.log(err))
+            const youtube_info = await axios.get(`https://www.googleapis.com/youtube/v3/channels?access_token=${access_token}&part=snippet,statistics&mine=true&fields=items&2Fsnippet%2Fthumbnails`);
+
+            let body = {
+                email: user_info.email,
+                channelName: youtube_info.data.items[0].snippet.title,
+                subscriberCount: youtube_info.data.items[0].statistics.subscriberCount,
+                viewCount: youtube_info.data.items[0].statistics.viewCount,
+                channelUrl: `https://www.youtube.com/channel/${youtube_info.data.items[0].id}`,
+                profileImgUrl: youtube_info.data.items[0].snippet.thumbnails.default.url,
+            }
 
             const user = await Supplier.findOne({
                 where: { email: user_info.email },
             });
 
-            if (user) { //auth 시도하다가 취소했을경우
-                const body = {
-                    channelName: youtube_info.items[0].snippet.title,
-                    subscriberCount: youtube_info.items[0].statistics.subscriberCount,
-                    viewCount: youtube_info.items[0].statistics.viewCount,
-                    channelUrl: `https://www.youtube.com/channel/${youtube_info.items[0].id}`,
-                    profileImgUrl: youtube_info.items[0].snippet.thumbnails.default.url,
-                }
-
+            if (user) {//auth 시도하다가 취소했을경우
                 Supplier.update(body, {
                     where: { email: user_info.email },
                 }).then(data => {
                     res.status(201).json({ email: user_info.email });
-                }).catch(err => {
-                    res.status(400).json("DB error")
                 })
             } else { //첫 auth - refresh token save
-                const body = {
-                    channelName: youtube_info.items[0].snippet.title,
-                    subscriberCount: youtube_info.items[0].statistics.subscriberCount,
-                    viewCount: youtube_info.items[0].statistics.viewCount,
-                    channelUrl: `https://www.youtube.com/channel/${youtube_info.items[0].id}`,
-                    profileImgUrl: youtube_info.items[0].snippet.thumbnails.default.url,
-                    email: user_info.email,
-                    refreshToken: response.data.refresh_token,
-                }
-                Supplier.create(body)
-                    .then(data => {
-                        res.status(201).json({ email: user_info.email });
-                    }).catch(err => {
-                        res.status(400).json("DB error")
-                    })
+                body.refreshToken = response.data.refresh_token,
+                    Supplier.create(body)
+                        .then(data => {
+                            res.status(201).json({ email: user_info.email });
+                        })
             }
         }).catch((err) => {
-            res.status(401).json("already used authorization code");
+            res.status(401).json(err);
         })
     },
     signup: async (req, res) => {
         let isClient = req.body.isClient;
         let body = req.body;
         delete body.isClient;
-
-        if (isClient) {
+        try {
             const client_user = await Client.findOne({
                 where: { userId: body.userId },
             });
             const supplier_user = await Supplier.findOne({
                 where: { userId: body.userId },
             });
-            if (client_user||supplier_user) { //아이디 중복확인
+            if (client_user || supplier_user) { //아이디 중복확인
                 res.status(400).json("아이디 중복")
             } else {
-                console.log(body);
-                Client.create(body)
-                    .then(data => {
-                        res.status(201).json("complete");
-                    }).catch(err => {
-                        res.status(400).json("DB error");
+                if (isClient) {
+                    Client.create(body)
+                        .then(data => {
+                            res.status(201).json("complete");
+                        })
+                } else {
+                    Supplier.update(body, {
+                        where: { email: req.body.email },
                     })
+                        .then(data => {
+                            res.status(201).json("complete");
+                        })
+                }
             }
-        } else {
-            const client_user = await Client.findOne({
-                where: { userId: body.userId },
-            });
-            const supplier_user = await Supplier.findOne({
-                where: { userId: body.userId },
-            });
-            if (client_user|| supplier_user) {
-                res.status(400).json("아이디 중복")
-            } else {
-                Supplier.update(body, {
-                    where: { email: req.body.email },
-                })
-                    .then(data => {
-                        res.status(201).json("complete");
-                    }).catch(err => {
-                        res.status(400).json("DB error")
-                    })
-            }
+        } catch (err) {
+            res.status(400).json(err);
         }
     },
     refresh: async (req, res) => {
         let user;
-        if (!req.cookies.jwt_refreshToken) {
-            res.status(200).send({ data: null, message: "refresh token not provided" });
-        } else {
             try {
-                const data = jwt.verify(req.cookies.jwt_refreshToken, process.env.REFRESH_SECRET);
-                console.log(data)
                 const client_user = await Client.findOne({
                     attributes: client_attributes,
-                    where: { userId: data.userId },
+                    where: { userId: req.data.userId },
                 });
                 const supplier_user = await Supplier.findOne({
                     attributes: supplier_attributes,
-                    where: { userId: data.userId },
+                    where: { userId: req.data.userId },
                 });
 
                 if (client_user) {
-                    const user = client_user;
+                    user = client_user;
                     const jwt_accessToken = jwt.sign({ user }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
                     res.status(200).json({ jwt_accessToken, user, isClient: true });
                 } else if (supplier_user) {
-                    const user = supplier_user;
+                    user = supplier_user;
                     const jwt_accessToken = jwt.sign({ user }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
                     res.status(200).json({ jwt_accessToken, user, isClient: false });
+                } else{
+                    res.status(401).json("login again");
                 }
             } catch (error) {
-                res.status(400).json("Invalid refreshToken, login again")
+                res.status(400).json(error)
             }
-
-        }
-
     },
     mypage: async (req, res) => {
-        const authorization = req.headers.authorization;
         const { isClient } = req.query;
-        if (!authorization) {
-            res.status(404).send({ data: null, message: 'invalid access token' });
-        } else {
-            const token = authorization.split(' ')[1];
-            const data = jwt.verify(token, process.env.ACCESS_SECRET);
-            console.log(data)
-            if (isClient == "true") {
-                try {
-                    const user = await Client.findOne({
-                        attributes: client_attributes,
-                        where: { userId: data.user.userId },
-                        include: [
-                            {
-                                model: Advertisement, as: "Advertisements",
-                                attributes: ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_id', 'token_address', 'createdAt', 'status'],
-                                include: [
-                                    {
-                                        model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",
-                                        include: [
-                                            {
-                                                model: Supplier, as: "Supplier",
-                                                attributes: ['id', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address'],
-                                            }
-                                        ],
-                                    }
-                                ]
-                            },
-                        ]
-                    });
-                    res.status(200).json(user);
-
-                } catch (err) {
-                    res.status(400).json(err)
-                }
+        let user;
+        try {
+            if (JSON.parse(isClient)) {
+                user = await Client.findOne({
+                    attributes: client_attributes,
+                    where: { userId: req.data.user.userId },
+                    include: [
+                        {
+                            model: Advertisement, as: "Advertisements",
+                            attributes: ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_id', 'token_address', 'createdAt', 'status'],
+                            include: [
+                                {
+                                    model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",
+                                    include: [
+                                        {
+                                            model: Supplier, as: "Supplier",
+                                            attributes: ['id', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address'],
+                                        }
+                                    ],
+                                }
+                            ]
+                        },
+                    ]
+                });
             } else {
-                try {
-                    const user = await Supplier.findOne({
-                        attributes: supplier_attributes,
-                        where: { userId: data.user.userId },
-                        include: [
-                            {
-                                model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",
-                                include: [
-                                    {
-                                        model: Advertisement, as: "Advertisement",
-                                        attributes: ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_id', 'token_address', 'createdAt', 'status'],
-                                    },
-                                ]
-                            }
-                        ]
-                    });
-                    res.status(200).json(user);
-
-                } catch (err) {
-                    res.status(400).json(err)
-                }
+                user = await Supplier.findOne({
+                    attributes: supplier_attributes,
+                    where: { userId: req.data.user.userId },
+                    include: [
+                        {
+                            model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",
+                            include: [
+                                {
+                                    model: Advertisement, as: "Advertisement",
+                                    attributes: ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_id', 'token_address', 'createdAt', 'status'],
+                                },
+                            ]
+                        }
+                    ]
+                });
             }
+            res.status(200).json(user);
+        } catch (err) {
+            res.status(400).json(err)
         }
-
     }
 }
