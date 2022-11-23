@@ -13,7 +13,7 @@ module.exports = {
             .then((data) => {
                 res.status(201).json("complete")
             }).catch((err) => {
-                res.status(400).json(err)
+                res.status(400).json(err.message)
             });
     },
     cancel: async (req, res) => { //광고 지원 취소 - supplier
@@ -27,7 +27,7 @@ module.exports = {
         }).then((data) => {
             res.status(201).json("complete")
         }).catch((err) => {
-            res.status(400).json(err)
+            res.status(400).json(err.message)
         });
 
     },
@@ -57,8 +57,8 @@ module.exports = {
                 });
                 res.status(201).json("complete");
             }
-        } catch (error) {
-            res.status(400).json(error);
+        } catch (err) {
+            res.status(400).json(err.message);
         }
 
     },
@@ -91,8 +91,8 @@ module.exports = {
                             res.status(201).json("complete")
                         })
                 }
-            } catch (error) {
-                res.status(400).json(error)
+            } catch (err) {
+                res.status(400).json(err.message)
             }
 
     },
@@ -121,7 +121,7 @@ module.exports = {
                         })
                 }
             } catch (err) {
-                res.status(400).json(err);
+                res.status(400).json(err.message);
             
         }
     },
@@ -172,7 +172,7 @@ module.exports = {
                     }
                 }
             } catch (err) {
-                res.status(400).json(err);
+                res.status(400).json(err.message);
             
         }
     },
@@ -223,7 +223,7 @@ module.exports = {
                     }
                 }
             } catch (err) {
-                res.status(400).json(err);
+                res.status(400).json(err.message);
             }
     }
 }

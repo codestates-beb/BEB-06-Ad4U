@@ -10,8 +10,8 @@ module.exports = {
                 limit: 10,
             });
             res.status(200).json(client_main);
-        } catch (error) {
-            res.status(400).json(error);
+        } catch (err) {
+            res.status(400).json(err.message);
         }
 
     },
@@ -28,8 +28,8 @@ module.exports = {
                 ]
             });
             res.status(200).json(client_list);
-        } catch (error) {
-            res.status(400).json(error);
+        } catch (err) {
+            res.status(400).json(err.message);
         }
     },
     detail: async (req, res) => {
@@ -50,8 +50,8 @@ module.exports = {
                 ]
             });
             res.status(200).json(client_datail);
-        }catch(error){
-            res.status(400).json(error);
+        }catch(err){
+            res.status(400).json(err.message);
         }
     }
 }

@@ -15,7 +15,7 @@ module.exports = {
               next();
           }
         } catch (err) {
-          res.status(401).json(err);
+          res.status(401).json(err.message);
         }
       },
       isLoggedIn_client: (req, res, next) => {
@@ -31,7 +31,7 @@ module.exports = {
               next();
           }
         } catch (err) {
-          res.status(401).json(err);
+          res.status(401).json(err.message);
         }
       },
       isLoggedIn_supplier: (req, res, next) => {
@@ -47,20 +47,20 @@ module.exports = {
               next();
           }
         } catch (err) {
-          res.status(401).json(err);
+          res.status(401).json(err.message);
         }
       },
       isCookieIn: (req, res, next) => {
         try {
           if (!req.cookies.jwt_refreshToken) {
-              res.status(200).json("login again");
+              res.status(200).send({message: "refresh token not provided"});
           } else {
               const data = jwt.verify(req.cookies.jwt_refreshToken, process.env.REFRESH_SECRET);
               req.data = data;
               next();
           }
         } catch (err) {
-          res.status(401).json(err);
+          res.status(401).json(err.message);
         }
       },
 }

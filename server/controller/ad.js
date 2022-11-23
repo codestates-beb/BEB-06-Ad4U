@@ -14,8 +14,8 @@ module.exports = {
                 // offset: 5,
             });
             res.status(200).json(main_ad);
-        } catch (error) {
-            res.status(400).json(error);
+        } catch (err) {
+            res.status(400).json(err.message);
         }
 
     },
@@ -42,8 +42,8 @@ module.exports = {
             });
 
             res.status(200).json(list_ad);
-        } catch (error) {
-            res.status(400).json(error);
+        } catch (err) {
+            res.status(400).json(err.message);
         }
 
     },
@@ -74,8 +74,8 @@ module.exports = {
                 // offset: 5,
             });
             res.status(200).json(ad_datail);
-        } catch (error) {
-            res.status(400).json(error);
+        } catch (err) {
+            res.status(400).json(err.message);
         }
 
     },
@@ -94,8 +94,8 @@ module.exports = {
                 .then(data => {
                     res.status(201).json("complete");
                 })
-        } catch (error) {
-            res.status(400).json(error);
+        } catch (err) {
+            res.status(400).json(err.message);
         }
     },
     _delete: async (req, res) => { //광고 삭제 -client
@@ -121,8 +121,8 @@ module.exports = {
                 });
                 res.status(200).json("complete")
             }
-        } catch (error) {
-            res.status(400).json(error);
+        } catch (err) {
+            res.status(400).json(err.message);
         }
     },
 }

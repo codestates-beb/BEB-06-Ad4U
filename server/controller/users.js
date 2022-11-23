@@ -59,8 +59,8 @@ module.exports = {
             } else {
                 res.status(401).json("no authorization.. check id, password");
             }
-        } catch (error) {
-            res.status(400).json(error);
+        } catch (err) {
+            res.status(400).json(err.message);
         }
     },
     logout: async (req, res) => {
@@ -98,7 +98,7 @@ module.exports = {
                 where: { email: user_info.email },
             });
 
-            if (user) {//auth 시도하다가 취소했을경우
+           if (user) {//auth 시도하다가 취소했을경우
                 Supplier.update(body, {
                     where: { email: user_info.email },
                 }).then(data => {
@@ -112,7 +112,7 @@ module.exports = {
                         })
             }
         }).catch((err) => {
-            res.status(401).json(err);
+            res.status(401).json(err.message);
         })
     },
     signup: async (req, res) => {
@@ -144,7 +144,7 @@ module.exports = {
                 }
             }
         } catch (err) {
-            res.status(400).json(err);
+            res.status(400).json(err.message);
         }
     },
     refresh: async (req, res) => {
@@ -170,8 +170,8 @@ module.exports = {
                 } else{
                     res.status(401).json("login again");
                 }
-            } catch (error) {
-                res.status(400).json(error)
+            } catch (err) {
+                res.status(400).json(err.message)
             }
     },
     mypage: async (req, res) => {
@@ -219,7 +219,7 @@ module.exports = {
             }
             res.status(200).json(user);
         } catch (err) {
-            res.status(400).json(err)
+            res.status(400).json(err.message)
         }
     }
 }
