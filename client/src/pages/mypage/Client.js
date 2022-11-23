@@ -5,6 +5,7 @@ import auth from '../../hooks/axios/auth';
 import { getLocalData } from '../../config/localStrage';
 import Contract from './component/Contract';
 import ClientAd from './component/ClientAd';
+import Emptypage from '../../component/Emptypage';
 import './Client.css';
 import Avatar from 'react-avatar';
 import img from '../../dummyfiles/img1.png';
@@ -95,7 +96,8 @@ const ClientMypage = ({ userData }) => {
         <Row>
           <Routes>
             <Route path="/" element={<Mypage adList={adList} setStatus={setStatus} />} />        
-            <Route path="/contract/:adId" element={<Contract userData={userData} adList={adList} />} />
+            <Route path="/contract/:adId" element={<Contract userData={userData} adList={adList} />} /><Route path="*" element={<Emptypage />} />
+            <Route path="*" element={<Emptypage />} />
           </Routes>
         </Row>
         <Row>

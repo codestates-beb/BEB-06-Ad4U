@@ -1,7 +1,7 @@
 .clientMypage_container {
-  position: relative;
+  /* position: relative; */
   margin-top: 200px;
-  height: 2000px;
+  height: 1000px;
 }
 
 .clientMypage_row h1 {

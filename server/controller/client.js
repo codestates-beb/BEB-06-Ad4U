@@ -1,19 +1,17 @@
 const { Client, Advertisement } = require('../models/index');
-const jwt = require('jsonwebtoken');
 
 
 module.exports = {
     main: async (req, res) => { //최근 10개만
         try {
-            let main_client = await Client.findAll({
+            let client_main = await Client.findAll({
                 attributes: ['id', 'company_name', 'company_number', 'email'],
                 order: [['id', 'DESC']],
                 limit: 10,
-                // offset: 5,
             });
-            res.status(200).json(main_client);
-        } catch (error) {
-            res.status(400).json(error);
+            res.status(200).json(client_main);
+        } catch (err) {
+            res.status(400).json(err.message);
         }
 
     },
@@ -25,14 +23,13 @@ module.exports = {
                 include: [
                     { model: Advertisement, as: "Advertisements", attributes: ["id"],  where: {
                         status : 0
-                    },},
+                    },
+                },
                 ]
-                //limit: 10,
-                // offset: 5,
             });
             res.status(200).json(client_list);
-        } catch (error) {
-            res.status(400).json(error);
+        } catch (err) {
+            res.status(400).json(err.message);
         }
     },
     detail: async (req, res) => {
@@ -53,10 +50,9 @@ module.exports = {
                 ]
             });
             res.status(200).json(client_datail);
-        }catch(error){
-            res.status(400).json(error);
+        }catch(err){
+            res.status(400).json(err.message);
         }
-
     }
 }
 
