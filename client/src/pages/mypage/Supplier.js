@@ -39,7 +39,7 @@ const SupplierMypage = ({ userData }) => {
       })
       .catch(err => console.log(err.response.data))
     } else return navigate('*');
-  }, []);
+  }, [accessToken, isClient]);
 
   const FilterAd = ({ adList, status }) => {
     //status가 초기값("")인경우 필터링 하지않음
