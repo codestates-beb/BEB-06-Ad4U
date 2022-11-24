@@ -43,14 +43,16 @@ const SupplierMypage = ({ userData }) => {
 
   const FilterAd = ({ adList, status }) => {
     //status가 초기값("")인경우 필터링 하지않음
+    if (status === 2) { //2일때는 2, 3 모두 보이게
+      const filteredAdList = adList.filter((el) => el.status === 2 || el.status === 3);
+      return filteredAdList.map((adList, idx) => <SupplierAd key={idx} idx={idx} adList={adList} />);
+    }
     if (typeof(status) === 'number') {
       const filteredAdList = adList.filter((el) => el.status === status);
       return filteredAdList.map((adList, idx) => <SupplierAd key={idx} idx={idx} adList={adList} />);
     } else return adList.map((adList, idx) => <SupplierAd key={idx} idx={idx} adList={adList} />);
   }
-
-  console.log(userData)
-
+  
   return (
     <Container className='supplierMypage_container'>
       <Row className='supplierMypage_row' >
@@ -69,13 +71,13 @@ const SupplierMypage = ({ userData }) => {
           </div>
         </Col>
         <Col xl={9} >
-        <Row>
-          <h1> Supplier Mypage</h1>
-          <Status adList={adList} setStatus={setStatus} />
-          <Container className='supplierMypage_accordion'>
-           <FilterAd adList={adList} status={status} />
-          </Container>
-        </Row>
+          <Row>
+            <h1> Supplier Mypage</h1>
+            <Status adList={adList} setStatus={setStatus} />
+            <Container className='supplierMypage_accordion'>
+             <FilterAd adList={adList} status={status} />
+            </Container>
+          </Row>
         </Col>       
       </Row>
     </Container>

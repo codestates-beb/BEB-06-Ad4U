@@ -28,7 +28,7 @@ module.exports = {
     detail: async (req, res)=> {
         try{
             let supplier_datail = await Supplier.findOne({
-                attributes: ['id', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl'],
+                attributes: ['id', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'channel_id'],
                 where: {
                     id: req.query.id
                 },

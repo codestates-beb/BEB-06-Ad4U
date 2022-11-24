@@ -6,9 +6,36 @@ import '../../Supplier.css';
 
 const Stage3 = ({ adList }) => {
 
+  // 4. Confirm Transaction
+  const handleConfirmTransaction = async () => {
+    let walletAddress = "0x6B22a196da91253c4a975E5217BB5dA0a1469e81";
+    let txIndex = 1;
+    const result = await method.confirmTransaction(walletAddress,txIndex);
+    console.log(result)
+  };
+  // 5. Revoke Transaction
+  const handleRevokeConfirmation = async () => {
+    let walletAddress = "0x6B22a196da91253c4a975E5217BB5dA0a1469e81";
+    let txIndex = 1;
+    const result = await method.revokeConfirmation(walletAddress,txIndex);
+    console.log(result)
+  };
+  
+  // 6. Excute Transaction
+  const handleExecuteTransaction = async () => {
+    let walletAddress = "0x6B22a196da91253c4a975E5217BB5dA0a1469e81";
+    let txIndex = 0;
+    const result = await method.executeTransaction(walletAddress,txIndex);
+    console.log(result)
+  };
+
   return (
     <>
-      <div>종료</div>
+      <div>진행중2</div>
+      <button onClick={handleConfirmTransaction}>4. Confirm Transaction</button>
+      <div>파기하시겠습니까?</div>
+      <button onClick={handleRevokeConfirmation}>5. Revoke Transaction</button>
+      <button onClick={handleExecuteTransaction}>6. Excute Transaction</button>
     </>
   );
 }

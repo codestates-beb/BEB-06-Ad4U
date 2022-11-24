@@ -42,6 +42,7 @@ module.exports = {
                             viewCount: youtube_info.data.items[0].statistics.viewCount,
                             channelUrl: `https://www.youtube.com/channel/${youtube_info.data.items[0].id}`,
                             profileImgUrl: youtube_info.data.items[0].snippet.thumbnails.default.url,
+                            channel_id: youtube_info.data.items[0].id
                         }
                         Supplier.update(body, {
                             where: { userId: userId },
@@ -92,6 +93,7 @@ module.exports = {
                 viewCount: youtube_info.data.items[0].statistics.viewCount,
                 channelUrl: `https://www.youtube.com/channel/${youtube_info.data.items[0].id}`,
                 profileImgUrl: youtube_info.data.items[0].snippet.thumbnails.default.url,
+                channel_id: youtube_info.data.items[0].id
             }
 
             const user = await Supplier.findOne({
