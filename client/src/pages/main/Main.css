@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 /* main page css */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;800&display=swap');
 .main_container Button {
   text-decoration: none;
   color: unset;
   display: inline-block;
   margin-top: 70px;
+  font-family: "Montserrat"
 }
 
 .header {
@@ -12,7 +14,7 @@
   z-index: 1;
   color: white;
   margin-left: 55%;
-  font-family: 'Montserrat:wght@500';
+  font-weight: 200;
 }
 
 .upbutton {
@@ -26,15 +28,14 @@
 }
 
 /* Home css */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
-
 .home_cantainer {
   position: relative;
   height: 850px;
   background-image: url(./star.png);
   background-size: 200px;
-
+  font-family: "Montserrat"
 }
+
 .home_text1 {
   margin-top: 100px;
   text-align: center;
@@ -42,12 +43,13 @@
   color: white;
   font-weight: 600;
   font-size: 3.2rem;
-  font-family: "Montserrat";
+  font-weight: 700;
 }
 
 .home_text2 {
   text-align: center;
-  color: white
+  color: white;
+  font-weight: 500;
 }
 
 /* About css */
