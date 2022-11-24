@@ -64,21 +64,21 @@ const SBTView = ({ userData, adList }) => {
       <div className="sbt-content">
         {sbtList.map((data, idx) => { return (
                 <div 
-                className="ad-content_card-container"
+                className="sbt-content_card-container"
                 onClick = {() => {
                   handleViewPdf(data)
                 }}
                 key={idx}
                 >
-                {data.AdimgUrl 
-                ? <Card.Img variant="top" src={data.AdimgUrl}/> 
-                : <Card.Img variant='top' src={nullImg}/> }
-                <Card.Body>
-                    <Card.Title>{data.title}</Card.Title>
-                    <Card.Text>
-                    {data.createdAt}
-                    </Card.Text>
-                </Card.Body>
+                    {data.AdimgUrl 
+                    ? <Card.Img variant="top" src={data.AdimgUrl}/> 
+                    : <Card.Img variant='top' src={nullImg}/> }
+                    <Card.Body>
+                        <Card.Title>{data.title}</Card.Title>
+                        <Card.Text>
+                        {data.createdAt}
+                        </Card.Text>
+                    </Card.Body>
                 </div>
             )})}
         </div>

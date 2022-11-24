@@ -8,6 +8,7 @@ import './AdUpload.css';
 
 import { myBucket, S3_BUCKET } from '../../../config/awsS3';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const AdUpload = () => {
@@ -25,6 +26,8 @@ const AdUpload = () => {
   const [vsCurrencies, setVsCurrencies] = useState("krw");
   const [ethPrice,setEthPrice] = useState(0);
   const [curCost, setCurCost] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     vsChange(curCost)
@@ -149,7 +152,7 @@ const AdUpload = () => {
         return;
     }
     // test용 access Token
-    var accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ0ZXN0IiwiaWF0IjoxNjY4NzQ1ODA2LCJleHAiOjE2Njg3NDk0MDZ9.lXCyyuq6t-RCuEUf3oDb6arOA69_9IoSPB5p8SNKrNc";
+    var accessToken = window.localStorage.getItem('accessToken');
     const options = {
         url: "http://localhost:3001/ad/create",
         method: 'POST',
@@ -166,14 +169,15 @@ const AdUpload = () => {
     }
     axios.request(options)
         .then(res => {
-        if(res.status == 400) {
-          // 에러 로직
+        if(res.status == 201) {
+          alert("광고 업로드 완료");
+          navigate(`/mypage/client`)
         }
         else {
-          // 성공 로직
+          alert(res);
         }
         })
-        .catch(err => console.log(err))
+        .catch(err => alert(err.message))
 
   }
 

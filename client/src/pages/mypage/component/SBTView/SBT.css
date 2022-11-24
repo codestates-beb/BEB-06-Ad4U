@@ -17,3 +17,17 @@
     gap: 100px;
     justify-content: center;
 }
+
+.sbt-content_card-container {
+    text-align: center;
+    padding: 10px 10px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 4px 4px #0c0b1473;
+    cursor: pointer;
+    font-size: 14px;
+    position: relative;
+    background: -webkit-linear-gradient(#ece9e6, #ffffff);
+  }
+  .sbt-content_card-container:hover {
+    transform: scale(1.1);
+  }
