@@ -24,22 +24,25 @@ const AdContract = ({ userData, adList }) => {
   const accessToken = getLocalData('accessToken');
   const isClient = getLocalData('isClient');
 
-  var AdInfo = {};
-
   const navigate = useNavigate();
 
-  
-  adList.forEach( async (element)  => {
-      if(element.id === parseInt(adId)) {
-        AdInfo = element;
-        AdInfo.owner = await getContractOwner(element.multisigAddress);
+  const [adInfo, setAdInfo] = useState({})
+
+  // 현재 광고 정보 불러오고, owner 조회 및 저장
+  async function getAdInfo() {
+    for(let i=0;i<adList.length;i++) {
+      if(adList[i].id === parseInt(adId)) {
+        const owner_arr = await getContractOwner(adList[i].multisigAddress);
+        setAdInfo({
+          multisigAddress: adList[i].multisigAddress,
+          supplierAddr: owner_arr[1],
+          clientAddr: owner_arr[0]
+        });
+        break;
       }
-  });
+    }
   
-
-  console.log(AdInfo);
-
-  const [modalShow, setModalShow] = useState(false);
+  }
 
   const [contractInfo, setContractInfo] = useState({
     mediaUrl : "",
@@ -47,11 +50,32 @@ const AdContract = ({ userData, adList }) => {
     date2 : "",
     value : "",
     content : "",
-    clientAddr : AdInfo.owner[0],
-    supplierAddr : AdInfo.owner[1],
+    clientAddr : "",
+    supplierAddr : "",
     isClient : true
   });
 
+  //multisigAddress, clientAddr, supplierAddr 렌더시 한번만 불러옴 + setAdInfo
+  useEffect(() => {
+    getAdInfo();
+  },[])
+  
+  // AdInfo 바뀔때마다 contractInfo set
+  useEffect(() => {
+    console.log(adInfo)
+    setContractInfo({
+      mediaUrl : "",
+      date1 : "",
+      date2 : "",
+      value : "",
+      content : "",
+      clientAddr : adInfo.clientAddr,
+      supplierAddr : adInfo.supplierAddr,
+      isClient : true
+    })
+  },[adInfo])
+
+  const [modalShow, setModalShow] = useState(false);
   const [vsCurrencies, setVsCurrencies] = useState("krw");
   const [ethPrice,setEthPrice] = useState(0);
   const [curCost, setCurCost] = useState("");
@@ -193,7 +217,8 @@ const AdContract = ({ userData, adList }) => {
     }
 
     //walletAddress 가져오기 : props
-    const walletAddress = AdInfo.multisigAddress;
+    const walletAddress = adInfo.multisigAddress;
+    console.log(walletAddress);
 
     //submit Transaction : (walletAddress, _to, _value, _data)
     const result = await method.submitTransaction(walletAddress,contractInfo.supplierAddr,contractInfo.value,tokenURI);
@@ -209,7 +234,7 @@ const AdContract = ({ userData, adList }) => {
 
     //DB 상태 업데이트
     const db_result = await contract.contract_create(accessToken,isClient,adId,tokenInfo);
-    alert(db_result);
+    alert(db_result.data);
     navigate(`/mypage/client`)
 
 
@@ -271,12 +296,12 @@ const AdContract = ({ userData, adList }) => {
       <Form.Label><h5>계약자 지갑 주소<span className="red"> *</span></h5></Form.Label>
       <InputGroup className="mb-3">
         <h6>&ensp;Advertiser&ensp;</h6>
-        <Form.Control type="text" placeholder="Enter Your Address" defaultValue={AdInfo.owner[0]} onChange={handleContractAddr1} disabled/>
+        <Form.Control type="text" placeholder="Enter Your Address" defaultValue={adInfo.clientAddr} onChange={handleContractAddr1} disabled/>
       </InputGroup>
 
       <InputGroup className="mb-3">
         <h6>&ensp;Creator&ensp;</h6>
-        <Form.Control type="text" placeholder="Enter Your Contractor Address" defaultValue={AdInfo.owner[1]} onChange={handleContractAddr2} disabled/>
+        <Form.Control type="text" placeholder="Enter Your Contractor Address" defaultValue={adInfo.supplierAddr} onChange={handleContractAddr2} disabled/>
       </InputGroup>
       <p id="address-message" className="addressMessage">Address Field Required!!</p>
 
