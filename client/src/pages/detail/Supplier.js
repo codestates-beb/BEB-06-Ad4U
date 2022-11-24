@@ -20,18 +20,39 @@ const SupplierDetail = () => {
     .catch(err => err.response.data)
   }, [supplierId])
 
+
+  // const [playlist, setPlaylist] = useState({id: "", snippet: {chnnelId:"", thumbnails: {}}});
+  const [playlist, setPlaylist] = useState([])
+    
+//https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${channel.id}&maxResults=50&key=process.env.REACT_APP_YOUTUBE_API_KEY"
+  useEffect(() => {
+    axios
+      .get(
+        "https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=UCVIYOhk0nZYOADDm7yF3DIA&maxResults=50&key=AIzaSyBsfPmb1PvWwsXO2m636QoCuzJmrNlsMC8"
+      )
+      .then((res) => {
+        console.log(res);
+        setPlaylist(res.data.items);
+      })
+      // .then((res) => {
+      //   const {title, channelId, channelTitle, thumbnails} = res.items[0].snippet;
+      // })
+      .catch(() => {});
+  }, []);
+  console.log(playlist)  ;
+
+  // const BASE_URL = 'https://www.googleapis.com/youtube/v3' ;
+  // const options = {
+  //   params: {
+  //     maxResultes: 30,
+  //   },
+  //   headers: {
+  //     'API-Key': process.env.REACT_APP_YOUTUBE_API_KEY,
+  //   }
+  // }
   // useEffect(() => {
-  //   axios
-  //     .get(
-  //       "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&status=&playlistId=PLlrxD0HtieHgS6P6YBu3Bc1DA9TICZ9CM&key=AIzaSyBsfPmb1PvWwsXO2m636QoCuzJmrNlsMC8"
-  //     )
-  //     .then((res) => {
-  //       console.log(res);
-  //       setInfo(res.data.items);
-  //     })
-  //     .catch(() => {});
-  // }, []);
-  // console.log(info);
+
+  // })
 
   return (
     <Container className='supplierDetail_container'>
@@ -44,6 +65,13 @@ const SupplierDetail = () => {
             <Card.Text>subscriber {detail.subscriberCount}</Card.Text>
             <Card.Text>view {detail.viewCount}</Card.Text>
           </Card.Body>
+        </div>
+        
+        <div className='youtubeVideo'>
+          {playlist.map((video) => (
+            <h1 >{video.title}</h1>
+            
+          ))}
         </div>
     </Container> 
   );
