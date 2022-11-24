@@ -4,6 +4,7 @@ import { Accordion, Col, Row, Container } from 'react-bootstrap';
 import method from '../../../../hooks/web3/sendTransaction';
 import '../../Supplier.css';
 
+//파기
 const Stage5 = ({ adList }) => {
 
   return (

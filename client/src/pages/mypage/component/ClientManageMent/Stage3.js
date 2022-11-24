@@ -4,6 +4,7 @@ import { Accordion, Col, Row, Container } from 'react-bootstrap';
 import method from '../../../../hooks/web3/sendTransaction';
 import '../../Client.css';
 
+//진행중2
 const Stage3 = ({ adList }) => {
 
   return (

@@ -39,13 +39,11 @@ const proceed = async (accessToken, isClient, adId) => {
     }
     const result = await axios.request(options)
     return result;
-  } else {
-    alert("로그인후 이용가능합니다.");
-  }
+  } else throw new Error("insufficient data");
 }
 
 //계약
-const contract_create = async (accessToken, isClient, adId, tokenInfo) => {
+const create = async (accessToken, isClient, adId, tokenInfo) => {
   if (accessToken && isClient && adId && tokenInfo) {
     const options = {
       url: "http://localhost:3001/function/contract",
@@ -64,9 +62,7 @@ const contract_create = async (accessToken, isClient, adId, tokenInfo) => {
     }
     const result = await axios.request(options)
     return result;
-  } else {
-    alert("로그인후 이용가능합니다.");
-  }
+  } else throw new Error("insufficient data");
 }
 
 //이행완료
@@ -86,9 +82,7 @@ const complete = async (accessToken, isClient, adId) => {
     }
     const result = await axios.request(options)
     return result;
-  } else {
-    alert("로그인후 이용가능합니다.");
-  }
+  } else throw new Error("insufficient data");
 }
 
 //파기
@@ -108,15 +102,13 @@ const cancel = async (accessToken, isClient, adId) => {
     }
     const result = await axios.request(options)
     return result;
-  } else {
-    alert("로그인후 이용가능합니다.");
-  }
+  } else throw new Error("insufficient data");
 }
 
 const contract = { 
   conference, 
   proceed, 
-  contract_create, 
+  create,
   complete, 
   cancel 
 };

@@ -219,25 +219,29 @@ const AdContract = ({ userData, adList }) => {
     //walletAddress 가져오기 : props
     const walletAddress = adInfo.multisigAddress;
     console.log(walletAddress);
+    try {
+      //submit Transaction : (walletAddress, _to, _value, _data)
+      const tx = await method.submitTransaction(walletAddress,contractInfo.supplierAddr,contractInfo.value,tokenURI);
+      var tokenInfo = {
+        token_uri: "",
+        token_id: 0,
+        token_address: ""
+      }
+      tokenInfo.token_uri = tx.events.SubmitTransaction.returnValues.data;
+      tokenInfo.token_address = tx.events[0].address;
+      tokenInfo.token_id = parseInt(tx.events.Response.returnValues[1],16);
+      console.log(tokenInfo);
 
-    //submit Transaction : (walletAddress, _to, _value, _data)
-    const result = await method.submitTransaction(walletAddress,contractInfo.supplierAddr,contractInfo.value,tokenURI);
-    var tokenInfo = {
-      token_uri: "",
-      token_id: 0,
-      token_address: ""
+      if (tx) {
+        //DB 상태 업데이트
+        const result = await contract.create(accessToken,isClient,adId,tokenInfo);
+        alert(result.data);
+        navigate(`/mypage/client`);
+      }
+    } catch (err) {
+      console.log(err);
+      alert("트랜젝션 생성에 실패하였습니다.");
     }
-    tokenInfo.token_uri = result.events.SubmitTransaction.returnValues.data;
-    tokenInfo.token_address = result.events[0].address;
-    tokenInfo.token_id = parseInt(result.events.Response.returnValues[1],16);
-    console.log(tokenInfo);
-
-    //DB 상태 업데이트
-    const db_result = await contract.contract_create(accessToken,isClient,adId,tokenInfo);
-    alert(db_result.data);
-    navigate(`/mypage/client`)
-
-
   }
 
 

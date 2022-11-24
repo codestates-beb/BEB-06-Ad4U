@@ -17,7 +17,7 @@ const SupplierMypage = ({ userData }) => {
   const [status, setStatus] = useState("");
 
   const navigate = useNavigate();
-  console.log("adList", adList)
+  // console.log("adList", adList)
 
   useEffect(() => {
     if(accessToken && isClient === "false") {
