@@ -9,21 +9,6 @@ import './Contract.css'
 
 const ContractPrint = ({contractInfo, previewCheck, setTokenURI}) => {
 
-    const dataURLtoFile = (dataurl, fileName) => {
- 
-        var arr = dataurl.split(','),
-            mime = arr[0].match(/:(.*?);/)[1],
-            bstr = atob(arr[1]), 
-            n = bstr.length, 
-            u8arr = new Uint8Array(n);
-            
-        while(n--){
-            u8arr[n] = bstr.charCodeAt(n);
-        }
-        
-        return new File([u8arr], fileName, {type:mime});
-    }
-
     useEffect(() => {
         const print = document.getElementById("divToPrint");
         html2canvas(print)
@@ -59,14 +44,6 @@ const ContractPrint = ({contractInfo, previewCheck, setTokenURI}) => {
             const url = `https://ad4u.infura-ipfs.io/ipfs/${added.path}`; // 전용 게이트 웨이 등록 infura IPFS 사용
             console.log(url);
             setTokenURI(url);
-
-            
-            //복호화
-            //ipfs 받
-            // const bytes = crypto.AES.decrypt(encrypted, '1');
-            // const decrypted = bytes.toString(crypto.enc.Utf8);
-            // new File(decrypted)
-            // console.log(decrypted)
 
         })
     },[previewCheck])

@@ -8,7 +8,7 @@ const Stage1 = ({ adList }) => {
 
   // 2. Supplier Sign Wallet
   const handleSupplierSignWallet = async () => {
-    let walletAddress = "0x6B22a196da91253c4a975E5217BB5dA0a1469e81";
+    let walletAddress = "0x28ED9A3C343240B3bd2A811c1Ba6caEb45e7A98C";
     const result = await method.supplierSignWallet(walletAddress);
     console.log(result)
   };

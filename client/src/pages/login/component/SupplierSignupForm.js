@@ -8,9 +8,9 @@ import Form from 'react-bootstrap/Form';
 
 import '../LoginPage.css';
 
-const SupplierSignupForm = ({ email, account, inputAccount, sendSignupData, handleClose }) => {
+const SupplierSignupForm = ({ email, address, inputAddress, sendSignupData, handleClose }) => {
   
-  const [isCorrect, setIsClient] = useState(true);
+  const [isCorrect, setIsCorrect] = useState(true); //비밀번호 검증
 
   let idRef = useRef(null);
   let passwordRef = useRef(null);
@@ -23,16 +23,16 @@ const SupplierSignupForm = ({ email, account, inputAccount, sendSignupData, hand
     const confirm = confirmRef.current.value;
 
     if (password === confirm) {
-      const signupData = { email, userId, password, account };
+      const signupData = { email, userId, password, address };
       
-      if ( email && userId && password && account ) {
-        setIsClient(true);
+      if ( email && userId && password && address ) {
+        setIsCorrect(true);
         sendSignupData(signupData);
       } else {
         alert("입력되지않은 정보가 있습니다.")
       }
     } else {
-      setIsClient(false);
+      setIsCorrect(false);
     }
   }
 
@@ -78,13 +78,13 @@ const SupplierSignupForm = ({ email, account, inputAccount, sendSignupData, hand
             <Form.Label>WalletAddress</Form.Label>
             <Form.Control 
               type="id"
-              value={account}
+              value={address}
               disabled
               rows={1} 
             />
             <button
               type="button"
-              onClick={inputAccount}
+              onClick={inputAddress}
             >
               getAccount
             </button>

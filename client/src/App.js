@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import auth from './hooks/axios/auth';
 import { setLocalData, clearLocalData } from './config/localStrage';
 
 import Nav from './component/Nav';
 import Main from './pages/main/Main';
 import ListPage from './pages/list/ListPage';
-import ClientMypage from './pages/mypage/Client';
-import SupplierMypage from './pages/mypage/Supplier';
+import Mypage from './pages/mypage/Mypage';
 import ClientDetail from './pages/detail/Client';
 import SupplierDetail from './pages/detail/Supplier';
 import AdDetail from './pages/detail/Ad';
@@ -23,6 +22,8 @@ const App = () => {
   const [ userData, setUserData ] = useState({});
   console.log("userData", userData);
 
+  const navigate = useNavigate();
+
   //세션유지
   useEffect(() => {
     auth.refresh()
@@ -34,12 +35,16 @@ const App = () => {
           setLocalData("isClient", isClient);
           setUserData(user);
         }
+        if (data.message === 'refresh token not provided') return clearLocalData();
       })
       .catch(err => {
         clearLocalData();
         console.log(err.response.data);
         return auth.logout()
-        .then(res => alert("쿠키가 만료되었습니다 다시 로그인 해주세요."))
+        .then(res => {
+          alert("쿠키가 만료되었습니다 다시 로그인 해주세요.");
+          navigate('/');
+        })
         .catch(err => console.log("logoutErr", err))
       })
   }, []);
@@ -50,8 +55,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/list/*" element={<ListPage />} />
-        <Route path="/mypage/client/*" element={<ClientMypage userData={userData}/>} />
-        <Route path="/mypage/supplier" element={<SupplierMypage userData={userData}/>} />
+        <Route path="/mypage/*" element={<Mypage userData={userData}/>} />
         <Route path="/detail/client/:clientId" element={<ClientDetail />} />
         <Route path="/detail/supplier/:supplierId" element={<SupplierDetail />} />
         <Route path="/detail/ad/:adId" element={<AdDetail userData={userData}/>} />

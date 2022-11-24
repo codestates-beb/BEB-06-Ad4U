@@ -5,6 +5,7 @@ import auth from '../../hooks/axios/auth';
 import { getLocalData } from '../../config/localStrage';
 import Contract from './component/Contract';
 import ClientAd from './component/ClientAd';
+import Emptypage from '../../component/Emptypage';
 import './Client.css';
 import Avatar from 'react-avatar';
 import img from '../../dummyfiles/img1.png';
@@ -12,6 +13,7 @@ import Status from './component/Status';
 import { Link } from 'react-router-dom';
 import { Col, Row, Container, Spinner, Card, ListGroup} from 'react-bootstrap';
 import axios from 'axios';
+import SBTView from './component/SBTView/SBTView';
 
 const ClientMypage = ({ userData }) => {
   const accessToken = getLocalData("accessToken");
@@ -94,8 +96,12 @@ const ClientMypage = ({ userData }) => {
         <Row>
           <Routes>
             <Route path="/" element={<Mypage adList={adList} setStatus={setStatus} />} />        
-            <Route path="/contract/:adId" element={<Contract userData={userData} adList={adList} />} />
+            <Route path="/contract/:adId" element={<Contract userData={userData} adList={adList} />} /><Route path="*" element={<Emptypage />} />
+            <Route path="*" element={<Emptypage />} />
           </Routes>
+        </Row>
+        <Row>
+          <SBTView userData={userData} adList={adList}/>
         </Row>
         </Col>        
       </Row>
