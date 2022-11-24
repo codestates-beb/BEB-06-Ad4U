@@ -46,6 +46,10 @@ module.exports = function(sequelize, DataTypes) {
     address: {
       type: DataTypes.STRING(100),
       allowNull: true
+    },
+    channel_id: {
+      type: DataTypes.STRING(100),
+      allowNull: true
     }
   }, {
     sequelize,
