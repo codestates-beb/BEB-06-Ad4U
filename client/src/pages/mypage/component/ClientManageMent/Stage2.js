@@ -32,7 +32,7 @@ const Stage2 = ({ adList }) => {
 
   return (
     <>
-      <div>진행중</div>
+      <div>진행중1</div>
       <button onClick={handleConfirmTransaction}>4. Confirm Transaction</button>
 
       <div>파기하시겠습니까?</div>

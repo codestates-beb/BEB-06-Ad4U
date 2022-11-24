@@ -8,7 +8,7 @@ const Stage3 = ({ adList }) => {
 
   return (
     <>
-      <div>종료</div>
+      <div>진행중2</div>
     </>
   );
 }
