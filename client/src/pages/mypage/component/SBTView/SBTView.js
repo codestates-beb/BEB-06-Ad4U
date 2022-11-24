@@ -14,6 +14,7 @@ import {triggerBase64Download} from 'common-base64-downloader-react';
 const SBTView = ({ userData, adList }) => {
   const [list, setList] = useState([]);
   const [sbtList, setSbtList] = useState([]);
+  
 
   const [base64PDF, setBase64PDF] = useState("");
   
