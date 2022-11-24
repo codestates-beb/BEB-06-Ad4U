@@ -125,4 +125,19 @@ module.exports = {
             res.status(400).json(err.message);
         }
     },
+    allContract: async (req, res) => {
+        try {
+            let list_contract = await Advertisement.findAll({
+                attributes: ['multisigAddress'],
+            });
+            const filter_contract = list_contract.filter((ele) => {
+                return ele.dataValues.multisigAddress != null;
+            })
+            console.log(filter_contract)
+            res.status(200).json(filter_contract);
+        } catch (err) {
+            res.status(400).json(err.message);
+        }
+
+    },
 }

@@ -101,12 +101,24 @@ const callApplyCancel = async (accessToken, isClient, adId) => {
   }
 }
 
+const allContractList = async () => {
+  const options = {
+    url: "http://localhost:3001/ad/allContract",
+    method: 'GET',
+    headers: {"Content-Type": "application/json"},
+    withCredentials: true,
+  }
+  const result = await axios.request(options)
+  return result;
+}
+
 const ad = { 
   mainList, 
   getList, 
   getDetail, 
   callApply, 
-  callApplyCancel 
+  callApplyCancel,
+  allContractList
 };
 
 export default ad;

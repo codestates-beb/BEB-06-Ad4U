@@ -1,7 +1,9 @@
 import React from 'react';
 import '../Main.css';
 import { SiHiveBlockchain } from "react-icons/si";
+import TotalValue from './TotalValue';
 const ReactRotatingText = require("react-rotating-text");
+
 
 const About = () => {
   function handle1Click (e) {
@@ -29,13 +31,14 @@ const About = () => {
             color = "rgb(108,182,154)"
           />
         </h2>
+        
         <div>
           <SiHiveBlockchain size="24" color='white' onClick={handle1Click} />
           <SiHiveBlockchain size="24" color='white' onClick={handle2Click} />
           <SiHiveBlockchain size="24" color='white' onClick={handle3Click} />
           <SiHiveBlockchain size="24" color='white' onClick={handle4Click} />
         </div>
-        
+        <TotalValue/>
       </div>
     </div>
   );
