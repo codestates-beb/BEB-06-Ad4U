@@ -5,8 +5,8 @@ import method from '../../../../hooks/web3/sendTransaction';
 import '../../Supplier.css';
 
 const Stage0 = ({ adList }) => {
-
-  // console.log("지원자명단", adList.Advertisement_has_Suppliers)
+  // console.log(adList)
+  // console.log("지원자명단", adList)
 
   return (
     <>
