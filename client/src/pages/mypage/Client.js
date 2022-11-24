@@ -36,10 +36,14 @@ const ClientMypage = ({ userData }) => {
       })
       .catch(err => console.log(err.response.data))
     } else return navigate('*');
-  }, []);
+  }, [accessToken, isClient]);
 
   const FilterAd = ({ adList, status }) => {
     //status가 초기값("")인경우 필터링 하지않음
+    if (status === 2) { //2일때는 2, 3 모두 보이게
+      const filteredAdList = adList.filter((el) => el.status === 2 || el.status === 3);
+      return filteredAdList.map((adList, idx) => <ClientAd key={idx} idx={idx} adList={adList} />);
+    }
     if (typeof(status) === 'number') {
       const filteredAdList = adList.filter((el) => el.status === status);
       return filteredAdList.map((adList, idx) => <ClientAd key={idx} idx={idx} adList={adList} />);
@@ -66,6 +70,7 @@ const ClientMypage = ({ userData }) => {
         <Status adList={adList} setStatus={setStatus} />
         <Container className='clientMypage_accordion'>
           <FilterAd adList={adList} status={status} />
+          <SBTView userData={userData} adList={adList}/>
         </Container>
       </>
     );
@@ -92,17 +97,12 @@ const ClientMypage = ({ userData }) => {
             <Link to="/upload"><button className='clientupload_btn'><span>광고 업로드</span></button></Link>
           </Row>
         </Col>
-        <Col xl={9}  >
-        <Row>
+        <Col xl={9} >
           <Routes>
             <Route path="/" element={<Mypage adList={adList} setStatus={setStatus} />} />        
             <Route path="/contract/:adId" element={<Contract userData={userData} adList={adList} />} /><Route path="*" element={<Emptypage />} />
             <Route path="*" element={<Emptypage />} />
           </Routes>
-        </Row>
-        <Row>
-          <SBTView userData={userData} adList={adList}/>
-        </Row>
         </Col>        
       </Row>
     </Container>

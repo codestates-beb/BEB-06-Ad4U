@@ -191,7 +191,7 @@ module.exports = {
                     include: [
                         {
                             model: Advertisement, as: "Advertisements",
-                            attributes: ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_id', 'token_address', 'createdAt', 'status'],
+                            attributes: ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_id', 'token_address','token_uri', 'createdAt', 'status'],
                             include: [
                                 {
                                     model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",

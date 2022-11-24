@@ -6,6 +6,7 @@ import Stage1 from './SupplierManageMent/Stage1';
 import Stage2 from './SupplierManageMent/Stage2';
 import Stage3 from './SupplierManageMent/Stage3';
 import Stage4 from './SupplierManageMent/Stage4';
+import Stage5 from './SupplierManageMent/Stage5';
 import '../Client.css';
 
 const SupplierAd = ({ idx, adList }) => {
@@ -17,6 +18,7 @@ const SupplierAd = ({ idx, adList }) => {
     if(status === 2) return <Stage2 adList={adList} />;
     if(status === 3) return <Stage3 adList={adList} />;
     if(status === 4) return <Stage4 adList={adList} />;
+    if(status === 5) return <Stage5 adList={adList} />;
     else return <div></div>;
   }
 

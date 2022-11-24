@@ -6,6 +6,7 @@ import Stage1 from './ClientManageMent/Stage1';
 import Stage2 from './ClientManageMent/Stage2';
 import Stage3 from './ClientManageMent/Stage3';
 import Stage4 from './ClientManageMent/Stage4';
+import Stage5 from './ClientManageMent/Stage5';
 import '../Client.css';
 
 const ClientAd = ({ idx, adList }) => {
@@ -17,6 +18,7 @@ const ClientAd = ({ idx, adList }) => {
     if(adList && status === 2) return <Stage2 adList={adList} />;
     if(adList && status === 3) return <Stage3 adList={adList} />;
     if(adList && status === 4) return <Stage4 adList={adList} />;
+    if(adList && status === 5) return <Stage5 adList={adList} />;
     else return <div></div>;
   }
 

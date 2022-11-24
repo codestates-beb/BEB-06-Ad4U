@@ -4,6 +4,7 @@ import contract from '../../../../hooks/axios/contract';
 import { getLocalData } from '../../../../config/localStrage';
 import '../../Client.css';
 
+//모집중
 const Stage0 = ({ adList }) => {
   const applicant = adList.Advertisement_has_Suppliers;
   const adId = adList.id

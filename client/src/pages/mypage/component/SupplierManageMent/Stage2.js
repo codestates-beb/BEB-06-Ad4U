@@ -1,43 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Accordion, Col, Row, Container } from 'react-bootstrap';
+import { getLocalData } from '../../../../config/localStrage';
+import contract from '../../../../hooks/axios/contract';
 import method from '../../../../hooks/web3/sendTransaction';
 import '../../Supplier.css';
 
+//진행중1
 const Stage2 = ({ adList }) => {
+  const adId = adList.id;
+  const contractAddress = adList.multisigAddress;
+  const accessToken = getLocalData('accessToken');
+  const isClient = getLocalData('isClient');
 
-  // 4. Confirm Transaction
-  const handleConfirmTransaction = async () => {
-    let walletAddress = "0x6B22a196da91253c4a975E5217BB5dA0a1469e81";
-    let txIndex = 1;
-    const result = await method.confirmTransaction(walletAddress,txIndex);
-    console.log(result)
-  };
-
-  // 5. Revoke Transaction
-  const handleRevokeConfirmation = async () => {
-    let walletAddress = "0x6B22a196da91253c4a975E5217BB5dA0a1469e81";
-    let txIndex = 1;
-    const result = await method.revokeConfirmation(walletAddress,txIndex);
-    console.log(result)
-  };
-  
-  // 6. Excute Transaction
-  const handleExecuteTransaction = async () => {
-    let walletAddress = "0x6B22a196da91253c4a975E5217BB5dA0a1469e81";
-    let txIndex = 0;
-    const result = await method.executeTransaction(walletAddress,txIndex);
-    console.log(result)
+  // 2. Supplier Sign Wallet
+  const handleSupplierSignWallet = async () => {
+    try {
+      const tx = await method.supplierSignWallet(contractAddress);
+      if (tx) return contract.proceed(accessToken, isClient, adId);
+    } catch (err) {
+      console.log(err);
+      alert("트랜젝션 생성에 실패하였습니다.");
+    }
   };
 
   return (
     <>
-      <div>진행중</div>
-      <button onClick={handleConfirmTransaction}>4. Confirm Transaction</button>
-
-      <div>파기하시겠습니까?</div>
-      <button onClick={handleRevokeConfirmation}>5. Revoke Transaction</button>
-      <button onClick={handleExecuteTransaction}>6. Excute Transaction</button>
+      <div>진행중1</div>
+      <button onClick={handleSupplierSignWallet}>2. Supplier Sign Wallet</button>
     </>
   );
 }
