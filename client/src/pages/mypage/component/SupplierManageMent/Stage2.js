@@ -6,38 +6,17 @@ import '../../Supplier.css';
 
 const Stage2 = ({ adList }) => {
 
-  // 4. Confirm Transaction
-  const handleConfirmTransaction = async () => {
-    let walletAddress = "0x6B22a196da91253c4a975E5217BB5dA0a1469e81";
-    let txIndex = 1;
-    const result = await method.confirmTransaction(walletAddress,txIndex);
-    console.log(result)
-  };
-
-  // 5. Revoke Transaction
-  const handleRevokeConfirmation = async () => {
-    let walletAddress = "0x6B22a196da91253c4a975E5217BB5dA0a1469e81";
-    let txIndex = 1;
-    const result = await method.revokeConfirmation(walletAddress,txIndex);
-    console.log(result)
-  };
-  
-  // 6. Excute Transaction
-  const handleExecuteTransaction = async () => {
-    let walletAddress = "0x6B22a196da91253c4a975E5217BB5dA0a1469e81";
-    let txIndex = 0;
-    const result = await method.executeTransaction(walletAddress,txIndex);
-    console.log(result)
-  };
+    // 2. Supplier Sign Wallet
+    const handleSupplierSignWallet = async () => {
+      let walletAddress = "0x28ED9A3C343240B3bd2A811c1Ba6caEb45e7A98C";
+      const result = await method.supplierSignWallet(walletAddress);
+      console.log(result)
+    };
 
   return (
     <>
-      <div>진행중</div>
-      <button onClick={handleConfirmTransaction}>4. Confirm Transaction</button>
-
-      <div>파기하시겠습니까?</div>
-      <button onClick={handleRevokeConfirmation}>5. Revoke Transaction</button>
-      <button onClick={handleExecuteTransaction}>6. Excute Transaction</button>
+      <div>진행중1</div>
+      <button onClick={handleSupplierSignWallet}>2. Supplier Sign Wallet</button>
     </>
   );
 }

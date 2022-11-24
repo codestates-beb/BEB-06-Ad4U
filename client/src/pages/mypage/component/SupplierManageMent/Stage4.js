@@ -8,7 +8,7 @@ const Stage4 = ({ adList }) => {
 
   return (
     <>
-      <div>파기됨</div>
+      <div>완료</div>
     </>
   );
 }

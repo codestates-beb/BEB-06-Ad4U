@@ -10,7 +10,7 @@ const Stage0 = ({ adList }) => {
 
   return (
     <>
-      <div>요청중</div>
+      <div>모집중</div>
       <div>지원 취소</div>
     </>
   );
