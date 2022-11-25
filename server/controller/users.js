@@ -5,7 +5,6 @@ const client_attributes = ['id', 'userId', 'company_name', 'company_number', 'em
 const supplier_attributes = ['id', 'userId', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address'];
 const advertisement_attributes = ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_id', 'token_address','token_uri', 'createdAt', 'status']
 const axios = require("axios");
-const {google} = require('googleapis');
 const jwt_decode = require('jwt-decode');
 
 module.exports = {
