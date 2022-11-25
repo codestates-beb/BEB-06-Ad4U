@@ -12,6 +12,7 @@ import Col from 'react-bootstrap/esm/Col';
 import Button from 'react-bootstrap/Button';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import axios from 'axios';
 
 import './LoginPage.css';
 
@@ -42,14 +43,7 @@ const LoginPage = ({ setUserData }) => {
   },[]);
 
   const googleOath = async () => {
-    const url = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code`+
-    `&access_type=offline`+
-    `&state=ad4u_oauth_login`+
-    `&include_granted_scopes=true`+
-    `&client_id=${process.env.REACT_APP_CLIENT_ID}`+
-    `&scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly`+
-    `&redirect_uri=http://localhost:3000/login`;
-    window.location.href=url;
+    window.location.href = await auth.oauthCode();;
   }
 
   const sendLoginData = async (loginData) => {

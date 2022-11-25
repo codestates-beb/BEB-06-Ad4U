@@ -1,5 +1,5 @@
 const { Client, Advertisement } = require('../models/index');
-const client_attributes = ['id', 'company_name', 'company_number', 'email', 'logoUrl'];
+const client_attributes = ['id', 'company_name', 'company_number', 'email', 'profileImgUrl'];
 
 module.exports = {
     main: async (req, res) => { //최근 10개만
