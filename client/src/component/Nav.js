@@ -66,9 +66,9 @@ const Nav = ({ userData, setUserData }) => {
               < RiStarSmileLine color='white' size={30}/>
             </Dropdown.Toggle>
             <Dropdown.Menu variant="dark">
-              <NavDropdown.Item href="/mypage/client">clientmypage</NavDropdown.Item>
-              <NavDropdown.Item href="/mypage/supplier">suppliermypage</NavDropdown.Item>
-              <NavDropdown.Item href="/list">list</NavDropdown.Item> 
+              <NavDropdown.Item href="/list">광고 목록</NavDropdown.Item>
+              <NavDropdown.Item href="/list/client">기업 목록</NavDropdown.Item>
+              <NavDropdown.Item href="/list/supplier">크리에이터 목록</NavDropdown.Item> 
             </Dropdown.Menu>
           </Dropdown>
         </Stack>

@@ -46,10 +46,11 @@ const ClientDetail = () => {
             <Card.Text as='h4' className='clientDetail_text'>모집중인 광고</Card.Text>
             <div className="clientDetail-content">
               {advertisement.length === 0 
-              ? <div>현재 모집중인 광고가 없습니다.</div>
+              ? <div className='noad'>현재 모집중인 광고가 없습니다.</div>
               : advertisement.map((el, idx) => {
                 console.log(el)
                 return (
+                  
                   <div 
                   className="clientDetail-content_card-container"
                   onClick={() => navigate(`/detail/ad/${el.id}`)}

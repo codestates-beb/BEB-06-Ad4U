@@ -21,11 +21,16 @@ const SupplierDetail = () => {
 
   // const [playlist, setPlaylist] = useState({id: "", snippet: {chnnelId:"", thumbnails: {}}});
   const [playlist, setPlaylist] = useState(0)
+  
 // UCVIYOhk0nZYOADDm7yF3DIA (4개)
-//https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${channel.id}&maxResults=50&key=process.env.REACT_APP_YOUTUBE_API_KEY"
+//https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${channel.id}&maxResults=50&key=process.env.REACT_APP_YOUTUBE_API_KEY
+// "https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=UCSGC87iX0QhnIfUOI_B_Rdg&maxResults=50&key=AIzaSyBsfPmb1PvWwsXO2m636QoCuzJmrNlsMC8"
   useEffect(() => {
+    const apikey = process.env.REACT_APP_YOUTUBE_API_KEY;
+    const get_channelId = detail.channel_id
+    console.log(get_channelId)
     axios.get(
-      "https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=UCSGC87iX0QhnIfUOI_B_Rdg&maxResults=50&key=AIzaSyBsfPmb1PvWwsXO2m636QoCuzJmrNlsMC8"
+      `https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${get_channelId}&maxResults=50&key=${apikey}`
       )
       .then((res) => {
         console.log(res.data.items);

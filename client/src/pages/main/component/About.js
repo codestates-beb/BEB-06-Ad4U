@@ -28,7 +28,7 @@ const About = () => {
           <Col xl={3}><img src={handshake} alt='handshake'/></Col>
           <Col xl={9}><h2>기업과 크리에이터를 이어주는 신뢰있는 계약 중개 플랫폼 </h2></Col>
         </Row>
-        <h1>Value</h1>
+        <h1>Why AD4U?</h1>
         <Row>
           <Col>
             <Card>
