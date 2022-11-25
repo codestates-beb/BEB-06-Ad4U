@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import supplier from '../../hooks/axios/supplier';
-import Avatar from 'react-avatar';
+import axios from 'axios';
 
+import Avatar from 'react-avatar';
 import { Container, Card } from 'react-bootstrap/esm';
 
+import supplier from '../../hooks/axios/supplier';
 import './Detail.css';
-import axios from 'axios';
+
 
 const SupplierDetail = () => {
   const { supplierId } = useParams();
   const [detail, setDetail] = useState({});
+  const [playlist, setPlaylist] = useState([])
   console.log("Detail", detail)
 
   useEffect(() => {
@@ -19,15 +21,9 @@ const SupplierDetail = () => {
     .catch(err => err.response.data)
   }, [supplierId])
 
-  // const [playlist, setPlaylist] = useState({id: "", snippet: {chnnelId:"", thumbnails: {}}});
-  const [playlist, setPlaylist] = useState(0)
-  
-// UCVIYOhk0nZYOADDm7yF3DIA (4개)
-//https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${channel.id}&maxResults=50&key=process.env.REACT_APP_YOUTUBE_API_KEY
-// "https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=UCSGC87iX0QhnIfUOI_B_Rdg&maxResults=50&key=AIzaSyBsfPmb1PvWwsXO2m636QoCuzJmrNlsMC8"
   useEffect(() => {
     const apikey = process.env.REACT_APP_YOUTUBE_API_KEY;
-    const get_channelId = detail.channel_id
+    const get_channelId = detail.channel_id;
     console.log(get_channelId)
     axios.get(
       `https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${get_channelId}&maxResults=50&key=${apikey}`
@@ -36,9 +32,8 @@ const SupplierDetail = () => {
         console.log(res.data.items);
         setPlaylist(res.data.items)
       })
-      .catch(() => {});
-  }, []);
-  console.log(playlist);
+      .catch((err) => { console.log(err) });
+  }, [detail]);
 
   return (
     <Container className='supplierDetail_container'>

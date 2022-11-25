@@ -4,8 +4,10 @@ import ad from '../../hooks/axios/ad';
 import client from '../../hooks/axios/client';
 import { useNavigate } from 'react-router-dom';
 
+import Avatar from 'react-avatar';
 import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap/esm';
 
+import nullImg from '../../dummyfiles/img1.png';
 import './Detail.css';
 
 const ClientDetail = () => {
@@ -38,31 +40,36 @@ const ClientDetail = () => {
     <Container className='clientDetail_container'>
       <div className="clientDetail_card-container">
         <Card.Body>
-          <Card.Title className='clientDetail_title' as='h1'>{detail.company_name}</Card.Title>
+          <Card.Title className='clientDetail_title' as='h1'>
+            {detail.profileImgUrl
+              ? <Avatar className='avatar' src={detail.profileImgUrl} size="100"/>
+              : <Avatar className='avatar' src={nullImg} size="100"/>
+            }
+            {detail.company_name}
+          </Card.Title>
           <ListGroup variant="flush">
-            <Card.Text>{detail.email}</Card.Text>
-            <Card.Text>{detail.company_number}</Card.Text>
             <ListGroup.Item></ListGroup.Item>
             <Card.Text as='h4' className='clientDetail_text'>모집중인 광고</Card.Text>
             <div className="clientDetail-content">
               {advertisement.length === 0 
-              ? <div className='noad'>현재 모집중인 광고가 없습니다.</div>
+              ? <div>현재 모집중인 광고가 없습니다.</div>
               : advertisement.map((el, idx) => {
                 console.log(el)
                 return (
-                  
                   <div 
                   className="clientDetail-content_card-container"
                   onClick={() => navigate(`/detail/ad/${el.id}`)}
                   key={idx}
                   >
-                    {/* <div key={idx}> */}
-                      {/* <span>광고 # {idx+1}</span> */}
                     <h5>{el.title}</h5>
-                    {/* </div> */}
                   </div>
               )})}
             </div>
+            <ListGroup.Item></ListGroup.Item>
+            <Card.Text as='h4' className='clientDetail_text'>회사소개</Card.Text>
+            <Card.Text>{detail.intro}</Card.Text>
+            <Card.Text>문의 _ 회사 이메일 : {detail.email}</Card.Text>
+            <Card.Text>회사번호 : {detail.company_number}</Card.Text>
           </ListGroup>
         </Card.Body>
        </div>

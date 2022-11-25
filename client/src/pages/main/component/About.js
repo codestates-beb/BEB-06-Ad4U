@@ -1,7 +1,7 @@
 import React from 'react';
 import '../Main.css';
 import { SiHiveBlockchain } from "react-icons/si";
-import handshake from '../handshake_about.png';
+import handshake from '../imgs/handshake.png';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import TotalValue from './TotalValue';
 const ReactRotatingText = require("react-rotating-text");

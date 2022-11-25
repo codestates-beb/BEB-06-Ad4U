@@ -37,9 +37,9 @@ const Nav = ({ userData, setUserData }) => {
         <button className='navllgout_btn' onClick={deleteUserData}><span>logout</span></button>
         {/* window.scrollTo(0,0) 넣어야함 */}
         <Link to={`/mypage/${isClient === 'true' ? "client" : "supplier"}`} >
-          {isClient === 'true'
-            ? <Avatar src={img} size="50" round={true}/> 
-            : <Avatar src={userData.profileImgUrl} size="50" round={true}/> }
+          {userData.profileImgUrl
+            ? <Avatar src={userData.profileImgUrl} size="50" round={true}/> 
+            : <Avatar src={img} size="50" round={true}/> }
         </Link>
       </Stack>
     )

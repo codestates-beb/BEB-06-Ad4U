@@ -187,7 +187,7 @@
   transform: scale(1.1);
 }
 
-
+/* TotalValue css */
 .totalVal_container {
   display: block;
   text-align: center;
@@ -195,7 +195,7 @@
   width: 100%;
   height: 300px;
   padding: 70px;
-  background-image: url(./star.png);
+  background-image: url(./imgs/star.png);
 }
 
 .totalTitle {

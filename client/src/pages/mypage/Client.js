@@ -83,9 +83,15 @@ const ClientMypage = ({ userData }) => {
           <Row>
             <div className="profile-content">
               <div className="profile-content_card-container">
-                <Avatar src={img} size="100" round={true}/>
+                {userData.profileImgUrl 
+                ? <Avatar src={userData.profileImgUrl} size="100" round={true}/>
+                : <Avatar src={img} size="100" round={true}/>}
                 <Card.Body>
-                  <Card.Title className='mt-3'>{userData.company_name}</Card.Title>
+                  <Card.Title className='mt-3' 
+                    onClick={() => navigate(`/detail/client/${userData.id}`)}
+                    key={userData.id}>
+                    {userData.company_name}
+                  </Card.Title>
                   <ListGroup variant="flush" className='mt-3'>
                   <ListGroup.Item >{userData.email}</ListGroup.Item>
                   <ListGroup.Item >{userData.company_number}</ListGroup.Item>
