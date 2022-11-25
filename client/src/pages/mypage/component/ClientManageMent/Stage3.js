@@ -51,17 +51,17 @@ const Stage3 = ({ adList }) => {
     }
   };
   
-  // 6. Excute Transaction
-  const handleExecuteTransaction = async () => {
-    try {
-      const tx = await method.executeTransaction(contractAddress, txIndex);
-      console.log(tx);
-      if (tx) return alert("성공!");
-    } catch(err) {
-      console.log(err);
-      alert("실패");
-    }
-  };
+  // // 6. Excute Transaction
+  // const handleExecuteTransaction = async () => {
+  //   try {
+  //     const tx = await method.executeTransaction(contractAddress, txIndex);
+  //     console.log(tx);
+  //     if (tx) return alert("성공!");
+  //   } catch(err) {
+  //     console.log(err);
+  //     alert("실패");
+  //   }
+  // };
 
   return (
     <>
@@ -70,7 +70,7 @@ const Stage3 = ({ adList }) => {
       <button onClick={sendResult}>서버로 결과보내기</button>
       <div>파기하시겠습니까?</div>
       <button onClick={handleRevokeConfirmation}>5. Revoke Transaction</button>
-      <button onClick={handleExecuteTransaction}>6. Excute Transaction</button>
+      {/* <button onClick={handleExecuteTransaction}>6. Excute Transaction</button> */}
     </>
   );
 }
