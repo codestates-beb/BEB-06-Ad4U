@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Row, Container } from 'react-bootstrap';
-import img_p from './1.png';
+import back from '../main_img.png';
 
 import '../Main.css';
 
@@ -8,12 +8,15 @@ const Home = () => {
 
   return (
     <Container className='home_cantainer'>
-      <Row>
-        <Col sn={{ size: 1, offset: 100}}>
-          <div className='home_text1'>JOIN</div>
-          <div className='home_text2'>We Create trustworthy contracts with Blockchain.</div>
-        </Col>
-      </Row>
+        <Row>
+          <Col xl={5} className='text' >
+            <div className='home_text1'>JOIN</div>
+            <div className='home_text2'>We Create trustworthy contracts with Blockchain.</div>
+          </Col>
+          <Col  xl={7} className='img'>
+            <img src={back} alt={back} />
+          </Col>
+        </Row>
     </Container>
   );
 }

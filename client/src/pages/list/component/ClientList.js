@@ -17,12 +17,14 @@ const ClientList = () => {
   ]
 
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     client.getList()
     .then(res => setList(res.data))
     .catch(err => console.log(err.response.data))
   }, [])
+  console.log(list)
 
   const refreshList = (eventKey, input) => {
     // input이 없으면 필터링 없이  refresh
