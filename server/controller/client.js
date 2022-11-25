@@ -56,11 +56,11 @@ module.exports = {
         }
     },
     inputInfo: async (req, res) => {
-        const {intro, logoUrl} = req.body;
+        const {intro, profileImgUrl} = req.body;
         try {
             let body = {};
             if(intro) body.intro = intro;
-            if(profileImgUrl) body.profileImgUrl = logoUrl;
+            if(profileImgUrl) body.profileImgUrl = profileImgUrl;
 
             Client.update(body,
                 { where: { id: req.data.user.id} })
