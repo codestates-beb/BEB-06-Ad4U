@@ -25,7 +25,7 @@ const SBTView = ({ userData, adList }) => {
     setSbtList(adList.filter(element => {
         return element.status > 2;
     }));
-    console.log(sbtList)
+    // console.log(sbtList)
   }, [adList])
 
   const dataURLtoBase64 = (dataurl) => {

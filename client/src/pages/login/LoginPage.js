@@ -12,7 +12,6 @@ import Col from 'react-bootstrap/esm/Col';
 import Button from 'react-bootstrap/Button';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import axios from 'axios';
 
 import './LoginPage.css';
 
@@ -43,7 +42,8 @@ const LoginPage = ({ setUserData }) => {
   },[]);
 
   const googleOath = async () => {
-    window.location.href = await auth.oauthCode();;
+    //서버에서 url을 받아와서 동의 페이지로 이동
+    window.location.href = await auth.oauthLink();
   }
 
   const sendLoginData = async (loginData) => {

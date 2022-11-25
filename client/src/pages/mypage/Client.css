@@ -35,3 +35,8 @@
 .clientMypage_accordion {
   margin-top: 20px;
 }
+
+/* profile card */
+.profile-content_card-container:hover {
+  transform: scale(1.1);
+}

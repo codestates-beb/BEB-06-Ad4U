@@ -7,8 +7,9 @@ const conference = async (accessToken, isClient, supplierId, adId, contractAddre
       url: "http://localhost:3001/function/conference",
       method: 'POST',
       headers: {
-        "Authorization": `Bearer ${accessToken}`},
-        "Content-Type": "application/json", 
+        "Authorization": `Bearer ${accessToken}`,
+        "Content-Type": "application/json"
+      },
       withCredentials: true,
       data : {
         isClient: JSON.parse(isClient),
@@ -29,8 +30,9 @@ const proceed = async (accessToken, isClient, adId) => {
       url: "http://localhost:3001/function/proceed",
       method: 'POST',
       headers: {
-        "Authorization": `Bearer ${accessToken}`},
-        "Content-Type": "application/json", 
+        "Authorization": `Bearer ${accessToken}`,
+        "Content-Type": "application/json"
+      }, 
       withCredentials: true,
       data : {
         isClient: JSON.parse(isClient),
@@ -49,8 +51,9 @@ const create = async (accessToken, isClient, adId, tokenInfo) => {
       url: "http://localhost:3001/function/contract",
       method: 'POST',
       headers: {
-        "Authorization": `Bearer ${accessToken}`},
-        "Content-Type": "application/json", 
+        "Authorization": `Bearer ${accessToken}`,
+        "Content-Type": "application/json"
+      }, 
       withCredentials: true,
       data : {
         isClient: JSON.parse(isClient),
@@ -72,8 +75,9 @@ const complete = async (accessToken, isClient, adId) => {
       url: "http://localhost:3001/function/complete",
       method: 'POST',
       headers: {
-        "Authorization": `Bearer ${accessToken}`},
-        "Content-Type": "application/json", 
+        "Authorization": `Bearer ${accessToken}`,
+        "Content-Type": "application/json"
+      }, 
       withCredentials: true,
       data : {
         isClient: JSON.parse(isClient),
@@ -92,8 +96,9 @@ const cancel = async (accessToken, isClient, adId) => {
       url: "http://localhost:3001/function/break",
       method: 'POST',
       headers: {
-        "Authorization": `Bearer ${accessToken}`},
-        "Content-Type": "application/json", 
+        "Authorization": `Bearer ${accessToken}`,
+        "Content-Type": "application/json"
+      }, 
       withCredentials: true,
       data : {
         isClient: JSON.parse(isClient),

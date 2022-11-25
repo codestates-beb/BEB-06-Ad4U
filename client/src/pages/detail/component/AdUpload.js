@@ -104,12 +104,8 @@ const AdUpload = () => {
     setAdInfo(AdInfo)
   }
 
-  const handleFileInput = async (e) => {
-    await uploadFile(e.target.files[0]);
-  }
-
-  const uploadFile = (file) => {
-
+  const uploadFile = (e) => {
+      const file = e.target.files[0]
       const params = {
           ACL: 'public-read',
           Body: file,
@@ -117,13 +113,10 @@ const AdUpload = () => {
           Key: file.name
       };
       
-
       myBucket.upload(params, function (err, data) {
         console.log(data)
-        if (err) {
-            throw err
-        }
-        console.log(`File uploaded successfully.`);
+        if (err) return alert("File upload is fail!");
+        console.log(`File uploaded successfully. ${data.Location}`);
         AdInfo.imgUrl = data.Location;
         setAdInfo(AdInfo)
       });
@@ -185,7 +178,7 @@ const AdUpload = () => {
     <Form className='form'>
       <Form.Group controlId="formFile" className="mb-3">
         <Form.Label><h5>이미지 업로드</h5></Form.Label>
-        <Form.Control type="file" onChange={handleFileInput}/>
+        <Form.Control type="file" onChange={uploadFile}/>
       </Form.Group>
       
       <Form.Group className="mb-3" controlId="formAdTitle">
