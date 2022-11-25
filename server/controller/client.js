@@ -39,15 +39,15 @@ module.exports = {
                 where: {
                     id: req.query.id
                 },
-                include: [
-                    {
-                        model: Advertisement, as: "Advertisements",
-                        attributes: ['id', 'title', 'AdimgUrl', 'cost', 'createdAt'],
-                        where: {
-                            status: 0
-                        }
-                    },
-                ]
+                // include: [
+                //     {
+                //         model: Advertisement, as: "Advertisements",
+                //         attributes: ['id', 'title', 'AdimgUrl', 'cost', 'createdAt'],
+                //         where: {
+                //             status: 0
+                //         }
+                //     },
+                // ]
             });
             res.status(200).json(client_datail);
         }catch(err){
