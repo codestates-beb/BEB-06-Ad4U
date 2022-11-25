@@ -13,21 +13,10 @@ const Stage2 = ({ adList }) => {
   const accessToken = getLocalData('accessToken');
   const isClient = getLocalData('isClient');
 
-  // 2. Supplier Sign Wallet
-  const handleSupplierSignWallet = async () => {
-    try {
-      const tx = await method.supplierSignWallet(contractAddress);
-      if (tx) return contract.proceed(accessToken, isClient, adId);
-    } catch (err) {
-      console.log(err);
-      alert("트랜젝션 생성에 실패하였습니다.");
-    }
-  };
-
   return (
     <>
       <div>진행중1</div>
-      <button onClick={handleSupplierSignWallet}>2. Supplier Sign Wallet</button>
+      <div>광고주가 계약서를 작성중입니다.</div>
     </>
   );
 }

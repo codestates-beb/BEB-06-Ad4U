@@ -7,7 +7,7 @@ const refresh = async () => {
     headers: {"Content-Type": "application/json"},
     withCredentials: true,
   }
-  const result = await axios.request(options)
+  const result = await axios.request(options);
   return result;
 }
 
@@ -20,7 +20,7 @@ const oauth = async (authorizationCode) => {
       withCredentials: true,
       data: { code: authorizationCode }
     }
-    const result = await axios.request(options)
+    const result = await axios.request(options);
     return result;
   } else throw new Error("authorizationCode not provided");
 }
@@ -35,7 +35,7 @@ const login = async (loginData) => {
       withCredentials: true,
       data:{ userId, password, isClient }
     }
-    const result = await axios.request(options)
+    const result = await axios.request(options);
     return result;
   } else throw new Error("insufficient loginData");
 }
@@ -76,7 +76,7 @@ const getMypage = async (isClient, accessToken) => {
       },
       withCredentials: true,
     }
-    const result = await axios.request(options)
+    const result = await axios.request(options);
     return result;
   } else throw new Error("insufficient localData");
 }
