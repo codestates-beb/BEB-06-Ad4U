@@ -9,7 +9,7 @@ import './Detail.css';
 
 const ClientDetail = () => {
   const { clientId } = useParams();
-  const [detail, setDetail] = useState({ Advertisements:[] });
+  const [detail, setDetail] = useState({ company_name: "", company_number: "", email: "", Advertisements:[] });
   console.log("Detail", detail)
 
   useEffect(() => {
@@ -30,8 +30,8 @@ const ClientDetail = () => {
             <Card.Text>{detail.company_number}</Card.Text>
             <ListGroup.Item></ListGroup.Item>
             <Card.Text as='h4' className='clientDetail_text'>진행중인 광고</Card.Text>
-            <div className="clientDetail-content">
-              {detail.Advertisements.map((el, idx) => {
+            <div className="clientDetail-content">              
+              {detail && detail.Advertisements.map((el, idx) => {
                 console.log(el)
                 return (
                   <div 
