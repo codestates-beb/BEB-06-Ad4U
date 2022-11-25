@@ -10,7 +10,7 @@ import './Client.css';
 import Avatar from 'react-avatar';
 import img from '../../dummyfiles/img1.png';
 import Status from './component/Status';
-import ClientInfo from './component/ClientModal/Info';
+import ClientEditInfo from './component/ClientEditInfo';
 import { Col, Row, Container, Spinner, Card, ListGroup } from 'react-bootstrap';
 import axios from 'axios';
 import SBTView from './component/SBTView/SBTView';
@@ -83,10 +83,15 @@ const ClientMypage = () => {
         <Col xl={3} >
           <Row>
             <div className="profile-content">
-              <div className="profile-content_card-container" onClick={() => setShow(true)}>
-                <Avatar src={userData.profileImgUrl} size="100" round={true}/>
+              <div className="profile-content_card-container" onClick={() => navigate(`/detail/client/${userData.id}`)}>
+                { userData.profileImgUrl 
+                ? <Avatar src={userData.profileImgUrl} size="100" round={true}/>
+                : <Avatar src={img} size="100" round={true}/>}
                 <Card.Body>
-                  <Card.Title className='mt-3'>{userData.company_name}</Card.Title>
+                  <Card.Title className='mt-3' 
+                    key={userData.id}>
+                    {userData.company_name}
+                  </Card.Title>
                   <ListGroup variant="flush" className='mt-3'>
                   <ListGroup.Item >{userData.email}</ListGroup.Item>
                   <ListGroup.Item >{userData.company_number}</ListGroup.Item>
@@ -95,7 +100,8 @@ const ClientMypage = () => {
                 </Card.Body>
               </div>
             </div>
-            <Link to="/upload"><button className='clientupload_btn'><span>광고 업로드</span></button></Link>
+            <Link><button className='clientSide_btn' onClick={() => setShow(true)}><span>정보 수정하기</span></button></Link>
+            <Link to="/upload"><button className='clientSide_btn'><span>광고 업로드</span></button></Link>
           </Row>
         </Col>
         <Col xl={9} >
@@ -106,7 +112,7 @@ const ClientMypage = () => {
           </Routes>
         </Col>        
       </Row>
-      <ClientInfo userData={userData} show={show} setShow={setShow} />
+      <ClientEditInfo userData={userData} show={show} setShow={setShow} />
     </Container>
   );
 }

@@ -5,9 +5,6 @@ import {getTransactionCount, getTransaction} from '../../../hooks/web3/queryCont
 
 import Web3 from "web3";
 
-
-
-
 const TotalValue = () => {
 
   const [AllContract, setAllContract] = useState([]);
@@ -54,8 +51,6 @@ const TotalValue = () => {
   return (
     <div className='totalVal_container'>
         <h1 className='totalTitle'>누적 거래량</h1>
-        <br></br>
-        <br></br>
         <h2>{totalContractVal} ETH</h2>
     </div>
   );

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ad from '../../hooks/axios/ad';
-import nullImg from '../../component/null.png';
+import nullImg from '../../dummyfiles/img1.png';
 import { useNavigate } from 'react-router-dom';
 import { getLocalData } from '../../config/localStrage'; 
 
 import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap/esm';
-
+import Avatar from 'react-avatar';
 import './Detail.css';
 
 const AdDetail = ({ userData }) => {
@@ -40,7 +40,13 @@ const AdDetail = ({ userData }) => {
             as="h5"
             onClick={() => navigate(`/detail/client/${detail.Client.id}`)}
             key={detail.Client.id}
-            >{detail.Client.company_name}</Card.Header>
+            >
+              {detail.profileImgUrl
+                ? <Avatar className='avatar' src={detail.profileImgUrl} size="50"/>
+                : <Avatar className='avatar' src={nullImg} size="50"/>
+              }
+              {detail.Client.company_name}
+            </Card.Header>
             <Card.Body>
               <ListGroup variant="flush" className='item'>
                 <ListGroup.Item>{detail.Client.email}</ListGroup.Item>
