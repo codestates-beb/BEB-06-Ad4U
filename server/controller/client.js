@@ -60,7 +60,7 @@ module.exports = {
         try {
             let body = {};
             if(intro) body.intro = intro;
-            if(logoUrl) body.logoUrl = logoUrl;
+            if(profileImgUrl) body.profileImgUrl = logoUrl;
 
             Client.update(body,
                 { where: { id: req.data.user.id} })
