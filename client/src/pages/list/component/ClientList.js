@@ -20,7 +20,7 @@ const ClientList = () => {
   
   useEffect(() => {
     client.getList()
-    .then(res => setList(res.data))
+    .then(res => {setList(res.data); console.log(res.data)})
     .catch(err => console.log(err.response.data))
   }, [])
   console.log(list)

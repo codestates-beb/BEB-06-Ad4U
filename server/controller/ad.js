@@ -1,11 +1,11 @@
 const { Client, Advertisement, Advertisement_has_Supplier, Supplier } = require('../models/index');
-
+const ad_attributes = ['id', 'title', 'AdimgUrl', 'cost', 'createdAt'];
 
 module.exports = {
     main: async (req, res) => { //최근 10개만
         try {
             let main_ad = await Advertisement.findAll({
-                attributes: ['id', 'title', 'AdimgUrl', 'cost', 'createdAt'],
+                attributes: ad_attributes,
                 where: {
                     status: 0,
                 },
@@ -22,7 +22,7 @@ module.exports = {
     list: async (req, res) => {
         try {
             let list_ad = await Advertisement.findAll({
-                attributes: ['id', 'title', 'AdimgUrl', 'cost', 'createdAt'],
+                attributes: ad_attributes,
                 where: {
                     status: 0,
                 },
@@ -49,22 +49,23 @@ module.exports = {
     },
     detail: async (req, res) => {
         try {
+            ad_attributes.push('content');
             let ad_datail = await Advertisement.findOne({
-                attributes: ['id', 'title', 'content', 'AdimgUrl', 'cost', 'createdAt'],
+                attributes: ad_attributes,
                 where: {
                     id: req.query.id
                 },
                 include: [
                     {
                         model: Client, as: "Client",
-                        attributes: ['id', 'userId', 'company_name', 'company_number', 'email'],
+                        attributes: ['id', 'company_name', 'company_number', 'email'],
                     },
                     {
                         model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",
                         include: [
                             {
                                 model: Supplier, as: "Supplier",
-                                attributes: ['userId'],
+                                attributes: ['id'],
                             }
                         ]
                     }
@@ -124,5 +125,19 @@ module.exports = {
         } catch (err) {
             res.status(400).json(err.message);
         }
+    },
+    allContract: async (req, res) => {
+        try {
+            let list_contract = await Advertisement.findAll({
+                attributes: ['multisigAddress'],
+            });
+            const filter_contract = list_contract.filter((ele) => {
+                return ele.dataValues.multisigAddress != null;
+            })
+            res.status(200).json(filter_contract);
+        } catch (err) {
+            res.status(400).json(err.message);
+        }
+
     },
 }

@@ -7,7 +7,7 @@ import {client} from "../../../config/linkIpfs"
 
 import './Contract.css'
 
-const ContractPrint = ({contractInfo, previewCheck, setTokenURI}) => {
+const ContractPrint = ({contractInfo, previewCheck, setTokenURI, setPreviewCheck}) => {
 
     useEffect(() => {
         const print = document.getElementById("divToPrint");
@@ -44,6 +44,7 @@ const ContractPrint = ({contractInfo, previewCheck, setTokenURI}) => {
             const url = `https://ad4u.infura-ipfs.io/ipfs/${added.path}`; // 전용 게이트 웨이 등록 infura IPFS 사용
             console.log(url);
             setTokenURI(url);
+            setPreviewCheck(true)
 
         })
     },[previewCheck])

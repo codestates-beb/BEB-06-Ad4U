@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Accordion, Col, Row, Container } from 'react-bootstrap';
 import '../../Client.css';
 
-import {AdContract} from '../Contract';
 
 //협의중
 const Stage1 = ({ adList }) => {
@@ -12,7 +11,7 @@ const Stage1 = ({ adList }) => {
   return (
     <>
       <div>협의중</div>
-      <Link to={`/mypage/client/contract/${adId}`}>계약서 작성하러가기</Link>
+      <div>크리에이터의 컨트랙트 서명을 기다리고 있습니다.</div>
     </>
   );
 }

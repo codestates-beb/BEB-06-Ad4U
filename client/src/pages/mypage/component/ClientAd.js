@@ -23,11 +23,13 @@ const ClientAd = ({ idx, adList }) => {
   }
 
   const showStatus = (status) => {
-    if(status === 0) return "요청중"; 
+    if(status === 0) return "모집중"; 
     if(status === 1) return "협의중";
-    if(status === 2) return "진행중";
-    if(status === 3) return "종료";
-    if(status === 4) return "파기";
+    if(status === 2) return "진행중(1/2)";
+    if(status === 3) return "진행중(2/2)";
+    if(status === 4) return "완료";
+    if(status === 5) return "파기";
+    else return "";
   }
 
   return (

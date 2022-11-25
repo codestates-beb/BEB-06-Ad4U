@@ -3,9 +3,10 @@ const { Client, Supplier, Advertisement, Advertisement_has_Supplier } = require(
 const jwt = require('jsonwebtoken');
 const client_attributes = ['id', 'userId', 'company_name', 'company_number', 'email'];
 const supplier_attributes = ['id', 'userId', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address'];
-const login_supplier_attributes = ['id', 'userId', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address', 'refreshToken'];
+const advertisement_attributes = ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_id', 'token_address','token_uri', 'createdAt', 'status']
 const axios = require("axios");
 const jwt_decode = require('jwt-decode');
+const supplier = require("./supplier");
 
 module.exports = {
     login: async (req, res) => {
@@ -18,8 +19,9 @@ module.exports = {
                     where: { userId: userId, password: password },
                 });
             } else {
+                supplier_attributes.push("refreshToken");
                 user = await Supplier.findOne({
-                    attributes: login_supplier_attributes,
+                    attributes: supplier_attributes,
                     where: { userId: userId, password: password },
                 });
                 const refreshToken = user.refreshToken;
@@ -185,13 +187,14 @@ module.exports = {
         let user;
         try {
             if (JSON.parse(isClient)) {
+                client_attributes.push('logoUrl', 'intro');
                 user = await Client.findOne({
                     attributes: client_attributes,
                     where: { userId: req.data.user.userId },
                     include: [
                         {
                             model: Advertisement, as: "Advertisements",
-                            attributes: ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_id', 'token_address','token_uri', 'createdAt', 'status'],
+                            attributes: advertisement_attributes,
                             include: [
                                 {
                                     model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",
@@ -216,7 +219,7 @@ module.exports = {
                             include: [
                                 {
                                     model: Advertisement, as: "Advertisement",
-                                    attributes: ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_id', 'token_address', 'createdAt', 'status'],
+                                    attributes: advertisement_attributes,
                                 },
                             ]
                         }

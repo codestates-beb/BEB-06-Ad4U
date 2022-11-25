@@ -3,6 +3,7 @@ import '../Main.css';
 import { SiHiveBlockchain } from "react-icons/si";
 import handshake from '../handshake_about.png';
 import { Card, Col, Container, Row } from 'react-bootstrap';
+import TotalValue from './TotalValue';
 const ReactRotatingText = require("react-rotating-text");
 
 
@@ -63,6 +64,7 @@ const About = () => {
             <SiHiveBlockchain size="24" color='white' onClick={handle3Click} />
             <SiHiveBlockchain size="24" color='white' onClick={handle4Click} />
           </Col>
+          <TotalValue/>
         </Row>
       </div>
         {/* <h3>
@@ -73,6 +75,7 @@ const About = () => {
           />
         </h3> */}
     </Container>
+
   );
 }
 

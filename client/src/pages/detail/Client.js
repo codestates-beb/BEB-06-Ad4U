@@ -30,21 +30,8 @@ const ClientDetail = () => {
             <Card.Text>{detail.company_number}</Card.Text>
             <ListGroup.Item></ListGroup.Item>
             <Card.Text as='h4' className='clientDetail_text'>진행중인 광고</Card.Text>
-            <div className="clientDetail-content">              
-              {detail && detail.Advertisements.map((el, idx) => {
-                console.log(el)
-                return (
-                  <div 
-                  className="clientDetail-content_card-container"
-                  onClick={() => navigate(`/detail/ad/${el.id}`)}
-                  key={idx}
-                  >
-                    {/* <div key={idx}> */}
-                      {/* <span>광고 # {idx+1}</span> */}
-                    <h5>{el.title}</h5>
-                    {/* </div> */}
-                  </div>
-              )})}
+            <div className="clientDetail-content">
+
             </div>
           </ListGroup>
         </Card.Body>
@@ -54,3 +41,19 @@ const ClientDetail = () => {
 }
 
 export default ClientDetail;
+
+
+// {detail.Advertisements.map((el, idx) => {
+//   console.log(el)
+//   return (
+//     <div 
+//     className="clientDetail-content_card-container"
+//     onClick={() => navigate(`/detail/ad/${el.id}`)}
+//     key={idx}
+//     >
+//       {/* <div key={idx}> */}
+//         {/* <span>광고 # {idx+1}</span> */}
+//       <h5>{el.title}</h5>
+//       {/* </div> */}
+//     </div>
+// )})}

@@ -311,7 +311,7 @@ const AdContract = ({ userData, adList }) => {
 
 
 
-      <Button variant="primary" onClick={() => {setModalShow(true); setPreviewCheck(true);}}>
+      <Button variant="primary" onClick={() => {setModalShow(true);}}>
         미리보기
       </Button>
      
@@ -335,7 +335,7 @@ const AdContract = ({ userData, adList }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className='modalBody'>
-        <ContractPrint contractInfo={contractInfo} previewCheck={previewCheck} setTokenURI={setTokenURI}></ContractPrint>
+        <ContractPrint contractInfo={contractInfo} previewCheck={previewCheck} setTokenURI={setTokenURI} setPreviewCheck={setPreviewCheck}></ContractPrint>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={() => setModalShow(false)}>Close</Button>
