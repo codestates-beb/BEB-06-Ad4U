@@ -1,6 +1,6 @@
 import axios from "axios";
 
-//협의 광고주만 가능
+//1.협의 광고주만 가능
 const conference = async (accessToken, isClient, supplierId, adId, contractAddress) => {
   if (accessToken && isClient && supplierId && adId && contractAddress) {
     const options = {
@@ -17,12 +17,32 @@ const conference = async (accessToken, isClient, supplierId, adId, contractAddre
         multisigAddress: contractAddress,
       }
     }
-    const result = await axios.request(options)
+    const result = await axios.request(options);
     return result;
   } else throw new Error("insufficient data");
 }
 
-//계약
+//2.진행
+const proceed = async (accessToken, isClient, adId) => {
+  if (accessToken && isClient && adId) {
+    const options = {
+      url: "http://localhost:3001/function/proceed",
+      method: 'POST',
+      headers: {
+        "Authorization": `Bearer ${accessToken}`},
+        "Content-Type": "application/json", 
+      withCredentials: true,
+      data : {
+        isClient: JSON.parse(isClient),
+        advertisement_id: adId,
+      }
+    }
+    const result = await axios.request(options);
+    return result;
+  } else throw new Error("insufficient data");
+}
+
+//3.계약
 const create = async (accessToken, isClient, adId, tokenInfo) => {
   if (accessToken && isClient && adId && tokenInfo) {
     const options = {
@@ -40,33 +60,12 @@ const create = async (accessToken, isClient, adId, tokenInfo) => {
         token_address: tokenInfo.token_address
       }
     }
-    const result = await axios.request(options)
+    const result = await axios.request(options);
     return result;
   } else throw new Error("insufficient data");
 }
 
-//진행
-const proceed = async (accessToken, isClient, adId) => {
-  if (accessToken && isClient && adId) {
-    const options = {
-      url: "http://localhost:3001/function/proceed",
-      method: 'POST',
-      headers: {
-        "Authorization": `Bearer ${accessToken}`},
-        "Content-Type": "application/json", 
-      withCredentials: true,
-      data : {
-        isClient: JSON.parse(isClient),
-        advertisement_id: adId,
-      }
-    }
-    const result = await axios.request(options)
-    return result;
-  } else throw new Error("insufficient data");
-}
-
-
-//이행완료
+//4.이행완료
 const complete = async (accessToken, isClient, adId) => {
   if (accessToken && isClient && adId) {
     const options = {
@@ -86,7 +85,7 @@ const complete = async (accessToken, isClient, adId) => {
   } else throw new Error("insufficient data");
 }
 
-//파기
+//5.파기
 const cancel = async (accessToken, isClient, adId) => {
   if (accessToken && isClient && adId) {
     const options = {
@@ -108,8 +107,8 @@ const cancel = async (accessToken, isClient, adId) => {
 
 const contract = { 
   conference, 
-  create,
   proceed, 
+  create,
   complete, 
   cancel 
 };

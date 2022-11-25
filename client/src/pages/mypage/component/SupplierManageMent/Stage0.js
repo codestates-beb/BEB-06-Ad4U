@@ -15,7 +15,7 @@ const Stage0 = ({ adList }) => {
   return (
     <>
       <div>모집중</div>
-      <button onClick={() => ad.callApplyCancel(accessToken, isClient, adId)}>지원 취소허기</button>
+      <button onClick={() => ad.callApplyCancel(accessToken, isClient, adId)}>지원 취소하기</button>
     </>
   );
 }

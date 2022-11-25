@@ -7,7 +7,7 @@ const mainList = async () => {
     headers: {"Content-Type": "application/json"},
     withCredentials: true,
   }
-  const result = await axios.request(options)
+  const result = await axios.request(options);
   return result;
 }
 
@@ -18,7 +18,7 @@ const getList = async () => {
     headers: {"Content-Type": "application/json"},
     withCredentials: true,
   }
-  const result = await axios.request(options)
+  const result = await axios.request(options);
   return result;
 }
 
@@ -30,7 +30,7 @@ const getDetail = async (adId) => {
       headers: {"Content-Type": "application/json"},
       withCredentials: true,
     }
-    const result = await axios.request(options)
+    const result = await axios.request(options);
     return result;
   } else {
     throw new Error('adId is undefind!');

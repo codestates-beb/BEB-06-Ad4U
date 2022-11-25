@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Accordion, Col, Row, Container } from 'react-bootstrap';
 import method from '../../../../hooks/web3/sendTransaction';
 import '../../Client.css';
@@ -10,7 +10,8 @@ const Stage2 = ({ adList }) => {
   
   return (
     <>
-      <div>크리에이터의 컨트랙트 서명을 기다리고 있습니다.</div>
+      <div>진행중1</div>
+      <Link to={`/mypage/client/contract/${adId}`}>계약서 작성하러가기</Link>
     </>
   );
 }
