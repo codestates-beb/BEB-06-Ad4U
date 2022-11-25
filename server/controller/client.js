@@ -53,6 +53,22 @@ module.exports = {
         }catch(err){
             res.status(400).json(err.message);
         }
+    },
+    inputInfo: async (req, res) => {
+        const {intro, logoUrl} = req.body;
+        try {
+            let body = {};
+            if(intro) body.intro = intro;
+            if(logoUrl) body.logoUrl = logoUrl;
+
+            Client.update(body,
+                { where: { id: req.data.user.id} })
+                .then((data) => {
+                    res.status(201).json("complete")
+                })
+        } catch (err) {
+            res.status(400).json(err.message);
+        }
     }
 }
 
