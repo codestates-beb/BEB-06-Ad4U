@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { Client, Supplier, Advertisement, Advertisement_has_Supplier } = require('../models/index');
 const jwt = require('jsonwebtoken');
-const client_attributes = ['id', 'userId', 'company_name', 'company_number', 'email'];
+const client_attributes = ['id', 'userId', 'company_name', 'company_number', 'email', 'profileImgUrl'];
 const supplier_attributes = ['id', 'userId', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address'];
 const advertisement_attributes = ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_id', 'token_address','token_uri', 'createdAt', 'status']
 const axios = require("axios");
@@ -187,7 +187,7 @@ module.exports = {
         let user;
         try {
             if (JSON.parse(isClient)) {
-                client_attributes.push('logoUrl', 'intro');
+                client_attributes.push('profileImgUrl', 'intro');
                 user = await Client.findOne({
                     attributes: client_attributes,
                     where: { userId: req.data.user.userId },

@@ -1,5 +1,5 @@
 const { Client, Advertisement } = require('../models/index');
-const client_attributes = ['id', 'company_name', 'company_number', 'email', 'logoUrl'];
+const client_attributes = ['id', 'company_name', 'company_number', 'email', 'profileImgUrl'];
 
 module.exports = {
     main: async (req, res) => { //최근 10개만
@@ -56,11 +56,11 @@ module.exports = {
         }
     },
     inputInfo: async (req, res) => {
-        const {intro, logoUrl} = req.body;
+        const {intro, profileImgUrl} = req.body;
         try {
             let body = {};
             if(intro) body.intro = intro;
-            if(logoUrl) body.logoUrl = logoUrl;
+            if(profileImgUrl) body.profileImgUrl = profileImgUrl;
 
             Client.update(body,
                 { where: { id: req.data.user.id} })

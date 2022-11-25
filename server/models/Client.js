@@ -31,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(2000),
       allowNull: true
     },
-    logoUrl: {
+    profileImgUrl: {
       type: DataTypes.STRING(300),
       allowNull: true
     }

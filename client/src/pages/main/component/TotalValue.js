@@ -15,7 +15,7 @@ const TotalValue = () => {
 
   async function getAllContract() {
     const result = await ad.allContractList();
-    console.log(result.data);
+    // console.log(result.data);
     setAllContract(result.data);
   }
 
@@ -27,7 +27,7 @@ const TotalValue = () => {
         for(let i=0;i<txCount;i++) {
             var txInfo = await getTransaction(walletAddress,i);
             var txVal = txInfo.value;
-            console.log(txVal)
+            // console.log(txVal)
             totalVal += parseInt(txVal)
             const valToWei = Web3.utils.fromWei(String(totalVal), "ether");
             setTimeout(() => {
@@ -47,7 +47,7 @@ const TotalValue = () => {
   },[AllContract])
 
   useEffect(() => {
-    console.log(totalContractVal)
+    // console.log(totalContractVal)
   },[totalContractVal])
 
 
