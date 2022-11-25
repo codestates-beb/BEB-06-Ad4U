@@ -187,7 +187,7 @@ module.exports = {
         let user;
         try {
             if (JSON.parse(isClient)) {
-                client_attributes.push('logoUrl', 'intro');
+                client_attributes.push('profileImgUrl', 'intro');
                 user = await Client.findOne({
                     attributes: client_attributes,
                     where: { userId: req.data.user.userId },
