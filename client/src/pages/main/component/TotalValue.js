@@ -32,7 +32,7 @@ const TotalValue = () => {
             const valToWei = Web3.utils.fromWei(String(totalVal), "ether");
             setTimeout(() => {
 
-            },1000)
+            },5000)
             setTotalContractVal(valToWei);
         }
     })
