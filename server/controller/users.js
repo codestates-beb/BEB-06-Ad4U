@@ -3,10 +3,16 @@ const { Client, Supplier, Advertisement, Advertisement_has_Supplier } = require(
 const jwt = require('jsonwebtoken');
 const client_attributes = ['id', 'userId', 'company_name', 'company_number', 'email', 'profileImgUrl'];
 const supplier_attributes = ['id', 'userId', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address'];
-const advertisement_attributes = ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_id', 'token_address','token_uri', 'createdAt', 'status']
+const advertisement_attributes = ['id', 'title', 'AdimgUrl', 'cost', 'multisigAddress', 'token_id', 'token_address', 'token_uri', 'createdAt', 'status']
 const axios = require("axios");
 const jwt_decode = require('jwt-decode');
-const supplier = require("./supplier");
+const { google } = require('googleapis');
+const oauth2Client = new google.auth.OAuth2(
+    process.env.CLIENT_ID,
+    process.env.CLIENT_PASSWORD,
+    "http://localhost:3000/login"
+);
+
 
 module.exports = {
     login: async (req, res) => {
@@ -70,24 +76,28 @@ module.exports = {
         res.clearCookie('jwt_refreshToken'); //쿠키삭제
         res.status(200).json("logout");
     },
+    authCode: async (req, res) => {
+        const scopes = [
+            "openid",
+            "profile",
+            "email",
+            "https://www.googleapis.com/auth/youtube.readonly"
+        ];
+
+        const authorizationUrl = oauth2Client.generateAuthUrl({
+            access_type: 'offline',
+            scope: scopes,
+            include_granted_scopes: true
+        });
+        console.log(authorizationUrl)
+        res.status(200).json(authorizationUrl);
+    },
     auth: async (req, res) => {
         const { code } = req.body;
-        axios.post("https://oauth2.googleapis.com/token", null, {
-            headers: {
-                "Content-Type": `application/x-www-form-urlencoded`
-            }, params: {
-                client_id: process.env.CLIENT_ID,
-                client_secret: process.env.CLIENT_PASSWORD,
-                code: code,
-                redirect_uri: "http://localhost:3000/login",
-                grant_type: "authorization_code"
-            }
-        }).then(async (response) => {
-            const user_info = jwt_decode(response.data.id_token);
-            const access_token = response.data.access_token;
-
-            const youtube_info = await axios.get(`https://www.googleapis.com/youtube/v3/channels?access_token=${access_token}&part=snippet,statistics&mine=true&fields=items&2Fsnippet%2Fthumbnails`);
-
+        try {
+            let { tokens } = await oauth2Client.getToken(code);
+            const user_info = jwt_decode(tokens.id_token);
+            const youtube_info = await axios.get(`https://www.googleapis.com/youtube/v3/channels?access_token=${tokens.access_token}&part=snippet,statistics&mine=true&fields=items&2Fsnippet%2Fthumbnails`);
             let body = {
                 email: user_info.email,
                 channelName: youtube_info.data.items[0].snippet.title,
@@ -103,9 +113,9 @@ module.exports = {
             });
 
             if (user) {
-                if(user.userId){ //회원가입이 되어있을 경우
+                if (user.userId) { //회원가입이 되어있을 경우
                     res.status(400).json("You are already a member")
-                }else{  //auth 시도하다가 취소했을경우
+                } else {  //auth 시도하다가 취소했을경우
                     Supplier.update(body, {
                         where: { email: user_info.email },
                     }).then(data => {
@@ -113,15 +123,17 @@ module.exports = {
                     })
                 }
             } else { //첫 auth - refresh token save
-                body.refreshToken = response.data.refresh_token,
+                body.refreshToken = tokens.refresh_token,
                     Supplier.create(body)
                         .then(data => {
                             res.status(201).json({ email: user_info.email });
                         })
             }
-        }).catch((err) => {
-            res.status(401).json(err.message);
-        })
+        } catch (err) {
+            res.status(400).json(err.message);
+        }
+
+
     },
     signup: async (req, res) => {
         let isClient = req.body.isClient;
@@ -157,30 +169,30 @@ module.exports = {
     },
     refresh: async (req, res) => {
         let user;
-            try {
-                const client_user = await Client.findOne({
-                    attributes: client_attributes,
-                    where: { userId: req.data.userId },
-                });
-                const supplier_user = await Supplier.findOne({
-                    attributes: supplier_attributes,
-                    where: { userId: req.data.userId },
-                });
+        try {
+            const client_user = await Client.findOne({
+                attributes: client_attributes,
+                where: { userId: req.data.userId },
+            });
+            const supplier_user = await Supplier.findOne({
+                attributes: supplier_attributes,
+                where: { userId: req.data.userId },
+            });
 
-                if (client_user) {
-                    user = client_user;
-                    const jwt_accessToken = jwt.sign({ user }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
-                    res.status(200).json({ jwt_accessToken, user, isClient: true });
-                } else if (supplier_user) {
-                    user = supplier_user;
-                    const jwt_accessToken = jwt.sign({ user }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
-                    res.status(200).json({ jwt_accessToken, user, isClient: false });
-                } else{
-                    res.status(401).json("login again");
-                }
-            } catch (err) {
-                res.status(400).json(err.message)
+            if (client_user) {
+                user = client_user;
+                const jwt_accessToken = jwt.sign({ user }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
+                res.status(200).json({ jwt_accessToken, user, isClient: true });
+            } else if (supplier_user) {
+                user = supplier_user;
+                const jwt_accessToken = jwt.sign({ user }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
+                res.status(200).json({ jwt_accessToken, user, isClient: false });
+            } else {
+                res.status(401).json("login again");
             }
+        } catch (err) {
+            res.status(400).json(err.message)
+        }
     },
     mypage: async (req, res) => {
         const { isClient } = req.query;
