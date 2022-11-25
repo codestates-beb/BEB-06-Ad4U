@@ -83,12 +83,21 @@ const ClientMypage = () => {
         <Col xl={3} >
           <Row>
             <div className="profile-content">
+<<<<<<< HEAD
               <div className="profile-content_card-container" onClick={() => navigate(`/detail/client/${userData.id}`)}>
                 { userData.profileImgUrl 
+=======
+              <div className="profile-content_card-container">
+                {userData.profileImgUrl 
+>>>>>>> f7abb927dd5c76de319b97d4cb8f9a9d6e771414
                 ? <Avatar src={userData.profileImgUrl} size="100" round={true}/>
                 : <Avatar src={img} size="100" round={true}/>}
                 <Card.Body>
                   <Card.Title className='mt-3' 
+<<<<<<< HEAD
+=======
+                    onClick={() => navigate(`/detail/client/${userData.id}`)}
+>>>>>>> f7abb927dd5c76de319b97d4cb8f9a9d6e771414
                     key={userData.id}>
                     {userData.company_name}
                   </Card.Title>
