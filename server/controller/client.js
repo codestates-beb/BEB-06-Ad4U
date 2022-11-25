@@ -5,7 +5,7 @@ module.exports = {
     main: async (req, res) => { //최근 10개만
         try {
             let client_main = await Client.findAll({
-                attributes: ['id', 'company_name', 'company_number', 'email'],
+                attributes: ['id', 'company_name', 'company_number', 'email', 'logoUrl'],
                 order: [['id', 'DESC']],
                 limit: 10,
             });
@@ -18,7 +18,7 @@ module.exports = {
     list: async (req, res) => {
         try {
             let client_list = await Client.findAll({
-                attributes: ['id', 'company_name', 'company_number', 'email'],
+                attributes: ['id', 'company_name', 'company_number', 'email', 'logoUrl'],
                 order: [['id', 'DESC']],
                 // include: [
                 //     { model: Advertisement, as: "Advertisements", attributes: ["id"],  where: {
@@ -35,7 +35,7 @@ module.exports = {
     detail: async (req, res) => {
         try{
             let client_datail = await Client.findOne({
-                attributes: ['id', 'company_name', 'company_number', 'email'],
+                attributes: ['id', 'company_name', 'company_number', 'email', 'intro', 'logoUrl'],
                 where: {
                     id: req.query.id
                 },
