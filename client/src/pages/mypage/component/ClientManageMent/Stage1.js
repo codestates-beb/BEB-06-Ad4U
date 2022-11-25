@@ -5,6 +5,7 @@ import '../../Client.css';
 
 import {AdContract} from '../Contract';
 
+//협의중
 const Stage1 = ({ adList }) => {
   const adId = adList.id;
 

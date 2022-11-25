@@ -20,12 +20,12 @@ module.exports = {
             let client_list = await Client.findAll({
                 attributes: ['id', 'company_name', 'company_number', 'email'],
                 order: [['id', 'DESC']],
-                include: [
-                    { model: Advertisement, as: "Advertisements", attributes: ["id"],  where: {
-                        status : 0
-                    },
-                },
-                ]
+                // include: [
+                //     { model: Advertisement, as: "Advertisements", attributes: ["id"],  where: {
+                //         status : 0
+                //     },
+                // },
+                // ]
             });
             res.status(200).json(client_list);
         } catch (err) {

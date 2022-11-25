@@ -100,12 +100,16 @@ module.exports = {
                 where: { email: user_info.email },
             });
 
-           if (user) {//auth 시도하다가 취소했을경우
-                Supplier.update(body, {
-                    where: { email: user_info.email },
-                }).then(data => {
-                    res.status(201).json({ email: user_info.email });
-                })
+            if (user) {
+                if(user.userId){ //회원가입이 되어있을 경우
+                    res.status(400).json("You are already a member")
+                }else{  //auth 시도하다가 취소했을경우
+                    Supplier.update(body, {
+                        where: { email: user_info.email },
+                    }).then(data => {
+                        res.status(201).json({ email: user_info.email });
+                    })
+                }
             } else { //첫 auth - refresh token save
                 body.refreshToken = response.data.refresh_token,
                     Supplier.create(body)
