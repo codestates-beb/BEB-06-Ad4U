@@ -145,6 +145,7 @@ const AdUpload = () => {
         return;
     }
     // test용 access Token
+    console.log(AdInfo.imgUrl);
     var accessToken = window.localStorage.getItem('accessToken');
     const options = {
         url: "http://localhost:3001/ad/create",
