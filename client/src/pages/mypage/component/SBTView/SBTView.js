@@ -12,11 +12,11 @@ import {triggerBase64Download} from 'common-base64-downloader-react';
 
 
 const SBTView = ({ userData, adList }) => {
+  console.log(adList)
   const [list, setList] = useState([]);
   const [sbtList, setSbtList] = useState([]);
   
 
-  const [base64PDF, setBase64PDF] = useState("");
   
 
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const SBTView = ({ userData, adList }) => {
     setSbtList(adList.filter(element => {
         return element.status > 2;
     }));
-    // console.log(sbtList)
+    console.log(sbtList)
   }, [adList])
 
   const dataURLtoBase64 = (dataurl) => {

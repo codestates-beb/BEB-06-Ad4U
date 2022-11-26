@@ -40,7 +40,7 @@ const Stage3 = ({ adList }) => {
   }
 
   //Confirm 두개가 됬을 경우, 서버로 결과를 보냄
-  const sendResult = async () => {
+  const sendResultExecuted = async () => {
     try {
       const result = await contract.complete(accessToken, isClient, adId);
       if (result) return alert("성공!");
@@ -50,6 +50,18 @@ const Stage3 = ({ adList }) => {
     }
   }
 
+    //Revoke시 파기
+  const sendResultRevoked = async () => {
+    try {
+      const result = await contract.cancel(accessToken, isClient, adId);
+      if (result) return alert("성공!");
+    } catch(err) {
+      console.log(err);
+      alert("실패");
+    }
+  }
+
+
   // 4. Confirm Transaction
   const handleConfirmTransaction = async () => {
     const confirmCount = await getConfirmCount(); // 내가 confirm하기 전 계약 컨펌 개수
@@ -58,7 +70,7 @@ const Stage3 = ({ adList }) => {
       const tx = await method.confirmTransaction(contractAddress, txIndex);
       console.log(tx)
       if(confirmCount == 1) {
-        sendResult();
+        sendResultExecuted();
       }
       if (tx) {
         setConfirmCheck(true);
@@ -75,7 +87,10 @@ const Stage3 = ({ adList }) => {
     try {
       const tx = await method.revokeConfirmation(contractAddress, txIndex);
       console.log(tx);
-      if (tx) return alert("성공!");
+      if (tx) {
+        sendResultRevoked();
+        return alert("성공!");
+      }
     } catch(err) {
       console.log(err);
       alert("실패");
@@ -89,7 +104,6 @@ const Stage3 = ({ adList }) => {
       <button onClick={handleConfirmTransaction} disabled={confirmCheck}>4. Confirm Transaction</button>
       <div>파기하시겠습니까?</div>
       <button onClick={handleRevokeConfirmation}>5. Revoke Transaction</button>
-      {/* <button onClick={handleExecuteTransaction}>6. Excute Transaction</button> */}
     </>
   );
 }

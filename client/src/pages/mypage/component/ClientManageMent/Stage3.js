@@ -49,6 +49,17 @@ const Stage3 = ({ adList }) => {
     }
   }
 
+  //Revoke시 파기
+  const sendResultRevoked = async () => {
+    try {
+      const result = await contract.cancel(accessToken, isClient, adId);
+      if (result) return alert("성공!");
+    } catch(err) {
+      console.log(err);
+      alert("실패");
+    }
+  }
+  
   // 4. Confirm Transaction
   const handleConfirmTransaction = async () => {
     const confirmCount = await getConfirmCount(); // 내가 confirm하기 전 계약 컨펌 개수
@@ -75,7 +86,10 @@ const Stage3 = ({ adList }) => {
     try {
       const tx = await method.revokeConfirmation(contractAddress, txIndex);
       console.log(tx);
-      if (tx) return alert("성공!");
+      if (tx) {
+        sendResultRevoked();
+        return alert("성공!");
+      }
     } catch(err) {
       console.log(err);
       alert("실패");
