@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(3000),
       allowNull: true
     },
-    AdImgBuf: {
+    AdImgUrl: {
       type: DataTypes.STRING(300),
       allowNull: true
     },

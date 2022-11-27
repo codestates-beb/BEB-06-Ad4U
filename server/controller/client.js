@@ -62,6 +62,8 @@ module.exports = {
             if(intro) body.intro = intro;
             if(profileImgUrl) body.profileImgUrl = profileImgUrl;
 
+            console.log(body);
+
             Client.update(body,
                 { where: { id: req.data.user.id} })
                 .then((data) => {
