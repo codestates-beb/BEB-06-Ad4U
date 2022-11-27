@@ -55,12 +55,12 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/list/*" element={<ListPage />} />
-        <Route path="/mypage/*" element={<Mypage userData={userData}/>} />
+        <Route path="/mypage/*" element={<Mypage />} />
         <Route path="/detail/client/:clientId" element={<ClientDetail />} />
         <Route path="/detail/supplier/:supplierId" element={<SupplierDetail />} />
         <Route path="/detail/ad/:adId" element={<AdDetail userData={userData}/>} />
         <Route path="/login" element={<LoginPage setUserData={setUserData} />} />
-        <Route path="/upload" element={<UploadPage />} />
+        <Route path="/upload" element={<UploadPage userData={userData}/>} />
         <Route path="*" element={<Emptypage />} />
         <Route path="/testapi" element={<TestApiPage />} />
       </Routes>

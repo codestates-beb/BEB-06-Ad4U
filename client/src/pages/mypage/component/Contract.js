@@ -58,22 +58,22 @@ const AdContract = ({ userData, adList }) => {
   //multisigAddress, clientAddr, supplierAddr 렌더시 한번만 불러옴 + setAdInfo
   useEffect(() => {
     getAdInfo();
-  },[])
+  },[contractInfo.value]) // 사이트 새로 고침시 주소 데이터 날라감, 제일 중요한 데이터인 value값을 기준으로 바뀔때마다 가져옴
   
   // AdInfo 바뀔때마다 contractInfo set
   useEffect(() => {
     console.log(adInfo)
     setContractInfo({
-      mediaUrl : "",
-      date1 : "",
-      date2 : "",
-      value : "",
-      content : "",
+      mediaUrl : contractInfo.mediaUrl,
+      date1 : contractInfo.date1,
+      date2 : contractInfo.date2,
+      value : contractInfo.value,
+      content : contractInfo.content,
       clientAddr : adInfo.clientAddr,
       supplierAddr : adInfo.supplierAddr,
       isClient : true
     })
-  },[adInfo])
+  },[adInfo]); //새로 고침해도 데이터 유지 
 
   const [modalShow, setModalShow] = useState(false);
   const [vsCurrencies, setVsCurrencies] = useState("krw");
@@ -98,17 +98,8 @@ const AdContract = ({ userData, adList }) => {
   }, [])
 
 
-  const handleContractAddr1 = async (e) => {
-    contractInfo.clientAddr = e.target.value;
-    setContractInfo(contractInfo)
-  }
-
-  const handleContractAddr2 = async (e) => {
-    contractInfo.supplierAddr = e.target.value;
-    setContractInfo(contractInfo)
-  }
-
   const handleContractUrl = async (e) => {
+    console.log(contractInfo)
     contractInfo.mediaUrl = e.target.value;
     setContractInfo(contractInfo)
   }
@@ -129,6 +120,7 @@ const AdContract = ({ userData, adList }) => {
   }
 
   const handleContractCost = async (e) => {
+    console.log(contractInfo)
     setCurCost(e.target.value);
     const cost =  e.target.value;
     const coinGeckoUrl = `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=${vsCurrencies}`;
@@ -159,6 +151,7 @@ const AdContract = ({ userData, adList }) => {
   }
 
   const vsChange = async (curCost) => {
+    console.log(contractInfo)
     const cost =  curCost;
     const coinGeckoUrl = `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=${vsCurrencies}`;
     const options = {
@@ -300,12 +293,12 @@ const AdContract = ({ userData, adList }) => {
       <Form.Label><h5>계약자 지갑 주소<span className="red"> *</span></h5></Form.Label>
       <InputGroup className="mb-3">
         <h6>&ensp;Advertiser&ensp;</h6>
-        <Form.Control type="text" placeholder="Enter Your Address" defaultValue={adInfo.clientAddr} onChange={handleContractAddr1} disabled/>
+        <Form.Control type="text" placeholder="Enter Your Address" defaultValue={adInfo.clientAddr} disabled/>
       </InputGroup>
 
       <InputGroup className="mb-3">
         <h6>&ensp;Creator&ensp;</h6>
-        <Form.Control type="text" placeholder="Enter Your Contractor Address" defaultValue={adInfo.supplierAddr} onChange={handleContractAddr2} disabled/>
+        <Form.Control type="text" placeholder="Enter Your Contractor Address" defaultValue={adInfo.supplierAddr} disabled/>
       </InputGroup>
       <p id="address-message" className="addressMessage">Address Field Required!!</p>
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import auth from '../../hooks/axios/auth';
 import { getLocalData } from '../../config/localStrage';
 import Contract from './component/Contract';
@@ -10,17 +10,18 @@ import './Client.css';
 import Avatar from 'react-avatar';
 import img from '../../dummyfiles/img1.png';
 import Status from './component/Status';
-import { Link } from 'react-router-dom';
-import { Col, Row, Container, Spinner, Card, ListGroup} from 'react-bootstrap';
+import ClientEditInfo from './component/ClientEditInfo';
+import { Col, Row, Container, Spinner, Card, ListGroup } from 'react-bootstrap';
 import axios from 'axios';
 import SBTView from './component/SBTView/SBTView';
 
-const ClientMypage = ({ userData }) => {
+const ClientMypage = () => {
   const accessToken = getLocalData("accessToken");
   const isClient = getLocalData("isClient");
-  const [myInfo, setMyInfo] = useState({});
+  const [userData, setUserData] = useState({});
   const [adList, setAdlist] = useState([]);
   const [status, setStatus] = useState("");
+  const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const ClientMypage = ({ userData }) => {
       .then(data => {
           setAdlist(data.Advertisements);
           delete data.Advertisements;
-          setMyInfo(data);
+          setUserData(data);
       })
       .catch(err => console.log(err.response.data))
     } else return navigate('*');
@@ -82,10 +83,15 @@ const ClientMypage = ({ userData }) => {
         <Col xl={3} >
           <Row>
             <div className="profile-content">
-              <div className="profile-content_card-container">
-                <Avatar src={img} size="100" round={true}/>
+              <div className="profile-content_card-container" onClick={() => navigate(`/detail/client/${userData.id}`)}>
+                { userData.profileImgUrl 
+                ? <Avatar src={userData.profileImgUrl} size="100" round={true}/>
+                : <Avatar src={img} size="100" round={true}/>}
                 <Card.Body>
-                  <Card.Title className='mt-3'>{userData.company_name}</Card.Title>
+                  <Card.Title className='mt-3' 
+                    key={userData.id}>
+                    {userData.company_name}
+                  </Card.Title>
                   <ListGroup variant="flush" className='mt-3'>
                   <ListGroup.Item >{userData.email}</ListGroup.Item>
                   <ListGroup.Item >{userData.company_number}</ListGroup.Item>
@@ -94,7 +100,8 @@ const ClientMypage = ({ userData }) => {
                 </Card.Body>
               </div>
             </div>
-            <Link to="/upload"><button className='clientupload_btn'><span>광고 업로드</span></button></Link>
+            <Link><button className='clientSide_btn' onClick={() => setShow(true)}><span>정보 수정하기</span></button></Link>
+            <Link to="/upload"><button className='clientSide_btn'><span>광고 업로드</span></button></Link>
           </Row>
         </Col>
         <Col xl={9} >
@@ -105,6 +112,7 @@ const ClientMypage = ({ userData }) => {
           </Routes>
         </Col>        
       </Row>
+      <ClientEditInfo userData={userData} show={show} setShow={setShow} />
     </Container>
   );
 }

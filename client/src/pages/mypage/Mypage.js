@@ -4,12 +4,12 @@ import ClientMypage from './Client';
 import SupplierMypage from './Supplier';
 import Emptypage from '../../component/Emptypage';
 
-const Mypage = ({ userData }) => {
+const Mypage = () => {
   return (
     <>
       <Routes>
-        <Route path="/client/*" element={<ClientMypage userData={userData}/>} />
-        <Route path="/supplier" element={<SupplierMypage userData={userData}/>} /> 
+        <Route path="/client/*" element={<ClientMypage />} />
+        <Route path="/supplier" element={<SupplierMypage />} /> 
         <Route path="*" element={<Emptypage />} /> 
       </Routes>
     </>

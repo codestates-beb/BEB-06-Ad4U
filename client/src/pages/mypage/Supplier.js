@@ -10,10 +10,10 @@ import Status from './component/Status';
 import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
 import SBTView from './component/SBTView/SBTView';
 
-const SupplierMypage = ({ userData }) => {
+const SupplierMypage = () => {
   const accessToken = getLocalData("accessToken");
   const isClient = getLocalData("isClient");
-  const [myInfo, setMyInfo] = useState({});
+  const [userData, setUserData] = useState({});
   const [adList, setAdlist] = useState([]);
   const [status, setStatus] = useState("");
 
@@ -34,7 +34,7 @@ const SupplierMypage = ({ userData }) => {
           });
           setAdlist(list);
           delete data.Advertisement_has_Suppliers;
-          setMyInfo(data);
+          setUserData(data);
       })
       .catch(err => console.log(err.response.data))
     } else return navigate('*');

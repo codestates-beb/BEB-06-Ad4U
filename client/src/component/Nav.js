@@ -37,9 +37,9 @@ const Nav = ({ userData, setUserData }) => {
         <button className='navllgout_btn' onClick={deleteUserData}><span>logout</span></button>
         {/* window.scrollTo(0,0) 넣어야함 */}
         <Link to={`/mypage/${isClient === 'true' ? "client" : "supplier"}`} >
-          {isClient === 'true'
-            ? <Avatar src={img} size="50" round={true}/> 
-            : <Avatar src={userData.profileImgUrl} size="50" round={true}/> }
+          {userData.profileImgUrl
+            ? <Avatar src={userData.profileImgUrl} size="50" round={true}/> 
+            : <Avatar src={img} size="50" round={true}/> }
         </Link>
       </Stack>
     )
@@ -66,9 +66,9 @@ const Nav = ({ userData, setUserData }) => {
               < RiStarSmileLine color='white' size={30}/>
             </Dropdown.Toggle>
             <Dropdown.Menu variant="dark">
-              <NavDropdown.Item href="/mypage/client">clientmypage</NavDropdown.Item>
-              <NavDropdown.Item href="/mypage/supplier">suppliermypage</NavDropdown.Item>
-              <NavDropdown.Item href="/list">list</NavDropdown.Item> 
+              <NavDropdown.Item href="/list">광고 목록</NavDropdown.Item>
+              <NavDropdown.Item href="/list/client">기업 목록</NavDropdown.Item>
+              <NavDropdown.Item href="/list/supplier">크리에이터 목록</NavDropdown.Item> 
             </Dropdown.Menu>
           </Dropdown>
         </Stack>

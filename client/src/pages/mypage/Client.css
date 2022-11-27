@@ -1,6 +1,7 @@
 .clientMypage_container {
   /* position: relative; */
   margin-top: 200px;
+  min-height: 1000px;
 }
 
 .clientMypage_row h1 {
@@ -9,13 +10,14 @@
 }
 
 
-.clientupload_btn span {  
+.clientSide_btn span {  
   color: white;
 }
 
-.clientupload_btn {
+.clientSide_btn {
+  width: 200px;
   padding: 10px 50px;
-  margin-left: 35px;
+  margin-left: 25px;
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 15px;
@@ -24,7 +26,7 @@
   border: 3px solid white;
 }
 
-.clientupload_btn:hover {
+.clientSide_btn:hover {
   transform: scale(1.1);
 }
 

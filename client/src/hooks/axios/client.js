@@ -35,6 +35,27 @@ const getDetail = async (clientId) => {
   } else throw new Error("clientId is undefined!");
 }
 
-const client = { mainList, getList, getDetail };
+const inputInfo = async (accessToken, isClient, intro, profileImgUrl) => {
+  if (accessToken && isClient && intro && profileImgUrl) {
+  const options = {
+    url: `http://localhost:3001/client/inputInfo`,
+    method: 'POST',
+    headers: {
+      "Authorization": `Bearer ${accessToken}`,
+      "Content-Type": "application/json"
+    }, 
+    withCredentials: true,
+    data: { 
+      isClient: JSON.parse(isClient),
+      profileImgUrl,
+      intro,
+    }
+  }
+  const result = await axios.request(options);
+  return result;
+  } else throw new Error("insufficient localData");
+}
+
+const client = { mainList, getList, getDetail, inputInfo };
 
 export default client;

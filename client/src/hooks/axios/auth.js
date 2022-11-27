@@ -11,7 +11,8 @@ const refresh = async () => {
   return result;
 }
 
-const oauthCode = async () => {
+const oauthLink = async () => {
+  //하이퍼링크 주소를 받아옴
   const options = {
     url: "http://localhost:3001/users/auth",
     method: 'GET',
@@ -44,7 +45,7 @@ const login = async (loginData) => {
       method: 'POST',
       headers: {"Content-Type": "application/json"},
       withCredentials: true,
-      data:{ userId, password, isClient }
+      data: { userId, password, isClient }
     }
     const result = await axios.request(options);
     return result;
@@ -92,6 +93,6 @@ const getMypage = async (isClient, accessToken) => {
   } else throw new Error("insufficient localData");
 }
 
-const auth = { refresh, oauthCode, oauth, login, logout, signup, getMypage };
+const auth = { refresh, oauthLink, oauth, login, logout, signup, getMypage };
 
 export default auth;
