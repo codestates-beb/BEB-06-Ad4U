@@ -62,7 +62,7 @@ module.exports = {
                 const jwt_accessToken = jwt.sign({ user }, process.env.ACCESS_SECRET, { expiresIn: '1h' });
                 const jwt_refreshToken = jwt.sign({ userId }, process.env.REFRESH_SECRET, { expiresIn: '3h' });
                 res.cookie('jwt_refreshToken', jwt_refreshToken, {
-                    maxAge: 60 * 60 * 3
+                    maxAge: (60 * 60 * 3 * 1000)
                 });
                 res.status(200).json({ user, jwt_accessToken, isClient });
             } else {
