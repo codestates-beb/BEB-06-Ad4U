@@ -37,10 +37,8 @@ const ClientAd = ({ idx, adList }) => {
       <Accordion defaultActiveKey={['0']}>
         <Accordion.Item>
           <Accordion.Header>
-            <span>{idx+1}. 광고명 {title}</span>
-            <span>___________</span>
-            <span>AdvertisementID - {id}</span>
-            <span>---{showStatus(status)}</span>
+              <Col xs={9}><span>{idx+1}. </span><span> {title}</span></Col>
+              <Col xs={2}>{showStatus(status)}</Col>
           </Accordion.Header>
           <Accordion.Body>
             <Rendering />

@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Accordion, Col, Row, Container } from 'react-bootstrap';
+import { Container, Col, Row, Stack} from 'react-bootstrap';
 import { getLocalData } from '../../../../config/localStrage';
 import contract from '../../../../hooks/axios/contract';
 import method from '../../../../hooks/web3/sendTransaction';
-import '../../Client.css';
 
-import {getIsConfirmed, getTransaction} from '../../../../hooks/web3/queryContract';
-import {getCurrentAccount} from '../../../../hooks/web3/common';
+
+import { getIsConfirmed, getTransaction } from '../../../../hooks/web3/queryContract';
+import { getCurrentAccount } from '../../../../hooks/web3/common';
+
+import '../fadeInButton.css';
+import '../../Client.css';
 
 //진행중2
 const Stage3 = ({ adList }) => {
@@ -23,7 +26,7 @@ const Stage3 = ({ adList }) => {
   //confirmCheck : 이미 컨펌된 경우 disable
   async function isConfirmed () {
     const account = await getCurrentAccount(); // 현재 계정 주소 get
-    const result = await getIsConfirmed(contractAddress,0,account);
+    const result = await getIsConfirmed(contractAddress, 0, account);
     console.log(result)
     setConfirmCheck(result);
   }
@@ -33,7 +36,7 @@ const Stage3 = ({ adList }) => {
   },[])
 
   async function getConfirmCount () {
-    var txInfo = await getTransaction(contractAddress,0);
+    var txInfo = await getTransaction(contractAddress, 0);
     return txInfo.numConfirmations;
   }
 
@@ -49,17 +52,6 @@ const Stage3 = ({ adList }) => {
     }
   }
 
-  //Revoke시 파기
-  const sendResultRevoked = async () => {
-    try {
-      const result = await contract.cancel(accessToken, isClient, adId);
-      if (result) return alert("성공!");
-    } catch(err) {
-      console.log(err);
-      alert("실패");
-    }
-  }
-  
   // 4. Confirm Transaction
   const handleConfirmTransaction = async () => {
     const confirmCount = await getConfirmCount(); // 내가 confirm하기 전 계약 컨펌 개수
@@ -80,15 +72,14 @@ const Stage3 = ({ adList }) => {
     }
   };
 
-
   // 5. Revoke Transaction
   const handleRevokeConfirmation = async () => {
     try {
       const tx = await method.revokeConfirmation(contractAddress, txIndex);
       console.log(tx);
       if (tx) {
-        sendResultRevoked();
-        return alert("성공!");
+        const result = await contract.cancel(accessToken, isClient, adId);
+        if (result) return alert("성공!");
       }
     } catch(err) {
       console.log(err);
@@ -96,14 +87,20 @@ const Stage3 = ({ adList }) => {
     }
   };
   
-
   return (
     <>
-      <div>진행중2</div>
-      <button onClick={handleConfirmTransaction} disabled={confirmCheck}>4. Confirm Transaction</button>
-      <div>파기하시겠습니까?</div>
-      <button onClick={handleRevokeConfirmation}>5. Revoke Transaction</button>
-      {/* <button onClick={handleExecuteTransaction}>6. Excute Transaction</button> */}
+      <Container className='management_container'>
+        <Stack gap={2}>
+          <div>
+            <span>진행중2</span>
+            <button className='fadeIn green' onClick={handleConfirmTransaction} disabled={confirmCheck}>Confirm</button>
+          </div>
+          <div>
+            <span>파기하시겠습니까?</span>
+            <button className='fadeIn red' onClick={handleRevokeConfirmation}>Revoke</button>
+          </div>
+        </Stack>
+      </Container>
     </>
   );
 }

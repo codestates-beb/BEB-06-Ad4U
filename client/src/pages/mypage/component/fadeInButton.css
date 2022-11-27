@@ -1,0 +1,51 @@
+
+.fadeIn {
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border-radius: 0.6em;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  font-weight: 400;
+  line-height: 1;
+  margin: auto;
+  padding: 18px 35px;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+/* color */
+.fadeIn.red {
+  border: 2px solid #e74c3c;
+  color: #e74c3c;
+}
+
+.fadeIn.red:hover {
+  color: #fff;
+  box-shadow: 0 0 40px 40px #e74c3c inset;
+}
+
+.fadeIn.cyan {
+  border: 2px solid #3abbc2;
+  color: #3abbc2;
+}
+
+.fadeIn.cyan:hover {
+  color: #fff;
+  box-shadow: 0 0 40px 40px #3abbc2 inset;
+}
+
+.fadeIn.green {
+  border: 2px solid #35d08f;
+  color: #35d08f;
+}
+
+.fadeIn.green:hover {
+  color: #fff;
+  box-shadow: 0 0 40px 40px #35d08f inset;
+}

@@ -10,8 +10,11 @@ const Stage2 = ({ adList }) => {
   
   return (
     <>
-      <div>진행중1</div>
-      <Link to={`/mypage/client/contract/${adId}`}>계약서 작성하러가기</Link>
+      <Container className='management_container'>
+        <Col className='stage2_contentArea'>
+          <div><Link to={`/mypage/client/contract/${adId}`}>계약서 작성하러가기</Link></div>
+        </Col>
+      </Container>
     </>
   );
 }
