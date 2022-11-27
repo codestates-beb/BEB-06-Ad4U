@@ -1,7 +1,6 @@
 import React from 'react';
 import './Detail.css';
 
-import Profile from '../common/Profile';
 import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
 import AdUpload from './component/AdUpload'
 import { useNavigate } from 'react-router-dom';

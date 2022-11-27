@@ -29,23 +29,18 @@ const App = () => {
     auth.refresh()
       .then(res => res.data)
       .then(data => {
+        if (data.message === 'refresh token not provided') return ;
         const { user, jwt_accessToken, isClient } = data;
         if (user && jwt_accessToken && typeof(isClient) === 'boolean') { 
           setLocalData("accessToken", jwt_accessToken);
           setLocalData("isClient", isClient);
           setUserData(user);
         }
-        if (data.message === 'refresh token not provided') return clearLocalData();
       })
       .catch(err => {
         clearLocalData();
         console.log(err.response.data);
-        return auth.logout()
-        .then(res => {
-          alert("쿠키가 만료되었습니다 다시 로그인 해주세요.");
-          navigate('/');
-        })
-        .catch(err => console.log("logoutErr", err))
+        alert("쿠키가 만료되었습니다 다시 로그인 해주세요.");
       })
   }, []);
   
