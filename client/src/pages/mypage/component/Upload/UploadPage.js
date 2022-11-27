@@ -4,14 +4,14 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal';
-import './AdUpload.css';
+import './UploadPage.css';
 
-import { myBucket, S3_BUCKET } from '../../../config/awsS3';
+import { myBucket, S3_BUCKET } from '../../../../config/awsS3';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
-const AdUpload = () => {
+const UploadPage= () => {
 
   const [modalShow, setModalShow] = useState(false);
 
@@ -258,4 +258,4 @@ const AdUpload = () => {
   );
 }
 
-export default AdUpload;
+export default UploadPage;
