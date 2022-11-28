@@ -100,7 +100,7 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(200px, 220px));
   padding:20px 0;
-  gap: 45px;
+  gap: 30px;
   justify-content: center;
 }
 

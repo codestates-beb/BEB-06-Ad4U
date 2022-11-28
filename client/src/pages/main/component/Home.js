@@ -11,7 +11,7 @@ const Home = () => {
         <Row>
           <Col xl={5} className='text' >
             <div className='home_text1'>JOIN</div>
-            <div className='home_text2'>We Create trustworthy contracts with Blockchain.</div>
+            <div className='home_text2'>We Create trustworthy contracts <br/> with Blockchain.</div>
           </Col>
           <Col  xl={7} className='img'>
             <img src={back} alt={back} />

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import '../Main.css';
 import ad from '../../../hooks/axios/ad'
 import {getTransactionCount, getTransaction} from '../../../hooks/web3/queryContract'
-
+import { Col, Row, Container } from 'react-bootstrap';
 import Web3 from "web3";
+import total_back from '../imgs/totalvalue_back.png';
 
 const TotalValue = () => {
 
@@ -49,10 +50,11 @@ const TotalValue = () => {
 
 
   return (
-    <div className='totalVal_container'>
-        <h1 className='totalTitle'>누적 거래량</h1>
-        <h2>{totalContractVal} ETH</h2>
-    </div>
+    <Container className='totalVal_container'>
+      <img src={total_back} alt="total_back" className='total_back'/>
+      <h1 className='totalTitle'>누적 거래량</h1>
+      <h2>{totalContractVal} ETH</h2>
+    </Container>
   );
 }
 
