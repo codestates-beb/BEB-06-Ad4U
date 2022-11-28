@@ -4,7 +4,8 @@ import './SBT.css';
 import { Row, Col, Card, Button, Container } from 'react-bootstrap';
 
 
-import pdfImg from '../../../../dummyfiles/document.png';
+import lockPdfImg from '../../../../dummyfiles/document.png';
+import downloadPdfImg from '../../../../dummyfiles/download-pdf.png';
 import axios from 'axios';
 import crypto from 'crypto-js';
 import {triggerBase64Download} from 'common-base64-downloader-react';
@@ -15,9 +16,6 @@ const SBTView = ({ userData, adList }) => {
   console.log(adList)
   const [list, setList] = useState([]);
   const [sbtList, setSbtList] = useState([]);
-  
-
-  
 
   const navigate = useNavigate();
 
@@ -33,6 +31,14 @@ const SBTView = ({ userData, adList }) => {
     var arr = dataurl.split(',')
     
     return arr[1];
+  }
+
+  const handleFileImg = (e) => {
+    if(e.target.src === downloadPdfImg) {
+      e.target.src = lockPdfImg;
+    } else {
+      e.target.src=downloadPdfImg;
+    }
   }
 
 
@@ -60,25 +66,28 @@ const SBTView = ({ userData, adList }) => {
   
 
   return (
-    <Container className='sbtContainer'>
-      <h3 className='sbtTitle'>나의 등록된 계약서 확인</h3>
-      <div className="sbt-content">
-        {sbtList.map((data, idx) => { return (
-                <div 
-                className="sbt-content_card-container"
-                onClick = {() => {
-                  handleViewPdf(data)
-                }}
-                key={idx}
-                >
-                  <Card.Img variant='top' src={pdfImg}/>
-                    <Card.Body>
-                        <Card.Title className='sbtAdTitle'>{data.title}</Card.Title>
-                    </Card.Body>
-                </div>
-            )})}
-        </div>
-    </Container>
+      <Container className='sbtContainer'>
+        <h3 className='sbtTitle'>나의 등록된 계약서 확인</h3>
+        <div className="sbt-content">
+          {sbtList.map((data, idx) => { return (
+                  <div 
+                  className="sbt-content_card-container"
+                  onClick = {() => {
+                    handleViewPdf(data)
+                  }}
+                  key={idx}
+                  >
+                    <Card.Img variant='top' src={lockPdfImg}
+                      onMouseOver={handleFileImg}
+                      onMouseOut={handleFileImg}
+                    />
+                      <Card.Body>
+                          <Card.Title className='sbtAdTitle'>{data.title}</Card.Title>
+                      </Card.Body>
+                  </div>
+              )})}
+          </div>
+      </Container>
   );
 }
 
