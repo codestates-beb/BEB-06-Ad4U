@@ -11,7 +11,6 @@ import ClientDetail from './pages/detail/Client';
 import SupplierDetail from './pages/detail/Supplier';
 import AdDetail from './pages/detail/Ad';
 import LoginPage from './pages/login/LoginPage';
-import UploadPage from './pages/detail/Upload';
 import Emptypage from './component/Emptypage';
 import Footer from './component/Footer';
 import TestApiPage from './pages/testAPI/testapi';
@@ -29,23 +28,18 @@ const App = () => {
     auth.refresh()
       .then(res => res.data)
       .then(data => {
+        if (data.message === 'refresh token not provided') return clearLocalData();
         const { user, jwt_accessToken, isClient } = data;
         if (user && jwt_accessToken && typeof(isClient) === 'boolean') { 
           setLocalData("accessToken", jwt_accessToken);
           setLocalData("isClient", isClient);
           setUserData(user);
         }
-        if (data.message === 'refresh token not provided') return clearLocalData();
       })
       .catch(err => {
         clearLocalData();
         console.log(err.response.data);
-        return auth.logout()
-        .then(res => {
-          alert("쿠키가 만료되었습니다 다시 로그인 해주세요.");
-          navigate('/');
-        })
-        .catch(err => console.log("logoutErr", err))
+        alert("쿠키가 만료되었습니다 다시 로그인 해주세요.");
       })
   }, []);
   
@@ -60,7 +54,6 @@ const App = () => {
         <Route path="/detail/supplier/:supplierId" element={<SupplierDetail />} />
         <Route path="/detail/ad/:adId" element={<AdDetail userData={userData}/>} />
         <Route path="/login" element={<LoginPage setUserData={setUserData} />} />
-        <Route path="/upload" element={<UploadPage userData={userData}/>} />
         <Route path="*" element={<Emptypage />} />
         <Route path="/testapi" element={<TestApiPage />} />
       </Routes>

@@ -14,6 +14,7 @@ import ClientEditInfo from './component/ClientEditInfo';
 import { Col, Row, Container, Spinner, Card, ListGroup } from 'react-bootstrap';
 import axios from 'axios';
 import SBTView from './component/SBTView/SBTView';
+import UploadPage from './component/Upload/UploadPage';
 
 const ClientMypage = () => {
   const accessToken = getLocalData("accessToken");
@@ -101,13 +102,14 @@ const ClientMypage = () => {
               </div>
             </div>
             <Link><button className='clientSide_btn' onClick={() => setShow(true)}><span>정보 수정하기</span></button></Link>
-            <Link to="/upload"><button className='clientSide_btn'><span>광고 업로드</span></button></Link>
+            <Link to="/mypage/client/upload"><button className='clientSide_btn'><span>광고 업로드</span></button></Link>
           </Row>
         </Col>
         <Col xl={9} >
           <Routes>
             <Route path="/" element={<Mypage adList={adList} setStatus={setStatus} />} />        
-            <Route path="/contract/:adId" element={<Contract userData={userData} adList={adList} />} /><Route path="*" element={<Emptypage />} />
+            <Route path='/upload' element={<UploadPage />} />
+            <Route path="/contract/:adId" element={<Contract userData={userData} adList={adList} />} />
             <Route path="*" element={<Emptypage />} />
           </Routes>
         </Col>        

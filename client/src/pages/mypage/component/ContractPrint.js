@@ -9,6 +9,8 @@ import './Contract.css'
 
 const ContractPrint = ({contractInfo, previewCheck, setTokenURI, setPreviewCheck}) => {
 
+    console.log(contractInfo);
+
     useEffect(() => {
         const print = document.getElementById("divToPrint");
         html2canvas(print)

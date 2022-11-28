@@ -1,3 +1,4 @@
+
 .clientMypage_container {
   /* position: relative; */
   margin-top: 200px;
@@ -30,10 +31,63 @@
   transform: scale(1.1);
 }
 
-.accordion {
+.clientMypage_accordion {
   margin-top: 20px;
 }
 
-.clientMypage_accordion {
-  margin-top: 20px;
+/* management */
+.management_container {
+  margin: auto;
+}
+
+.channelUrl {
+  text-decoration: none;
+  color: rgba(65, 61, 61, 0.834)
+}
+
+.divider_solid {
+  border-top: 2px solid #999; 
+}
+
+/* stage0 */
+.stage0_ImgArea {
+  margin: 10px 0px 20px 10px;
+}
+
+.stage0_buttonArea {
+  margin: auto;
+  width: 180px;
+}
+
+/* stage1 */
+.stage1_contentArea {
+  height: 80px;
+  display: flex;
+}
+
+.stage1_contentArea div {
+  margin: auto;
+  color: rgb(8, 110, 161);
+  font-size: large;
+}
+
+/* stage2 */
+.stage2_contentArea {
+  height: 80px;
+  display: flex;
+}
+
+.stage2_contentArea div {
+  margin: auto;
+  text-decoration: none;
+}
+
+.stage2_contentArea div a {
+  text-decoration: none;
+  font-size: large;
+}
+
+/* stage3 */
+.stage3_contentArea {
+  margin: 10px;
 }

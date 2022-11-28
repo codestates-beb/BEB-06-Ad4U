@@ -82,6 +82,7 @@ module.exports = {
     },
     create: async (req, res) => { //광고 생성 - client
         const { title, content, AdImgUrl, cost } = req.body;
+        console.log(req.body);
         try {
             const body = {
                 title: title,
