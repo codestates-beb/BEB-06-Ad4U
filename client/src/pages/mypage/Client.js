@@ -72,13 +72,13 @@ const ClientMypage = () => {
         <Status adList={adList} setStatus={setStatus} />
         <Container className='clientMypage_accordion'>
           <FilterAd adList={adList} status={status} />
-          <SBTView userData={userData} adList={adList}/>
         </Container>
       </>
     );
   } 
 
   return (
+    <>
     <Container className='clientMypage_container'>
       <Row className='clientMypage_row' >
         <Col xl={3} >
@@ -116,6 +116,8 @@ const ClientMypage = () => {
       </Row>
       <ClientEditInfo userData={userData} show={show} setShow={setShow} />
     </Container>
+    <SBTView userData={userData} adList={adList}/>
+    </>
   );
 }
 
