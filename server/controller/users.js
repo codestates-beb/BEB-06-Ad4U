@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { Client, Supplier, Advertisement, Advertisement_has_Supplier } = require('../models/index');
+const { Client, Supplier, Advertisement, Advertisement_has_Supplier, Client_has_Supplier} = require('../models/index');
 const jwt = require('jsonwebtoken');
 const client_attributes = ['id', 'userId', 'company_name', 'company_number', 'email', 'profileImgUrl'];
 const supplier_attributes = ['id', 'userId', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address'];
@@ -218,7 +218,7 @@ module.exports = {
                                     ],
                                 }
                             ]
-                        },
+                        }
                     ]
                 });
             } else {
@@ -233,6 +233,20 @@ module.exports = {
                                     model: Advertisement, as: "Advertisement",
                                     attributes: advertisement_attributes,
                                 },
+                                
+                            ]
+                        },
+                        {
+                            model: Client_has_Supplier, as: "Client_has_Suppliers",
+                            include: [
+                                {
+                                    model: Client, as: "Client",
+                                    attributes: ['id', 'company_name', 'company_number', 'email', 'profileImgUrl'],
+                                },
+                                {
+                                    model: Advertisement, as: "Advertisement",
+                                    attributes: ['id', 'title', 'AdimgUrl', 'cost', 'createdAt'],
+                                }
                             ]
                         }
                     ]

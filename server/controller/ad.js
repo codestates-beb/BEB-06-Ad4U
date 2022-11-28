@@ -1,4 +1,4 @@
-const { Client, Advertisement, Advertisement_has_Supplier, Supplier } = require('../models/index');
+const { Client, Advertisement, Advertisement_has_Supplier, Supplier, Client_has_Supplier } = require('../models/index');
 const ad_attributes = ['id', 'title', 'AdimgUrl', 'cost', 'createdAt'];
 
 module.exports = {
@@ -112,6 +112,11 @@ module.exports = {
                 res.status(401).json('invalid access');
             } else {
                 await Advertisement_has_Supplier.destroy({
+                    where: {
+                        Advertisement_id: advertisement_id
+                    }
+                });
+                await Client_has_Supplier.destroy({
                     where: {
                         Advertisement_id: advertisement_id
                     }

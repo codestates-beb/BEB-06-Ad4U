@@ -7,22 +7,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    title: {
-      type: DataTypes.STRING(50),
-      allowNull: true
-    },
-    content: {
-      type: DataTypes.STRING(3000),
-      allowNull: true
-    },
-    AdImgUrl: {
-      type: DataTypes.STRING(300),
-      allowNull: true
-    },
-    cost: {
-      type: DataTypes.STRING(45),
-      allowNull: true
-    },
     Client_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -31,6 +15,26 @@ module.exports = function(sequelize, DataTypes) {
         model: 'Client',
         key: 'id'
       }
+    },
+    status: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    title: {
+      type: DataTypes.STRING(50),
+      allowNull: true
+    },
+    content: {
+      type: DataTypes.STRING(3000),
+      allowNull: true
+    },
+    cost: {
+      type: DataTypes.STRING(45),
+      allowNull: true
+    },
+    AdImgUrl: {
+      type: DataTypes.STRING(300),
+      allowNull: true
     },
     multisigAddress: {
       type: DataTypes.STRING(45),
@@ -46,10 +50,6 @@ module.exports = function(sequelize, DataTypes) {
     },
     token_address: {
       type: DataTypes.STRING(100),
-      allowNull: true
-    },
-    status: {
-      type: DataTypes.INTEGER,
       allowNull: true
     }
   }, {
