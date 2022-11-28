@@ -33,48 +33,65 @@ const AdDetail = ({ userData }) => {
   return (
     <>
       <Container className='adDetail_container'>
-      <Row>
-        <Col xl={3} className="adDetail_company_card">
-          <Card style={{ width: '259px' }}>
-            <Card.Header 
-            as="h5"
-            onClick={() => navigate(`/detail/client/${detail.Client.id}`)}
-            key={detail.Client.id}
+        <Row className='adDetail_row'>
+
+          <Col xl={7} className="adDetail_card">
+            <Row className='adDetail_Img'>
+              {detail.AdimgUrl 
+                ? <Card.Img variant="top" className='adDetail_card_img' src={detail.AdimgUrl}/> 
+                : <Card.Img variant='top' className='adDetail_card_img' src={nullImg}/> }
+            </Row>
+            <Row>
+              <h3 className='adTitle'>{detail.title}</h3>
+              <br></br>
+              <br></br>
+              <p className='adContent'>{detail.content}</p>
+            </Row>
+          </Col>
+
+          <Col xl={3}>
+            <Card border="dark"
+              bg={"dark"}
+              text={"white"} 
+              className="adDetail_info_card"
             >
-              {detail.profileImgUrl
-                ? <Avatar className='avatar' src={detail.profileImgUrl} size="50"/>
-                : <Avatar className='avatar' src={nullImg} size="50"/>
-              }
-              {detail.Client.company_name}
-            </Card.Header>
-            <Card.Body>
-              <ListGroup variant="flush" className='item'>
-                <ListGroup.Item>{detail.Client.email}</ListGroup.Item>
-                <ListGroup.Item>{detail.Client.company_number}</ListGroup.Item>
-              </ListGroup>
-            </Card.Body>
-          </Card>
-          <div className='adGo'>
-            {isApply.length 
-              ? (<button className='adGo_btn' onClick={() => ad.callApplyCancel(accessToken, isClient, adId)} ><span>취소하기</span></button>)
-              : (<button className='adGo_btn' onClick={() => ad.callApply(accessToken, isClient, adId)} ><span>지원하기</span></button>)
-            } 
-          </div>
-        </Col>
-        <Col xl={9} className="adDetail_card">
-          <Row className='adDetail_Img'>
-            {detail.AdimgUrl 
-              ? <Card.Img variant="top" className='adDetail_card_img' src={detail.AdimgUrl}/> 
-              : <Card.Img variant='top' className='adDetail_card_img' src={nullImg}/> }
-          </Row>
-          <Row>
-            <Card style={{ width: '900px' }}>
-              <Card.Header as="h3">{detail.title}</Card.Header>
-              <Card.Body>{detail.content}</Card.Body>
+              <Card.Header 
+              as="h5"
+              onClick={() => navigate(`/detail/client/${detail.Client.id}`)}
+              key={detail.Client.id}
+              >
+                {detail.profileImgUrl
+                  ? <Avatar className='avatar' src={detail.profileImgUrl} size="50"/>
+                  : <Avatar className='avatar' src={nullImg} size="50"/>
+                }
+                {detail.Client.company_name}
+              </Card.Header>
+              <Card.Body>
+                <ListGroup variant="flush" className='item'>
+                  <ListGroup.Item>{detail.Client.email}</ListGroup.Item>
+                  <ListGroup.Item>{detail.Client.company_number}</ListGroup.Item>
+                </ListGroup>
+              </Card.Body>
+              <Card.Body>
+                <Card.Title className='infoCardTitle'>제안 금액</Card.Title>
+                <Card.Text>
+                  {detail.cost} ETH
+                </Card.Text>
+                <Card.Title className='infoCardTitle'>지원자 수</Card.Title>
+                <Card.Text>
+                  {detail.Advertisement_has_Suppliers.length}
+                </Card.Text>
+                <div className='adGo'>
+                  {isApply.length 
+                    ? (<button className='adGo_btn' onClick={() => ad.callApplyCancel(accessToken, isClient, adId)} ><span>취소하기</span></button>)
+                    : (<button className='adGo_btn' onClick={() => ad.callApply(accessToken, isClient, adId)} ><span>지원하기</span></button>)
+                  } 
+                </div>
+              </Card.Body>
             </Card>
-          </Row>
-        </Col>
-      </Row>
+          </Col>
+          
+        </Row>
       </Container>
     </>
   );

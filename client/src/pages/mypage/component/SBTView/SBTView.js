@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SBT.css';
 import { Row, Col, Card, Button, Container } from 'react-bootstrap';
-import Viewer from 'react-viewer';
 
-import nullImg from '../../../../dummyfiles/img1.png';
+
+import pdfImg from '../../../../dummyfiles/document.png';
 import axios from 'axios';
 import crypto from 'crypto-js';
 import {triggerBase64Download} from 'common-base64-downloader-react';
@@ -71,14 +71,9 @@ const SBTView = ({ userData, adList }) => {
                 }}
                 key={idx}
                 >
-                    {data.AdimgUrl 
-                    ? <Card.Img variant="top" src={data.AdimgUrl}/> 
-                    : <Card.Img variant='top' src={nullImg}/> }
+                  <Card.Img variant='top' src={pdfImg}/>
                     <Card.Body>
-                        <Card.Title>{data.title}</Card.Title>
-                        <Card.Text>
-                        {data.createdAt}
-                        </Card.Text>
+                        <Card.Title className='sbtAdTitle'>{data.title}</Card.Title>
                     </Card.Body>
                 </div>
             )})}

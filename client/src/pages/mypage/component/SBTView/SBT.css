@@ -31,3 +31,8 @@
   .sbt-content_card-container:hover {
     transform: scale(1.1);
   }
+
+.sbtAdTitle {
+    font-weight: bold;
+    color: black;
+}

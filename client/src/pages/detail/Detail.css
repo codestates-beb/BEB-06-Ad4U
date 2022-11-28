@@ -1,18 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 /* Ad css */
 .adDetail_container {
+    display: flex;
     position: relative;
     color: white;
-    height: 2000px;
     margin-top: 150px;
+    width: 100%;
+    justify-content: center;
+    font-family: "Montserrat"
+}
+
+  .adDetail_row {
+    display: flex;
+    width: 100%;
+    justify-content: center;
   }
   
   .adDetail_company_card {
     color: black;
     text-align: center;
+    
   }
   
   .adDetail_card {
     color: black;
+    white-space: pre-wrap;
+    font-size: large;
   }
   
   .adGo span {  
@@ -20,8 +33,6 @@
   }
   
   .adGo_btn {
-    margin-top: 30px;
-    margin-right: 47px;
     padding: 10px 30px;
     border-radius: 15px;
     background: none;
@@ -33,13 +44,40 @@
   }
   
   .adDetail_Img {
-    margin : 0px 0px 20px 65px ;
+    margin-bottom: 20px;
   }
   
   .adDetail_card_img {
-    width: 750px;
-    height: 550px;
+    width: fit-content;
+    height: 300px;
+    
   }
+
+  .adTitle {
+    color: white;
+    font-weight: bolder;
+  }
+
+  .adContent {
+    color: white;
+    font-size: large;
+  }
+
+  .adDetail_info_card {
+    width: 300px;
+    font-weight: bold;
+    border-radius: 10px;
+    position: fixed;
+  }
+
+  .infoCardTitle {
+    font-weight:  bold;
+  }
+
+
+
+
+  
   
   /* Client css */
   .clientDetail_container {
