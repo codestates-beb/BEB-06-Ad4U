@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Col, Row, Stack} from 'react-bootstrap';
+import { Container, Col, Row, Stack, Image} from 'react-bootstrap';
 import { getLocalData } from '../../../../config/localStrage';
 import contract from '../../../../hooks/axios/contract';
 import method from '../../../../hooks/web3/sendTransaction';
@@ -10,11 +10,18 @@ import { TbChecklist } from "react-icons/tb";
 import { getIsConfirmed, getTransaction } from '../../../../hooks/web3/queryContract';
 import { getCurrentAccount } from '../../../../hooks/web3/common';
 
+import lockPdfImg from '../../../../dummyfiles/document.png';
+import downloadPdfImg from '../../../../dummyfiles/download-pdf.png';
+import axios from 'axios';
+import crypto from 'crypto-js';
+import {triggerBase64Download} from 'common-base64-downloader-react';
+
 import '../TransactionButton.css';
 import '../../Client.css';
 
 //진행중2
 const Stage3 = ({ adList }) => {
+  console.log(adList)
   const adId = adList.id;
   const contractAddress = adList.multisigAddress;
   const accessToken = getLocalData('accessToken');
@@ -30,10 +37,7 @@ const Stage3 = ({ adList }) => {
     const result = await getIsConfirmed(contractAddress, 0, account);
     if (result === false) return setConfirmCheck(result);
     else { 
-      document.getElementById("stage3_alertText").style.display = "block";
-      document.getElementById("check_button").textContent = "confirmed";
-      document.getElementById("check_button").style.pointerEvents="none";
-      document.getElementById("check_button").setAttribute("disabled", "true");
+      alert("이미 confirm된 계약입니다!");
     }
   }
 
@@ -53,9 +57,6 @@ const Stage3 = ({ adList }) => {
           }
         }
         else {
-          document.getElementById("confirm_button").textContent = "confirmed";
-          document.getElementById("confirm_button").style.pointerEvents="none";
-          document.getElementById("confirm_button").setAttribute("disabled", "true");
           alert("confirm 완료!");
         }
       }
@@ -83,6 +84,41 @@ const Stage3 = ({ adList }) => {
     }
   };
 
+  const handleFileImg = (e) => {
+    if(e.target.src === downloadPdfImg) {
+      e.target.src = lockPdfImg;
+    } else {
+      e.target.src=downloadPdfImg;
+    }
+  }
+  const dataURLtoBase64 = (dataurl) => {
+ 
+    var arr = dataurl.split(',')
+    
+    return arr[1];
+  }
+
+  const handleViewPdf = async () => {
+    console.log(adList);
+    const secretKey = process.env.REACT_APP_SECRET_KEY;
+
+      const options = {
+        url: adList.token_uri,
+        method: 'GET',
+        headers: {"Content-Type": "application/json"}
+      }
+      
+      await axios.request(options)
+      .then(res => {
+        console.log(res.data)
+        //복호화
+          const bytes = crypto.AES.decrypt(res.data, secretKey);
+          const decrypted = bytes.toString(crypto.enc.Utf8);
+          const decrypted_base64 = "data:application/pdf;base64,"+dataURLtoBase64(decrypted);
+          triggerBase64Download(decrypted_base64, `${adList.title}_${adList.createdAt}`)
+      })
+  }
+
   return (
     <>
       <Container className='management_container'>
@@ -96,8 +132,20 @@ const Stage3 = ({ adList }) => {
               ? <button id='check_button' className='transaction_Button check' onClick={isConfirmed}>Check!</button> 
               : <button id='confirm_button' className='transaction_Button confirm' onClick={handleConfirmTransaction}>Confirm</button>}
               <button className='transaction_Button revoke' onClick={handleRevokeConfirmation}>Revoke</button>
-              <p id='stage3_alertText'>이미 confirm한 계약입니다.</p>
+              <br></br>
+              <br></br>
             </Col>
+            <hr></hr>
+            <Row
+              onMouseOver={handleFileImg}
+              onMouseOut={handleFileImg}
+              onClick={handleViewPdf}
+            >
+              <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
+              <Col className='contractDownload'>
+                  계약서 다운로드
+              </Col>
+            </Row>
           </Row>
       </Container>
     </>
