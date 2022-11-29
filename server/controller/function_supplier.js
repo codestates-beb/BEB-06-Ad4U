@@ -9,23 +9,30 @@ module.exports = {
                 Advertisement_id: advertisement_id,
                 Supplier_id: req.data.user.id
             }
-            await Advertisement_has_Supplier.create(body);
-
-            await Client_has_Supplier.destroy({
-                where: {
-                    Advertisement_id: advertisement_id,
-                    Supplier_id: req.data.user.id
-                },
-            });
-
-            res.status(201).json("complete")
+            const data = await Advertisement_has_Supplier.findOne({where : body});
+            if(data){
+                await Client_has_Supplier.destroy({
+                    where: {
+                        Advertisement_id: advertisement_id,
+                        Supplier_id: req.data.user.id
+                    },
+                });
+                res.status(201).json("already apply");
+            }else{
+                await Advertisement_has_Supplier.create(body);
+                await Client_has_Supplier.destroy({
+                    where: {
+                        Advertisement_id: advertisement_id,
+                        Supplier_id: req.data.user.id
+                    },
+                });
+                res.status(201).json("complete");
+            }
+            
 
         } catch (err) {
             res.status(400).json(err.message)
         }
-
-
-
     },
     cancel: async (req, res) => { //광고 지원 취소 - supplier
         const { advertisement_id } = req.body;
