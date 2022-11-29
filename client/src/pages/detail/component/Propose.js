@@ -65,7 +65,9 @@ const Propose = ({ show, setShow, userData, supplierId }) => {
         </Modal.Header>
         <Modal.Body>  
           <ListGroup variant="flush">
-            {adList.map((data, idx) => <ListItem key={idx} idx={idx} data={data} />)}
+            {adList.length > 0
+            ? adList.map((data, idx) => <ListItem key={idx} idx={idx} data={data} />)
+            : <div>업로드한 광고가 없습니다.</div>}
           </ListGroup>
         </Modal.Body>
       </Modal>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { getLocalData } from '../../config/localStrage';
 
 import Avatar from 'react-avatar';
 import { Container, Card } from 'react-bootstrap/esm';
@@ -37,6 +38,12 @@ const SupplierDetail = ({ userData }) => {
       .catch((err) => { console.log(err) });
   }, [detail]);
 
+  const handleShow = () => {
+    const isClient = getLocalData("isClient")
+    if (isClient === "true") return setShow(true);
+    else return alert("광고주만 사용할수있는 기능입니다.");
+  }
+
   return (
     <Container className='supplierDetail_container'>
       <div className="supplierDetail-content_card-container">
@@ -48,7 +55,7 @@ const SupplierDetail = ({ userData }) => {
           <Card.Text>subscriber {detail.subscriberCount}</Card.Text>
           <Card.Text>view {detail.viewCount}</Card.Text>
         </Card.Body>
-        <button onClick={() => setShow(true)}>제안하기</button>
+        <button onClick={handleShow}>제안하기</button>
       </div>
       <div className='youtubeVideo'>
         {playlist && playlist.map((video, idx) => {
