@@ -6,6 +6,7 @@ import { getLocalData } from '../../../config/localStrage';
 
 import Avatar from 'react-avatar';
 import { Container, Row, Col, Card, ListGroup, Form, Button, Modal } from 'react-bootstrap';
+import swal from 'sweetalert';
 
 import '../Client.css';
 
@@ -44,7 +45,7 @@ const ClientEditInfo = ({ userData, show, setShow }) => {
       
       const result = await client.inputInfo(accessToken, isClient, newIntro, imgUrl);
       if (result) {
-        alert("성공적으로 수정되었습니다.");
+        swal("성공적으로 수정되었습니다.");
         window.location.reload();
       } 
     } catch (err) {

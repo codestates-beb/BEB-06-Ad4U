@@ -9,6 +9,7 @@ import './UploadPage.css';
 import { myBucket, S3_BUCKET } from '../../../../config/awsS3';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 
 const UploadPage= () => {
