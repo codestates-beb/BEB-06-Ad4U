@@ -53,7 +53,7 @@ const App = () => {
         <Route path="/list/*" element={<ListPage />} />
         <Route path="/mypage/*" element={<Mypage />} />
         <Route path="/detail/client/:clientId" element={<ClientDetail />} />
-        <Route path="/detail/supplier/:supplierId" element={<SupplierDetail />} />
+        <Route path="/detail/supplier/:supplierId" element={<SupplierDetail userData={userData}/>} />
         <Route path="/detail/ad/:adId" element={<AdDetail userData={userData}/>} />
         <Route path="/login" element={<LoginPage setUserData={setUserData} />} />
         <Route path="*" element={<Emptypage />} />

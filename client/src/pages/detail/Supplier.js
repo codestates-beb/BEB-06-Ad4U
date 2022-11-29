@@ -6,13 +6,15 @@ import Avatar from 'react-avatar';
 import { Container, Card } from 'react-bootstrap/esm';
 
 import supplier from '../../hooks/axios/supplier';
+import Propose from './component/Propose';
 import './Detail.css';
 
 
-const SupplierDetail = () => {
+const SupplierDetail = ({ userData }) => {
   const { supplierId } = useParams();
   const [detail, setDetail] = useState({});
   const [playlist, setPlaylist] = useState([])
+  const [show, setShow] = useState(false);
   console.log("Detail", detail)
 
   useEffect(() => {
@@ -46,6 +48,7 @@ const SupplierDetail = () => {
           <Card.Text>subscriber {detail.subscriberCount}</Card.Text>
           <Card.Text>view {detail.viewCount}</Card.Text>
         </Card.Body>
+        <button onClick={() => setShow(true)}>제안하기</button>
       </div>
       <div className='youtubeVideo'>
         {playlist && playlist.map((video, idx) => {
@@ -60,6 +63,7 @@ const SupplierDetail = () => {
           )
         })}
       </div>
+      <Propose show={show} setShow={setShow} userData={userData} supplierId={supplierId} />
     </Container> 
   );
 }
