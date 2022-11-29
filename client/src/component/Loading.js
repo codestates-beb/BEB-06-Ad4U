@@ -12,6 +12,7 @@ const Loading = () => {
           <span className="sr-only">Loading...</span>
           <span className="sr-only">잠시만 기려주세요!!</span>
         </Spinner>
+        
       </Container>
   )
 }
