@@ -77,7 +77,7 @@ module.exports = {
 
     },
     refuse: async (req, res) => { //광고 거절 - supplier
-        const { advertisement_id } = req.body;
+        const { Advertisement_id } = req.body;
 
         Client_has_Supplier.destroy({
             where: {

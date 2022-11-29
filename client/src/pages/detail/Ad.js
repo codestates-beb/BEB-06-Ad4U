@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import ad from '../../hooks/axios/ad';
+import ad from '../../hooks/axios/supplier';
+import supplier from '../../hooks/axios/supplier';
 import nullImg from '../../dummyfiles/img1.png';
 import { useNavigate } from 'react-router-dom';
 import { getLocalData } from '../../config/localStrage'; 
@@ -83,8 +84,8 @@ const AdDetail = ({ userData }) => {
                 </Card.Text>
                 <div className='adGo'>
                   {isApply.length 
-                    ? (<button className='adGo_btn' onClick={() => ad.callApplyCancel(accessToken, isClient, adId)} ><span>취소하기</span></button>)
-                    : (<button className='adGo_btn' onClick={() => ad.callApply(accessToken, isClient, adId)} ><span>지원하기</span></button>)
+                    ? (<button className='adGo_btn' onClick={() => supplier.callApplyCancel(accessToken, isClient, adId)} ><span>취소하기</span></button>)
+                    : (<button className='adGo_btn' onClick={() => supplier.callApply(accessToken, isClient, adId)} ><span>지원하기</span></button>)
                   } 
                 </div>
               </Card.Body>

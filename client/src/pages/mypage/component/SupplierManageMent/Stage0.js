@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Accordion, Col, Row, Container } from 'react-bootstrap';
 import method from '../../../../hooks/web3/sendTransaction';
 import { getLocalData } from '../../../../config/localStrage';
-import ad from '../../../../hooks/axios/ad';
+import supplier from '../../../../hooks/axios/supplier';
 import '../../Supplier.css';
 
 //모집중
@@ -15,7 +15,7 @@ const Stage0 = ({ adList }) => {
   return (
     <>
       <div>모집중</div>
-      <button onClick={() => ad.callApplyCancel(accessToken, isClient, adId)}>지원 취소하기</button>
+      <button onClick={() => supplier.callApplyCancel(accessToken, isClient, adId)}>지원 취소하기</button>
     </>
   );
 }
