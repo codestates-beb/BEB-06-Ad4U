@@ -111,9 +111,36 @@
   font-weight: 400;
 }
 
-#stage3_alertText {
-  font-size: small;
-  font-weight: 400;
-  display: none;
-  margin-top: 3px;
+
+
+
+.contractDownload {
+  text-align: left;
+  text-decoration: underline;
+  padding: 0px;
+}
+
+.contractDownload:hover {
+  opacity: 0.7;
+}
+
+.contractDownloadIcon {
+  width: 50px;
+  height: 24px;
+  padding-left: 0px;
+}
+
+.completeIcon {
+  width: 40px;
+  height: 40px;
+  float: left;
+  padding-bottom: 10px;
+  padding-left: 0px;
+  padding-right: 10px;
+  margin: auto;
+}
+
+.completeCol {
+  text-align: left;
+  padding: 0px;
 }

@@ -8,7 +8,6 @@ import Avatar from 'react-avatar';
 
 import Status from './component/Status';
 import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
-import SBTView from './component/SBTView/SBTView';
 
 const SupplierMypage = () => {
   const accessToken = getLocalData("accessToken");
@@ -75,7 +74,6 @@ const SupplierMypage = () => {
             <Status adList={adList} setStatus={setStatus} />
             <Container className='supplierMypage_accordion'>
              <FilterAd adList={adList} status={status} />
-             <SBTView userData={userData} adList={adList}/>
             </Container>
           </Row>
         </Col>       

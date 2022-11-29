@@ -13,7 +13,6 @@ import Status from './component/Status';
 import ClientEditInfo from './component/ClientEditInfo';
 import { Col, Row, Container, Spinner, Card, ListGroup } from 'react-bootstrap';
 import axios from 'axios';
-import SBTView from './component/SBTView/SBTView';
 import UploadPage from './component/Upload/UploadPage';
 
 const ClientMypage = () => {
@@ -116,7 +115,6 @@ const ClientMypage = () => {
       </Row>
       <ClientEditInfo userData={userData} show={show} setShow={setShow} />
     </Container>
-    <SBTView userData={userData} adList={adList}/>
     </>
   );
 }
