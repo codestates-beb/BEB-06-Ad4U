@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import client from '../../../hooks/axios/client';
 import { myBucket, S3_BUCKET } from '../../../config/awsS3';
 import { getLocalData } from '../../../config/localStrage';
+import Swal from 'sweetalert2'
 
 import Avatar from 'react-avatar';
 import { Container, Row, Col, Card, ListGroup, Form, Button, Modal } from 'react-bootstrap';
-import swal from 'sweetalert';
+
 
 import '../Client.css';
 
@@ -28,8 +29,13 @@ const ClientEditInfo = ({ userData, show, setShow }) => {
         Key: file.name
     };
     
-    myBucket.upload(params, (err, data) => {
-      if (err) return alert("File upload is fail!");
+    myBucket.upload(params, async (err, data) => {
+      if (err) {
+        await Swal.fire({
+          icon: 'error',
+          title: '파일 업로드 실패...',
+        })
+      }
       console.log(`File uploaded successfully. ${data.Location}`);
       setNewProfileImgUrl(data.Location);
     });
@@ -45,7 +51,7 @@ const ClientEditInfo = ({ userData, show, setShow }) => {
       
       const result = await client.inputInfo(accessToken, isClient, newIntro, imgUrl);
       if (result) {
-        swal("성공적으로 수정되었습니다.");
+        // swal("성공적으로 수정되었습니다.");
         window.location.reload();
       } 
     } catch (err) {

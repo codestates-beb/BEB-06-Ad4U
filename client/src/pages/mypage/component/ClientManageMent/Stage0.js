@@ -5,6 +5,7 @@ import { getLocalData } from '../../../../config/localStrage';
 import Avatar from 'react-avatar';
 import Img from '../../../../dummyfiles/img1.png';
 import { Container, Row, Col, Card, ListGroup, Form, Button } from 'react-bootstrap';
+import Swal from 'sweetalert2'
 import '../../Client.css';
 import '../TransactionButton.css';
 
@@ -19,21 +20,37 @@ const Stage0 = ({ adList }) => {
     const handleDeploy = async (supplierId, supplierAddr) => {
       //광고주 지갑주소랑, 크리에이터 지갑주소가 같을 시 에러남, 다른주소로!
       try {
-        if (isClient === "false") return alert("광고주 계정으로만 이용가능합니다.");
+        if (isClient === "false") {
+          await Swal.fire({
+            icon: 'error',
+            title: '광고주 계정으로만 실행 가능합니다!',
+          })
+        }
         if (accessToken && isClient && supplierId && adId) {
           const tx = await method.multiSigWalletDeploy(supplierAddr);
           const contractAddress = tx._address;
           if (contractAddress) {
             const result = await contract.conference(accessToken, isClient, supplierId, adId, contractAddress)
             if (result) {
-              alert("contract deploy is success!");
+              await Swal.fire({
+                icon: 'success',
+                title: '계약 생성 완료!',
+              })
               window.location.reload();
             }
-          } else return alert("다시 로그인 해주세요");
+          } else {
+            await Swal.fire({
+              icon: 'error',
+              title: '계정 오류!',
+            })
+          }
         }
       } catch (err) {
         console.log(err);
-        alert("contract deploy is fail!");
+        await Swal.fire({
+          icon: 'error',
+          title: '계약 생성 실패..',
+        })
       }
     };
 

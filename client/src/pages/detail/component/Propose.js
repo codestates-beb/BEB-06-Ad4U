@@ -4,6 +4,8 @@ import { getLocalData } from '../../../config/localStrage';
 import ad from '../../../hooks/axios/ad';
 import client from '../../../hooks/axios/client';
 import { Container, Row, Col, Card, ListGroup, Form, Button, Modal, Toast } from 'react-bootstrap';
+import Swal from 'sweetalert2';
+
 
 import '../Detail.css';
 
@@ -34,9 +36,19 @@ const Propose = ({ show, setShow, userData, supplierId }) => {
     const sendPropose = async (adId) => {
       try {
         const result = await client.propose(accessToken, isClient, supplierId, adId)
-        if (result) return alert("제안완료");
+        if (result) {
+          await Swal.fire({
+            icon: 'success',
+            title: '광고 제안 성공!',
+          })    
+          window.location.reload();
+        }
       } catch (err) {
-        alert("이미 제안한 광고입니다.");
+        await Swal.fire({
+          icon: 'error',
+          title: '이미 제안된 광고입니다.',
+        })
+        window.location.reload();
       }
     } 
 

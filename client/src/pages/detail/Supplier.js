@@ -5,6 +5,7 @@ import { getLocalData } from '../../config/localStrage';
 
 import Avatar from 'react-avatar';
 import { Container, Card } from 'react-bootstrap/esm';
+import Swal from 'sweetalert2'
 
 import supplier from '../../hooks/axios/supplier';
 import Propose from './component/Propose';
@@ -38,10 +39,15 @@ const SupplierDetail = ({ userData }) => {
       .catch((err) => { console.log(err) });
   }, [detail]);
 
-  const handleShow = () => {
+  const handleShow = async () => {
     const isClient = getLocalData("isClient")
     if (isClient === "true") return setShow(true);
-    else return alert("광고주만 사용할수있는 기능입니다.");
+    else {
+      await Swal.fire({
+        icon: 'error',
+        title: '광고주 계정으로만 지원 가능합니다!',
+      })
+    }
   }
 
   return (
