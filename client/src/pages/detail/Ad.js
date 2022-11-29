@@ -60,8 +60,8 @@ const AdDetail = ({ userData }) => {
               onClick={() => navigate(`/detail/client/${detail.Client.id}`)}
               key={detail.Client.id}
               >
-                {detail.profileImgUrl
-                  ? <Avatar className='avatar' src={detail.profileImgUrl} size="50"/>
+                {detail.Client.profileImgUrl
+                  ? <Avatar className='avatar' src={detail.Client.profileImgUrl} size="50"/>
                   : <Avatar className='avatar' src={nullImg} size="50"/>
                 }
                 {detail.Client.company_name}

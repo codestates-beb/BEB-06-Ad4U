@@ -56,7 +56,7 @@ module.exports = {
     detail: async (req, res) => {
         try {
             ad_attributes.push('content');
-            let ad_datail = await Advertisement.findOne({
+            let ad_detail = await Advertisement.findOne({
                 attributes: ad_attributes,
                 where: {
                     id: req.query.id
@@ -80,7 +80,7 @@ module.exports = {
                 //limit: 10,
                 // offset: 5,
             });
-            res.status(200).json(ad_datail);
+            res.status(200).json(ad_detail);
         } catch (err) {
             res.status(400).json(err.message);
         }

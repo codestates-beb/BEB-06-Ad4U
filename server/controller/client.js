@@ -35,7 +35,7 @@ module.exports = {
     detail: async (req, res) => {
         try{
             client_attributes.push('intro');
-            let client_datail = await Client.findOne({
+            let client_detail = await Client.findOne({
                 attributes: client_attributes,
                 where: {
                     id: req.query.id
@@ -49,8 +49,9 @@ module.exports = {
                 //         }
                 //     },
                 // ]
+                
             });
-            res.status(200).json(client_datail);
+            res.status(200).json(client_detail);
         }catch(err){
             res.status(400).json(err.message);
         }

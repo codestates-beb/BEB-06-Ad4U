@@ -89,7 +89,6 @@ module.exports = {
             scope: scopes,
             include_granted_scopes: true
         });
-        console.log(authorizationUrl)
         res.status(200).json(authorizationUrl);
     },
     auth: async (req, res) => {

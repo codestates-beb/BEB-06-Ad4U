@@ -28,13 +28,13 @@ module.exports = {
     detail: async (req, res)=> {
         try{
             supplier_attributes.push('channelUrl', 'channel_id');
-            let supplier_datail = await Supplier.findOne({
+            let supplier_detail = await Supplier.findOne({
                 attributes: supplier_attributes,
                 where: {
                     id: req.query.id
                 },
             });
-            res.status(200).json(supplier_datail);
+            res.status(200).json(supplier_detail);
         }catch(err){
             res.status(400).json(err.message);
         }
