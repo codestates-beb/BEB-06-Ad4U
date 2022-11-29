@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Row, Container } from 'react-bootstrap';
-import back from '../imgs/main_img.png';
+import back from '../imgs/home_back.png';
 
 import '../Main.css';
 

@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import supplier from '../../../hooks/axios/supplier';
 import client from '../../../hooks/axios/client';
 
+import dkanrjsk from '../imgs/handshake.png';
+
 const BusinessPartner = () => {
   const [clientList, setClientList] = useState([]);
   const [supplierList, setSupplierList] = useState([]);
@@ -46,12 +48,17 @@ const BusinessPartner = () => {
           )
         })}
       </div>
-
-      <div className="partner-content">
+      <div className='partner_viewall'>
+        <Link to="/list/client"><button className='partnerviewall_btn'><span>View all</span></button></Link>
+      </div>
+        
+      <h1 className='withus'>Creator with us</h1>
+      <h3>크리에이터</h3>
+      <div className="creator-content">
         {supplierList.map((data, idx) => {
           return (
           <div 
-          className="partner-content_card-container"
+          className="creator-content_card-container"
           onClick = {() => {
             navigate(`/detail/supplier/${data.id}`)
             window.scrollTo(0,0)
@@ -65,6 +72,7 @@ const BusinessPartner = () => {
           )
         })}
       </div>
+
       <div className='partner_viewall'>
         <Link to="/list/supplier"><button className='partnerviewall_btn'><span>View all</span></button></Link>
       </div>

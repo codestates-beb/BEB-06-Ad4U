@@ -172,7 +172,6 @@
 .ad_viewall {  
   display: flex; 
   justify-content: center;
-  margin-top: 15px;
 }
 
 .ad_viewall span {  
@@ -212,9 +211,9 @@
 
 .partner-content {
   display: grid;
-  grid-template-columns: repeat(5, minmax(240px, 120px));
-  padding:20px 0;
-  gap: 20px;
+  grid-template-columns: repeat(5, minmax(200px, 120px));
+  margin-top: 30px;
+  gap: 40px;
   justify-content: center;
 }
 
@@ -225,7 +224,7 @@
 .partner-content_card-container  {
   text-align: center;
   padding: 10px 10px;
-  border-radius: 4px;
+  border-radius: 10px;
   box-shadow: 2px 2px 4px 4px #0c0b1473;
   cursor: pointer;
   position: relative;
@@ -234,6 +233,32 @@
 
 .partner-content_card-container:hover {
   transform: scale(1.1);
+}
+
+.creator-content {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(200px, 120px));
+  gap: 40px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.creator-content_card-container  {
+  text-align: center;
+  padding: 10px 10px;
+  border-radius: 30px;
+  box-shadow: 2px 2px 4px 4px #0c0b1473;
+  cursor: pointer;
+  position: relative;
+  background-color: #ffffff;
+}
+
+.creator-content_card-container:hover {
+  transform: scale(1.1);
+}
+
+.withus {
+  margin-top: 150px;
 }
 
 .partner_viewall {  
@@ -260,6 +285,7 @@
   transform: scale(1.1);
 }
 
+
 /* Us css */
 .Us_cantainer {
   margin-top: 100px;
@@ -285,7 +311,7 @@
 
 .us_card_container {
   position: absolute;
-  top: 4790px;
+  top: 5185px;
   left:18%;
 }
 

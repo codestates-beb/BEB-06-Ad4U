@@ -58,12 +58,8 @@ const ClientList = () => {
                 window.scrollTo(0,0)}}
               key={idx}
               >
-                <Row>
-                  <Col><Avatar src={data.profileImgUrl} size="100" round={true}/></Col>
-                  <Col><Card.Body>
-                    <Card.Title className='clientList_companyname'>{data.company_name}</Card.Title>
-                  </Card.Body></Col>
-                </Row>
+                <Avatar src={data.profileImgUrl} size="100" round={true}/>
+                <Card.Title className='clientList_companyname'>{data.company_name}</Card.Title>
               </div>
           )})}
         </div>

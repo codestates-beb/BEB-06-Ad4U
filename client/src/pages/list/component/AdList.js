@@ -55,6 +55,10 @@ const AdList = () => {
             onClick={() => navigate(`/detail/ad/${data.id}`)}
             key={idx}
             >
+              {/* onClick={() => { 
+                navigate(`/detail/client/${data.id}`)
+                window.scrollTo(0,0)}}
+              key={idx} */}
               <Row className='adList_img'>
                 {data.AdimgUrl 
                 ? <Card.Img variant="top" src={data.AdimgUrl}/> 
