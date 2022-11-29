@@ -50,6 +50,14 @@
 }
 
 /* stage0 */
+.stage0_emptyArea {
+  height: 50px;
+  text-align: center;
+  margin-top: 25px;
+  font-size: large;
+  font-weight: 400;
+}
+
 .stage0_ImgArea {
   margin: 10px 0px 20px 10px;
 }
@@ -79,7 +87,6 @@
 
 .stage2_contentArea div {
   margin: auto;
-  text-decoration: none;
 }
 
 .stage2_contentArea div a {
@@ -89,5 +96,24 @@
 
 /* stage3 */
 .stage3_contentArea {
-  margin: 10px;
+  margin: 30px;
+  text-align: center;
+}
+
+.stage3_descriptionArea {
+  margin-top: 10px;
+  font-size: large;
+  font-weight: 600;
+}
+
+.stage3_detailArea {
+  font-size: small;
+  font-weight: 400;
+}
+
+#stage3_alertText {
+  font-size: small;
+  font-weight: 400;
+  display: none;
+  margin-top: 3px;
 }
