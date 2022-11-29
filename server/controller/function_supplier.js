@@ -17,7 +17,7 @@ module.exports = {
                         Supplier_id: req.data.user.id
                     },
                 });
-                res.status(201).json("already apply");
+                res.status(201).json("already applied");
             }else{
                 await Advertisement_has_Supplier.create(body);
                 await Client_has_Supplier.destroy({
