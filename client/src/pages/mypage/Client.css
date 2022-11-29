@@ -1,15 +1,15 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 .clientMypage_container {
   /* position: relative; */
   margin-top: 200px;
   min-height: 1000px;
+  font-family: "Montserrat"
 }
 
 .clientMypage_row h1 {
   color: white;
   margin-bottom: 30px;
 }
-
 
 .clientSide_btn span {  
   color: white;
@@ -50,6 +50,14 @@
 }
 
 /* stage0 */
+.stage0_emptyArea {
+  height: 50px;
+  text-align: center;
+  margin-top: 25px;
+  font-size: large;
+  font-weight: 400;
+}
+
 .stage0_ImgArea {
   margin: 10px 0px 20px 10px;
 }
@@ -79,7 +87,6 @@
 
 .stage2_contentArea div {
   margin: auto;
-  text-decoration: none;
 }
 
 .stage2_contentArea div a {
@@ -89,5 +96,24 @@
 
 /* stage3 */
 .stage3_contentArea {
-  margin: 10px;
+  margin: 30px;
+  text-align: center;
+}
+
+.stage3_descriptionArea {
+  margin-top: 10px;
+  font-size: large;
+  font-weight: 600;
+}
+
+.stage3_detailArea {
+  font-size: small;
+  font-weight: 400;
+}
+
+#stage3_alertText {
+  font-size: small;
+  font-weight: 400;
+  display: none;
+  margin-top: 3px;
 }

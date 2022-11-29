@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Main.css';
-import { Row, Col, Card, Button } from 'react-bootstrap';
+import { Row, Col, Card, Button, Container } from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
 import ad from '../../../hooks/axios/ad'
@@ -20,8 +20,9 @@ const Ad = ({ data }) => {
   }, [])
 
   return (
-    <div className='ad_container'>
-      <h3>어떤 광고를 찾고계신가요?</h3>
+    <Container className='ad_container'>
+      <h1>Advertising Inventory</h1>
+      <h3>광고를 찾고계신가요?</h3>
       <div className="ad-content">
         {list.map((data, idx) => { return (
             <div 
@@ -36,19 +37,15 @@ const Ad = ({ data }) => {
               ? <Card.Img variant="top" src={data.AdimgUrl}/> 
               : <Card.Img variant='top' src={nullImg}/> }
               <Card.Body>
-                <Card.Title>{data.title}</Card.Title>
-                <Card.Text>{}</Card.Text>
-                <Card.Text>
-                  {data.createdAt}
-                </Card.Text>
+                <Card.Title className='cardTitle'>{data.title}</Card.Title>
               </Card.Body>
             </div>
         )})}
       </div>
       <div className='ad_viewall'>
         <Link to="/list"><button className='adviewall_btn'><span>View all</span></button></Link>
-       </div>
-    </div>
+      </div>
+    </Container>
   );
 }
 
