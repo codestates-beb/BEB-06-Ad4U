@@ -7,10 +7,14 @@ import '../../Client.css';
 const Stage1 = ({ adList }) => {
   const adId = adList.id;
 
+  const { id, channelName, profileImgUrl, channelUrl } = adList.Advertisement_has_Suppliers[0].Supplier;
+
   return (
     <>
       <Container className='management_container'>
-        <Col className='stage1_contentArea'><div>크리에이터의 컨트랙트 서명을 기다리고 있습니다.</div></Col>
+        {channelName
+        ? <Col className='stage1_contentArea'><div>크리에이터 ({channelName} 님)의 컨트랙트 서명을 기다리고 있습니다.</div></Col>
+        : <Col className='stage1_contentArea'><div>크리에이터의 컨트랙트 서명을 기다리고 있습니다.</div></Col>}
       </Container>
     </>
   );
