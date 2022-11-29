@@ -3,52 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { Accordion, Col, Row, Container, Image } from 'react-bootstrap';
 import method from '../../../../hooks/web3/sendTransaction';
 import '../../Client.css';
-
+//lock downloadPdfImg 둘다 필요함.
 import lockPdfImg from '../../../../dummyfiles/document.png';
 import downloadPdfImg from '../../../../dummyfiles/download-pdf.png';
 import revokeImg from '../../../../dummyfiles/cancel.png';
-import axios from 'axios';
-import crypto from 'crypto-js';
-import {triggerBase64Download} from 'common-base64-downloader-react';
+import { handleFileImg, handleViewPdf } from '../../../../hooks/ipfs/getPdfFile';
 
 //파기
 const Stage5 = ({ adList }) => {
-
-
-  const handleFileImg = (e) => {
-    if(e.target.src === downloadPdfImg) {
-      e.target.src = lockPdfImg;
-    } else {
-      e.target.src=downloadPdfImg;
-    }
-  }
-  const dataURLtoBase64 = (dataurl) => {
- 
-    var arr = dataurl.split(',')
-    
-    return arr[1];
-  }
-
-  const handleViewPdf = async () => {
-    console.log(adList);
-    const secretKey = process.env.REACT_APP_SECRET_KEY;
-
-      const options = {
-        url: adList.token_uri,
-        method: 'GET',
-        headers: {"Content-Type": "application/json"}
-      }
-      
-      await axios.request(options)
-      .then(res => {
-        console.log(res.data)
-        //복호화
-          const bytes = crypto.AES.decrypt(res.data, secretKey);
-          const decrypted = bytes.toString(crypto.enc.Utf8);
-          const decrypted_base64 = "data:application/pdf;base64,"+dataURLtoBase64(decrypted);
-          triggerBase64Download(decrypted_base64, `${adList.title}_${adList.createdAt}`)
-      })
-  }
 
   return (
     <>
@@ -58,17 +20,17 @@ const Stage5 = ({ adList }) => {
             <Image src={revokeImg} className="completeIcon"></Image>
             Revoked
           </Col>
-        <hr></hr>
-              <Row
-                onMouseOver={handleFileImg}
-                onMouseOut={handleFileImg}
-                onClick={handleViewPdf}
-              >
-                <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
-                <Col className='contractDownload'>
-                    계약서 다운로드
-                </Col>
-              </Row>
+        <hr />
+          <Row
+            onMouseOver={handleFileImg}
+            onMouseOut={handleFileImg}
+            onClick={() => handleViewPdf(adList.token_uri, adList.title, adList.createdAt)}
+          >
+            <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
+            <Col className='contractDownload'>
+                계약서 다운로드
+            </Col>
+          </Row>
         </Row>
       </Container>
     </>
