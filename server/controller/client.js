@@ -55,14 +55,12 @@ module.exports = {
             res.status(400).json(err.message);
         }
     },
-    inputInfo: async (req, res) => {
+    inputInfo: async (req, res) => { //사용자 정보 입력
         const {intro, profileImgUrl} = req.body;
         try {
             let body = {};
             if(intro) body.intro = intro;
             if(profileImgUrl) body.profileImgUrl = profileImgUrl;
-
-            console.log(body);
 
             Client.update(body,
                 { where: { id: req.data.user.id} })
@@ -72,7 +70,7 @@ module.exports = {
         } catch (err) {
             res.status(400).json(err.message);
         }
-    }
+    },
 }
 
 

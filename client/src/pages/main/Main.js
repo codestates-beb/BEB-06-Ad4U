@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import About from './component/About';
 import Home from './component/Home';
 import Ad from './component/Ad';
@@ -9,11 +9,14 @@ import smoothscroll from 'smoothscroll-polyfill';
 import { IoIosArrowDropupCircle } from "react-icons/io";
 
 import './Main.css';
+import Us from './component/Us';
 
 // scrollTo 메서드를 사용 할 때, behavior 속성을 smooth로 설정 할 경우, 스크롤 이동시 부드럽게 이동하는 효과 
 smoothscroll.polyfill();
 
 const Main = ( userData ) => {
+  console.log(userData)
+
   const topClick = () => {
     window.scrollTo(0, 0, { behavior : "smooth" })
   }
@@ -21,15 +24,14 @@ const Main = ( userData ) => {
     window.scrollTo(0, 0, { behavior : "smooth" })
       };
   const onAboutClick = () => {
-    window.scrollTo(0, 700, { behavior : "smooth" })
+    window.scrollTo(0, 920, { behavior : "smooth" })
       };
   const onAdClick = () => {
-    window.scrollTo(0, 1550, { behavior : "smooth" })
-      };
-  const onCreatorClick = () => {
     window.scrollTo(0, 2300, { behavior : "smooth" })
       };
-      console.log(userData)
+  const onCreatorClick = () => {
+    window.scrollTo(0, 3300, { behavior : "smooth" })
+      };
 
   return (
     <Container className='main_container'>
@@ -41,11 +43,12 @@ const Main = ( userData ) => {
           <Col xs={1} ><Button variant="link" onClick={onCreatorClick}><h5>Partner</h5></Button></Col>
         </Row>
       </header>
-      <main>
+      <main className='body_container'>
         <Home />
         <About />
         <Ad />
         <BusinessPartner />
+        <Us />
       </main>
       <Button variant="light" className='upbutton' onClick={topClick}>
         <IoIosArrowDropupCircle />

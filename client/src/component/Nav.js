@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from './clear_logo.png';
 import auth from '../hooks/axios/auth';
@@ -13,6 +13,22 @@ import img from '../dummyfiles/img1.png';
 import './NFE.css';
 
 const Nav = ({ userData, setUserData }) => {
+  // 적용 중
+  // const [show, handleShow] = useState(false);
+
+  //   useEffect(() => {
+  //       window.addEventListener("scroll", () => {
+  //           if(window.scrollY > 50) {
+  //               handleShow(true);
+  //           } else {
+  //               handleShow(false);
+  //           }
+  //       });
+  //       return () => {
+  //           window.removeEventListener("scroll", () => {});
+  //       };
+  //   }, []);
+
   const isClient = getLocalData("isClient");
 
   const navigate = useNavigate();

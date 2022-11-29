@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Main.css';
-import { Row, Col, Card } from 'react-bootstrap';
+import { Row, Col, Card, Container } from 'react-bootstrap';
 import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
 import supplier from '../../../hooks/axios/supplier';
 import client from '../../../hooks/axios/client';
+
+import dkanrjsk from '../imgs/handshake.png';
 
 const BusinessPartner = () => {
   const [clientList, setClientList] = useState([]);
@@ -26,60 +28,55 @@ const BusinessPartner = () => {
   }, [])
 
   return (
-    <div className='supplier_container'>
+    <Container className='partner_container'>
       <h1>Business Partner with us</h1>
       <h3>파트너사</h3>
-      <div className="supplier-content">
+      <div className="partner-content">
         {clientList.map((data, idx) => {
           return (
           <div 
-          className="supplier-content_card-container"
+          className="partner-content_card-container"
           onClick = {() => {
             navigate(`/detail/client/${data.id}`)
             window.scrollTo(0,0)
           }}
           key={idx}
           >
-            <Row>
-              {/* client 사진 없음 
-              <Col><Avatar src={data.profileImgUrl} size="100" round={true}/></Col> */}
-              <Col><Card.Body>
-                <Card.Title>{data.company_name}</Card.Title>
-              </Card.Body></Col>
-            </Row>
+            <Avatar src={data.profileImgUrl} size="100" />
+            <Card.Title className='bp_cardTitle'>{data.company_name}</Card.Title>
           </div>
           )
         })}
       </div>
-
-      <div className="supplier-content">
+      <div className='partner_viewall'>
+        <Link to="/list/client"><button className='partnerviewall_btn'><span>View all</span></button></Link>
+      </div>
+        
+      <h1 className='withus'>Creator with us</h1>
+      <h3>크리에이터</h3>
+      <div className="creator-content">
         {supplierList.map((data, idx) => {
           return (
           <div 
-          className="supplier-content_card-container"
+          className="creator-content_card-container"
           onClick = {() => {
             navigate(`/detail/supplier/${data.id}`)
             window.scrollTo(0,0)
           }}
           key={idx}
           >
-            <Row>
-              <Col><Avatar src={data.profileImgUrl} size="100" round={true}/></Col>
-              <Col><Card.Body>
-                <Card.Title>{data.channelName}</Card.Title>
-                <Card.Text>subscribers {data.subscriberCount}</Card.Text>
-              </Card.Body></Col>
-            </Row>
+            <Avatar src={data.profileImgUrl} size="100" round={true}/>
+            <Card.Title className='bp_cardTitle'>{data.channelName}</Card.Title>
+            <Card.Text>subscribers {data.subscriberCount}</Card.Text>
           </div>
           )
         })}
       </div>
 
-  
-      <div className='supplier_viewall'>
-        <Link to="/list/supplier"><button className='supplierviewall_btn'><span>View all</span></button></Link>
+      <div className='partner_viewall'>
+        <Link to="/list/supplier"><button className='partnerviewall_btn'><span>View all</span></button></Link>
       </div>
-    </div>
+    </Container>
   );
 }
 

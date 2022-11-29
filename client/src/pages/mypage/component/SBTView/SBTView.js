@@ -13,7 +13,7 @@ import {triggerBase64Download} from 'common-base64-downloader-react';
 
 
 const SBTView = ({ userData, adList }) => {
-  console.log(adList)
+  // console.log(adList)
   const [list, setList] = useState([]);
   const [sbtList, setSbtList] = useState([]);
 

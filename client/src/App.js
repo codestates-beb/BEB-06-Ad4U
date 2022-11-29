@@ -16,6 +16,8 @@ import Footer from './component/Footer';
 import TestApiPage from './pages/testAPI/testapi';
 
 import './App.css';
+import Spinner from './component/Loading';
+import Loading from './component/Loading';
 
 const App = () => {
   const [ userData, setUserData ] = useState({});
@@ -56,6 +58,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage setUserData={setUserData} />} />
         <Route path="*" element={<Emptypage />} />
         <Route path="/testapi" element={<TestApiPage />} />
+        <Route path="/abc" element={<Loading />} />
       </Routes>
       <Footer />
     </>

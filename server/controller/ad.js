@@ -1,4 +1,4 @@
-const { Client, Advertisement, Advertisement_has_Supplier, Supplier } = require('../models/index');
+const { Client, Advertisement, Advertisement_has_Supplier, Supplier, Client_has_Supplier } = require('../models/index');
 const ad_attributes = ['id', 'title', 'AdimgUrl', 'cost', 'createdAt'];
 
 module.exports = {
@@ -9,6 +9,12 @@ module.exports = {
                 where: {
                     status: 0,
                 },
+                include: [
+                    {
+                        model: Client, as: "Client",
+                        attributes: ['id', 'company_name', 'email', 'profileImgUrl'],
+                    }
+                ],
                 order: [['id', 'DESC']],
                 limit: 10,
                 // offset: 5,
@@ -30,7 +36,7 @@ module.exports = {
                 include: [
                     {
                         model: Client, as: "Client",
-                        attributes: ['id', 'company_name', 'company_number', 'email'],
+                        attributes: ['id', 'company_name', 'email', 'profileImgUrl'],
                     },
                 ]
                 //limit: 10,
@@ -58,7 +64,7 @@ module.exports = {
                 include: [
                     {
                         model: Client, as: "Client",
-                        attributes: ['id', 'company_name', 'company_number', 'email'],
+                        attributes: ['id', 'company_name', 'company_number', 'email', 'profileImgUrl'],
                     },
                     {
                         model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",
@@ -112,6 +118,11 @@ module.exports = {
                 res.status(401).json('invalid access');
             } else {
                 await Advertisement_has_Supplier.destroy({
+                    where: {
+                        Advertisement_id: advertisement_id
+                    }
+                });
+                await Client_has_Supplier.destroy({
                     where: {
                         Advertisement_id: advertisement_id
                     }
