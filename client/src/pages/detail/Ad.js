@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import ad from '../../hooks/axios/supplier';
+import ad from '../../hooks/axios/ad';
 import supplier from '../../hooks/axios/supplier';
 import nullImg from '../../dummyfiles/img1.png';
 import { useNavigate } from 'react-router-dom';
@@ -91,7 +91,6 @@ const AdDetail = ({ userData }) => {
               </Card.Body>
             </Card>
           </Col>
-          
         </Row>
       </Container>
     </>
