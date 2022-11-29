@@ -9,6 +9,12 @@ module.exports = {
                 where: {
                     status: 0,
                 },
+                include: [
+                    {
+                        model: Client, as: "Client",
+                        attributes: ['id', 'company_name', 'email', 'profileImgUrl'],
+                    }
+                ],
                 order: [['id', 'DESC']],
                 limit: 10,
                 // offset: 5,
@@ -30,7 +36,7 @@ module.exports = {
                 include: [
                     {
                         model: Client, as: "Client",
-                        attributes: ['id', 'company_name', 'company_number', 'email'],
+                        attributes: ['id', 'company_name', 'email', 'profileImgUrl'],
                     },
                 ]
                 //limit: 10,
@@ -58,7 +64,7 @@ module.exports = {
                 include: [
                     {
                         model: Client, as: "Client",
-                        attributes: ['id', 'company_name', 'company_number', 'email'],
+                        attributes: ['id', 'company_name', 'company_number', 'email', 'profileImgUrl'],
                     },
                     {
                         model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",
