@@ -30,14 +30,14 @@
   }
   
   .adGo span {  
-    color: white;
+    color: black;
   }
   
   .adGo_btn {
     padding: 10px 30px;
     border-radius: 15px;
     background: none;
-    border: 3px solid white;
+    border: 3px solid black;
   }
   
   .adGo_btn:hover {
@@ -51,7 +51,6 @@
   .adDetail_card_img {
     width: fit-content;
     height: 300px;
-    
   }
 
   .adTitle {
@@ -67,15 +66,32 @@
   .adDetail_info_card {
     width: 300px;
     font-weight: bold;
+    color: black;
     border-radius: 10px;
     position: fixed;
   }
 
   .infoCardTitle {
     font-weight:  bold;
+    color: black;
+    padding-bottom: 0px;
   }
 
+  .infoCardContent {
+    color: black;
+    margin: auto;
+  }
+  
+  .infoCardHeader {
+    color: black;
+    display: inline-block;
+  }
 
+  .vsKrw {
+    padding-top: 0px;
+    color: black;
+    font-size: small;
+  }
 
 
   
