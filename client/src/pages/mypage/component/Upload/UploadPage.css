@@ -10,6 +10,13 @@
 .adContent {
     white-space: pre-wrap;
     font-size: large;
+    color: black;
+}
+
+.aDContent {
+    white-space: pre-wrap;
+    font-size: large;
+    color: black;
 }
 
 .adImg {
