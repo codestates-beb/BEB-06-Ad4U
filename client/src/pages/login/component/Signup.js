@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import Swal from 'sweetalert2'
 
 import '../LoginPage.css';
 
@@ -36,11 +37,17 @@ const SignUp = ({ show, setShow, email }) => {
     try {
       const result = await auth.signup(signupData);
       if (result) {
-        alert("회원가입이 완료되었습니다. 로그인을 해주세요");
+        await Swal.fire({
+          icon: 'success',
+          title: '회원가입 완료!',
+        })
         handleClose();
       }
     } catch (err) {
-      alert(err.response.data);
+      await Swal.fire({
+        icon: 'error',
+        title: '회원가입 실패..',
+      })
     }
   }
 

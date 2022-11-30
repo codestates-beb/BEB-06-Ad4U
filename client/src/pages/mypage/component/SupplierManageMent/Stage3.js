@@ -4,6 +4,7 @@ import { Accordion, Col, Row, Container } from 'react-bootstrap';
 import { getLocalData } from '../../../../config/localStrage';
 import contract from '../../../../hooks/axios/contract';
 import method from '../../../../hooks/web3/sendTransaction';
+
 import '../../Supplier.css';
 
 import {getIsConfirmed, getTransaction} from '../../../../hooks/web3/queryContract';

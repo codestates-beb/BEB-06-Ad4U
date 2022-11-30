@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Swal from 'sweetalert2'
 
 import '../LoginPage.css';
 
@@ -29,7 +30,10 @@ const SupplierSignupForm = ({ email, address, inputAddress, sendSignupData, hand
         setIsCorrect(true);
         sendSignupData(signupData);
       } else {
-        alert("입력되지않은 정보가 있습니다.")
+        await Swal.fire({
+          icon: 'warning',
+          title: '입력되지 않은 정보가 있습니다!',
+        })
       }
     } else {
       setIsCorrect(false);

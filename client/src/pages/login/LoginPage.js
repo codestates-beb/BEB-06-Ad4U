@@ -12,6 +12,7 @@ import Col from 'react-bootstrap/esm/Col';
 import Button from 'react-bootstrap/Button';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import Swal from 'sweetalert2'
 
 import './LoginPage.css';
 
@@ -63,10 +64,16 @@ const LoginPage = ({ setUserData }) => {
           }
         }
       } else {
-        alert("아이디와 비밀번호를 입력해주세요");
+        await Swal.fire({
+          icon: 'warning',
+          title: '아이디와 비밀번호를 입력해주세요.',
+        })
       }
     } catch (err) {
-      alert(err.response.data);
+      await Swal.fire({
+        icon: 'warning',
+        title: '아이디 또는 비밀번호가 잘못되었습니다.',
+      })
     }
   }
   

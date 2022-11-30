@@ -3,21 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import auth from '../../hooks/axios/auth';
 import { getLocalData } from '../../config/localStrage';
 import SupplierAd from './component/SupplierAd';
+import ad from '../../hooks/axios/ad';
+import supplier from '../../hooks/axios/supplier';
 import './Supplier.css';
 import Avatar from 'react-avatar';
 
 import Status from './component/Status';
-import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
+import { Container, Row, Col, Card, ListGroup, Accordion, Button } from 'react-bootstrap';
 
 const SupplierMypage = () => {
   const accessToken = getLocalData("accessToken");
   const isClient = getLocalData("isClient");
   const [userData, setUserData] = useState({});
-  const [adList, setAdlist] = useState([]);
+  const [adList, setAdlist] = useState([]); 
+  const [proposeList, setProposeList] = useState([]);
   const [status, setStatus] = useState("");
 
   const navigate = useNavigate();
-  // console.log("adList", adList)
 
   useEffect(() => {
     if(accessToken && isClient === "false") {
@@ -32,6 +34,8 @@ const SupplierMypage = () => {
             list.push(Advertisement);
           });
           setAdlist(list);
+          setProposeList(data.Client_has_Suppliers);
+          delete data.Client_has_Suppliers;
           delete data.Advertisement_has_Suppliers;
           setUserData(data);
       })
@@ -49,6 +53,43 @@ const SupplierMypage = () => {
       const filteredAdList = adList.filter((el) => el.status === status);
       return filteredAdList.map((adList, idx) => <SupplierAd key={idx} idx={idx} adList={adList} />);
     } else return adList.map((adList, idx) => <SupplierAd key={idx} idx={idx} adList={adList} />);
+  }
+
+  const ListItem = ({ data, idx }) => {
+    const { cost, title } = data.Advertisement;
+    const adId = data.Advertisement_id;
+    const { company_name, profileImgUrl } = data.Client;
+    const clientId = data.Client_Id;
+
+    const sendRefuse = async () => {
+      try {
+        const result = await supplier.refuse(accessToken, isClient, adId);
+        if (result) {
+          alert("거절완료");
+          window.location.reload();
+        }
+      } catch (err) {
+        console.log(err.response.data);
+      }
+    } 
+
+    return (
+      <ListGroup.Item> 
+        <Row>
+          <Col xl={9}>
+            <Row>
+              <Col xl={4}>{idx+1}. {title}</Col>
+              <Col xl={5}>{cost}ETH</Col>
+              <Col xl={3}>{company_name}</Col>
+            </Row>
+          </Col>
+          <Col xl={3}>
+            <Button onClick={() => supplier.callApply(accessToken, isClient, adId)}>Accept</Button>
+            <Button onClick={sendRefuse}>Refuse</Button>
+          </Col>
+        </Row>
+      </ListGroup.Item>
+    );
   }
   
   return (
@@ -73,7 +114,20 @@ const SupplierMypage = () => {
             <h1> Supplier Mypage</h1>
             <Status adList={adList} setStatus={setStatus} />
             <Container className='supplierMypage_accordion'>
-             <FilterAd adList={adList} status={status} />
+              <FilterAd adList={adList} status={status} />
+              {/* 광고제안 */}
+              <Accordion alwaysOpen>
+                <Accordion.Item>
+                  <Accordion.Header>제안받은 광고</Accordion.Header>
+                  <Accordion.Body>
+                  <ListGroup variant="flush">
+                    {proposeList.length > 0
+                    ? proposeList.map((data, idx) => <ListItem key={idx} idx={idx} data={data} />)
+                    : <div>제안받은 광고가 없습니다.</div>}
+                  </ListGroup>
+                  </Accordion.Body>
+                </Accordion.Item> 
+              </Accordion>
             </Container>
           </Row>
         </Col>       

@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { getLocalData } from '../../config/localStrage';
 
 import Avatar from 'react-avatar';
 import { Container, Card } from 'react-bootstrap/esm';
+import Swal from 'sweetalert2'
 
 import supplier from '../../hooks/axios/supplier';
+import Propose from './component/Propose';
 import './Detail.css';
 
 
-const SupplierDetail = () => {
+const SupplierDetail = ({ userData }) => {
   const { supplierId } = useParams();
   const [detail, setDetail] = useState({});
   const [playlist, setPlaylist] = useState([])
+  const [show, setShow] = useState(false);
   console.log("Detail", detail)
 
   useEffect(() => {
@@ -35,6 +39,17 @@ const SupplierDetail = () => {
       .catch((err) => { console.log(err) });
   }, [detail]);
 
+  const handleShow = async () => {
+    const isClient = getLocalData("isClient")
+    if (isClient === "true") return setShow(true);
+    else {
+      await Swal.fire({
+        icon: 'error',
+        title: '광고주 계정으로만 지원 가능합니다!',
+      })
+    }
+  }
+
   return (
     <Container className='supplierDetail_container'>
       <div className="supplierDetail-content_card-container">
@@ -46,6 +61,7 @@ const SupplierDetail = () => {
           <Card.Text>subscriber {detail.subscriberCount}</Card.Text>
           <Card.Text>view {detail.viewCount}</Card.Text>
         </Card.Body>
+        <button onClick={handleShow}>제안하기</button>
       </div>
       <div className='youtubeVideo'>
         {playlist && playlist.map((video, idx) => {
@@ -60,6 +76,7 @@ const SupplierDetail = () => {
           )
         })}
       </div>
+      <Propose show={show} setShow={setShow} userData={userData} supplierId={supplierId} />
     </Container> 
   );
 }

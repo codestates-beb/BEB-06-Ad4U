@@ -49,11 +49,6 @@
   margin-right: 20px;
 }
 
-.transaction_Button.check:hover {
-  color: #426454;
-  box-shadow: 0 0 40px 40px #fff inset;
-}
-
 /* confirm */
 .transaction_Button.confirm {
   border: 3px solid #35d08f;

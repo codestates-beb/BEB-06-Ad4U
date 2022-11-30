@@ -37,25 +37,46 @@ const getDetail = async (clientId) => {
 
 const inputInfo = async (accessToken, isClient, intro, profileImgUrl) => {
   if (accessToken && isClient && intro && profileImgUrl) {
-  const options = {
-    url: `http://localhost:3001/client/inputInfo`,
-    method: 'POST',
-    headers: {
-      "Authorization": `Bearer ${accessToken}`,
-      "Content-Type": "application/json"
-    }, 
-    withCredentials: true,
-    data: { 
-      isClient: JSON.parse(isClient),
-      profileImgUrl,
-      intro,
+    const options = {
+      url: `http://localhost:3001/client/inputInfo`,
+      method: 'POST',
+      headers: {
+        "Authorization": `Bearer ${accessToken}`,
+        "Content-Type": "application/json"
+      }, 
+      withCredentials: true,
+      data: { 
+        isClient: JSON.parse(isClient),
+        profileImgUrl,
+        intro,
+      }
     }
-  }
-  const result = await axios.request(options);
-  return result;
+    const result = await axios.request(options);
+    return result;
   } else throw new Error("insufficient localData");
 }
 
-const client = { mainList, getList, getDetail, inputInfo };
+const propose = async (accessToken, isClient, supplier_id, advertisement_id) => {
+  if(accessToken && isClient && supplier_id && advertisement_id) {
+    const options = {
+      url: `http://localhost:3001/function/propose`,
+      method: 'POST',
+      headers: {
+        "Authorization": `Bearer ${accessToken}`,
+        "Content-Type": "application/json"
+      }, 
+      withCredentials: true,
+      data: { 
+        isClient: JSON.parse(isClient),
+        supplier_id,
+        advertisement_id,
+      }
+    }
+    const result = await axios.request(options);
+    return result;
+  } else throw new Error("insufficient localData");
+}
+
+const client = { mainList, getList, getDetail, inputInfo, propose };
 
 export default client;
