@@ -30,6 +30,7 @@ const UploadPage= () => {
   const [curCost, setCurCost] = useState("");
 
   const navigate = useNavigate();
+  const [previewCheck, setPreviewCheck] = useState(false);
 
   useEffect(() => {
     vsChange(curCost)
@@ -175,7 +176,8 @@ const UploadPage= () => {
             icon: 'success',
             title: '광고 업로드 완료!',
           })
-          window.location.href = 'http://localhost:3000/mypage/client';
+          navigate(`/mypage/client`)
+          window.location.reload();
         }
         else {
           await Swal.fire({
@@ -228,21 +230,15 @@ const UploadPage= () => {
       </Form.Group>
       <p id="content-message" className="contentMessage">Content Field Required!!</p>
 
-      <Button variant="primary" onClick={() => setModalShow(true)}>
+      <Button variant="primary" onClick={() => {setModalShow(true); setPreviewCheck(true);}}>
         미리보기
       </Button>
      
-        {/* <button className='upload_btn' onClick={() => setModalShow(true)}><span>미리보기</span></button> */}
-     
       <br></br>
       <br></br>
-      <Button variant="primary" type="submit" onClick={handleSubmit}>
+      <Button variant="primary" type="submit" onClick={handleSubmit} disabled={!previewCheck}>
         Submit
       </Button>
-
-        {/* <button className='upload_btn' onClick={() => setModalShow(true)}><span>Submit</span></button> */}
-   
-
 
       <Modal
       show={modalShow}
@@ -250,7 +246,7 @@ const UploadPage= () => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header>
         
         <Modal.Title>
           {AdInfo.title}
@@ -259,7 +255,8 @@ const UploadPage= () => {
       <Modal.Body>
         <img src={AdInfo.imgUrl} className="adImg"/>
         <h4>제안 금액 : {AdInfo.cost} ETH</h4>
-        <p className='adContent'>{AdInfo.content}</p>
+        <br></br>
+        <p className='aDContent'>{AdInfo.content}</p>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={() => setModalShow(false)}>Close</Button>
