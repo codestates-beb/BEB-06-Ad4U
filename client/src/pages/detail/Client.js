@@ -14,12 +14,13 @@ const ClientDetail = () => {
   const { clientId } = useParams();
   const [detail, setDetail] = useState({ company_name: "", company_number: "", email: "" });
   const [advertisement, setAdvertisement] = useState([]);
-  console.log("Detail", detail)
-  console.log("Advertisement", advertisement)
+  console.log("Detail", detail.intro)
+  //console.log("Advertisement", advertisement)
 
   useEffect(() => {
     client.getDetail(clientId)
     .then(res => {
+      //console.log(res.data)
       setDetail(res.data)
       return ad.getList()
       .then(res => res.data)
@@ -67,7 +68,7 @@ const ClientDetail = () => {
             </div>
             <ListGroup.Item></ListGroup.Item>
             <Card.Text as='h4' className='clientDetail_text'>회사소개</Card.Text>
-            <Card.Text>{detail.intro}</Card.Text>
+            <p className='clientIntro'>{detail.intro}</p>
             <Card.Text>문의 _ 회사 이메일 : {detail.email}</Card.Text>
             <Card.Text>사업자번호 : {detail.company_number}</Card.Text>
           </ListGroup>

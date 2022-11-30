@@ -212,7 +212,7 @@ const UploadPage= () => {
 
       <Form.Group className="mb-3" controlId="formAdContent">
         <Form.Label><h5>광고 내용<span className="alert"> *</span></h5></Form.Label>
-        <Form.Control as="textarea" placeholder="Enter Your Advertisement Info" rows={3} onChange={handleAdContent}/>
+        <Form.Control as="textarea" placeholder="Enter Your Advertisement Info" rows={10} onChange={handleAdContent}/>
       </Form.Group>
       <p id="content-message" className="contentMessage">Content Field Required!!</p>
 

@@ -134,6 +134,14 @@
   .clientDetail-content_card-container:hover {
     transform: scale(1.1);
   }
+
+  .clientIntro {
+    white-space: pre-wrap;
+    text-align: left;
+    line-height: 2;
+    margin-left: 40px;
+    margin-right: 40px;
+  }
   
   /* Supplier css */
   .supplierDetail_container {
