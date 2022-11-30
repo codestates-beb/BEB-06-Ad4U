@@ -9,7 +9,7 @@ import './Supplier.css';
 import Avatar from 'react-avatar';
 
 import Status from './component/Status';
-import { Container, Row, Col, Card, ListGroup, Accordion, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, ListGroup, Accordion, Button,  OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 const SupplierMypage = () => {
   const accessToken = getLocalData("accessToken");
@@ -91,6 +91,14 @@ const SupplierMypage = () => {
       </ListGroup.Item>
     );
   }
+
+  const renderTooltip = (props) => {
+    return (
+      <Tooltip id="button-tooltip" {...props}>
+        {userData.address}
+      </Tooltip>
+    );
+  }    
   
   return (
     <Container className='supplierMypage_container'>
@@ -102,8 +110,17 @@ const SupplierMypage = () => {
               <Card.Body>
                 <Card.Title className='mt-3'>{userData.channelName}</Card.Title>
                 <ListGroup variant="flush" className='mt-3'>
-                <ListGroup.Item >{userData.email}</ListGroup.Item>
-                <ListGroup.Item >{userData.userId}</ListGroup.Item>
+                  <ListGroup.Item >{userData.email}</ListGroup.Item>
+                  <ListGroup.Item >{userData.userId}</ListGroup.Item>
+                  <ListGroup.Item >
+                    <OverlayTrigger
+                      placement="bottom"
+                      delay={{ show: 250, hide: 400 }}
+                      overlay={renderTooltip}
+                    >
+                    <div>등록된 지갑주소</div>
+                    </OverlayTrigger>
+                  </ListGroup.Item>
                 </ListGroup>
               </Card.Body>
             </div>
@@ -114,9 +131,8 @@ const SupplierMypage = () => {
             <h1> Supplier Mypage</h1>
             <Status adList={adList} setStatus={setStatus} />
             <Container className='supplierMypage_accordion'>
-              <FilterAd adList={adList} status={status} />
               {/* 광고제안 */}
-              <Accordion alwaysOpen>
+              <Accordion alwaysOpen flush>
                 <Accordion.Item>
                   <Accordion.Header>제안받은 광고</Accordion.Header>
                   <Accordion.Body>
@@ -128,6 +144,7 @@ const SupplierMypage = () => {
                   </Accordion.Body>
                 </Accordion.Item> 
               </Accordion>
+              <FilterAd adList={adList} status={status} />
             </Container>
           </Row>
         </Col>       

@@ -38,3 +38,91 @@
 .supplierMypage_accordion {
   margin-top: 20px;
 }
+
+/* management */
+.supplierManagement_container {
+  margin: auto;
+}
+
+.supplierChannelUrl {
+  text-decoration: none;
+  color: rgba(65, 61, 61, 0.834)
+}
+
+.supplierDivider_solid {
+  border-top: 2px solid #999; 
+}
+
+/* stage0 */
+.supplierStage0_contentArea {
+  height: 40px;
+  margin: auto;
+}
+
+.supplierStage0_contentArea div { 
+  margin-top: 10px;
+  text-align: center;
+}
+
+.supplierStage0_buttonArea {
+  margin: auto;
+  width: 180px;
+}
+
+/* stage1 */
+.supplierStage1_contentArea {
+  margin: 30px;
+  text-align: center;
+}
+
+.supplierStage1_descriptionArea {
+  margin-top: 10px;
+  font-size: large;
+  font-weight: 600;
+}
+
+.supplierStage1_detailArea {
+  font-size: small;
+  font-weight: 400;
+}
+
+/* stage2 */
+.supplierStage2_contentArea {
+  height: 80px;
+  display: flex;
+}
+
+.supplierStage2_contentArea div {
+  margin: auto;
+  color: rgb(8, 110, 161);
+  font-size: large;
+}
+
+/* stage3 */
+.supplierStage3_contentArea {
+  margin: 30px;
+  text-align: center;
+}
+
+.supplierStage3_descriptionArea {
+  margin-top: 10px;
+  font-size: large;
+  font-weight: 600;
+}
+
+.supplierStage3_detailArea {
+  font-size: small;
+  font-weight: 400;
+}
+
+/* stage4 */
+.supplierStage4_contentArea {
+  margin: 30px;
+  text-align: center;
+}
+
+/* stage5 */
+.supplierStage5_contentArea {
+  margin: 30px;
+  text-align: center;
+}

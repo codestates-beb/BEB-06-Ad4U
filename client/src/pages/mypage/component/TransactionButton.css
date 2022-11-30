@@ -19,17 +19,7 @@
   transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
 }
 
-/* revoke */
-.transaction_Button.revoke {
-  border: 3px solid #eb3d22;
-  color: #eb3d22;
-}
-
-.transaction_Button.revoke:hover {
-  color: #fff;
-  box-shadow: 0 0 40px 40px #eb3d22 inset;
-}
-
+/* client */
 /* select */
 .transaction_Button.select {
   border: 3px solid #3abbc2;
@@ -59,4 +49,38 @@
 .transaction_Button.confirm:hover {
   color: #fff;
   box-shadow: 0 0 40px 40px #35d08f inset;
+}
+
+/* revoke */
+.transaction_Button.revoke {
+  border: 3px solid #eb3d22;
+  color: #eb3d22;
+}
+
+.transaction_Button.revoke:hover {
+  color: #fff;
+  box-shadow: 0 0 40px 40px #eb3d22 inset;
+}
+
+/* supplier */
+/* apply_cancel */
+.transaction_Button.apply_cancel {
+  border: 3px solid #e9ae2d;
+  color: #e9ae2d;
+}
+
+.transaction_Button.apply_cancel:hover {
+  color: #fff;
+  box-shadow: 0 0 40px 40px #e9ae2d inset;
+}
+
+/* sign */
+.transaction_Button.sign {
+  border: 3px solid #592de9;
+  color: #592de9;
+}
+
+.transaction_Button.sign:hover {
+  color: #fff;
+  box-shadow: 0 0 40px 40px #592de9 inset;
 }

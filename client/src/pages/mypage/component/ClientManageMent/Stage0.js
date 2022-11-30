@@ -22,12 +22,7 @@ const Stage0 = ({ adList }) => {
     const handleDeploy = async (supplierId, supplierAddr) => {
       //광고주 지갑주소랑, 크리에이터 지갑주소가 같을 시 에러남, 다른주소로!
       try {
-        if (isClient === "false") {
-          await Swal.fire({
-            icon: 'error',
-            title: '광고주 계정으로만 실행 가능합니다!',
-          })
-        }
+        setIsLoading(true);
         if (accessToken && isClient && supplierId && adId) {
           const tx = await method.multiSigWalletDeploy(supplierAddr);
           const contractAddress = tx._address;
@@ -39,16 +34,12 @@ const Stage0 = ({ adList }) => {
                 title: '계약 생성 완료!',
               })
               window.location.reload();
-              setIsLoading(false)
+              setIsLoading(false);
             }
-          } else {
-            await Swal.fire({
-              icon: 'error',
-              title: '계정 오류!',
-            })
           }
         }
       } catch (err) {
+        setIsLoading(false);
         console.log(err);
         await Swal.fire({
           icon: 'error',
@@ -64,27 +55,26 @@ const Stage0 = ({ adList }) => {
       return (
         <>
           <Row>
-            <Col className='stage0_ImgArea' xl={2}>
+            <Col className='clientStage0_ImgArea' xl={2}>
               {applicant.profileImgUrl
               ? <Avatar src={applicant.profileImgUrl} alt="채널이미지" />
               : <Avatar src={Img} alt="채널 대체이미지" />}
             </Col>
-            <Col className='stage0_contentArea' xl={7}>
+            <Col className='clientStage0_contentArea' xl={7}>
               <div>{idx+1}번째 지원자</div>
               <span>채널명 {applicant.channelName}</span>
-              <div><a className='channelUrl' href={applicant.channelUrl}>{applicant.channelUrl}</a></div>
+              <div><a className='clientChannelUrl' href={applicant.channelUrl}>{applicant.channelUrl}</a></div>
               <div>구독자수 {applicant.subscriberCount}</div> 
               <div>조회수 {applicant.viewCount}</div>
             </Col>
-            <Col className='stage0_buttonArea' xl={3}>
+            <Col className='clientStage0_buttonArea' xl={3}>
               <button 
                 className='transaction_Button select' 
                 onClick={() => handleDeploy(applicant.id, applicant.address)}
               >select</button>
             </Col>
           </Row>
-          <Row><hr className='divider_solid' /></Row>
-            
+          <Row><hr className='clientDivider_solid' /></Row>
         </>
       );
     }
@@ -92,14 +82,14 @@ const Stage0 = ({ adList }) => {
 
   return (
     <>
-      {isLoading 
-        ? <Loading /> 
-        : <Container className='management_container'>
-            {applicant.length === 0 
-            ? <div className='stage0_emptyArea'>현재 지원자가 없습니다.</div>
-            : applicant.map((el, idx)=><ApplicantList key={idx} idx={idx} el={el} />)}
-          </Container>
-      }
+    {isLoading 
+      ? <Loading /> 
+      : <Container className='clientManagement_container'>
+        {applicant.length === 0 
+        ? <div className='clientStage0_emptyArea'>현재 지원자가 없습니다.</div>
+        : applicant.map((el, idx)=><ApplicantList key={idx} idx={idx} el={el} />)}
+        </Container>
+      } 
     </>
   );
 }

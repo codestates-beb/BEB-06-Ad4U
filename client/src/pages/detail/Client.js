@@ -20,7 +20,6 @@ const ClientDetail = () => {
   useEffect(() => {
     client.getDetail(clientId)
     .then(res => {
-      //console.log(res.data)
       setDetail(res.data)
       return ad.getList()
       .then(res => res.data)
