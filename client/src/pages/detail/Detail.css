@@ -175,7 +175,7 @@
     border-radius: 4px;
     box-shadow: 2px 2px 4px 4px #0c0b1473;
     box-shadow: 1px 1px 8px 8px #0c0b1473;
-    cursor: pointer;
+    
     font-size: 18px;
     position: relative;
     background-color:#ffffff;
@@ -183,6 +183,25 @@
   
   .supplierDetail_title {
     margin: 20px;
+  }
+
+  .supplierDetail_col-center {
+    justify-content : center;
+    display: flex;
+    align-items: center;
+  }
+
+  .supplierDetail_col-textleft {
+    text-align : left;
+  }
+
+  .supplierDetail_cardText {
+    text-align : left;
+  }
+
+  .supplierDetail_cardText-email {
+    text-align : left;
+    cursor: pointer;
   }
 
   .youtubeVideo {

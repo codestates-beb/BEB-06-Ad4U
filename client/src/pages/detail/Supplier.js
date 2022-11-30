@@ -4,7 +4,7 @@ import axios from 'axios';
 import { getLocalData } from '../../config/localStrage';
 
 import Avatar from 'react-avatar';
-import { Container, Card } from 'react-bootstrap/esm';
+import { Container, Card, Row, Col, Button, OverlayTrigger, Tooltip } from 'react-bootstrap/esm';
 import Swal from 'sweetalert2'
 
 import supplier from '../../hooks/axios/supplier';
@@ -28,7 +28,6 @@ const SupplierDetail = ({ userData }) => {
   useEffect(() => {
     const apikey = process.env.REACT_APP_YOUTUBE_API_KEY;
     const get_channelId = detail.channel_id;
-    console.log(get_channelId)
     axios.get(
       `https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${get_channelId}&maxResults=50&key=${apikey}`
       )
@@ -50,25 +49,77 @@ const SupplierDetail = ({ userData }) => {
     }
   }
 
+  const clipCopy = async () => {
+    const clip = detail.email;
+    window.navigator.clipboard.writeText(clip).then(() => {
+      console.log('복사완료');
+    });
+  }
+
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      클립보드에 복사
+    </Tooltip>
+  );
+
   return (
     <Container className='supplierDetail_container'>
       <div className="supplierDetail-content_card-container">
-        <Avatar src={detail.profileImgUrl} size="150"/>
+        
+        
+      <Row>
+        <Col sm={5} className='supplierDetail_col-center'>
+        <Avatar src={detail.profileImgUrl} size="200" />
+        </Col>
+        <Col sm={7}>
         <Card.Body>
           <Card.Title className='supplierDetail_title' as='h1'>{detail.channelName}</Card.Title>
-          <Card.Text>{detail.channelUrl}</Card.Text>
-          <Card.Text>{detail.email}</Card.Text>
-          <Card.Text>subscriber {detail.subscriberCount}</Card.Text>
-          <Card.Text>view {detail.viewCount}</Card.Text>
+
+          <Row>
+            <Col>
+          <Card.Subtitle className="supplierDetail_cardText mb-2 text-muted">이메일</Card.Subtitle>
+           </Col>
+           <Col className='supplierDetail_col-textleft'>
+           <OverlayTrigger
+            placement="right"
+            delay={{ show: 100, hide: 100 }}
+            overlay={renderTooltip}
+            >
+              <a className='supplierDetail_cardText-email text-muted mb-2' onClick={clipCopy}>{detail.email}</a>
+    </OverlayTrigger>
+          
+          </Col>
+          </Row>
+          <Row>
+          <Col>
+          <Card.Subtitle className="supplierDetail_cardText mb-2 text-muted">구독자</Card.Subtitle>
+          </Col>
+          <Col>
+          <Card.Text  className='supplierDetail_cardText text-muted mb-2'>{ detail.subscriberCount > 10000 ? (detail.subscriberCount/10000).toFixed(2) + "만명" : detail.subscriberCount + "명"}</Card.Text>
+          </Col>
+          </Row>
+          <Row>
+          <Col>
+          <Card.Subtitle className="supplierDetail_cardText mb-2 text-muted">총 조회수</Card.Subtitle>
+          </Col>
+          <Col>
+          <Card.Text  className='supplierDetail_cardText text-muted mb-2'>{detail.viewCount} 회</Card.Text>
+          </Col>
+          </Row>
+          <Card.Text  className='supplierDetail_cardText'><a href={detail.channelUrl}>채널 바로가기</a></Card.Text>
         </Card.Body>
-        <button onClick={handleShow}>제안하기</button>
+        <Button variant="outline-dark" onClick={handleShow}>제안하기</Button>
+        </Col>
+        </Row>
+        
+        
       </div>
       <div className='youtubeVideo'>
         {playlist && playlist.map((video, idx) => {
           return (
             <div className='playlist_card-container' key={idx}>
               <Card.Body>
-                <img src={video.snippet.thumbnails.medium.url} alt="" />
+                <img src={video.snippet.thumbnails.medium.url} alt=""/>
                 <Card.Text>{video.snippet.title}</Card.Text>
                 <Card.Footer>{video.snippet.description}</Card.Footer>
               </Card.Body>
