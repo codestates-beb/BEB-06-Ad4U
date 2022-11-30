@@ -169,6 +169,16 @@
     margin: 20px;
   }
 
+  .supplierDetail_col {
+    justify-content : center;
+    display: flex;
+    align-items: center;
+  }
+
+  .supplierDetail_cardText {
+    text-align : left;
+  }
+
   .youtubeVideo {
     display: grid;
     grid-template-columns: repeat(3, minmax(340px, 220px));
