@@ -17,6 +17,7 @@ import { getContractOwner } from '../../../hooks/web3/queryContract';
 import contract from '../../../hooks/axios/contract'
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
+import Loading from '../../../component/Loading';
 
 
 
@@ -82,6 +83,7 @@ const AdContract = ({ userData, adList }) => {
   const [curCost, setCurCost] = useState("");
   const [previewCheck, setPreviewCheck] = useState(false);
   const [tokenURI, setTokenURI] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     vsChange(curCost)
@@ -182,9 +184,9 @@ const AdContract = ({ userData, adList }) => {
   }
 
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     console.log(tokenURI);
-    e.preventDefault();
+    setIsLoading(true);
 
     //AdInfo 유효성 검사
     var checkVaild = 0;
@@ -233,7 +235,9 @@ const AdContract = ({ userData, adList }) => {
           icon: 'success',
           title: '계약 생성 성공!',
         })
+        setIsLoading(false);
         navigate(`/mypage/client`);
+        window.location.reload();
       }
     } catch (err) {
       console.log(err);
@@ -241,13 +245,18 @@ const AdContract = ({ userData, adList }) => {
         icon: 'error',
         title: '트랜잭션 오류..',
       })
+      navigate(`/mypage/client`);
+      window.location.reload();
+      setIsLoading(false);
     }
   }
 
 
 
   return (
-    
+    <>
+    {isLoading 
+    ? <Loading /> :
     <Container>
     <br></br>
     <br></br>
@@ -317,7 +326,25 @@ const AdContract = ({ userData, adList }) => {
      
       <br></br>
       <br></br>
-      <Button variant="primary" type="submit" onClick={handleSubmit} disabled={!previewCheck}>
+      <Button variant="primary" onClick={async ()=> {
+        await Swal.fire({
+          title: '해당 계약 내용으로 계약을\n 진행하시겠습니까?',
+          html:
+          '<b>해당 계약서는 한국디지털광고협회 표준 양식으로 작성되었으며,\n 계약 진행시 계약 내용에 대한 수정은 불가합니다.\n 계약금은 앞서 생성하신 스마트컨트랙트에 예치됩니다.</b> ',
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: 'Progress',
+          denyButtonText: `Don't Proceed`,
+        }).then((result) => {
+          console.log(result)
+            if (result.isConfirmed) {
+              window.scrollTo(0, 0)
+              handleSubmit();
+            } else if (result.isDenied) {
+              Swal.fire('계약 진행 취소', '', 'info')
+            }
+          })
+      }} disabled={!previewCheck}>
         Submit
       </Button>
 
@@ -343,6 +370,8 @@ const AdContract = ({ userData, adList }) => {
     </Modal>
     </Form>
     </Container>
+  }
+  </>
     
   );
 }
