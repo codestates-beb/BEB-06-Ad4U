@@ -245,8 +245,6 @@ const AdContract = ({ userData, adList }) => {
         icon: 'error',
         title: '트랜잭션 오류..',
       })
-      navigate(`/mypage/client`);
-      window.location.reload();
       setIsLoading(false);
     }
   }

@@ -58,7 +58,8 @@ const Stage3 = ({ adList }) => {
       if (tx) {
         const txInfo = await getTransaction(contractAddress, 0);
         const confirmCount = txInfo.numConfirmations; // 현재 계약 컨펌 개수
-        if (confirmCount === 2) {  //Confirm 두개가 됬을 경우, 서버로 결과를 보냄
+        console.log(confirmCount)
+        if (parseInt(confirmCount) === 2) {  //Confirm 두개가 됬을 경우, 서버로 결과를 보냄
           const result = await contract.complete(accessToken, isClient, adId);
           if (result) {
             setConfirmCheck2(true);
