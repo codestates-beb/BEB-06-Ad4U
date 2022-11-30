@@ -177,6 +177,7 @@ const UploadPage= () => {
             title: '광고 업로드 완료!',
           })
           navigate(`/mypage/client`)
+          window.location.reload();
         }
         else {
           await Swal.fire({
