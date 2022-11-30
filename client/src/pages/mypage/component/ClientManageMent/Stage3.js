@@ -128,7 +128,7 @@ const Stage3 = ({ adList }) => {
   const loadPdf = async (token_uri, title, createdAt) => {
     try {
     setIsLoading(true);
-    handleViewPdf(token_uri, title, createdAt);
+    await handleViewPdf(token_uri, title, createdAt);
     setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
@@ -185,15 +185,15 @@ const Stage3 = ({ adList }) => {
               <br />
             </Col>
             <hr />
-          <Row
-            onMouseOver={handleFileImg}
-            onMouseOut={handleFileImg}
-            onClick={() => loadPdf(adList.token_uri, adList.title, adList.createdAt)}
-          >
-            <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
-            <Col className='contractDownload'>
-                계약서 다운로드
-                </Col>
+            <Row
+              onMouseOver={handleFileImg}
+              onMouseOut={handleFileImg}
+              onClick={() => loadPdf(adList.token_uri, adList.title, adList.createdAt)}
+            >
+              <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
+              <Col className='contractDownload'>
+                  계약서 다운로드
+              </Col>
             </Row>
           </Row>
         </Container>

@@ -4,15 +4,19 @@ import contract from '../../../../hooks/axios/contract';
 import { getLocalData } from '../../../../config/localStrage';
 import Avatar from 'react-avatar';
 import Img from '../../../../dummyfiles/img1.png';
-import { Container, Row, Col, Card, ListGroup, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, ListGroup, Form, Button, OverlayTrigger, Popover, CloseButton } from 'react-bootstrap';
 import Swal from 'sweetalert2'
+import Loading from '../../../../component/Loading';
+import { TbTrashX } from 'react-icons/tb';
+import ad from '../../../../hooks/axios/ad';
+
 import '../../Client.css';
 import '../TransactionButton.css';
-import Loading from '../../../../component/Loading';
 
 //모집중
 const Stage0 = ({ adList }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
   const applicant = adList.Advertisement_has_Suppliers;
   const adId = adList.id
   const accessToken = getLocalData('accessToken');
@@ -94,14 +98,52 @@ const Stage0 = ({ adList }) => {
     }
   }
 
+  const deleteAd = async () => {
+    try {
+      const result = await ad._delete(accessToken, isClient, adId);
+      if (result) {
+        setShowOverlay(false)
+        await Swal.fire({
+          icon: 'success',
+          title: '광고가 삭제되었습니다.',
+        })
+        window.location.reload();
+      }
+    } catch(err) {
+      setShowOverlay(false);
+      console.log(err);
+      await Swal.fire({
+        icon: 'error',
+        title: '에러발생',
+      })
+    }
+  }
+
   return (
     <>
     {isLoading 
       ? <Loading /> 
       : <Container className='clientManagement_container'>
-        {applicant.length === 0 
-        ? <div className='clientStage0_emptyArea'>현재 지원자가 없습니다.</div>
-        : applicant.map((el, idx)=><ApplicantList key={idx} idx={idx} el={el} />)}
+          {applicant.length === 0 
+          ? <>
+              <div className='clientStage0_emptyArea'>현재 지원자가 없습니다.</div>
+              <hr className='clientDivider_solid' />
+            </>
+          : applicant.map((el, idx)=><ApplicantList key={idx} idx={idx} el={el} />)}
+          <Col>
+            <div className='clientStage0_footer' onClick={() => {
+              Swal.fire({
+                title: '해당 광고를 삭제하시겠습니까?',
+                html:
+                '<b>삭제된 광고는 복구할 수 없습니다.</b> ',
+                showCancelButton: true,
+                confirmButtonText: 'Confirm',
+              }).then((result) => {
+                  if (result.isConfirmed) return deleteAd();
+                })
+            }}>
+            <TbTrashX size={20} /> 광고를 삭제하시겠습니까? </div>
+          </Col>
         </Container>
       } 
     </>

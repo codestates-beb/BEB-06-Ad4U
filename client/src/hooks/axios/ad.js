@@ -37,7 +37,25 @@ const getDetail = async (adId) => {
   }
 }
 
-
+const _delete = async (accessToken, isClient, advertisement_id) => {
+  if (accessToken && isClient && advertisement_id) {
+    const options = {
+      url: "http://localhost:3001/ad/delete",
+      method: 'POST',
+      headers: {
+        "Authorization": `Bearer ${accessToken}`,
+        "Content-Type": "application/json"
+      },
+      withCredentials: true,
+      data: {
+        isClient: JSON.parse(isClient),
+        advertisement_id,
+      }
+    }
+    const result = await axios.request(options);
+    return result;
+  } else throw new Error("insufficient data");
+}
 
 const allContractList = async () => {
   const options = {
@@ -46,7 +64,7 @@ const allContractList = async () => {
     headers: {"Content-Type": "application/json"},
     withCredentials: true,
   }
-  const result = await axios.request(options)
+  const result = await axios.request(options);
   return result;
 }
 
@@ -54,6 +72,7 @@ const ad = {
   mainList, 
   getList, 
   getDetail, 
+  _delete,
   allContractList
 };
 

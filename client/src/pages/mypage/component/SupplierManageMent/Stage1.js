@@ -34,12 +34,12 @@ const Stage1 = ({ adList }) => {
         }
       }
     } catch (err) {
+      setIsLoading(false);
       console.log(err);
       await Swal.fire({
         icon: 'error',
         title: '트랜잭션 오류...',
       })
-      setIsLoading(false);
     }
   };
 

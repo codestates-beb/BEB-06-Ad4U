@@ -90,15 +90,7 @@ const SupplierMypage = () => {
         </Row>
       </ListGroup.Item>
     );
-  }
-
-  const renderTooltip = (props) => {
-    return (
-      <Tooltip id="button-tooltip" {...props}>
-        {userData.address}
-      </Tooltip>
-    );
-  }    
+  } 
   
   return (
     <Container className='supplierMypage_container'>
@@ -116,7 +108,10 @@ const SupplierMypage = () => {
                     <OverlayTrigger
                       placement="bottom"
                       delay={{ show: 250, hide: 400 }}
-                      overlay={renderTooltip}
+                      overlay={
+                      <Tooltip id="button-tooltip">
+                        {userData.address}
+                      </Tooltip>}
                     >
                     <div>등록된 지갑주소</div>
                     </OverlayTrigger>

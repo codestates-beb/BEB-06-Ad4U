@@ -107,19 +107,19 @@ const Stage3 = ({ adList }) => {
       }
       setIsLoading(false);
     } catch(err) {
+      setIsLoading(false);
       console.log(err);
       await Swal.fire({
         icon: 'error',
         title: '트랜잭션 오류 발생...',
       });
-      setIsLoading(false);
     }
   };
 
   const loadPdf = async (token_uri, title, createdAt) => {
     try {
     setIsLoading(true);
-    handleViewPdf(token_uri, title, createdAt);
+    await handleViewPdf(token_uri, title, createdAt);
     setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
