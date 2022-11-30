@@ -116,33 +116,36 @@ const Stage3 = ({ adList }) => {
 
   return (
     <>
-      <Container className='management_container'>
-        <Row className='stage3_contentArea'>
-          <Col xl={7}>
-            <Row className='stage3_descriptionArea'>{adList.title} 광고계약이 현재 진행중입니다.</Row>
-            <Row className='stage3_detailArea'>confirm으로 계약을 완료시키거나 revoke로 파기할 수 있습니다.</Row>
-          </Col>
-          <Col xl={5}>          
-            {confirmCheck
-            ? <button id='check_button' className='transaction_Button check' onClick={isConfirmed}>Check!</button> 
-            : <button id='confirm_button' className='transaction_Button confirm' onClick={handleConfirmTransaction}>Confirm</button>}
-            <button className='transaction_Button revoke' onClick={handleRevokeConfirmation}>Revoke</button>
-            <br />
-            <br />
-          </Col>
-          <hr />
-          <Row
-            onMouseOver={handleFileImg}
-            onMouseOut={handleFileImg}
-            onClick={() => handleViewPdf(adList.token_uri, adList.title, adList.createdAt)}
-          >
-            <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
-            <Col className='contractDownload'>
-                계약서 다운로드
+    {isLoading 
+      ? <Loading /> 
+      : <Container className='management_container'>
+          <Row className='stage3_contentArea'>
+            <Col xl={7}>
+              <Row className='stage3_descriptionArea'>{adList.title} 광고계약이 현재 진행중입니다.</Row>
+              <Row className='stage3_detailArea'>confirm으로 계약을 완료시키거나 revoke로 파기할 수 있습니다.</Row>
             </Col>
+            <Col xl={5}>          
+              {confirmCheck
+              ? <button id='check_button' className='transaction_Button check' onClick={isConfirmed}>Check!</button> 
+              : <button id='confirm_button' className='transaction_Button confirm' onClick={handleConfirmTransaction}>Confirm</button>}
+              <button className='transaction_Button revoke' onClick={handleRevokeConfirmation}>Revoke</button>
+              <br />
+              <br />
+            </Col>
+            <hr />
+            <Row
+              onMouseOver={handleFileImg}
+              onMouseOut={handleFileImg}
+              onClick={() => handleViewPdf(adList.token_uri, adList.title, adList.createdAt)}
+            >
+              <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
+              <Col className='contractDownload'>
+                  계약서 다운로드
+              </Col>
+            </Row>
           </Row>
-        </Row>
-      </Container>
+        </Container>
+    }
     </>
   );
 }
