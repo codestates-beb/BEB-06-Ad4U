@@ -18,6 +18,7 @@ import {triggerBase64Download} from 'common-base64-downloader-react';
 
 import '../TransactionButton.css';
 import '../../Client.css';
+import Loading from '../../../../component/Loading';
 
 //진행중2
 const Stage3 = ({ adList }) => {
@@ -28,6 +29,7 @@ const Stage3 = ({ adList }) => {
   const isClient = getLocalData('isClient');
 
   const [confirmCheck, setConfirmCheck] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   let txIndex = 0;
 
@@ -43,6 +45,7 @@ const Stage3 = ({ adList }) => {
 
   // 4. Confirm Transaction
   const handleConfirmTransaction = async () => { 
+    setIsLoading(true);
     try {
       const tx = await method.confirmTransaction(contractAddress, txIndex);
       console.log(tx)
@@ -54,6 +57,7 @@ const Stage3 = ({ adList }) => {
           if (result) {
             alert("양쪽에서 confirm이 되었습니다 계약을 성공적으로 완료합니다.");
             window.location.reload();
+            setIsLoading(false)
           }
         }
         else {
@@ -68,6 +72,7 @@ const Stage3 = ({ adList }) => {
 
   // 5. Revoke Transaction
   const handleRevokeConfirmation = async () => {
+    setIsLoading(true);
     try {
       const tx = await method.revokeConfirmation(contractAddress, txIndex);
       console.log(tx);
@@ -76,6 +81,7 @@ const Stage3 = ({ adList }) => {
         if (result) {
           alert("계약이 파기되었습니다.");
           window.location.reload();
+          setIsLoading(false)
         }
       }
     } catch(err) {
@@ -121,33 +127,36 @@ const Stage3 = ({ adList }) => {
 
   return (
     <>
-      <Container className='management_container'>
-          <Row className='stage3_contentArea'>
-            <Col xl={7}>
-              <Row className='stage3_descriptionArea'>{adList.title} 광고계약이 현재 진행중입니다.</Row>
-              <Row className='stage3_detailArea'>confirm으로 계약을 완료시키거나 revoke로 파기할 수 있습니다.</Row>
-            </Col>
-            <Col xl={5}>          
-              {confirmCheck
-              ? <button id='check_button' className='transaction_Button check' onClick={isConfirmed}>Check!</button> 
-              : <button id='confirm_button' className='transaction_Button confirm' onClick={handleConfirmTransaction}>Confirm</button>}
-              <button className='transaction_Button revoke' onClick={handleRevokeConfirmation}>Revoke</button>
-              <br></br>
-              <br></br>
-            </Col>
-            <hr></hr>
-            <Row
-              onMouseOver={handleFileImg}
-              onMouseOut={handleFileImg}
-              onClick={handleViewPdf}
-            >
-              <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
-              <Col className='contractDownload'>
-                  계약서 다운로드
+      {isLoading 
+        ? <Loading /> 
+        : <Container className='management_container'>
+            <Row className='stage3_contentArea'>
+              <Col xl={7}>
+                <Row className='stage3_descriptionArea'>{adList.title} 광고계약이 현재 진행중입니다.</Row>
+                <Row className='stage3_detailArea'>confirm으로 계약을 완료시키거나 revoke로 파기할 수 있습니다.</Row>
               </Col>
+              <Col xl={5}>          
+                {confirmCheck
+                ? <button id='check_button' className='transaction_Button check' onClick={isConfirmed}>Check!</button> 
+                : <button id='confirm_button' className='transaction_Button confirm' onClick={handleConfirmTransaction}>Confirm</button>}
+                <button className='transaction_Button revoke' onClick={handleRevokeConfirmation}>Revoke</button>
+                <br></br>
+                <br></br>
+              </Col>
+              <hr></hr>
+              <Row
+                onMouseOver={handleFileImg}
+                onMouseOut={handleFileImg}
+                onClick={handleViewPdf}
+              >
+                <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
+                <Col className='contractDownload'>
+                    계약서 다운로드
+                </Col>
+              </Row>
             </Row>
-          </Row>
-      </Container>
+          </Container>
+      }
     </>
   );
 }

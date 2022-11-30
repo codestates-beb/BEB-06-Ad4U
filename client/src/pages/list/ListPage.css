@@ -61,7 +61,67 @@
 }
 
 /* clientList css */
-.clientList_container h1 {
+.partnerList_card_container {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(200px, 200px));
+  margin-top: 30px;
+  gap: 30px;
+  justify-content: center;
+  font-family: "Montserrat";
+  margin-right: 40px;
+}
+
+.partnerList_card {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  z-index: 1;
+  perspective: 1000px;
+  border-radius: 10px;
+}
+
+.partnerList_card_front img {
+  border-radius: 10px;
+  width: 200px;
+  height: 200px;
+}
+
+.partnerList_card_content {
+  width: 100%;
+  height: 100%;
+  margin: 10%;
+  transform-style: preserve-3d;
+  box-shadow: 5px 5px 15px rgba(247,247,247, .2);
+}
+
+.partnerList_card_content:hover {
+  transform: rotateY(180deg);
+  box-shadow: -5px 5px 15px rgba(247,247,247, .2);
+}
+
+.partnerList_card_front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.partnerList_card_back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  text-align: center;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.partnerList_card_back h3 {
+  margin-top: 40%;
+  font-weight: 700;
+}
+/* .clientList_container h1 {
   color: white;
   margin-bottom: 20px;
   font-family: "Montserrat"
@@ -92,7 +152,7 @@
 }
 .clientList_companyname {
   margin-top: 10px;
-}
+} */
 
 /* adList css */
 .adList_container h1 {
@@ -124,7 +184,9 @@
 }
 
 .adList-content_card-container img {
+  height: 201px;
   margin-bottom: 10px;
+  border-radius: 4px;
 }
 
 .adList_img {

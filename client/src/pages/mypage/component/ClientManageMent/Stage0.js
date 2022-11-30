@@ -7,9 +7,11 @@ import Img from '../../../../dummyfiles/img1.png';
 import { Container, Row, Col, Card, ListGroup, Form, Button } from 'react-bootstrap';
 import '../../Client.css';
 import '../TransactionButton.css';
+import Loading from '../../../../component/Loading';
 
 //모집중
 const Stage0 = ({ adList }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const applicant = adList.Advertisement_has_Suppliers;
   const adId = adList.id
   const accessToken = getLocalData('accessToken');
@@ -20,6 +22,7 @@ const Stage0 = ({ adList }) => {
       //광고주 지갑주소랑, 크리에이터 지갑주소가 같을 시 에러남, 다른주소로!
       try {
         if (isClient === "false") return alert("광고주 계정으로만 이용가능합니다.");
+        setIsLoading(true);
         if (accessToken && isClient && supplierId && adId) {
           const tx = await method.multiSigWalletDeploy(supplierAddr);
           const contractAddress = tx._address;
@@ -28,7 +31,9 @@ const Stage0 = ({ adList }) => {
             if (result) {
               alert("contract deploy is success!");
               window.location.reload();
+              setIsLoading(false)
             }
+            
           } else return alert("다시 로그인 해주세요");
         }
       } catch (err) {
@@ -64,6 +69,7 @@ const Stage0 = ({ adList }) => {
             </Col>
           </Row>
           <Row><hr className='divider_solid' /></Row>
+            
         </>
       );
     }
@@ -71,11 +77,14 @@ const Stage0 = ({ adList }) => {
 
   return (
     <>
-      <Container className='management_container'>
-        {applicant.length === 0 
-        ? <div className='stage0_emptyArea'>현재 지원자가 없습니다.</div>
-        : applicant.map((el, idx)=><ApplicantList key={idx} idx={idx} el={el} />)}
-      </Container>
+      {isLoading 
+        ? <Loading /> 
+        : <Container className='management_container'>
+            {applicant.length === 0 
+            ? <div className='stage0_emptyArea'>현재 지원자가 없습니다.</div>
+            : applicant.map((el, idx)=><ApplicantList key={idx} idx={idx} el={el} />)}
+          </Container>
+      }
     </>
   );
 }

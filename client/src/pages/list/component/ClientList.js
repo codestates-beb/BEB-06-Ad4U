@@ -42,29 +42,62 @@ const ClientList = () => {
     .catch(err => console.log(err.response.data))
   }
 
+
+ 
+
   return (
     <Container className='clientList_container'>
-      <h1>ClientList</h1>
+      <h1>기업들을 모아봤어요</h1>
       <SearchBar filter={filter} refreshList={refreshList}/>
       {list.length === 0 
       ? <div className='noresultant'>검색결과가 없습니다</div> 
-      : <div className="clientList-content">
+      : <div className='partnerList_card_container'>
           {list && list.map((data, idx) => {
             return (
-              <div 
-              className="clientList-content_card-container"
-              onClick={() => { 
+              <div className='partnerList_card'
+              onClick = {() => {
                 navigate(`/detail/client/${data.id}`)
-                window.scrollTo(0,0)}}
+                window.scrollTo(0,0)
+              }}
               key={idx}
               >
-                <Avatar src={data.profileImgUrl} size="100" round={true}/>
-                <Card.Title className='clientList_companyname'>{data.company_name}</Card.Title>
+                <div className='partnerList_card_content'>
+                  <div className='partnerList_card_front'>
+                    <img src={data.profileImgUrl} alt='profileImg'/>
+                  </div>
+                  <div className='partnerList_card_back'>
+                    <h3>{data.company_name}</h3>
+                  </div>
+                </div>
               </div>
-          )})}
+            )
+          })}
         </div>
       }
     </Container>
+
+    // <Container className='clientList_container'>
+    //   <h1>기업들을 모아봤어요</h1>
+    //   <SearchBar filter={filter} refreshList={refreshList}/>
+    //   {list.length === 0 
+    //   ? <div className='noresultant'>검색결과가 없습니다</div> 
+    //   : <div className="clientList-content">
+    //       {list && list.map((data, idx) => {
+    //         return (
+    //           <div 
+    //           className="clientList-content_card-container"
+    //           onClick={() => { 
+    //             navigate(`/detail/client/${data.id}`)
+    //             window.scrollTo(0,0)}}
+    //           key={idx}
+    //           >
+    //             <Avatar src={data.profileImgUrl} size="100" round={true}/>
+    //             <Card.Title className='clientList_companyname'>{data.company_name}</Card.Title>
+    //           </div>
+    //       )})}
+    //     </div>
+    //   }
+    // </Container>
   );
 }
 

@@ -4,16 +4,11 @@ import './NFE.css';
 
 const Loading = () => {
   return (
-      <Container className='d-flex justify-content-center'>
-        {/* <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-        </Spinner> */}
-        <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-          <span className="sr-only">잠시만 기려주세요!!</span>
-        </Spinner>
-        
-      </Container>
+    <div className='loading_background'>
+      <div className='loading_text'>잠시만 기다려 주세요</div>
+      <br/>
+      <Spinner animation="border" variant="primary" />  
+    </div>
   )
 }
 
