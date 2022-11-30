@@ -75,11 +75,11 @@ const SupplierDetail = ({ userData }) => {
         <Card.Body>
           <Card.Title className='supplierDetail_title' as='h1'>{detail.channelName}</Card.Title>
 
-          <Row className="mb-2 ">
+          <Row className="mb-2">
             <Col>
-          <Card.Subtitle className="supplierDetail_cardText text-muted">이메일</Card.Subtitle>
+          <Card.Subtitle sm={5} className="supplierDetail_cardText text-muted">이메일</Card.Subtitle>
            </Col>
-           <Col className='supplierDetail_col-textleft'>
+           <Col sm={7} className='supplierDetail_col-textleft'>
            <OverlayTrigger
             placement="right"
             delay={{ show: 100, hide: 100 }}
@@ -90,18 +90,18 @@ const SupplierDetail = ({ userData }) => {
           </Col>
           </Row>
           <Row className="mb-2">
-          <Col>
+          <Col sm={5}>
           <Card.Subtitle className="supplierDetail_cardText text-muted">구독자</Card.Subtitle>
           </Col>
-          <Col>
+          <Col sm={7}>
           <Card.Text  className='supplierDetail_cardText text-muted'>{ detail.subscriberCount > 10000 ? (detail.subscriberCount/10000).toFixed(2) + "만명" : detail.subscriberCount + "명"}</Card.Text>
           </Col>
           </Row>
           <Row className="mb-2">
-          <Col>
+          <Col sm={5}>
           <Card.Subtitle className="supplierDetail_cardText text-muted">총 조회수</Card.Subtitle>
           </Col>
-          <Col>
+          <Col sm={7}>
           <Card.Text  className='supplierDetail_cardText text-muted'>{detail.viewCount} 회</Card.Text>
           </Col>
           </Row>
