@@ -16,6 +16,7 @@ import method from '../../../hooks/web3/sendTransaction';
 import { getContractOwner } from '../../../hooks/web3/queryContract';
 import contract from '../../../hooks/axios/contract'
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 
 
@@ -228,12 +229,18 @@ const AdContract = ({ userData, adList }) => {
       if (tx) {
         //DB 상태 업데이트
         const result = await contract.create(accessToken,isClient,adId,tokenInfo);
-        alert(result.data);
+        await Swal.fire({
+          icon: 'success',
+          title: '계약 생성 성공!',
+        })
         navigate(`/mypage/client`);
       }
     } catch (err) {
       console.log(err);
-      alert("트랜젝션 생성에 실패하였습니다.");
+      await Swal.fire({
+        icon: 'error',
+        title: '트랜잭션 오류..',
+      })
     }
   }
 

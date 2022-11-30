@@ -3,6 +3,7 @@ import crypto from 'crypto-js';
 import { triggerBase64Download } from 'common-base64-downloader-react';
 import lockPdfImg from '../../dummyfiles/document.png';
 import downloadPdfImg from '../../dummyfiles/download-pdf.png';
+import { useState } from 'react';
 
 
 const handleFileImg = (e) => {

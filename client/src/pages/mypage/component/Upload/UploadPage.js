@@ -4,11 +4,13 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Modal from 'react-bootstrap/Modal';
+import Swal from 'sweetalert2'
 import './UploadPage.css';
 
 import { myBucket, S3_BUCKET } from '../../../../config/awsS3';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
 
 
 const UploadPage= () => {
@@ -113,10 +115,15 @@ const UploadPage= () => {
           Key: file.name
       };
       
-      myBucket.upload(params, function (err, data) {
+      myBucket.upload(params, async function (err, data) {
         console.log(data)
-        if (err) return alert("File upload is fail!");
-        console.log(`File uploaded successfully. ${data.Location}`);
+        if (err) {
+          await Swal.fire({
+            icon: 'error',
+            title: '파일 업로드 실패...',
+          })
+        }
+        
         AdInfo.imgUrl = data.Location;
         setAdInfo(AdInfo)
       });
@@ -162,16 +169,21 @@ const UploadPage= () => {
         }
     }
     axios.request(options)
-        .then(res => {
+        .then(async (res) => {
         if(res.status == 201) {
-          alert("광고 업로드 완료");
+          await Swal.fire({
+            icon: 'success',
+            title: '광고 업로드 완료!',
+          })
           navigate(`/mypage/client`)
         }
         else {
-          alert(res);
+          await Swal.fire({
+            icon: 'error',
+            title: '광고 업로드 실패..',
+          })
         }
         })
-        .catch(err => alert(err.message))
 
   }
 

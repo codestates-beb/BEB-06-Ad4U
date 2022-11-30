@@ -13,21 +13,21 @@ import img from '../dummyfiles/img1.png';
 import './NFE.css';
 
 const Nav = ({ userData, setUserData }) => {
-  // 적용 중
-  // const [show, handleShow] = useState(false);
 
-  //   useEffect(() => {
-  //       window.addEventListener("scroll", () => {
-  //           if(window.scrollY > 50) {
-  //               handleShow(true);
-  //           } else {
-  //               handleShow(false);
-  //           }
-  //       });
-  //       return () => {
-  //           window.removeEventListener("scroll", () => {});
-  //       };
-  //   }, []);
+  const [show, handleShow] = useState(false);
+
+    useEffect(() => {
+        window.addEventListener("scroll", () => {
+            if(window.scrollY > 50) {
+                handleShow(true);
+            } else {
+                handleShow(false);
+            }
+        });
+        return () => {
+            window.removeEventListener("scroll", () => {});
+        };
+    }, []);
 
   const isClient = getLocalData("isClient");
 
@@ -46,6 +46,7 @@ const Nav = ({ userData, setUserData }) => {
       alert(err.response.data);
     }
   }
+
 
   const LoggedIn = ({ userData }) => {
     return (
@@ -70,8 +71,8 @@ const Nav = ({ userData, setUserData }) => {
   }
 
   return (
-    <Navbar expand="lg" className='navbar'>
-      <Container>
+    <Navbar expand="lg" className={`navbar ${show && 'nav_clear'}`}>
+      <Container >
         <Link to="/">
           <img className="nav_logo" src = {Logo} alt = "Ad4U logo" width={100} height={50}/>
         </Link>

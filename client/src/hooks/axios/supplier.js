@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 const mainList = async () => {
   const options = {
@@ -71,29 +72,51 @@ const applyCancel = async (accessToken, isClient, adId) => {
 }
 
 const callApply = async (accessToken, isClient, adId) => {
-  try {
-    if (isClient === "true") return alert("크리에이터 계정으로만 지원가능합니다.");
+    if (isClient === "true") {
+      await Swal.fire({
+        icon: 'error',
+        title: '크리에이터 계정으로만 지원 가능합니다!',
+      })
+    }
     if (accessToken && isClient) {
       const result = await apply(accessToken, isClient, adId);
-      if (result) alert("신청이 완료되었습니다!!");
-      window.location.reload();
+      if (result) {
+        await Swal.fire({
+          icon: 'success',
+          title: '지원 완료',
+        })
+        window.location.reload();
+      }
     } else {
-      alert("로그인후 이용가능합니다.");
+      await Swal.fire({
+        icon: 'error',
+        title: '로그인 후 가능합니다!',
+      })
     }
-  } catch (err) {
-    console.log(err.response.data);
-  }
 }
 
 const callApplyCancel = async (accessToken, isClient, adId) => {
   try {
-      if (isClient === "true") return alert("크리에이터 계정으로만 지원가능합니다.");
+      if (isClient === "true") {
+        await Swal.fire({
+          icon: 'error',
+          title: '크리에이터 계정으로만 취소 가능합니다!',
+        })
+      }
       if (accessToken && isClient) {
       const result = await applyCancel(accessToken, isClient, adId);
-      if (result) alert("신청이 취소되었습니다!!");
-      window.location.reload();
+      if (result) {
+        await Swal.fire({
+          icon: 'success',
+          title: '지원 취소 완료',
+        })
+        window.location.reload();
+      }
     } else {
-      alert("로그인후 이용가능합니다.");
+      await Swal.fire({
+        icon: 'error',
+        title: '로그인 후 가능합니다!',
+      })
     }
   } catch (err) {
     console.log(err.response.data);
