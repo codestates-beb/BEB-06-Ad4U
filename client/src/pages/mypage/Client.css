@@ -66,6 +66,22 @@
   width: 180px;
 }
 
+.clientStage0_footer {
+  width: 200px;
+}
+
+.clientStage0_footer {
+  width: 200px;
+}
+
+.clientStage0_popover {
+  max-width: 100%;
+} 
+
+.clientStage0_popoverInner {
+  max-width: 100%;
+}
+
 /* stage1 */
 .clientStage1_contentArea {
   height: 80px;
