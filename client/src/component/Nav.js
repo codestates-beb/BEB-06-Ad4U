@@ -39,7 +39,6 @@ const Nav = ({ userData, setUserData }) => {
       if (result) {
         setUserData({});
         clearLocalData();
-        alert("로그아웃 되었습니다.");
         navigate('/');
       } 
     } catch (err) {

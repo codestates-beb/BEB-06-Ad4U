@@ -46,6 +46,7 @@ const Stage3 = ({ adList }) => {
   // 4. Confirm Transaction
   const handleConfirmTransaction = async () => { 
     try {
+      setIsLoading(true);
       if(confirmCheck2 === true) {
         await Swal.fire({
           icon: 'error',
@@ -57,7 +58,8 @@ const Stage3 = ({ adList }) => {
       if (tx) {
         const txInfo = await getTransaction(contractAddress, 0);
         const confirmCount = txInfo.numConfirmations; // 현재 계약 컨펌 개수
-        if (confirmCount === 2) {  //Confirm 두개가 됬을 경우, 서버로 결과를 보냄
+        console.log(confirmCount)
+        if (parseInt(confirmCount) === 2) {  //Confirm 두개가 됬을 경우, 서버로 결과를 보냄
           const result = await contract.complete(accessToken, isClient, adId);
           if (result) {
             setConfirmCheck2(true);
@@ -73,6 +75,7 @@ const Stage3 = ({ adList }) => {
             icon: 'success',
             title: 'Confirm 완료!',
           });
+          window.location.reload();
         }
       }
       setIsLoading(false);
@@ -82,6 +85,7 @@ const Stage3 = ({ adList }) => {
         icon: 'error',
         title: '트랜잭션 오류 발생...',
       });
+      setIsLoading(false);
     }
   };
 
@@ -103,6 +107,7 @@ const Stage3 = ({ adList }) => {
       }
       setIsLoading(false);
     } catch(err) {
+      setIsLoading(false);
       console.log(err);
       await Swal.fire({
         icon: 'error',
@@ -139,8 +144,44 @@ const Stage3 = ({ adList }) => {
             <Col xl={5}>          
               {confirmCheck
               ? <button className='transaction_Button check' onClick={isConfirmed}>Check!</button> 
-              : <button className='transaction_Button confirm' onClick={handleConfirmTransaction}>Confirm</button>}
-              <button className='transaction_Button revoke' onClick={handleRevokeConfirmation}>Revoke</button>
+              : <button className='transaction_Button confirm' onClick={() =>{
+                Swal.fire({
+                  title: '계약을 완료하시겠습니까?',
+                  html:
+                  '<b>계약 대상자 모두 계약을 완료(Confirm)하면 예치된 금액이 크리에이터님 지갑으로 송금되며,\n 계약은 완료상태로, 파기가 불가합니다. </b> ',
+                  showDenyButton: true,
+                  showCancelButton: true,
+                  confirmButtonText: 'Progress',
+                  denyButtonText: `Don't Proceed`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                      window.scrollTo(0, 0)
+                      handleConfirmTransaction();
+                    } else if (result.isDenied) {
+                      Swal.fire('계약 완료 취소', '', 'info')
+                      
+                    }
+                  })
+              }}>Confirm</button>}
+              <button className='transaction_Button revoke' onClick={()=> {
+                Swal.fire({
+                  title: '계약을 파기하시겠습니까?',
+                  html:
+                  '<b>계약 파기시 예치된 금액은 광고주님에게로 돌아가며,\n 계약은 파기상태로, 되돌릴 수 없습니다.</b> ',
+                  showDenyButton: true,
+                  showCancelButton: true,
+                  confirmButtonText: 'Progress',
+                  denyButtonText: `Don't Proceed`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                      window.scrollTo(0, 0)
+                      handleRevokeConfirmation();
+                    } else if (result.isDenied) {
+                      Swal.fire('계약 파기 취소', '', 'info')
+                      
+                    }
+                  })
+              }}>Revoke</button>
               <br />
               <br />
             </Col>

@@ -74,7 +74,25 @@ const Stage0 = ({ adList }) => {
             <Col className='clientStage0_buttonArea' xl={3}>
               <button 
                 className='transaction_Button select' 
-                onClick={() => handleDeploy(applicant.id, applicant.address)}
+                onClick={async () => {
+                  Swal.fire({
+                    title: '선택한 유튜버와 계약을\n 진행하시겠습니까?',
+                    html:
+                    '<b>계약 생성시 해당 광고는 모집을 종료합니다.</b> ',
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: 'Progress',
+                    denyButtonText: `Don't Proceed`,
+                  }).then((result) => {
+                      if (result.isConfirmed) {
+                        window.scrollTo(0, 0)
+                        handleDeploy(applicant.id, applicant.address)
+                      } else if (result.isDenied) {
+                        Swal.fire('계약 진행 취소', '', 'info')
+                      }
+                    })
+                  }
+                }
               >select</button>
             </Col>
           </Row>
@@ -117,27 +135,18 @@ const Stage0 = ({ adList }) => {
             </>
           : applicant.map((el, idx)=><ApplicantList key={idx} idx={idx} el={el} />)}
           <Col>
-            <OverlayTrigger
-              containerPadding={20}
-              show={showOverlay}
-              trigger="click"
-              placement='bottom'
-              overlay={
-                <Popover id='popover-positioned' className='clientStage0_popover'>
-                  <Popover.Header as="h3">
-                    <Row>
-                      <Col xl={10}>정말로 삭제하시겠습니까? </Col>
-                      <Col xl={2}><CloseButton onClick={() => setShowOverlay(false)}/></Col>
-                    </Row>
-                  </Popover.Header>
-                  <Popover.Body className='clientStage0_popoverInner'>
-                      광고삭제시 복구할수없습니다  <Button variant='danger' onClick={deleteAd}>삭제</Button>
-                  </Popover.Body>
-                </Popover>
-              }
-            >
-              <div className='clientStage0_footer' onClick={() => setShowOverlay(true)}><TbTrashX size={20} /> 광고를 삭제하시겠습니까? </div>
-            </OverlayTrigger>
+            <div className='clientStage0_footer' onClick={() => {
+              Swal.fire({
+                title: '해당 광고를 삭제하시겠습니까?',
+                html:
+                '<b>삭제된 광고는 복구할 수 없습니다.</b> ',
+                showCancelButton: true,
+                confirmButtonText: 'Confirm',
+              }).then((result) => {
+                  if (result.isConfirmed) return deleteAd();
+                })
+            }}>
+            <TbTrashX size={20} /> 광고를 삭제하시겠습니까? </div>
           </Col>
         </Container>
       } 
