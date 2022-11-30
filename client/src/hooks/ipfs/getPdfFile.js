@@ -4,7 +4,6 @@ import { triggerBase64Download } from 'common-base64-downloader-react';
 import lockPdfImg from '../../dummyfiles/document.png';
 import downloadPdfImg from '../../dummyfiles/download-pdf.png';
 
-
 const handleFileImg = (e) => {
   if(e.target.src === downloadPdfImg) {
     e.target.src = lockPdfImg;

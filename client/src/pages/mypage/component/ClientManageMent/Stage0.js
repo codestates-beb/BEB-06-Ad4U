@@ -8,9 +8,11 @@ import { Container, Row, Col, Card, ListGroup, Form, Button } from 'react-bootst
 import Swal from 'sweetalert2'
 import '../../Client.css';
 import '../TransactionButton.css';
+import Loading from '../../../../component/Loading';
 
 //모집중
 const Stage0 = ({ adList }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const applicant = adList.Advertisement_has_Suppliers;
   const adId = adList.id
   const accessToken = getLocalData('accessToken');
@@ -20,12 +22,7 @@ const Stage0 = ({ adList }) => {
     const handleDeploy = async (supplierId, supplierAddr) => {
       //광고주 지갑주소랑, 크리에이터 지갑주소가 같을 시 에러남, 다른주소로!
       try {
-        if (isClient === "false") {
-          await Swal.fire({
-            icon: 'error',
-            title: '광고주 계정으로만 실행 가능합니다!',
-          })
-        }
+        setIsLoading(true);
         if (accessToken && isClient && supplierId && adId) {
           const tx = await method.multiSigWalletDeploy(supplierAddr);
           const contractAddress = tx._address;
@@ -37,15 +34,12 @@ const Stage0 = ({ adList }) => {
                 title: '계약 생성 완료!',
               })
               window.location.reload();
+              setIsLoading(false);
             }
-          } else {
-            await Swal.fire({
-              icon: 'error',
-              title: '계정 오류!',
-            })
           }
         }
       } catch (err) {
+        setIsLoading(false);
         console.log(err);
         await Swal.fire({
           icon: 'error',
@@ -88,11 +82,14 @@ const Stage0 = ({ adList }) => {
 
   return (
     <>
-      <Container className='clientManagement_container'>
+    {isLoading 
+      ? <Loading /> 
+      : <Container className='clientManagement_container'>
         {applicant.length === 0 
         ? <div className='clientStage0_emptyArea'>현재 지원자가 없습니다.</div>
         : applicant.map((el, idx)=><ApplicantList key={idx} idx={idx} el={el} />)}
-      </Container>
+        </Container>
+      } 
     </>
   );
 }

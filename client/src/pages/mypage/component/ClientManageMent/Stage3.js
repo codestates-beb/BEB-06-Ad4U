@@ -13,10 +13,12 @@ import lockPdfImg from '../../../../dummyfiles/document.png';
 import downloadPdfImg from '../../../../dummyfiles/download-pdf.png';
 import { handleFileImg, handleViewPdf } from '../../../../hooks/ipfs/getPdfFile';
 import Swal from 'sweetalert2';
+import Loading from '../../../../component/Loading';
 
 import '../TransactionButton.css';
 import '../../Client.css';
 import '../ContractDownload.css';
+
 
 //진행중2
 const Stage3 = ({ adList }) => {
@@ -27,6 +29,7 @@ const Stage3 = ({ adList }) => {
   const isClient = getLocalData('isClient');
 
   const [confirmCheck, setConfirmCheck] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [confirmCheck2, setConfirmCheck2] = useState(false);
 
   let txIndex = 0;
@@ -46,6 +49,7 @@ const Stage3 = ({ adList }) => {
 
   // 4. Confirm Transaction
   const handleConfirmTransaction = async () => { 
+
     try {
       if(confirmCheck2 === true) {
         await Swal.fire({
@@ -53,6 +57,7 @@ const Stage3 = ({ adList }) => {
           title: '이미 Confirm된 계약입니다!',
         });
       }
+      setIsLoading(true);
       const tx = await method.confirmTransaction(contractAddress, txIndex);
       console.log(tx)
       if (tx) {
@@ -62,14 +67,17 @@ const Stage3 = ({ adList }) => {
           const result = await contract.complete(accessToken, isClient, adId);
           if (result) {
             setConfirmCheck2(true);
+            setIsLoading(false);
             await Swal.fire({
               icon: 'success',
               title: '상호 계약이 성공적으로 완료되었습니다!',
             });
             window.location.reload();
+            
           }
         } else {  //Confirm 하나인경우는 서버로 보내지 않음.
           setConfirmCheck2(true);  
+          setIsLoading(false);
           await Swal.fire({
             icon: 'success',
             title: 'Confirm 완료!',
@@ -77,6 +85,7 @@ const Stage3 = ({ adList }) => {
         }
       }
     } catch (err) {
+      setIsLoading(false);
       console.log(err);
       await Swal.fire({
         icon: 'error',
@@ -88,11 +97,13 @@ const Stage3 = ({ adList }) => {
   // 5. Revoke Transaction
   const handleRevokeConfirmation = async () => {
     try {
+      setIsLoading(true);
       const tx = await method.revokeConfirmation(contractAddress, txIndex);
       console.log(tx);
       if (tx) {
         const result = await contract.cancel(accessToken, isClient, adId);
         if (result) {
+          setIsLoading(false);
           await Swal.fire({
             icon: 'success',
             title: '계약 파기 완료',
@@ -101,6 +112,7 @@ const Stage3 = ({ adList }) => {
         }
       }
     } catch(err) {
+      setIsLoading(false);
       console.log(err);
       await Swal.fire({
         icon: 'error',
@@ -126,21 +138,23 @@ const Stage3 = ({ adList }) => {
 
   return (
     <>
-      <Container className='clientManagement_container'>
-        <Row className='clientStage3_contentArea'>
-          <Col xl={7}>
-            <Row className='clientStage3_descriptionArea'>{adList.title} 광고계약이 현재 진행중입니다.</Row>
-            <Row className='clientStage3_detailArea'>confirm으로 계약을 완료시키거나 revoke로 파기할 수 있습니다.</Row>
-          </Col>
-          <Col xl={5}>          
-            {confirmCheck
-            ? <button className='transaction_Button check' onClick={isConfirmed}>Check!</button> 
-            : <button className='transaction_Button confirm' onClick={handleConfirmTransaction}>Confirm</button>}
-            <button className='transaction_Button revoke' onClick={handleRevokeConfirmation}>Revoke</button>
-            <br />
-            <br />
-          </Col>
-          <hr />
+      {isLoading 
+      ? <Loading /> 
+      : <Container className='clientManagement_container'>
+          <Row className='clientStage3_contentArea'>
+            <Col xl={7}>
+              <Row className='clientStage3_descriptionArea'>{adList.title} 광고계약이 현재 진행중입니다.</Row>
+              <Row className='clientStage3_detailArea'>confirm으로 계약을 완료시키거나 revoke로 파기할 수 있습니다.</Row>
+            </Col>
+            <Col xl={5}>          
+              {confirmCheck
+              ? <button className='transaction_Button check' onClick={isConfirmed}>Check!</button> 
+              : <button className='transaction_Button confirm' onClick={handleConfirmTransaction}>Confirm</button>}
+              <button className='transaction_Button revoke' onClick={handleRevokeConfirmation}>Revoke</button>
+              <br />
+              <br />
+            </Col>
+            <hr />
           <Row
             onMouseOver={handleFileImg}
             onMouseOut={handleFileImg}
@@ -149,10 +163,11 @@ const Stage3 = ({ adList }) => {
             <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
             <Col className='contractDownload'>
                 계약서 다운로드
-            </Col>
+                </Col>
+            </Row>
           </Row>
-        </Row>
-      </Container>
+        </Container>
+      }
     </>
   );
 }

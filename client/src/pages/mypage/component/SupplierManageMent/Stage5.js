@@ -8,19 +8,22 @@ import downloadPdfImg from '../../../../dummyfiles/download-pdf.png';
 import revokeImg from '../../../../dummyfiles/cancel.png';
 import { handleFileImg, handleViewPdf } from '../../../../hooks/ipfs/getPdfFile';
 import Swal from 'sweetalert2';
+import Loading from '../../../../component/Loading';
+
 import '../../Supplier.css';
 import '../ContractDownload.css';
 
 //파기
 const Stage5 = ({ adList }) => {
+  const [isLoading, setIsLoading] = useState(false);
 
   const loadPdf = async (token_uri, title, createdAt) => {
     try {
-    //setIsloading(true);
+    setIsLoading(true);
     handleViewPdf(token_uri, title, createdAt);
-    //setIsloading(false);
+    setIsLoading(false);
     } catch (err) {
-      //setIsloading(false);
+      setIsLoading(false);
       console.log(err);
       await Swal.fire({
         icon: 'error',
@@ -31,25 +34,28 @@ const Stage5 = ({ adList }) => {
 
   return (
     <>
-      <Container className='supplierManagement_container'>
-        <Row className='supplierStage3_contentArea'>
-          <Col className='completeCol'>
-            <Image src={revokeImg} className="completeIcon"></Image>
-            Revoked
-          </Col>
-        <hr />
-          <Row
-            onMouseOver={handleFileImg}
-            onMouseOut={handleFileImg}
-            onClick={() => loadPdf(adList.token_uri, adList.title, adList.createdAt)}
-          >
-            <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
-            <Col className='contractDownload'>
-                계약서 다운로드
+      {isLoading
+      ? <Loading />
+      :  <Container className='supplierManagement_container'>
+          <Row className='supplierStage3_contentArea'>
+            <Col className='completeCol'>
+              <Image src={revokeImg} className="completeIcon"></Image>
+              Revoked
             </Col>
+          <hr />
+            <Row
+              onMouseOver={handleFileImg}
+              onMouseOut={handleFileImg}
+              onClick={() => loadPdf(adList.token_uri, adList.title, adList.createdAt)}
+            >
+              <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
+              <Col className='contractDownload'>
+                  계약서 다운로드
+              </Col>
+            </Row>
           </Row>
-        </Row>
-      </Container>
+        </Container>
+      }
     </>
   );
 }

@@ -11,6 +11,7 @@ import lockPdfImg from '../../../../dummyfiles/document.png';
 import downloadPdfImg from '../../../../dummyfiles/download-pdf.png';
 import { handleFileImg, handleViewPdf } from '../../../../hooks/ipfs/getPdfFile';
 import Swal from 'sweetalert2';
+import Loading from '../../../../component/Loading';
 
 import '../../Supplier.css';
 import '../TransactionButton.css';
@@ -27,6 +28,7 @@ const Stage3 = ({ adList }) => {
 
   const [confirmCheck, setConfirmCheck] = useState(true);
   const [confirmCheck2, setConfirmCheck2] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   //confirmCheck : 이미 컨펌된 경우 disable
   const isConfirmed = async () => {
@@ -73,6 +75,7 @@ const Stage3 = ({ adList }) => {
           });
         }
       }
+      setIsLoading(false);
     } catch (err) {
       console.log(err);
       await Swal.fire({
@@ -85,6 +88,7 @@ const Stage3 = ({ adList }) => {
   // 5. Revoke Transaction
   const handleRevokeConfirmation = async () => {
     try {
+      setIsLoading(true);
       const tx = await method.revokeConfirmation(contractAddress, txIndex);
       console.log(tx);
       if (tx) {
@@ -97,6 +101,7 @@ const Stage3 = ({ adList }) => {
           window.location.reload();
         }
       }
+      setIsLoading(false);
     } catch(err) {
       console.log(err);
       await Swal.fire({
@@ -108,11 +113,11 @@ const Stage3 = ({ adList }) => {
 
   const loadPdf = async (token_uri, title, createdAt) => {
     try {
-    //setIsloading(true);
+    setIsLoading(true);
     handleViewPdf(token_uri, title, createdAt);
-    //setIsloading(false);
+    setIsLoading(false);
     } catch (err) {
-      //setIsloading(false);
+      setIsLoading(false);
       console.log(err);
       await Swal.fire({
         icon: 'error',
@@ -123,33 +128,36 @@ const Stage3 = ({ adList }) => {
   
   return (
     <>
-      <Container className='supplierManagement_container'>
-        <Row className='supplierStage3_contentArea'>
-          <Col xl={7}>
-            <Row className='supplierStage3_descriptionArea'>{adList.title} 광고계약이 현재 진행중입니다.</Row>
-            <Row className='supplierStage3_detailArea'>confirm으로 계약을 완료시키거나 revoke로 파기할 수 있습니다.</Row>
-          </Col>
-          <Col xl={5}>          
-            {confirmCheck
-            ? <button className='transaction_Button check' onClick={isConfirmed}>Check!</button> 
-            : <button className='transaction_Button confirm' onClick={handleConfirmTransaction}>Confirm</button>}
-            <button className='transaction_Button revoke' onClick={handleRevokeConfirmation}>Revoke</button>
-            <br />
-            <br />
-          </Col>
-          <hr />
-          <Row
-            onMouseOver={handleFileImg}
-            onMouseOut={handleFileImg}
-            onClick={() => loadPdf(adList.token_uri, adList.title, adList.createdAt)}
-          >
-            <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
-            <Col className='contractDownload'>
-                계약서 다운로드
+      {isLoading 
+      ? <Loading /> 
+      : <Container className='supplierManagement_container'>
+          <Row className='supplierStage3_contentArea'>
+            <Col xl={7}>
+              <Row className='supplierStage3_descriptionArea'>{adList.title} 광고계약이 현재 진행중입니다.</Row>
+              <Row className='supplierStage3_detailArea'>confirm으로 계약을 완료시키거나 revoke로 파기할 수 있습니다.</Row>
             </Col>
+            <Col xl={5}>          
+              {confirmCheck
+              ? <button className='transaction_Button check' onClick={isConfirmed}>Check!</button> 
+              : <button className='transaction_Button confirm' onClick={handleConfirmTransaction}>Confirm</button>}
+              <button className='transaction_Button revoke' onClick={handleRevokeConfirmation}>Revoke</button>
+              <br />
+              <br />
+            </Col>
+            <hr />
+            <Row
+              onMouseOver={handleFileImg}
+              onMouseOut={handleFileImg}
+              onClick={() => loadPdf(adList.token_uri, adList.title, adList.createdAt)}
+            >
+              <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
+              <Col className='contractDownload'>
+                  계약서 다운로드
+              </Col>
+            </Row>
           </Row>
-        </Row>
-      </Container>
+        </Container>
+      }
     </>
   );
 }

@@ -52,13 +52,11 @@ const AdList = () => {
           {list.map((data, idx) => { return (
             <div 
             className="adList-content_card-container"
-            onClick={() => navigate(`/detail/ad/${data.id}`)}
+            onClick={() => {
+              navigate(`/detail/ad/${data.id}`)
+              window.scrollTo(0,0)}}
             key={idx}
             >
-              {/* onClick={() => { 
-                navigate(`/detail/client/${data.id}`)
-                window.scrollTo(0,0)}}
-              key={idx} */}
               <Row className='adList_img'>
                 {data.AdimgUrl 
                 ? <Card.Img variant="top" src={data.AdimgUrl}/> 

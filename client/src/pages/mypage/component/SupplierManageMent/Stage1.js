@@ -4,9 +4,9 @@ import { Accordion, Col, Row, Container } from 'react-bootstrap';
 import method from '../../../../hooks/web3/sendTransaction';
 import contract from '../../../../hooks/axios/contract';
 import { getLocalData } from '../../../../config/localStrage';
+import Loading from '../../../../component/Loading';
 import '../../Supplier.css';
 import '../TransactionButton.css';
-
 
 const Stage1 = ({ adList }) => {
   const adId = adList.id;
@@ -14,13 +14,17 @@ const Stage1 = ({ adList }) => {
   const accessToken = getLocalData('accessToken');
   const isClient = getLocalData('isClient');
 
+  const [isLoading, setIsLoading] = useState(false);
+
   // 2. Supplier Sign Wallet
   const handleSupplierSignWallet = async () => {
     try {
+      setIsLoading(true);
       const tx = await method.supplierSignWallet(contractAddress);
       if (tx) {
         const result = await contract.proceed(accessToken, isClient, adId);
         if (result) {
+          setIsLoading(false);
           alert("스마트컨트랙트에 서명하였습니다.");
           window.location.reload();
         }
@@ -33,7 +37,9 @@ const Stage1 = ({ adList }) => {
 
   return (
     <>
-      <Container className='supplierManagement_container'>
+      {isLoading 
+      ? <Loading />
+      : <Container className='supplierManagement_container'>
         <Row className='supplierStage1_contentArea'>
           <Col xl={9}>
             <div className='supplierStage1_descriptionArea'>스마트컨트랙트가 블록체인에 배포되었습니다</div>
@@ -42,6 +48,7 @@ const Stage1 = ({ adList }) => {
           <Col xl={3}><button className='transaction_Button sign' onClick={handleSupplierSignWallet}>Sign</button></Col>
         </Row>  
       </Container>
+      }
     </>
   );
 }

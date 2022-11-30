@@ -9,6 +9,7 @@ import '../TransactionButton.css';
 
 //모집중
 const Stage0 = ({ adList }) => {
+
   const adId = adList.id;
   const accessToken = getLocalData('accessToken');
   const isClient = getLocalData('isClient');
