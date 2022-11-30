@@ -25,12 +25,15 @@
 }
 
 .titleMessage {
+    color : #ffffff;
     display: none;
 }
 .costMessage {
+    color : #ffffff;
     display: none;
 }
 .contentMessage {
+    color : #ffffff;
     display: none;
 }
 
@@ -61,3 +64,4 @@ h5 {
 .upload_btn span {
   color: white;
 }
+
