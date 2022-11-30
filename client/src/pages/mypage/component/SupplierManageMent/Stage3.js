@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Accordion, Col, Row, Container } from 'react-bootstrap';
+import { Col, Row, Container, Image } from 'react-bootstrap';
 import { getLocalData } from '../../../../config/localStrage';
 import contract from '../../../../hooks/axios/contract';
 import method from '../../../../hooks/web3/sendTransaction';
+import { getIsConfirmed, getTransaction } from '../../../../hooks/web3/queryContract';
+import { getCurrentAccount } from '../../../../hooks/web3/common';
+//lock downloadPdfImg 둘다 필요함.
+import lockPdfImg from '../../../../dummyfiles/document.png';
+import downloadPdfImg from '../../../../dummyfiles/download-pdf.png';
+import { handleFileImg, handleViewPdf } from '../../../../hooks/ipfs/getPdfFile';
+import Swal from 'sweetalert2';
 
 import '../../Supplier.css';
-
-import {getIsConfirmed, getTransaction} from '../../../../hooks/web3/queryContract';
-import {getCurrentAccount} from '../../../../hooks/web3/common';
+import '../TransactionButton.css';
+import '../ContractDownload.css';
 
 //진행중2
 const Stage3 = ({ adList }) => {
@@ -19,67 +25,60 @@ const Stage3 = ({ adList }) => {
 
   let txIndex = 0;
 
-  const [confirmCheck, setConfirmCheck] = useState(false);
-
-  
+  const [confirmCheck, setConfirmCheck] = useState(true);
+  const [confirmCheck2, setConfirmCheck2] = useState(false);
 
   //confirmCheck : 이미 컨펌된 경우 disable
-  async function isConfirmed () {
+  const isConfirmed = async () => {
     const account = await getCurrentAccount(); // 현재 계정 주소 get
-    const result = await getIsConfirmed(contractAddress,0,account);
-    console.log(result)
-    setConfirmCheck(result);
-  }
-
-  useEffect(() => {
-    isConfirmed();
-  },[])
-
-  async function getConfirmCount () {
-    var txInfo = await getTransaction(contractAddress,0);
-    return txInfo.numConfirmations;
-  }
-
-  //Confirm 두개가 됬을 경우, 서버로 결과를 보냄
-  const sendResultExecuted = async () => {
-    try {
-      const result = await contract.complete(accessToken, isClient, adId);
-      if (result) return alert("성공!");
-    } catch(err) {
-      console.log(err);
-      alert("실패");
+    const result = await getIsConfirmed(contractAddress, 0, account);
+    if (result === false) return setConfirmCheck(result);
+    else { 
+      await Swal.fire({
+        icon: 'error',
+        title: '이미 Confirm된 계약입니다!',
+      })
     }
   }
-
-    //Revoke시 파기
-  const sendResultRevoked = async () => {
-    try {
-      const result = await contract.cancel(accessToken, isClient, adId);
-      if (result) return alert("성공!");
-    } catch(err) {
-      console.log(err);
-      alert("실패");
-    }
-  }
-
 
   // 4. Confirm Transaction
-  const handleConfirmTransaction = async () => {
-    const confirmCount = await getConfirmCount(); // 내가 confirm하기 전 계약 컨펌 개수
-    console.log(confirmCount)
+  const handleConfirmTransaction = async () => { 
     try {
+      if(confirmCheck2 === true) {
+        await Swal.fire({
+          icon: 'error',
+          title: '이미 Confirm된 계약입니다!',
+        });
+      }
       const tx = await method.confirmTransaction(contractAddress, txIndex);
       console.log(tx)
-      if(confirmCount == 1) {
-        sendResultExecuted();
-      }
       if (tx) {
-        setConfirmCheck(true);
-        return alert("성공!");
+        const txInfo = await getTransaction(contractAddress, 0);
+        const confirmCount = txInfo.numConfirmations; // 현재 계약 컨펌 개수
+        if (confirmCount === 2) {  //Confirm 두개가 됬을 경우, 서버로 결과를 보냄
+          const result = await contract.complete(accessToken, isClient, adId);
+          if (result) {
+            setConfirmCheck2(true);
+            await Swal.fire({
+              icon: 'success',
+              title: '상호 계약이 성공적으로 완료되었습니다!',
+            });
+            window.location.reload();
+          }
+        } else {  //Confirm 하나인경우는 서버로 보내지 않음.
+          setConfirmCheck2(true);  
+          await Swal.fire({
+            icon: 'success',
+            title: 'Confirm 완료!',
+          });
+        }
       }
     } catch (err) {
       console.log(err);
-      alert("실패");
+      await Swal.fire({
+        icon: 'error',
+        title: '트랜잭션 오류 발생...',
+      });
     }
   };
 
@@ -89,22 +88,68 @@ const Stage3 = ({ adList }) => {
       const tx = await method.revokeConfirmation(contractAddress, txIndex);
       console.log(tx);
       if (tx) {
-        sendResultRevoked();
-        return alert("성공!");
+        const result = await contract.cancel(accessToken, isClient, adId);
+        if (result) {
+          await Swal.fire({
+            icon: 'success',
+            title: '계약 파기 완료',
+          });
+          window.location.reload();
+        }
       }
     } catch(err) {
       console.log(err);
-      alert("실패");
+      await Swal.fire({
+        icon: 'error',
+        title: '트랜잭션 오류 발생...',
+      });
+    }
+  };
+
+  const loadPdf = async (token_uri, title, createdAt) => {
+    try {
+    //setIsloading(true);
+    handleViewPdf(token_uri, title, createdAt);
+    //setIsloading(false);
+    } catch (err) {
+      //setIsloading(false);
+      console.log(err);
+      await Swal.fire({
+        icon: 'error',
+        title: '계약서 발급이 실패하였습니다.',
+      });
     }
   };
   
-
   return (
     <>
-      <div>진행중2</div>
-      <button onClick={handleConfirmTransaction} disabled={confirmCheck}>4. Confirm Transaction</button>
-      <div>파기하시겠습니까?</div>
-      <button onClick={handleRevokeConfirmation}>5. Revoke Transaction</button>
+      <Container className='supplierManagement_container'>
+        <Row className='supplierStage3_contentArea'>
+          <Col xl={7}>
+            <Row className='supplierStage3_descriptionArea'>{adList.title} 광고계약이 현재 진행중입니다.</Row>
+            <Row className='supplierStage3_detailArea'>confirm으로 계약을 완료시키거나 revoke로 파기할 수 있습니다.</Row>
+          </Col>
+          <Col xl={5}>          
+            {confirmCheck
+            ? <button className='transaction_Button check' onClick={isConfirmed}>Check!</button> 
+            : <button className='transaction_Button confirm' onClick={handleConfirmTransaction}>Confirm</button>}
+            <button className='transaction_Button revoke' onClick={handleRevokeConfirmation}>Revoke</button>
+            <br />
+            <br />
+          </Col>
+          <hr />
+          <Row
+            onMouseOver={handleFileImg}
+            onMouseOut={handleFileImg}
+            onClick={() => loadPdf(adList.token_uri, adList.title, adList.createdAt)}
+          >
+            <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
+            <Col className='contractDownload'>
+                계약서 다운로드
+            </Col>
+          </Row>
+        </Row>
+      </Container>
     </>
   );
 }

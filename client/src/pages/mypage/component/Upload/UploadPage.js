@@ -175,7 +175,7 @@ const UploadPage= () => {
             icon: 'success',
             title: '광고 업로드 완료!',
           })
-          navigate(`/mypage/client`)
+          window.location.href = 'http://localhost:3000/mypage/client';
         }
         else {
           await Swal.fire({

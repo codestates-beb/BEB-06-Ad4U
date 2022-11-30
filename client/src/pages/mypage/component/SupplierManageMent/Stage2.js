@@ -15,8 +15,9 @@ const Stage2 = ({ adList }) => {
 
   return (
     <>
-      <div>진행중1</div>
-      <div>광고주가 계약서를 작성중입니다.</div>
+      <Container className='supplierManagement_container'>
+        <Col className='supplierStage2_contentArea'><div>광고주가 계약서를 작성중입니다.</div></Col>       
+      </Container>
     </>
   );
 }

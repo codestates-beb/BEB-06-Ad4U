@@ -1,0 +1,31 @@
+.completeCol {
+  text-align: left;
+  padding: 0px;
+}
+
+.contractDownload {
+  text-align: left;
+  text-decoration: underline;
+  padding: 0px;
+}
+
+.contractDownload:hover {
+  opacity: 0.7;
+}
+
+.contractDownloadIcon {
+  width: 35px;
+  height: 24px;
+  padding-left: 0px;
+}
+
+.completeIcon {
+  width: 35px;
+  height: 40px;
+  float: left;
+  padding-bottom: 10px;
+  padding-left: 0px;
+  padding-right: 10px;
+  margin: auto;
+}
+

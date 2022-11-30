@@ -61,26 +61,26 @@ const Stage0 = ({ adList }) => {
       return (
         <>
           <Row>
-            <Col className='stage0_ImgArea' xl={2}>
+            <Col className='clientStage0_ImgArea' xl={2}>
               {applicant.profileImgUrl
               ? <Avatar src={applicant.profileImgUrl} alt="채널이미지" />
               : <Avatar src={Img} alt="채널 대체이미지" />}
             </Col>
-            <Col className='stage0_contentArea' xl={7}>
+            <Col className='clientStage0_contentArea' xl={7}>
               <div>{idx+1}번째 지원자</div>
               <span>채널명 {applicant.channelName}</span>
-              <div><a className='channelUrl' href={applicant.channelUrl}>{applicant.channelUrl}</a></div>
+              <div><a className='clientChannelUrl' href={applicant.channelUrl}>{applicant.channelUrl}</a></div>
               <div>구독자수 {applicant.subscriberCount}</div> 
               <div>조회수 {applicant.viewCount}</div>
             </Col>
-            <Col className='stage0_buttonArea' xl={3}>
+            <Col className='clientStage0_buttonArea' xl={3}>
               <button 
                 className='transaction_Button select' 
                 onClick={() => handleDeploy(applicant.id, applicant.address)}
               >select</button>
             </Col>
           </Row>
-          <Row><hr className='divider_solid' /></Row>
+          <Row><hr className='clientDivider_solid' /></Row>
         </>
       );
     }
@@ -88,9 +88,9 @@ const Stage0 = ({ adList }) => {
 
   return (
     <>
-      <Container className='management_container'>
+      <Container className='clientManagement_container'>
         {applicant.length === 0 
-        ? <div className='stage0_emptyArea'>현재 지원자가 없습니다.</div>
+        ? <div className='clientStage0_emptyArea'>현재 지원자가 없습니다.</div>
         : applicant.map((el, idx)=><ApplicantList key={idx} idx={idx} el={el} />)}
       </Container>
     </>

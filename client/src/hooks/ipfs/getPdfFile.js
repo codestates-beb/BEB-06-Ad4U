@@ -22,21 +22,21 @@ const dataURLtoBase64 = (dataurl) => {
 const handleViewPdf = async (token_uri, title, createdAt) => {
   const secretKey = process.env.REACT_APP_SECRET_KEY;
 
-    const options = {
-      url: token_uri,
-      method: 'GET',
-      headers: {"Content-Type": "application/json"}
-    }
-    
-    await axios.request(options)
-    .then(res => {
-      console.log(res.data)
-      //복호화
-        const bytes = crypto.AES.decrypt(res.data, secretKey);
-        const decrypted = bytes.toString(crypto.enc.Utf8);
-        const decrypted_base64 = "data:application/pdf;base64,"+dataURLtoBase64(decrypted);
-        triggerBase64Download(decrypted_base64, `${title}_${createdAt}`)
-    })
+  const options = {
+    url: token_uri,
+    method: 'GET',
+    headers: {"Content-Type": "application/json"}
+  }
+
+  const result = await axios.request(options);
+
+  if (result) {
+    //복호화
+    const bytes = crypto.AES.decrypt(result.data, secretKey);
+    const decrypted = bytes.toString(crypto.enc.Utf8);
+    const decrypted_base64 = "data:application/pdf;base64,"+dataURLtoBase64(decrypted);
+    triggerBase64Download(decrypted_base64, `${title}_${createdAt}`)
+  }
 }
 
 export { handleFileImg, dataURLtoBase64, handleViewPdf };
