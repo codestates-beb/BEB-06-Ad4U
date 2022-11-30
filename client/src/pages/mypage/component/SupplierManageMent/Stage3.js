@@ -149,17 +149,12 @@ const Stage3 = ({ adList }) => {
                   title: '계약을 완료하시겠습니까?',
                   html:
                   '<b>계약 대상자 모두 계약을 완료(Confirm)하면 예치된 금액이 크리에이터님 지갑으로 송금되며,\n 계약은 완료상태로, 파기가 불가합니다. </b> ',
-                  showDenyButton: true,
                   showCancelButton: true,
                   confirmButtonText: 'Progress',
-                  denyButtonText: `Don't Proceed`,
                 }).then((result) => {
                     if (result.isConfirmed) {
                       window.scrollTo(0, 0)
                       handleConfirmTransaction();
-                    } else if (result.isDenied) {
-                      Swal.fire('계약 완료 취소', '', 'info')
-                      
                     }
                   })
               }}>Confirm</button>}

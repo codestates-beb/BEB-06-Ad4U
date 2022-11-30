@@ -329,17 +329,13 @@ const AdContract = ({ userData, adList }) => {
           title: '해당 계약 내용으로 계약을\n 진행하시겠습니까?',
           html:
           '<b>해당 계약서는 한국디지털광고협회 표준 양식으로 작성되었으며,\n 계약 진행시 계약 내용에 대한 수정은 불가합니다.\n 계약금은 앞서 생성하신 스마트컨트랙트에 예치됩니다.</b> ',
-          showDenyButton: true,
           showCancelButton: true,
           confirmButtonText: 'Progress',
-          denyButtonText: `Don't Proceed`,
         }).then((result) => {
           console.log(result)
             if (result.isConfirmed) {
               window.scrollTo(0, 0)
               handleSubmit();
-            } else if (result.isDenied) {
-              Swal.fire('계약 진행 취소', '', 'info')
             }
           })
       }} disabled={!previewCheck}>

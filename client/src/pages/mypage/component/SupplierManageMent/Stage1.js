@@ -58,15 +58,11 @@ const Stage1 = ({ adList }) => {
               title: '해당 계약에\n 서명하시겠습니까?',
               html:
               '<b>계약 서명시 해당 광고에 참여하게 됩니다.</b> ',
-              showDenyButton: true,
               showCancelButton: true,
               confirmButtonText: 'Sign',
-              denyButtonText: `Don't Sign`,
             }).then((result) => {
                 if (result.isConfirmed) {
                   handleSupplierSignWallet();
-                } else if (result.isDenied) {
-                  Swal.fire('계약 서명 취소', '', 'info')
                 }
               })
           }}>Sign</button></Col>

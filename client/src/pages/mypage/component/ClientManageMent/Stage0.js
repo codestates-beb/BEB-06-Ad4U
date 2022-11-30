@@ -75,16 +75,12 @@ const Stage0 = ({ adList }) => {
                     title: '선택한 유튜버와 계약을\n 진행하시겠습니까?',
                     html:
                     '<b>계약 생성시 해당 광고는 모집을 종료합니다.</b> ',
-                    showDenyButton: true,
                     showCancelButton: true,
                     confirmButtonText: 'Progress',
-                    denyButtonText: `Don't Proceed`,
                   }).then((result) => {
                       if (result.isConfirmed) {
                         window.scrollTo(0, 0)
                         handleDeploy(applicant.id, applicant.address)
-                      } else if (result.isDenied) {
-                        Swal.fire('계약 진행 취소', '', 'info')
                       }
                     })
                   }

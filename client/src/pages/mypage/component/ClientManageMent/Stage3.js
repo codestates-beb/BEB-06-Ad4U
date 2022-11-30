@@ -158,17 +158,12 @@ const Stage3 = ({ adList }) => {
                   title: '계약을 완료하시겠습니까?',
                   html:
                   '<b>계약 대상자 모두 계약을 완료(Confirm)하면 예치된 금액이 크리에이터님 지갑으로 송금되며,\n 계약은 완료상태로, 파기가 불가합니다. </b> ',
-                  showDenyButton: true,
                   showCancelButton: true,
-                  confirmButtonText: 'Progress',
-                  denyButtonText: `Don't Proceed`,
+                  confirmButtonText: 'Progress'
                 }).then((result) => {
                     if (result.isConfirmed) {
                       window.scrollTo(0, 0)
                       handleConfirmTransaction();
-                    } else if (result.isDenied) {
-                      Swal.fire('계약 완료 취소', '', 'info')
-                      window.location.reload();
                     }
                   })
               }}>Confirm</button>}
@@ -177,17 +172,12 @@ const Stage3 = ({ adList }) => {
                   title: '계약을 파기하시겠습니까?',
                   html:
                   '<b>계약 파기시 예치된 금액은 광고주님에게로 돌아가며,\n 계약은 파기상태로, 되돌릴 수 없습니다.</b> ',
-                  showDenyButton: true,
                   showCancelButton: true,
                   confirmButtonText: 'Progress',
-                  denyButtonText: `Don't Proceed`,
                 }).then((result) => {
                     if (result.isConfirmed) {
                       window.scrollTo(0, 0)
                       handleRevokeConfirmation();
-                    } else if (result.isDenied) {
-                      Swal.fire('계약 파기 취소', '', 'info')
-                      window.location.reload();
                     }
                   })
               }}>Revoke</button>
