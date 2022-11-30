@@ -7,6 +7,7 @@ import ad from '../../hooks/axios/ad';
 import supplier from '../../hooks/axios/supplier';
 import './Supplier.css';
 import Avatar from 'react-avatar';
+import Loading from '../../component/Loading';
 
 import Status from './component/Status';
 import { Container, Row, Col, Card, ListGroup, Accordion, Button,  OverlayTrigger, Tooltip } from 'react-bootstrap';
@@ -18,6 +19,7 @@ const SupplierMypage = () => {
   const [adList, setAdlist] = useState([]); 
   const [proposeList, setProposeList] = useState([]);
   const [status, setStatus] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -47,12 +49,12 @@ const SupplierMypage = () => {
     //status가 초기값("")인경우 필터링 하지않음
     if (status === 2) { //2일때는 2, 3 모두 보이게
       const filteredAdList = adList.filter((el) => el.status === 2 || el.status === 3);
-      return filteredAdList.map((adList, idx) => <SupplierAd key={idx} idx={idx} adList={adList} />);
+      return filteredAdList.map((adList, idx) => <SupplierAd key={idx} idx={idx} adList={adList} setIsLoading={setIsLoading} />);
     }
     if (typeof(status) === 'number') {
       const filteredAdList = adList.filter((el) => el.status === status);
-      return filteredAdList.map((adList, idx) => <SupplierAd key={idx} idx={idx} adList={adList} />);
-    } else return adList.map((adList, idx) => <SupplierAd key={idx} idx={idx} adList={adList} />);
+      return filteredAdList.map((adList, idx) => <SupplierAd key={idx} idx={idx} adList={adList} setIsLoading={setIsLoading} />);
+    } else return adList.map((adList, idx) => <SupplierAd key={idx} idx={idx} adList={adList} setIsLoading={setIsLoading} />);
   }
 
   const ListItem = ({ data, idx }) => {
@@ -122,26 +124,29 @@ const SupplierMypage = () => {
           </div>
         </Col>
         <Col xl={9} >
-          <Row>
-            <h1> Supplier Mypage</h1>
-            <Status adList={adList} setStatus={setStatus} />
-            <Container className='supplierMypage_accordion'>
-              {/* 광고제안 */}
-              <Accordion alwaysOpen flush>
-                <Accordion.Item>
-                  <Accordion.Header>제안받은 광고</Accordion.Header>
-                  <Accordion.Body>
-                  <ListGroup variant="flush">
-                    {proposeList.length > 0
-                    ? proposeList.map((data, idx) => <ListItem key={idx} idx={idx} data={data} />)
-                    : <div>제안받은 광고가 없습니다.</div>}
-                  </ListGroup>
-                  </Accordion.Body>
-                </Accordion.Item> 
-              </Accordion>
-              <FilterAd adList={adList} status={status} />
-            </Container>
-          </Row>
+          {isLoading
+          ? <Loading />
+          : <Row>
+              <h1> Supplier Mypage</h1>
+              <Status adList={adList} setStatus={setStatus} />
+              <Container className='supplierMypage_accordion'>
+                {/* 광고제안 */}
+                <Accordion alwaysOpen flush>
+                  <Accordion.Item>
+                    <Accordion.Header>제안받은 광고</Accordion.Header>
+                    <Accordion.Body>
+                    <ListGroup variant="flush">
+                      {proposeList.length > 0
+                      ? proposeList.map((data, idx) => <ListItem key={idx} idx={idx} data={data} />)
+                      : <div>제안받은 광고가 없습니다.</div>}
+                    </ListGroup>
+                    </Accordion.Body>
+                  </Accordion.Item> 
+                </Accordion>
+                <FilterAd adList={adList} status={status} />
+              </Container>
+            </Row>
+          }
         </Col>       
       </Row>
     </Container>

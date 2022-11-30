@@ -11,14 +11,13 @@ import lockPdfImg from '../../../../dummyfiles/document.png';
 import downloadPdfImg from '../../../../dummyfiles/download-pdf.png';
 import { handleFileImg, handleViewPdf } from '../../../../hooks/ipfs/getPdfFile';
 import Swal from 'sweetalert2';
-import Loading from '../../../../component/Loading';
 
 import '../../Supplier.css';
 import '../TransactionButton.css';
 import '../ContractDownload.css';
 
 //진행중2
-const Stage3 = ({ adList }) => {
+const Stage3 = ({ adList, setIsLoading }) => {
   const adId = adList.id;
   const contractAddress = adList.multisigAddress;
   const accessToken = getLocalData('accessToken');
@@ -28,7 +27,6 @@ const Stage3 = ({ adList }) => {
 
   const [confirmCheck, setConfirmCheck] = useState(true);
   const [confirmCheck2, setConfirmCheck2] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   //confirmCheck : 이미 컨펌된 경우 disable
   const isConfirmed = async () => {
@@ -133,67 +131,64 @@ const Stage3 = ({ adList }) => {
   
   return (
     <>
-      {isLoading 
-      ? <Loading /> 
-      : <Container className='supplierManagement_container'>
-          <Row className='supplierStage3_contentArea'>
-            <Col xl={7}>
-              <Row className='supplierStage3_descriptionArea'>{adList.title} 광고계약이 현재 진행중입니다.</Row>
-              <Row className='supplierStage3_detailArea'>confirm으로 계약을 완료시키거나 revoke로 파기할 수 있습니다.</Row>
+      <Container className='supplierManagement_container'>
+        <Row className='supplierStage3_contentArea'>
+          <Col xl={7}>
+            <Row className='supplierStage3_descriptionArea'>{adList.title} 광고계약이 현재 진행중입니다.</Row>
+            <Row className='supplierStage3_detailArea'>confirm으로 계약을 완료시키거나 revoke로 파기할 수 있습니다.</Row>
+          </Col>
+          <Col xl={5}>          
+            {confirmCheck
+            ? <button className='transaction_Button check' onClick={isConfirmed}>Check!</button> 
+            : <button className='transaction_Button confirm' onClick={() =>{
+              Swal.fire({
+                title: '계약을 완료하시겠습니까?',
+                html:
+                '<b>계약 대상자 모두 계약을 완료(Confirm)하면 예치된 금액이 크리에이터님 지갑으로 송금되며,\n 계약은 완료상태로, 파기가 불가합니다. </b> ',
+                showCancelButton: true,
+                confirmButtonText: 'Progress',
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                    window.scrollTo(0, 0)
+                    handleConfirmTransaction();
+                  }
+                })
+            }}>Confirm</button>}
+            <button className='transaction_Button revoke' onClick={()=> {
+              Swal.fire({
+                title: '계약을 파기하시겠습니까?',
+                html:
+                '<b>계약 파기시 예치된 금액은 광고주님에게로 돌아가며,\n 계약은 파기상태로, 되돌릴 수 없습니다.</b> ',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Progress',
+                denyButtonText: `Don't Proceed`,
+              }).then((result) => {
+                  if (result.isConfirmed) {
+                    window.scrollTo(0, 0)
+                    handleRevokeConfirmation();
+                  } else if (result.isDenied) {
+                    Swal.fire('계약 파기 취소', '', 'info')
+                    
+                  }
+                })
+            }}>Revoke</button>
+            <br />
+            <br />
+          </Col>
+          <hr />
+          <Row
+            onMouseOver={handleFileImg}
+            onMouseOut={handleFileImg}
+            onClick={() => loadPdf(adList.token_uri, adList.title, adList.createdAt)}
+          >
+            <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
+            <Col className='contractDownload'>
+                계약서 다운로드
             </Col>
-            <Col xl={5}>          
-              {confirmCheck
-              ? <button className='transaction_Button check' onClick={isConfirmed}>Check!</button> 
-              : <button className='transaction_Button confirm' onClick={() =>{
-                Swal.fire({
-                  title: '계약을 완료하시겠습니까?',
-                  html:
-                  '<b>계약 대상자 모두 계약을 완료(Confirm)하면 예치된 금액이 크리에이터님 지갑으로 송금되며,\n 계약은 완료상태로, 파기가 불가합니다. </b> ',
-                  showCancelButton: true,
-                  confirmButtonText: 'Progress',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                      window.scrollTo(0, 0)
-                      handleConfirmTransaction();
-                    }
-                  })
-              }}>Confirm</button>}
-              <button className='transaction_Button revoke' onClick={()=> {
-                Swal.fire({
-                  title: '계약을 파기하시겠습니까?',
-                  html:
-                  '<b>계약 파기시 예치된 금액은 광고주님에게로 돌아가며,\n 계약은 파기상태로, 되돌릴 수 없습니다.</b> ',
-                  showDenyButton: true,
-                  showCancelButton: true,
-                  confirmButtonText: 'Progress',
-                  denyButtonText: `Don't Proceed`,
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                      window.scrollTo(0, 0)
-                      handleRevokeConfirmation();
-                    } else if (result.isDenied) {
-                      Swal.fire('계약 파기 취소', '', 'info')
-                      
-                    }
-                  })
-              }}>Revoke</button>
-              <br />
-              <br />
-            </Col>
-            <hr />
-            <Row
-              onMouseOver={handleFileImg}
-              onMouseOut={handleFileImg}
-              onClick={() => loadPdf(adList.token_uri, adList.title, adList.createdAt)}
-            >
-              <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
-              <Col className='contractDownload'>
-                  계약서 다운로드
-              </Col>
-            </Row>
           </Row>
-        </Container>
-      }
+        </Row>
+      </Container>
     </>
   );
 }

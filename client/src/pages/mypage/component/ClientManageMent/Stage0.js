@@ -14,9 +14,7 @@ import '../../Client.css';
 import '../TransactionButton.css';
 
 //모집중
-const Stage0 = ({ adList }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(false);
+const Stage0 = ({ adList, setIsLoading }) => {
   const applicant = adList.Advertisement_has_Suppliers;
   const adId = adList.id
   const accessToken = getLocalData('accessToken');
@@ -102,7 +100,6 @@ const Stage0 = ({ adList }) => {
     try {
       const result = await ad._delete(accessToken, isClient, adId);
       if (result) {
-        setShowOverlay(false)
         await Swal.fire({
           icon: 'success',
           title: '광고가 삭제되었습니다.',
@@ -110,7 +107,6 @@ const Stage0 = ({ adList }) => {
         window.location.reload();
       }
     } catch(err) {
-      setShowOverlay(false);
       console.log(err);
       await Swal.fire({
         icon: 'error',
@@ -121,31 +117,28 @@ const Stage0 = ({ adList }) => {
 
   return (
     <>
-    {isLoading 
-      ? <Loading /> 
-      : <Container className='clientManagement_container'>
-          {applicant.length === 0 
-          ? <>
-              <div className='clientStage0_emptyArea'>현재 지원자가 없습니다.</div>
-              <hr className='clientDivider_solid' />
-            </>
-          : applicant.map((el, idx)=><ApplicantList key={idx} idx={idx} el={el} />)}
-          <Col>
-            <div className='clientStage0_footer' onClick={() => {
-              Swal.fire({
-                title: '해당 광고를 삭제하시겠습니까?',
-                html:
-                '<b>삭제된 광고는 복구할 수 없습니다.</b> ',
-                showCancelButton: true,
-                confirmButtonText: 'Confirm',
-              }).then((result) => {
-                  if (result.isConfirmed) return deleteAd();
-                })
-            }}>
-            <TbTrashX size={20} /> 광고를 삭제하시겠습니까? </div>
-          </Col>
-        </Container>
-      } 
+      <Container className='clientManagement_container'>
+        {applicant.length === 0 
+        ? <>
+            <div className='clientStage0_emptyArea'>현재 지원자가 없습니다.</div>
+            <hr className='clientDivider_solid' />
+          </>
+        : applicant.map((el, idx)=><ApplicantList key={idx} idx={idx} el={el} />)}
+        <Col>
+          <div className='clientStage0_footer' onClick={() => {
+            Swal.fire({
+              title: '해당 광고를 삭제하시겠습니까?',
+              html:
+              '<b>삭제된 광고는 복구할 수 없습니다.</b> ',
+              showCancelButton: true,
+              confirmButtonText: 'Confirm',
+            }).then((result) => {
+                if (result.isConfirmed) return deleteAd();
+              })
+          }}>
+          <TbTrashX size={20} /> 광고를 삭제하시겠습니까? </div>
+        </Col>
+      </Container>
     </>
   );
 }

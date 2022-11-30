@@ -8,14 +8,12 @@ import downloadPdfImg from '../../../../dummyfiles/download-pdf.png';
 import revokeImg from '../../../../dummyfiles/cancel.png';
 import { handleFileImg, handleViewPdf } from '../../../../hooks/ipfs/getPdfFile';
 import Swal from 'sweetalert2';
-import Loading from '../../../../component/Loading';
 
 import '../../Supplier.css';
 import '../ContractDownload.css';
 
 //파기
-const Stage5 = ({ adList }) => {
-  const [isLoading, setIsLoading] = useState(false);
+const Stage5 = ({ adList, setIsLoading }) => {
 
   const loadPdf = async (token_uri, title, createdAt) => {
     try {
@@ -34,28 +32,25 @@ const Stage5 = ({ adList }) => {
 
   return (
     <>
-      {isLoading
-      ? <Loading />
-      :  <Container className='supplierManagement_container'>
-          <Row className='supplierStage3_contentArea'>
-            <Col className='completeCol'>
-              <Image src={revokeImg} className="completeIcon"></Image>
-              Revoked
+      <Container className='supplierManagement_container'>
+        <Row className='supplierStage3_contentArea'>
+          <Col className='completeCol'>
+            <Image src={revokeImg} className="completeIcon"></Image>
+            Revoked
+          </Col>
+        <hr />
+          <Row
+            onMouseOver={handleFileImg}
+            onMouseOut={handleFileImg}
+            onClick={() => loadPdf(adList.token_uri, adList.title, adList.createdAt)}
+          >
+            <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
+            <Col className='contractDownload'>
+                계약서 다운로드
             </Col>
-          <hr />
-            <Row
-              onMouseOver={handleFileImg}
-              onMouseOut={handleFileImg}
-              onClick={() => loadPdf(adList.token_uri, adList.title, adList.createdAt)}
-            >
-              <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
-              <Col className='contractDownload'>
-                  계약서 다운로드
-              </Col>
-            </Row>
           </Row>
-        </Container>
-      }
+        </Row>
+      </Container>
     </>
   );
 }

@@ -4,18 +4,16 @@ import { Accordion, Col, Row, Container } from 'react-bootstrap';
 import method from '../../../../hooks/web3/sendTransaction';
 import contract from '../../../../hooks/axios/contract';
 import { getLocalData } from '../../../../config/localStrage';
-import Loading from '../../../../component/Loading';
+
 import '../../Supplier.css';
 import '../TransactionButton.css';
 import Swal from 'sweetalert2'
 
-const Stage1 = ({ adList }) => {
+const Stage1 = ({ adList, setIsLoading }) => {
   const adId = adList.id;
   const contractAddress = adList.multisigAddress;
   const accessToken = getLocalData('accessToken');
   const isClient = getLocalData('isClient');
-
-  const [isLoading, setIsLoading] = useState(false);
 
   // 2. Supplier Sign Wallet
   const handleSupplierSignWallet = async () => {
@@ -45,9 +43,7 @@ const Stage1 = ({ adList }) => {
 
   return (
     <>
-      {isLoading 
-      ? <Loading />
-      : <Container className='supplierManagement_container'>
+      <Container className='supplierManagement_container'>
         <Row className='supplierStage1_contentArea'>
           <Col xl={9}>
             <div className='supplierStage1_descriptionArea'>스마트컨트랙트가 블록체인에 배포되었습니다</div>
@@ -68,7 +64,6 @@ const Stage1 = ({ adList }) => {
           }}>Sign</button></Col>
         </Row>  
       </Container>
-      }
     </>
   );
 }
