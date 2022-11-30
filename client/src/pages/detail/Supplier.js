@@ -75,9 +75,9 @@ const SupplierDetail = ({ userData }) => {
         <Card.Body>
           <Card.Title className='supplierDetail_title' as='h1'>{detail.channelName}</Card.Title>
 
-          <Row>
+          <Row className="mb-2 ">
             <Col>
-          <Card.Subtitle className="supplierDetail_cardText mb-2 text-muted">이메일</Card.Subtitle>
+          <Card.Subtitle className="supplierDetail_cardText text-muted">이메일</Card.Subtitle>
            </Col>
            <Col className='supplierDetail_col-textleft'>
            <OverlayTrigger
@@ -85,28 +85,27 @@ const SupplierDetail = ({ userData }) => {
             delay={{ show: 100, hide: 100 }}
             overlay={renderTooltip}
             >
-              <a className='supplierDetail_cardText-email text-muted mb-2' onClick={clipCopy}>{detail.email}</a>
+              <a className='supplierDetail_cardText-email text-muted' onClick={clipCopy}>{detail.email}</a>
     </OverlayTrigger>
-          
           </Col>
           </Row>
-          <Row>
+          <Row className="mb-2">
           <Col>
-          <Card.Subtitle className="supplierDetail_cardText mb-2 text-muted">구독자</Card.Subtitle>
+          <Card.Subtitle className="supplierDetail_cardText text-muted">구독자</Card.Subtitle>
           </Col>
           <Col>
-          <Card.Text  className='supplierDetail_cardText text-muted mb-2'>{ detail.subscriberCount > 10000 ? (detail.subscriberCount/10000).toFixed(2) + "만명" : detail.subscriberCount + "명"}</Card.Text>
-          </Col>
-          </Row>
-          <Row>
-          <Col>
-          <Card.Subtitle className="supplierDetail_cardText mb-2 text-muted">총 조회수</Card.Subtitle>
-          </Col>
-          <Col>
-          <Card.Text  className='supplierDetail_cardText text-muted mb-2'>{detail.viewCount} 회</Card.Text>
+          <Card.Text  className='supplierDetail_cardText text-muted'>{ detail.subscriberCount > 10000 ? (detail.subscriberCount/10000).toFixed(2) + "만명" : detail.subscriberCount + "명"}</Card.Text>
           </Col>
           </Row>
-          <Card.Text  className='supplierDetail_cardText'><a href={detail.channelUrl}>채널 바로가기</a></Card.Text>
+          <Row className="mb-2">
+          <Col>
+          <Card.Subtitle className="supplierDetail_cardText text-muted">총 조회수</Card.Subtitle>
+          </Col>
+          <Col>
+          <Card.Text  className='supplierDetail_cardText text-muted'>{detail.viewCount} 회</Card.Text>
+          </Col>
+          </Row>
+          <Card.Text  className='supplierDetail_cardText mb-2'><a href={detail.channelUrl}>채널 바로가기</a></Card.Text>
         </Card.Body>
         <Button variant="outline-dark" onClick={handleShow}>제안하기</Button>
         </Col>
