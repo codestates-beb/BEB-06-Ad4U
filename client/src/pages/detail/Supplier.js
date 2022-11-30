@@ -4,7 +4,7 @@ import axios from 'axios';
 import { getLocalData } from '../../config/localStrage';
 
 import Avatar from 'react-avatar';
-import { Container, Card, Row, Col, Button } from 'react-bootstrap/esm';
+import { Container, Card, Row, Col, Button, OverlayTrigger, Tooltip } from 'react-bootstrap/esm';
 import Swal from 'sweetalert2'
 
 import supplier from '../../hooks/axios/supplier';
@@ -49,13 +49,26 @@ const SupplierDetail = ({ userData }) => {
     }
   }
 
+  const clipCopy = async () => {
+    const clip = detail.email;
+    window.navigator.clipboard.writeText(clip).then(() => {
+      console.log('복사완료');
+    });
+  }
+
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      클립보드에 복사
+    </Tooltip>
+  );
+
   return (
     <Container className='supplierDetail_container'>
       <div className="supplierDetail-content_card-container">
         
         
       <Row>
-        <Col sm={5} className='supplierDetail_col'>
+        <Col sm={5} className='supplierDetail_col-center'>
         <Avatar src={detail.profileImgUrl} size="200" />
         </Col>
         <Col sm={7}>
@@ -66,8 +79,15 @@ const SupplierDetail = ({ userData }) => {
             <Col>
           <Card.Subtitle className="supplierDetail_cardText mb-2 text-muted">이메일</Card.Subtitle>
            </Col>
-           <Col>
-          <Card.Text  className='supplierDetail_cardText text-muted mb-2'>{detail.email}</Card.Text>
+           <Col className='supplierDetail_col-textleft'>
+           <OverlayTrigger
+            placement="right"
+            delay={{ show: 100, hide: 100 }}
+            overlay={renderTooltip}
+            >
+              <a className='supplierDetail_cardText-email text-muted mb-2' onClick={clipCopy}>{detail.email}</a>
+    </OverlayTrigger>
+          
           </Col>
           </Row>
           <Row>
