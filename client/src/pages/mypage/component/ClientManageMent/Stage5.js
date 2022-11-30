@@ -21,7 +21,7 @@ const Stage5 = ({ adList }) => {
   const loadPdf = async (token_uri, title, createdAt) => {
     try {
     setIsLoading(true);
-    handleViewPdf(token_uri, title, createdAt);
+    await handleViewPdf(token_uri, title, createdAt);
     setIsLoading(false);
     } catch (err) {
       setIsLoading(false);

@@ -123,11 +123,11 @@ const Stage3 = ({ adList }) => {
 
   const loadPdf = async (token_uri, title, createdAt) => {
     try {
-    //setIsloading(true);
-    handleViewPdf(token_uri, title, createdAt);
-    //setIsloading(false);
+    setIsLoading(true);
+    await handleViewPdf(token_uri, title, createdAt);
+    setIsLoading(false);
     } catch (err) {
-      //setIsloading(false);
+      setIsLoading(false);
       console.log(err);
       await Swal.fire({
         icon: 'error',
