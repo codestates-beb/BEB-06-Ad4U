@@ -2,9 +2,9 @@ import React from 'react';
 import Swal from 'sweetalert2';
 
 import lockPdfImg from '../../../../dummyfiles/document.png';
-import revokeImg from '../../../../dummyfiles/cancel.png';
 import { handleFileImg, handleViewPdf } from '../../../../hooks/ipfs/getPdfFile';
 
+import { AiOutlineFileExcel } from 'react-icons/ai';
 import { Container, Row, Col, Image } from 'react-bootstrap';
 
 import '../../Supplier.css';
@@ -33,8 +33,8 @@ const Stage5 = ({ adList, setIsLoading }) => {
       <Container className='supplierManagement_container'>
         <Row className='supplierStage3_contentArea'>
           <Col className='completeCol'>
-            <Image src={revokeImg} className="completeIcon"></Image>
-            Revoked
+            <AiOutlineFileExcel size={200}/>
+            <div>파기된 계약입니다.</div>
           </Col>
         <hr />
           <Row
@@ -42,9 +42,9 @@ const Stage5 = ({ adList, setIsLoading }) => {
             onMouseOut={handleFileImg}
             onClick={() => loadPdf(adList.token_uri, adList.title, adList.createdAt)}
           >
-            <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
             <Col className='contractDownload'>
-                계약서 다운로드
+              <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
+              <span>계약서 다운로드</span>
             </Col>
           </Row>
         </Row>

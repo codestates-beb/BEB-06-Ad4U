@@ -177,9 +177,9 @@ const Stage3 = ({ adList, setIsLoading }) => {
             onMouseOut={handleFileImg}
             onClick={() => loadPdf(adList.token_uri, adList.title, adList.createdAt)}
           >
-            <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
             <Col className='contractDownload'>
-                계약서 다운로드
+              <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
+              계약서 다운로드
             </Col>
           </Row>
         </Row>
