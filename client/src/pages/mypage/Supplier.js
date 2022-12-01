@@ -13,6 +13,7 @@ import Status from './component/Status';
 import { Container, Row, Col, Card, ListGroup, Accordion, Button,  OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Swal from 'sweetalert2'
 
+
 const SupplierMypage = () => {
   const accessToken = getLocalData("accessToken");
   const isClient = getLocalData("isClient");
@@ -59,6 +60,7 @@ const SupplierMypage = () => {
   }
 
   const ListItem = ({ data, idx }) => {
+    console.log(data)
     const { cost, title } = data.Advertisement;
     const adId = data.Advertisement_id;
     const { company_name, profileImgUrl } = data.Client;
@@ -83,15 +85,18 @@ const SupplierMypage = () => {
       <ListGroup.Item> 
         <Row>
           <Col xl={9}>
-            <Row>
+            <Row className='supplierStage3_descriptionArea'>
               <Col xl={4}>{idx+1}. {title}</Col>
               <Col xl={5}>{cost}ETH</Col>
               <Col xl={3}>{company_name}</Col>
+              <Col>
+                <a className='linkToAd' href={"http://localhost:3000/detail/ad/"+adId}>광고 보러가기</a>
+              </Col>
             </Row>
           </Col>
-          <Col xl={3}>
-            <Button onClick={() => supplier.callApply(accessToken, isClient, adId)}>Accept</Button>
-            <Button onClick={sendRefuse}>Refuse</Button>
+          <Col xl={3} className="btnGroup">
+            <Button className='acceptBtn' onClick={() => supplier.callApply(accessToken, isClient, adId)}>Accept</Button>
+            <Button className='refuseBtn' onClick={sendRefuse}>Refuse</Button>
           </Col>
         </Row>
       </ListGroup.Item>
