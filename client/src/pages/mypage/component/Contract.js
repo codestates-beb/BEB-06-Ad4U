@@ -15,6 +15,7 @@ import ContractPrint from './ContractPrint';
 import method from '../../../hooks/web3/sendTransaction';
 import { getContractOwner } from '../../../hooks/web3/queryContract';
 import contract from '../../../hooks/axios/contract'
+import {exchange} from '../../../hooks/axios/coinGecko'
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 
@@ -116,62 +117,16 @@ const AdContract = ({ userData, adList, setIsLoading }) => {
   }
 
   const handleContractCost = async (e) => {
-    console.log(contractInfo)
     setCurCost(e.target.value);
-    const cost =  e.target.value;
-    const coinGeckoUrl = `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=${vsCurrencies}`;
-    const options = {
-      url: coinGeckoUrl,
-      method: 'GET',
-      headers: {"Content-Type": "application/json"}
-    }
-    var toEth = 0;
-    await axios.request(options)
-        .then(res => {
-          if(vsCurrencies == "krw") {
-            toEth = (1/res.data.ethereum.krw)*cost;
-            console.log(toEth);
-            setEthPrice(toEth);
-          } else if (vsCurrencies == "usd") {
-            toEth = (1/res.data.ethereum.usd)*cost;
-            setEthPrice(toEth);
-          } else if (vsCurrencies == "eur") {
-            toEth = (1/res.data.ethereum.eur)*cost;
-            setEthPrice(toEth);
-          }
-        })
-        .catch(err => console.log(err))
-
+    var toEth = await exchange(e.target.value, vsCurrencies);
+    setEthPrice(toEth);
     contractInfo.value = toEth;
     setContractInfo(contractInfo)
   }
 
   const vsChange = async (curCost) => {
-    console.log(contractInfo)
-    const cost =  curCost;
-    const coinGeckoUrl = `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=${vsCurrencies}`;
-    const options = {
-      url: coinGeckoUrl,
-      method: 'GET',
-      headers: {"Content-Type": "application/json"}
-    }
-    var toEth = 0;
-    await axios.request(options)
-        .then(res => {
-          if(vsCurrencies == "krw") {
-            toEth = (1/res.data.ethereum.krw)*cost;
-            console.log(toEth)
-            setEthPrice(toEth)
-          } else if (vsCurrencies == "usd") {
-            toEth = (1/res.data.ethereum.usd)*cost;
-            setEthPrice(toEth)
-          } else if (vsCurrencies == "eur") {
-            toEth = (1/res.data.ethereum.eur)*cost;
-            setEthPrice(toEth)
-          }
-        })
-        .catch(err => console.log(err))
-
+    var toEth = await exchange(curCost,vsCurrencies);
+    setEthPrice(toEth);
     contractInfo.cost = toEth;
     setContractInfo(contractInfo);
   }

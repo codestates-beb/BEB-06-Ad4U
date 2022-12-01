@@ -11,6 +11,7 @@ import './UploadPage.css';
 import { myBucket, S3_BUCKET } from '../../../../config/awsS3';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import {exchange} from '../../../../hooks/axios/coinGecko';
 
 
 
@@ -49,62 +50,19 @@ const UploadPage = () => {
     setAdInfo(AdInfo)
   }
 
+
   const handleAdCost = async (e) => {
     setCurCost(e.target.value);
-    const cost = e.target.value;
-    const coinGeckoUrl = `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=${vsCurrencies}`;
-    const options = {
-      url: coinGeckoUrl,
-      method: 'GET',
-      headers: { "Content-Type": "application/json" }
-    }
-    var toEth = 0;
-    await axios.request(options)
-      .then(res => {
-        if (vsCurrencies == "krw") {
-          toEth = (1 / res.data.ethereum.krw) * cost;
-          console.log(toEth)
-          setEthPrice(toEth)
-        } else if (vsCurrencies == "usd") {
-          toEth = (1 / res.data.ethereum.usd) * cost;
-          setEthPrice(toEth)
-        } else if (vsCurrencies == "eur") {
-          toEth = (1 / res.data.ethereum.eur) * cost;
-          setEthPrice(toEth)
-        }
-      })
-      .catch(err => console.log(err))
-
+    var toEth = await exchange(e.target.value, vsCurrencies);
+    setEthPrice(toEth);
     AdInfo.cost = toEth;
     setAdInfo(AdInfo)
   }
 
   const vsChange = async (curCost) => {
-    const cost = curCost;
-    const coinGeckoUrl = `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=${vsCurrencies}`;
-    const options = {
-      url: coinGeckoUrl,
-      method: 'GET',
-      headers: { "Content-Type": "application/json" }
-    }
-    var toEth = 0;
-    await axios.request(options)
-      .then(res => {
-        if (vsCurrencies == "krw") {
-          toEth = (1 / res.data.ethereum.krw) * cost;
-          console.log(toEth)
-          setEthPrice(toEth)
-        } else if (vsCurrencies == "usd") {
-          toEth = (1 / res.data.ethereum.usd) * cost;
-          setEthPrice(toEth)
-        } else if (vsCurrencies == "eur") {
-          toEth = (1 / res.data.ethereum.eur) * cost;
-          setEthPrice(toEth)
-        }
-      })
-      .catch(err => console.log(err))
-
-    AdInfo.cost = toEth;
+    var toEth = await exchange(curCost,vsCurrencies);
+    setEthPrice(toEth);
+    AdInfo.cost = toEth
     setAdInfo(AdInfo)
   }
 
@@ -166,7 +124,6 @@ const UploadPage = () => {
   }
 
   const handleSubmit = async () => {
-    // test용 access Token
     setModalShow(false)
     console.log(AdInfo.imgUrl);
     var accessToken = window.localStorage.getItem('accessToken');

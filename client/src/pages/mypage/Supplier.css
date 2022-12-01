@@ -126,3 +126,23 @@
   margin: 30px;
   text-align: center;
 }
+
+/* 제안받은 광고*/
+.linkToAd {
+  margin-top: 10px;
+  font-size: small;
+}
+
+.btnGroup {
+  display: flex;
+}
+
+.acceptBtn {
+  margin: 10px;
+  border: none;
+}
+
+.refuseBtn {
+  margin: 10px;
+  border: none;
+}
