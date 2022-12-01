@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Accordion, Col, Row, Container, Image } from 'react-bootstrap';
-import method from '../../../../hooks/web3/sendTransaction';
+import React from 'react';
+import Swal from 'sweetalert2';
 
-//lock downloadPdfImg 둘다 필요함.
 import lockPdfImg from '../../../../dummyfiles/document.png';
-import downloadPdfImg from '../../../../dummyfiles/download-pdf.png';
 import completeImg from '../../../../dummyfiles/checked.png';
 import { handleFileImg, handleViewPdf } from '../../../../hooks/ipfs/getPdfFile';
-import Swal from 'sweetalert2';
+
+import { Col, Row, Container, Image } from 'react-bootstrap';
 
 import '../../Client.css';
 import '../ContractDownload.css';
 
 //완료
 const Stage4 = ({ adList, setIsLoading }) => {
-
   const loadPdf = async (token_uri, title, createdAt) => {
     try {
     setIsLoading(true);

@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../Main.css';
-import { Row, Col, Card, Button, Container } from 'react-bootstrap';
-
-import { Link } from 'react-router-dom';
-import ad from '../../../hooks/axios/ad'
-import nullImg from '../../../dummyfiles/img1.png';
+import { useNavigate, Link } from 'react-router-dom';
 import Avatar from 'react-avatar';
 
-const Ad = ({ data }) => {
+import ad from '../../../hooks/axios/ad'
+import nullImg from '../../../dummyfiles/img1.png';
+
+import { Container } from 'react-bootstrap';
+
+import '../Main.css';
+
+const Ad = () => {
   const [list, setList] = useState([]);
-  console.log(list)
 
   const navigate = useNavigate();
 
@@ -27,27 +27,32 @@ const Ad = ({ data }) => {
       <div className="ad-content">
         {list.map((data, idx) => { 
           return (
-              <div className='ad_card'>
-                <div className='ad_card_front'>
-                  {data.AdimgUrl 
-                    ? <img src={data.AdimgUrl} alt='adimg'/> 
-                    : <img src={nullImg} alt='nullimg'/> }
-                    <div className='ad_card_front_title'>
-                      <div>{data.title}</div>
-                      <div className='ad_card_name'>{data.Client.company_name}</div>
-                    </div>
-            
-                </div>
-                <div className='ad_card_back'>
-                  <Avatar src={data.Client.profileImgUrl} size="100" />
-                  <div className='ad_back_cost'>광고료 : {data.cost}ETH</div>
-                  <div className='ad_back_email'>문의 : {data.Client.email}</div>
-                </div>
+            <div className='ad_card'
+              onClick = {() => {
+                navigate(`/detail/ad/${data.id}`)
+                window.scrollTo(0,0)
+              }}
+              key={idx}
+            >
+              <div className='ad_card_front'>
+                {data.AdimgUrl 
+                  ? <img src={data.AdimgUrl} alt='adimg'/> 
+                  : <img src={nullImg} alt='nullimg'/> }
+                  <div className='ad_card_front_title'>
+                    <div>{data.title}</div>
+                    <div className='ad_card_name'>{data.Client.company_name}</div>
+                  </div>
               </div>
+              <div className='ad_card_back'>
+                <Avatar src={data.Client.profileImgUrl} size="100" />
+                <div className='ad_back_cost'>광고료 : {data.cost}ETH</div>
+                <div className='ad_back_email'>문의 : {data.Client.email}</div>
+              </div>
+            </div>
         )})}
       </div>
-      <div className='ad_viewall'>
-        <Link to="/list"><button className='adviewall_btn'><span>View all</span></button></Link>
+      <div className='viewall'>
+        <Link to="/list"><button className='viewall_btn'><span>View all</span></button></Link>
       </div>
     </Container>
   );

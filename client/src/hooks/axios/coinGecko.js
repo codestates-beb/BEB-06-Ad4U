@@ -21,7 +21,5 @@ export const exchange = async (curCost, vsCurrencies) => {
       })
       .catch(err => console.log(err))
 
-    console.log(toEth);
-
     return toEth;
 }

@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import Avatar from 'react-avatar';
+
 import ad from '../../hooks/axios/ad';
 import client from '../../hooks/axios/client';
-import { useNavigate } from 'react-router-dom';
-
-import Avatar from 'react-avatar';
-import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap/esm';
-
 import nullImg from '../../dummyfiles/img1.png';
+
+import { Container, Card, ListGroup } from 'react-bootstrap/esm';
+
 import './Detail.css';
 
 const ClientDetail = () => {
   const { clientId } = useParams();
   const [detail, setDetail] = useState({ company_name: "", company_number: "", email: "" });
   const [advertisement, setAdvertisement] = useState([]);
-  console.log("Detail", detail.intro)
-  //console.log("Advertisement", advertisement)
 
   useEffect(() => {
     client.getDetail(clientId)
@@ -54,7 +52,6 @@ const ClientDetail = () => {
               {advertisement.length === 0 
               ? <div>현재 모집중인 광고가 없습니다.</div>
               : advertisement.map((el, idx) => {
-                console.log(el)
                 return (
                   <div 
                   className="clientDetail-content_card-container"

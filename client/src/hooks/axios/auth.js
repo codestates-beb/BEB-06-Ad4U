@@ -12,7 +12,6 @@ const refresh = async () => {
 }
 
 const oauthLink = async () => {
-  //하이퍼링크 주소를 받아옴
   const options = {
     url: "http://localhost:3001/users/auth",
     method: 'GET',

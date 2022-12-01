@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Accordion, Col, Row, Container } from 'react-bootstrap';
-import { getLocalData } from '../../../../config/localStrage';
-import contract from '../../../../hooks/axios/contract';
-import method from '../../../../hooks/web3/sendTransaction';
+import React from 'react';
+
+import { Col, Container } from 'react-bootstrap';
+
 import '../../Supplier.css';
 
 //진행중1
-const Stage2 = ({ adList }) => {
-  const adId = adList.id;
-  const contractAddress = adList.multisigAddress;
-  const accessToken = getLocalData('accessToken');
-  const isClient = getLocalData('isClient');
-
+const Stage2 = () => {
   return (
     <>
       <Container className='supplierManagement_container'>

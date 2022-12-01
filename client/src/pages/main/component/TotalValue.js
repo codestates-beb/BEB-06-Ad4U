@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import '../Main.css';
+import Web3 from "web3";
+
 import ad from '../../../hooks/axios/ad'
 import {getTransactionCount, getTransaction} from '../../../hooks/web3/queryContract'
-import { Col, Row, Container } from 'react-bootstrap';
-import Web3 from "web3";
 import total_back from '../imgs/totalvalue_back.png';
+
+import { Container } from 'react-bootstrap';
+
+import '../Main.css';
 
 const TotalValue = () => {
 
@@ -13,7 +16,6 @@ const TotalValue = () => {
 
   async function getAllContract() {
     const result = await ad.allContractList();
-    // console.log(result.data);
     setAllContract(result.data);
   }
 
@@ -25,7 +27,6 @@ const TotalValue = () => {
         for(let i=0;i<txCount;i++) {
             var txInfo = await getTransaction(walletAddress,i);
             var txVal = txInfo.value;
-            // console.log(txVal)
             totalVal += parseInt(txVal)
             const valToWei = Web3.utils.fromWei(String(totalVal), "ether");
             setTimeout(() => {
@@ -45,9 +46,7 @@ const TotalValue = () => {
   },[AllContract])
 
   useEffect(() => {
-    // console.log(totalContractVal)
   },[totalContractVal])
-
 
   return (
     <Container className='totalVal_container'>

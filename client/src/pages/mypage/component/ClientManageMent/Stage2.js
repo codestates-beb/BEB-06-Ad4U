@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Accordion, Col, Row, Container } from 'react-bootstrap';
-import method from '../../../../hooks/web3/sendTransaction';
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+import { Col, Container } from 'react-bootstrap';
+
 import '../../Client.css';
 
 //진행중1

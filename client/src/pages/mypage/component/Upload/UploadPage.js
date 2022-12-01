@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import Dropdown from 'react-bootstrap/Dropdown';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Modal from 'react-bootstrap/Modal';
-import { Row, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
-import './UploadPage.css';
+import axios from 'axios';
 
 import { myBucket, S3_BUCKET } from '../../../../config/awsS3';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import {exchange} from '../../../../hooks/axios/coinGecko';
 
+import { Button, Dropdown, Form, InputGroup, Modal }from 'react-bootstrap';
 
+import './UploadPage.css';
 
 const UploadPage = () => {
 
   const [modalShow, setModalShow] = useState(false);
-
+  const [vsCurrencies, setVsCurrencies] = useState("krw");
+  const [ethPrice, setEthPrice] = useState(0);
+  const [curCost, setCurCost] = useState("");
   const [AdInfo, setAdInfo] = useState({
     title: "",
     content: "",
@@ -27,12 +24,7 @@ const UploadPage = () => {
     isClient: true
   });
 
-  const [vsCurrencies, setVsCurrencies] = useState("krw");
-  const [ethPrice, setEthPrice] = useState(0);
-  const [curCost, setCurCost] = useState("");
-
   const navigate = useNavigate();
-
 
   useEffect(() => {
     vsChange(curCost)
@@ -49,7 +41,6 @@ const UploadPage = () => {
     AdInfo.content = e.target.value;
     setAdInfo(AdInfo)
   }
-
 
   const handleAdCost = async (e) => {
     setCurCost(e.target.value);
@@ -91,7 +82,6 @@ const UploadPage = () => {
 
   const preview = async (e) => {
     e.preventDefault();
-    //AdInfo 유효성 검사
     var checkVaild = 0;
     console.log(AdInfo.content)
 
@@ -158,7 +148,6 @@ const UploadPage = () => {
           })
         }
       })
-
   }
 
   return (
@@ -213,18 +202,16 @@ const UploadPage = () => {
         centered
       >
         <Modal.Header>
-
           <Modal.Title>
             {AdInfo.title}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <img src={AdInfo.imgUrl} className="adImg" />
+          <img src={AdInfo.imgUrl} className="adImg" alt='adImg'/>
           <h4>제안 금액 : {AdInfo.cost} ETH</h4>
           <br></br>
           <p className='aDContent'>{AdInfo.content}</p>
         </Modal.Body>
-
         <Modal.Footer>
           <Button variant="primary" type="submit" onClick={handleSubmit}>
             Submit
@@ -233,7 +220,6 @@ const UploadPage = () => {
         </Modal.Footer>
       </Modal>
     </Form>
-
   );
 }
 

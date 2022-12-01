@@ -1,10 +1,11 @@
 import React from 'react';
-import { Col, Row, Container, Card } from 'react-bootstrap';
 
-import '../Main.css';
 import us_img from '../imgs/back_Us.png';
+
+import { Col, Row, Card } from 'react-bootstrap';
 import { BsGithub } from "react-icons/bs";
 
+import '../Main.css';
 
 const Us = () => {
   function handle1Click (e) {
@@ -19,7 +20,6 @@ const Us = () => {
   function handle4Click (e) {
     window.location.href = 'https://github.com/yiminwook/BEB-06-Ad4U.git';
   }
-
 
   return (
     <div className='Us_cantainer'>

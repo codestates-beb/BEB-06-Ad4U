@@ -28,7 +28,7 @@
 /* Home css */
 .home_cantainer {
   position: relative;
-  height: 850px;
+  min-height: 850px;
   font-family: "Montserrat";
 }
 
@@ -47,6 +47,18 @@
   background: linear-gradient(to right, #4568DC,#B06AB3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: home_text1 3s ease-in-out;
+}
+
+@keyframes home_text1{
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .home_text2 {
@@ -54,6 +66,7 @@
   color: white;
   font-size: 25px;
   font-weight: 600;
+  animation: fadein 7s ease-in-out;
 }
 
 /* About css */
@@ -95,9 +108,8 @@
   margin: 10px 20px 10px 10px;
 }
 
-.about_social {
+.about_people {
   height: 500px;
-  margin-left: 20px;
 }
 
 /* TotalValue css */
@@ -108,7 +120,6 @@
   color: #ffffff;
   font-family: "Montserrat";
   margin-top: 150px;
-  margin-bottom: 200px;
 }
 
 .totalTitle {
@@ -129,6 +140,7 @@
 .ad_container {
   position: relative;
   font-family: "Montserrat";
+  margin-top: 150px;
 }
 
 .ad_container h1 {
@@ -172,7 +184,6 @@
   height: 100%;
   backface-visibility: hidden;
   display: flex;
-
 }
 
 .ad_card_front img {
@@ -189,11 +200,13 @@
   font-weight: 700;
   line-height: 30px;
 }
+
 .ad_card_name {
   color: #4e4a67; 
   line-height: 1.5em;
   font-size: 15px;
 }
+
 .ad_card_back {
   position: absolute;
   width: 100%;
@@ -218,36 +231,9 @@
   font-weight: 500;
 }
 
-.ad_viewall {  
-  display: flex; 
-  justify-content: center;
-}
-
-.ad_viewall span {  
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.adviewall_btn {
-  padding: 10px 30px;
-  border-radius: 15px;
-  background: none;
-  color: inherit;
-  border: 3px solid white;
-}
-
-.adviewall_btn:hover {
-  transform: scale(1.1);
-}
-
 /* BusinessPartner partner css */
-.partner_container h1 {
-  color: white;
-}
-
-.partner_container h3 {
-  color: white;
+.partner_container {
+  margin-top: 150px;
 }
 
 .partner_card_container {
@@ -258,6 +244,14 @@
   justify-content: center;
   font-family: "Montserrat";
   margin-right: 40px;
+}
+
+.partner_container h1 {
+  color: white;
+}
+
+.partner_container h3 {
+  color: white;
 }
 
 .partner_card {
@@ -334,8 +328,6 @@
 
 .creator_card_img {
   display: flex;
-  /*아래는 넣어도 되고 안넣어도 되고*/
-  /* height: 100%; */
   width: 150px;
   overflow: hidden;
   border-radius: 20px 0 0 20px;
@@ -343,7 +335,6 @@
 
 .creator_card_img img {
   width: 100%;
-  /* object-fit: cover; */
   border-radius: 20px 0 0 20px;
   transition: all 0.2s linear;
 }
@@ -374,19 +365,19 @@
   margin-top: 150px;
 }
 
-.partner_viewall {  
+/* view all button css */
+.viewall {  
   display: flex; 
   justify-content: center;
-  margin-top: 15px;
 }
 
-.partner_viewall span {  
+.viewall span {  
   color: white;
   font-size: 20px;
   font-weight: 600;
 }
 
-.partnerviewall_btn {
+.viewall_btn {
   padding: 10px 30px;
   border-radius: 15px;
   background: none;
@@ -394,10 +385,9 @@
   border: 3px solid white;
 }
 
-.partner_btn:hover {
+.viewall_btn:hover {
   transform: scale(1.1);
 }
-
 
 /* Us css */
 .Us_cantainer {
@@ -424,7 +414,7 @@
 
 .us_card_container {
   position: absolute;
-  top: 5185px;
+  top: 6100px;
   left:18%;
 }
 

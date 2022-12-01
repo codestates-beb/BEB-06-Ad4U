@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../Main.css';
-import { Row, Col, Card, Container } from 'react-bootstrap';
-import Avatar from 'react-avatar';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+
 import supplier from '../../../hooks/axios/supplier';
 import client from '../../../hooks/axios/client';
 
-import dkanrjsk from '../imgs/handshake.png';
+import { Row, Col, Container } from 'react-bootstrap';
+
+import '../Main.css';
 
 const BusinessPartner = () => {
   const [clientList, setClientList] = useState([]);
@@ -35,11 +34,11 @@ const BusinessPartner = () => {
         {clientList.map((data, idx) => {
           return (
             <div className='partner_card'
-            onClick = {() => {
-              navigate(`/detail/client/${data.id}`)
-              window.scrollTo(0,0)
-            }}
-            key={idx}
+              onClick = {() => {
+                navigate(`/detail/client/${data.id}`)
+                window.scrollTo(0,0)
+              }}
+              key={idx}
             >
               <div className='partner_card_content'>
                 <div className='partner_card_front'>
@@ -53,8 +52,8 @@ const BusinessPartner = () => {
           )
         })}
       </div>
-      <div className='partner_viewall'>
-        <Link to="/list/client"><button className='partnerviewall_btn'><span>View all</span></button></Link>
+      <div className='viewall'>
+        <Link to="/list/client"><button className='viewall_btn'><span>View all</span></button></Link>
       </div>
         
       <h1 className='withus'>Creator with us</h1>
@@ -63,9 +62,9 @@ const BusinessPartner = () => {
         {supplierList.map((data, idx) => {
           return (
             <div className='creator_card'
-            onClick = {() => {
-              navigate(`/detail/supplier/${data.id}`)
-              window.scrollTo(0,0)
+              onClick = {() => {
+                navigate(`/detail/supplier/${data.id}`)
+                window.scrollTo(0,0)
             }}
             key={idx}>
               <div className='creator_card_img'>
@@ -73,14 +72,14 @@ const BusinessPartner = () => {
               </div>
               <Col className='creator_card_text'>
                 <Row><div className='creator_card_t1'>{data.channelName}</div></Row>
-                <Row><div className='creator_card_t2'>구독자 {data.subscriberCount}</div></Row>
+                <Row><div className='creator_card_t2'>구독자 {data.subscriberCount > 10000 ? (data.subscriberCount/10000).toFixed(2) + "만명" : data.subscriberCount + "명"}</div></Row>
               </Col>
             </div>
           )
         })}
       </div>
-      <div className='partner_viewall'>
-        <Link to="/list/supplier"><button className='partnerviewall_btn'><span>View all</span></button></Link>
+      <div className='viewall'>
+        <Link to="/list/supplier"><button className='viewall_btn'><span>View all</span></button></Link>
       </div>
     </Container>
   );

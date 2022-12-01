@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Container,Row, Col, Image } from 'react-bootstrap';
-import method from '../../../../hooks/web3/sendTransaction';
-//lock downloadPdfImg 둘다 필요함.
+import React from 'react';
+import Swal from 'sweetalert2';
+
 import lockPdfImg from '../../../../dummyfiles/document.png';
-import downloadPdfImg from '../../../../dummyfiles/download-pdf.png';
 import completeImg from '../../../../dummyfiles/checked.png';
 import { handleFileImg, handleViewPdf } from '../../../../hooks/ipfs/getPdfFile';
-import Swal from 'sweetalert2';
+
+import { Container,Row, Col, Image } from 'react-bootstrap';
 
 import '../../Supplier.css';
 import '../ContractDownload.css';

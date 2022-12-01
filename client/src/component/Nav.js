@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from './clear_logo.png';
+import Avatar from 'react-avatar';
+
 import auth from '../hooks/axios/auth';
 import { getLocalData, clearLocalData } from '../config/localStrage';
-
-import { Navbar, NavDropdown, Container,Dropdown  } from 'react-bootstrap';
-import Stack from 'react-bootstrap/Stack';
-import Avatar from 'react-avatar';
-import { RiStarSmileLine } from "react-icons/ri";
 import img from '../dummyfiles/img1.png';
+import Logo from './clear_logo.png';
+
+import { Navbar, NavDropdown, Container, Dropdown, Stack } from 'react-bootstrap';
+import { RiStarSmileLine } from "react-icons/ri";
 
 import './NFE.css';
 
@@ -46,12 +46,10 @@ const Nav = ({ userData, setUserData }) => {
     }
   }
 
-
   const LoggedIn = ({ userData }) => {
     return (
       <Stack direction="horizontal" gap={4} justify='flex-end'>
         <button className='navllgout_btn' onClick={deleteUserData}><span>logout</span></button>
-        {/* window.scrollTo(0,0) 넣어야함 */}
         <Link to={`/mypage/${isClient === 'true' ? "client" : "supplier"}`} >
           {userData.profileImgUrl
             ? <Avatar src={userData.profileImgUrl} size="50" round={true}/> 
