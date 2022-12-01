@@ -3,14 +3,10 @@ import auth from '../../../hooks/axios/auth';
 import SupplierSignupForm  from './SupplierSignupForm';
 import ClientSignupForm  from './ClientSignupForm';
 import { loadWeb3, getCurrentAccount } from '../../../hooks/web3/common';
-
-import Container from 'react-bootstrap/esm/Container';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+import confetti from 'canvas-confetti';
 import Swal from 'sweetalert2'
 
+import { Container, Modal, Button, Tab, Tabs } from 'react-bootstrap';
 import '../LoginPage.css';
 
 const SignUp = ({ show, setShow, email }) => {
@@ -36,12 +32,17 @@ const SignUp = ({ show, setShow, email }) => {
     console.log("SignupData", signupData);
     try {
       const result = await auth.signup(signupData);
-      if (result) {
+      if (true) {
         await Swal.fire({
           icon: 'success',
           title: '회원가입 완료!',
+        }).then(res => {
+          handleClose();
+          setTimeout(shoot, 0);
+          setTimeout(shoot, 100);
+          setTimeout(shoot, 200);
+          setTimeout(shoot, 300);
         })
-        handleClose();
       }
     } catch (err) {
       await Swal.fire({
@@ -49,6 +50,32 @@ const SignUp = ({ show, setShow, email }) => {
         title: '회원가입 실패..',
       })
     }
+  }
+
+  const shoot = () => {
+    const defaults = {
+      spread: 360,
+      ticks: 50,
+      gravity: 0,
+      decay: 0.94,
+      startVelocity: 30,
+      shapes: ['star'],
+      colors: ['FFE400', 'FFBD00', 'E89400', 'FFCA6C', 'FDFFB8']
+    };
+
+    confetti({
+      ...defaults,
+      particleCount: 40,
+      scalar: 1.2,
+      shapes: ['star']
+    });
+  
+    confetti({
+      ...defaults,
+      particleCount: 10,
+      scalar: 0.75,
+      shapes: ['circle']
+    });
   }
 
   return (

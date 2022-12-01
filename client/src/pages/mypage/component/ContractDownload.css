@@ -1,6 +1,5 @@
-.completeCol {
-  text-align: left;
-  padding: 0px;
+.completeCol div {
+  font-weight: 500;
 }
 
 .contractDownload {

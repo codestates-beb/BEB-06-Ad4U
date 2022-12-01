@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Swal from 'sweetalert2';
+import confetti from 'canvas-confetti';
 
 import lockPdfImg from '../../../../dummyfiles/document.png';
-import completeImg from '../../../../dummyfiles/checked.png';
 import { handleFileImg, handleViewPdf } from '../../../../hooks/ipfs/getPdfFile';
 
+import { GiPartyPopper } from 'react-icons/gi';
 import { Col, Row, Container, Image } from 'react-bootstrap';
 
 import '../../Client.css';
@@ -12,11 +13,12 @@ import '../ContractDownload.css';
 
 //완료
 const Stage4 = ({ adList, setIsLoading }) => {
+
   const loadPdf = async (token_uri, title, createdAt) => {
     try {
-    setIsLoading(true);
-    await handleViewPdf(token_uri, title, createdAt);
-    setIsLoading(false);
+      setIsLoading(true);
+      await handleViewPdf(token_uri, title, createdAt);
+      setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
       console.log(err);
@@ -30,10 +32,18 @@ const Stage4 = ({ adList, setIsLoading }) => {
   return (
     <>
       <Container className='clientStageManagement_container'>
-        <Row className='clientStage4_contentArea'>
+        <Row 
+          className='clientStage4_contentArea' 
+          onClick={() => {
+            confetti({
+              particleCount: 150,
+              spread: 60
+            });
+          }
+        }>
           <Col className='completeCol'>
-            <Image src={completeImg} className="completeIcon"></Image>
-            Complete
+            <GiPartyPopper size={200}/>
+            <div>계약이 성공적으로 완료되었습니다!</div>
           </Col>
         <hr />
           <Row
@@ -41,9 +51,9 @@ const Stage4 = ({ adList, setIsLoading }) => {
             onMouseOut={handleFileImg}
             onClick={() => loadPdf(adList.token_uri, adList.title, adList.createdAt)}
           >
-            <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
             <Col className='contractDownload'>
-                계약서 다운로드
+              <Image src={lockPdfImg} className="contractDownloadIcon"></Image>
+              계약서 다운로드
             </Col>
           </Row>
         </Row>
