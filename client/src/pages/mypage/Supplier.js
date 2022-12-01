@@ -11,6 +11,7 @@ import Loading from '../../component/Loading';
 
 import Status from './component/Status';
 import { Container, Row, Col, Card, ListGroup, Accordion, Button,  OverlayTrigger, Tooltip } from 'react-bootstrap';
+import Swal from 'sweetalert2'
 
 const SupplierMypage = () => {
   const accessToken = getLocalData("accessToken");
@@ -67,7 +68,10 @@ const SupplierMypage = () => {
       try {
         const result = await supplier.refuse(accessToken, isClient, adId);
         if (result) {
-          alert("거절완료");
+          await Swal.fire({
+            icon: 'success',
+            title: '거절 완료',
+          })
           window.location.reload();
         }
       } catch (err) {
