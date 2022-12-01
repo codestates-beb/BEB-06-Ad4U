@@ -45,7 +45,7 @@ const Ad = () => {
               </div>
               <div className='ad_card_back'>
                 <Avatar src={data.Client.profileImgUrl} size="100" />
-                <div className='ad_back_cost'>광고료 : {data.cost}ETH</div>
+                <div className='ad_back_cost'>제안 금액 : {data.cost}ETH</div>
                 <div className='ad_back_email'>문의 : {data.Client.email}</div>
               </div>
             </div>

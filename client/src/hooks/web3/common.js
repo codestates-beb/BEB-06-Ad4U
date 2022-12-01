@@ -2,7 +2,6 @@ import Web3 from "web3";
 import { ABI } from './contractInfo';
 import Swal from 'sweetalert2'
 
-// 메타마스크 연결
 const loadWeb3 = async () => {
   if (window.ethereum) {
     window.web3 = new Web3(window.ethereum);
@@ -27,13 +26,10 @@ const loadWeb3 = async () => {
   }
 }
 
-// contract 객체 생성
 const loadContract = async (walletAddress) => {
   return await new window.web3.eth.Contract(ABI,walletAddress);
 }
 
-
-// 현재 계정 주소 가져오기
 const getCurrentAccount = async() => {
   const accounts = await window.ethereum.request({
     method: "eth_requestAccounts",

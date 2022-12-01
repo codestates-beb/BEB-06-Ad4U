@@ -133,7 +133,7 @@ const UploadPage = () => {
     }
     axios.request(options)
       .then(async (res) => {
-        if (res.status == 201) {
+        if (res.status === 201) {
           await Swal.fire({
             icon: 'success',
             title: '광고 업로드 완료!',

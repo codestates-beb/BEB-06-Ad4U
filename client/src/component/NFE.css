@@ -1,10 +1,10 @@
 /* Nav css */
-.navbar {
+.nav {
   position: fixed;
   top: 0;
   width: 100%;
   height: 70px;
-  z-index: 3;
+  z-index: 1;
   padding: 20px;
   display: flex;
   justify-content: space-between;
@@ -18,8 +18,16 @@
 }
 
 .nav_logo {
-  display: flex;
-  margin-left: 40px;
+  position: fixed;
+  margin-left: 90px;
+  object-fit: contain;
+  top:11px;
+}
+
+.nav_login {
+  position: fixed;
+  right: 100px;
+  object-fit: contain;
 }
 
 .navlogin_btn span {  
@@ -27,18 +35,6 @@
 }
 
 .navlogin_btn {
-  padding: 6px 25px;
-  border-radius: 15px;
-  background: none;
-  color: inherit;
-  border: 3px solid white;
-}
-
-.navllgout_btn span {  
-  color: white;
-}
-
-.navllgout_btn {
   padding: 6px 25px;
   border-radius: 15px;
   background: none;

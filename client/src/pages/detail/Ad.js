@@ -97,7 +97,7 @@ const AdDetail = ({ userData }) => {
               <Card.Text className='infoCardContent'>
                 {detail.cost} ETH
               </Card.Text>
-              <p className='vsKrw'>{toKrw} KRW</p>
+              <p className='vsKrw'>= {toKrw} KRW</p>
               <Card.Title className='infoCardTitle'>지원자 수</Card.Title>
               <Card.Text className='infoCardContent'>
                 {detail.Advertisement_has_Suppliers.length}
