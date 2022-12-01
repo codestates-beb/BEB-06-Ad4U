@@ -16,8 +16,7 @@ module.exports = {
                     }
                 ],
                 order: [['id', 'DESC']],
-                limit: 10,
-                // offset: 5,
+                limit: 10
             });
             res.status(200).json(main_ad);
         } catch (err) {
@@ -39,9 +38,6 @@ module.exports = {
                         attributes: ['id', 'company_name', 'email', 'profileImgUrl'],
                     },
                 ]
-                //limit: 10,
-                // offset: 5,
-
             });
             list_ad.forEach((el) => {
                 el.dataValues.company_name = el.Client.company_name;
@@ -77,8 +73,6 @@ module.exports = {
                     }
 
                 ]
-                //limit: 10,
-                // offset: 5,
             });
             res.status(200).json(ad_detail);
         } catch (err) {
@@ -88,7 +82,6 @@ module.exports = {
     },
     create: async (req, res) => { //광고 생성 - client
         const { title, content, AdImgUrl, cost } = req.body;
-        console.log(req.body);
         try {
             const body = {
                 title: title,
