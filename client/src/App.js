@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import auth from './hooks/axios/auth';
 import { setLocalData, clearLocalData } from './config/localStrage';
+import Swal from 'sweetalert2';
 
 import Nav from './component/Nav';
 import Main from './pages/main/Main';
@@ -13,17 +14,12 @@ import AdDetail from './pages/detail/Ad';
 import LoginPage from './pages/login/LoginPage';
 import Emptypage from './component/Emptypage';
 import Footer from './component/Footer';
-import TestApiPage from './pages/testAPI/testapi';
 
 import './App.css';
-import Spinner from './component/Loading';
-import Loading from './component/Loading';
 
 const App = () => {
   const [ userData, setUserData ] = useState({});
   console.log("userData", userData);
-
-  const navigate = useNavigate();
 
   //세션유지
   useEffect(() => {
@@ -41,7 +37,11 @@ const App = () => {
       .catch(err => {
         clearLocalData();
         console.log(err.response.data);
-        alert("쿠키가 만료되었습니다 다시 로그인 해주세요.");
+        Swal.fire({
+          icon: 'warning',
+          title: "쿠키가 만료되었습니다",
+          html: '<b>다시 로그인 해주세요.</b>',
+        })
       })
   }, []);
   
@@ -57,8 +57,6 @@ const App = () => {
         <Route path="/detail/ad/:adId" element={<AdDetail userData={userData}/>} />
         <Route path="/login" element={<LoginPage setUserData={setUserData} />} />
         <Route path="*" element={<Emptypage />} />
-        <Route path="/testapi" element={<TestApiPage />} />
-        <Route path="/abc" element={<Loading />} />
       </Routes>
       <Footer />
     </>
