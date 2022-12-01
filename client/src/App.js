@@ -13,7 +13,6 @@ import AdDetail from './pages/detail/Ad';
 import LoginPage from './pages/login/LoginPage';
 import Emptypage from './component/Emptypage';
 import Footer from './component/Footer';
-import TestApiPage from './pages/testAPI/testapi';
 
 import './App.css';
 import Spinner from './component/Loading';
@@ -57,7 +56,6 @@ const App = () => {
         <Route path="/detail/ad/:adId" element={<AdDetail userData={userData}/>} />
         <Route path="/login" element={<LoginPage setUserData={setUserData} />} />
         <Route path="*" element={<Emptypage />} />
-        <Route path="/testapi" element={<TestApiPage />} />
         <Route path="/abc" element={<Loading />} />
       </Routes>
       <Footer />
