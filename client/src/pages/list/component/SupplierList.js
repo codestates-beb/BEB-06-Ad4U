@@ -45,63 +45,28 @@ const SupplierList = () => {
     .catch(err => console.log(err.response.data))
   }
 
-  // const SupplierCard = ({ idx, data }) => {
-    
-  //   const handleClick = (e) => { 
-  //     //더블클릭시 이동
-  //     if (e.detail === 1) return navigate(`/detail/supplier/${data.id}`);
-  //   }
-
-  //   return (
-  //       <div 
-  //         className="supplierList-content_card-container"
-  //         onClick={(e) => navigate(`/detail/supplier/${data.id}`)}
-  //       >
-  //         <Row>
-  //           <Col><Avatar src={data.profileImgUrl} alt="profile_img" size="100" round={true}/></Col>
-  //           <Col><Card.Body>
-  //             <Card.Title>{data.channelName}</Card.Title>
-  //             <Card.Text>
-  //               <RiUserFollowFill/> 
-  //               subscribe {data.subscriberCount} <br/>
-  //               <GoPlay />
-  //               viewer
-  //             </Card.Text>
-  //             </Card.Body>
-  //           </Col>
-  //         </Row>
-  //       </div>
-
-  //   );
-  // }
-
   return (
     <Container className='supplierList_container'>
-      <h1>SupplierList</h1>
       <SearchBar filter={filter} refreshList={refreshList}/>
       {list.length === 0 
       ? <div className="noresultant">검색결과가 없습니다</div>
       : <div className="supplierList-content">
         {list.map((data, idx) => {
           return (
-            <div 
-            key={idx}
-            className="supplierList-content_card-container"
-            onClick={(e) => navigate(`/detail/supplier/${data.id}`)}
-            >
-              <Row>
-                <Col><Avatar src={data.profileImgUrl} alt="profile_img" size="100" round={true}/></Col>
-                <Col><Card.Body>
-                  <Card.Title>{data.channelName}</Card.Title>
-                  <Card.Text>
-                    <RiUserFollowFill/> 
-                    subscribe {data.subscriberCount} <br/>
-                    <GoPlay />
-                    viewer
-                  </Card.Text>
-                  </Card.Body>
-                </Col>
-              </Row>
+            <div className='supplierList_card'
+            onClick = {() => {
+              navigate(`/detail/supplier/${data.id}`)
+              window.scrollTo(0,0)
+            }}
+            key={idx}>
+              <div className='supplierList_card_img'>
+                <img src={data.profileImgUrl} alt='card img'/>
+              </div>
+              <Col className='supplierList_card_text'>
+                <Row><div className='supplierList_card_t1'>{data.channelName}</div></Row>
+                <Row><div className='supplierList_card_t2'>구독자 {data.subscriberCount}</div></Row>
+                <Row><div className='supplierList_card_t2'>조회수 {data.viewCount}</div></Row>
+              </Col>
             </div>
           )})}
         </div>

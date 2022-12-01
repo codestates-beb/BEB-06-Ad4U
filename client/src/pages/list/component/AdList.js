@@ -44,7 +44,6 @@ const AdList = () => {
 
   return (
     <Container className='adList_container'>
-      <h1>AdList</h1>
       <SearchBar className='searchbar' filter={filter} refreshList={refreshList}/>
       {list.length === 0 
       ? <div className='noresultant'>검색결과가 없습니다</div> 
@@ -57,15 +56,14 @@ const AdList = () => {
               window.scrollTo(0,0)}}
             key={idx}
             >
-              <Row className='adList_img'>
+              <Row>
                 {data.AdimgUrl 
-                ? <Card.Img variant="top" src={data.AdimgUrl}/> 
-                : <Card.Img variant='top' src={nullImg}/> }
+                ? <Card.Img variant="top" src={data.AdimgUrl} className='adList_img'/> 
+                : <Card.Img variant='top' src={nullImg} className='adList_img'/> }
               </Row>
               <Row>
-                <Card.Body>
-                  <Card.Title>{data.title}</Card.Title>
-                </Card.Body>
+              <div className='adList_title'>{data.title}</div>
+              <div className='adList_name'>{data.Client.company_name}</div>
               </Row>
             </div>
           )})}

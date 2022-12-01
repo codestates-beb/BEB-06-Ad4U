@@ -47,7 +47,6 @@ const ClientList = () => {
 
   return (
     <Container className='clientList_container'>
-      <h1>기업들을 모아봤어요</h1>
       <SearchBar filter={filter} refreshList={refreshList}/>
       {list.length === 0 
       ? <div className='noresultant'>검색결과가 없습니다</div> 

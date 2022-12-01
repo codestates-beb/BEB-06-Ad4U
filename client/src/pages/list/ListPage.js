@@ -26,7 +26,7 @@ const List = () => {
           </Card>
           
         </Col>
-        <Col xl={9}>
+        <Col xl={9} >
           <Routes>
             <Route path="/" element={<AdList />} />
             <Route path="/client" element={<ClientList />} />
