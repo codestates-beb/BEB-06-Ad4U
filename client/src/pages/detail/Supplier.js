@@ -98,7 +98,7 @@ const SupplierDetail = ({ userData }) => {
                   <Card.Subtitle className="supplierDetail_cardText text-muted">총 조회수</Card.Subtitle>
                 </Col>
                 <Col sm={7}>
-                  <Card.Text className='supplierDetail_cardText text-muted'>{detail.viewCount} 회</Card.Text>
+                  <Card.Text className='supplierDetail_cardText text-muted'>{detail.viewCount  > 10000 ? (detail.viewCount/10000).toFixed(2) + "만" : detail.viewCount} 회</Card.Text>
                 </Col>
               </Row>
               <Card.Text className='supplierDetail_cardText mb-2'><a href={detail.channelUrl}>채널 바로가기</a></Card.Text>

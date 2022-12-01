@@ -9,6 +9,7 @@ import img from '../dummyfiles/img1.png';
 
 import { NavDropdown, Dropdown, Row, Col, Stack } from 'react-bootstrap';
 import { RiStarSmileLine } from "react-icons/ri";
+import Swal from 'sweetalert2'
 
 import './NFE.css';
 
@@ -34,17 +35,12 @@ const Nav = ({ userData, setUserData }) => {
   const navigate = useNavigate();
 
   const deleteUserData = async () => {
-    try {
       const result = await auth.logout();
       if (result) {
         setUserData({});
         clearLocalData();
-        alert("로그아웃 되었습니다.");
         navigate('/');
       } 
-    } catch (err) {
-      alert(err.response.data);
-    }
   }
 
   const LoggedIn = ({ userData }) => {

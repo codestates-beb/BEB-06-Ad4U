@@ -23,7 +23,12 @@
 .transaction_Button.select {
   border: 3px solid #3abbc2;
   color: #3abbc2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
+
 
 .transaction_Button.select:hover {
   color: #fff;
