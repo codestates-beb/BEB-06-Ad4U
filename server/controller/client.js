@@ -1,4 +1,4 @@
-const { Client, Advertisement } = require('../models/index');
+const { Client } = require('../models/index');
 const client_attributes = ['id', 'company_name', 'company_number', 'email', 'profileImgUrl'];
 
 module.exports = {
@@ -20,12 +20,6 @@ module.exports = {
             let client_list = await Client.findAll({
                 attributes: client_attributes,
                 order: [['id', 'DESC']],
-                // include: [
-                //     { model: Advertisement, as: "Advertisements", attributes: ["id"],  where: {
-                //         status : 0
-                //     },
-                // },
-                // ]
             });
             res.status(200).json(client_list);
         } catch (err) {
@@ -40,16 +34,6 @@ module.exports = {
                 where: {
                     id: req.query.id
                 },
-                // include: [
-                //     {
-                //         model: Advertisement, as: "Advertisements",
-                //         attributes: ['id', 'title', 'AdimgUrl', 'cost', 'createdAt'],
-                //         where: {
-                //             status: 0
-                //         }
-                //     },
-                // ]
-                
             });
             res.status(200).json(client_detail);
         }catch(err){
@@ -73,9 +57,3 @@ module.exports = {
         }
     },
 }
-
-
-// multisigAddress
-// token_uri
-// token_id
-// token_address

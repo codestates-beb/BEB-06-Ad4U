@@ -40,10 +40,3 @@ module.exports = {
         }
     },
 }
-
-
-// multisigAddress
-// token_uri
-// token_id
-// token_address
-
