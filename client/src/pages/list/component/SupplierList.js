@@ -61,7 +61,7 @@ const SupplierList = () => {
                 <Col className='supplierList_card_text'>
                   <Row><div className='supplierList_card_t1'>{data.channelName}</div></Row>
                   <Row><div className='supplierList_card_t2'>구독자 {data.subscriberCount > 10000 ? (data.subscriberCount/10000).toFixed(2) + "만명" : data.subscriberCount + "명"}</div></Row>
-                  <Row><div className='supplierList_card_t2'>조회수 {data.viewCount > 10000 ? (data.subscriberCount/10000).toFixed(2) + "만회" : data.subscriberCount + "회"}</div></Row>
+                  <Row><div className='supplierList_card_t2'>조회수 {data.viewCount > 10000 ? (data.viewCount/10000).toFixed(2) + "만회" : data.viewCount + "회"}</div></Row>
                 </Col>
               </div>
             )})}
