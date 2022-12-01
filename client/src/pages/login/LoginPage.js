@@ -74,36 +74,41 @@ const LoginPage = ({ setUserData }) => {
   return (
     <>
       <Container className='loginPage_container'>
-        <Tabs
-          className='login_tab'
-          defaultActiveKey="supplier"
-          onSelect={handleIsClient}
-          justify
-        >
-          <Tab 
-            eventKey="supplier" 
-            title="크리에이터"
-          >
-            <LoginForm sendLoginData={sendLoginData}/>
-          </Tab>
-          <Tab 
-            eventKey="client" 
-            title="광고주"
-          >
-            <LoginForm sendLoginData={sendLoginData} />
-          </Tab>
-        </Tabs>
-        <Row className='login_buttonArea'>
-          <Col xl={3}/>
-          <Col xl={4}>
-            <button className="login_googleSignupButton" onClick={googleOath}>
-              <FcGoogle className='login_googleIcon' size={30}/>  
-              Google 계정으로 간편회원가입
-            </button>
-          </Col>
-          <Col xl={5}/>
+        <Row>
+          <Col xl={2}/>
+            <Col xl={8}>
+              <Tabs
+                className='login_tab'
+                defaultActiveKey="supplier"
+                onSelect={handleIsClient}
+                justify
+              >
+                <Tab 
+                  eventKey="supplier" 
+                  title="크리에이터"
+                >
+                  <LoginForm sendLoginData={sendLoginData}/>
+                </Tab>
+                <Tab 
+                  eventKey="client" 
+                  title="광고주"
+                >
+                  <LoginForm sendLoginData={sendLoginData} />
+                </Tab>
+              </Tabs>
+              <Row className='login_buttonArea'>
+                <Col xl={3}/>
+                <Col xl={4}>
+                  <button className="login_googleSignupButton" onClick={googleOath}>
+                    <FcGoogle className='login_googleIcon' size={30}/>  
+                    Google 계정으로 간편회원가입
+                  </button>
+                </Col>
+                <Col xl={5}/>
+              </Row>
+            </Col>
+          <Col xl={2}/>
         </Row>
-        <button onClick={() => setShow(true)}>123</button>
       </Container>
       <Signup 
         email={email}

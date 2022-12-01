@@ -87,15 +87,12 @@ const SignUp = ({ show, setShow, email }) => {
           >
             <ClientSignupForm 
               email={email}
-              // address={address}
-              // inputAddress={inputAddress} 
               sendSignupData={sendSignupData}
               handleClose={handleClose}
             />
           </Tab>
         </Tabs>
         </Modal.Body>
-        <Modal.Footer></Modal.Footer>
       </Modal>
     </>
   );

@@ -39,7 +39,7 @@ const SupplierSignupForm = ({ email, address, inputAddress, sendSignupData, hand
     <>
       <Container>
         <Form onSubmit={onSubmit}>
-          <Form.Group className="signup_inputArea" as={Row}>
+          <Form.Group className="signup_inputArea">
             <Form.Label>이메일</Form.Label>
             <Form.Control
               placeholder="Google Email" 
@@ -48,14 +48,14 @@ const SupplierSignupForm = ({ email, address, inputAddress, sendSignupData, hand
               disabled
             />
           </Form.Group>
-          <Form.Group className="signup_inputArea" as={Row}>
+          <Form.Group className="signup_inputArea">
             <Form.Label>아이디</Form.Label>
             <Form.Control 
               type="id" 
               rows={1} 
               ref={idRef}/>
           </Form.Group>
-          <Form.Group className="signup_inputArea" as={Row}>
+          <Form.Group className="signup_inputArea">
             <Form.Label>비밀번호</Form.Label>
             <Form.Control 
               type="password"
@@ -63,7 +63,7 @@ const SupplierSignupForm = ({ email, address, inputAddress, sendSignupData, hand
               ref={passwordRef}
             />
           </Form.Group>
-          <Form.Group className="signup_inputArea" as={Row}>
+          <Form.Group className="signup_inputArea">
             <Form.Label>비밀번호 확인</Form.Label>
             <Form.Control 
               type="password"
@@ -72,26 +72,28 @@ const SupplierSignupForm = ({ email, address, inputAddress, sendSignupData, hand
             />
             <div>{isCorrect ? "" : "비밀번호가 일치하지 않습니다."}</div>
           </Form.Group>
-          <Form.Group className="signup_inputArea" as={Row}>
+          <Form.Group className="signup_inputArea">
             <Form.Label>이더리움 계정</Form.Label>
-            <Col xl={9}>
-              <Form.Control 
-                className='signup_walletInput'
-                type="id"
-                value={address}
-                disabled
-                rows={1} 
-              />
-            </Col>
-            <Col xl={3}>
-              <Button
-                className='signup_walletButton'
-                variant="secondary"
-                onClick={inputAddress}
-              >
-                가져오기
-              </Button>
-            </Col>
+            <Row>
+              <Col xl={9}>
+                <Form.Control 
+                  className='signup_walletInput'
+                  type="id"
+                  value={address}
+                  disabled
+                  rows={1} 
+                />
+              </Col>
+              <Col xl={3}>
+                <Button
+                  className='signup_walletButton'
+                  variant="secondary"
+                  onClick={inputAddress}
+                >
+                  가져오기
+                </Button>
+              </Col>
+            </Row>
           </Form.Group>
           <Row className="signup_lowerArea" >
             <Col xl={4}/>

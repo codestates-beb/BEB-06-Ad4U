@@ -43,7 +43,7 @@ const ClientSignupForm = ({ email, sendSignupData, handleClose }) => {
     <>
       <Container>
         <Form onSubmit={onSubmit}>
-          <Form.Group className="signup_inputArea" as={Row}>
+          <Form.Group className="signup_inputArea">
             <Form.Label>이메일</Form.Label>
             <Form.Control
               placeholder="Google Email" 
@@ -53,14 +53,14 @@ const ClientSignupForm = ({ email, sendSignupData, handleClose }) => {
               disabled
             />
           </Form.Group>
-          <Form.Group className="signup_inputArea" as={Row}>
+          <Form.Group className="signup_inputArea">
             <Form.Label>아이디</Form.Label>
             <Form.Control 
               type="id" 
               rows={1} 
               ref={idRef}/>
           </Form.Group>
-          <Form.Group className="signup_inputArea" as={Row}>
+          <Form.Group className="signup_inputArea">
             <Form.Label>비밀번호</Form.Label>
             <Form.Control 
               type="password"
@@ -68,7 +68,7 @@ const ClientSignupForm = ({ email, sendSignupData, handleClose }) => {
               ref={passwordRef}
             />
           </Form.Group>
-          <Form.Group className="signup_inputArea" as={Row}>
+          <Form.Group className="signup_inputArea">
             <Form.Label>비밀번호 확인</Form.Label>
             <Form.Control 
               type="password"
@@ -77,7 +77,7 @@ const ClientSignupForm = ({ email, sendSignupData, handleClose }) => {
             />
             <div>{isCorrect ? "" : "비밀번호가 일치하지 않습니다."}</div>
           </Form.Group>
-          <Form.Group className="signup_inputArea" as={Row}>
+          <Form.Group className="signup_inputArea">
             <Form.Label>회사명</Form.Label>
             <Form.Control 
               type="text"
@@ -86,7 +86,7 @@ const ClientSignupForm = ({ email, sendSignupData, handleClose }) => {
               autoFocus
             />
           </Form.Group>
-          <Form.Group className="signup_inputArea" as={Row}>
+          <Form.Group className="signup_inputArea">
             <Form.Label>사업자번호</Form.Label>
             <Form.Control 
               type="id"

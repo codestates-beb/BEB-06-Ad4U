@@ -1,13 +1,11 @@
 /* login */
 .loginPage_container {
   box-sizing: border-box;
-  padding-top: 50px;
   padding-right: 30px;
   padding-left: 30px;
   padding-bottom: 50px;
-  margin-top: 150px;
+  margin-top: 120px;
   margin-bottom: 500px;
-  width: 800px;
 }
 
 .login_tab li > button {
@@ -24,7 +22,7 @@
 .login_inputArea {
   margin: auto;
   padding: 30px;
-  width: 500px;
+  width: 600px;
 }
 
 .login_text {
@@ -32,7 +30,8 @@
 }
 
 .login_buttonArea {
-  margin: 30px
+  margin: 50px;
+  padding-left: 50px;
 }
 
 .login_button {
@@ -59,8 +58,9 @@
 }
 
 .login_googleSignupButton {
+  margin: auto;
   background-color: rgb(255, 255, 255);
-  width: 300px;
+  width: 350px;
   height: 60px;
   border-radius: 100px;
   border-color: gray;
@@ -98,12 +98,7 @@
   margin-top: 30px;
 }
 
-.signup_walletInput {
-  width: 340px;
-}
-
 .signup_walletButton {
-  width: 100px;
   font-weight: 500;
   font-size: large;
 }
@@ -114,7 +109,7 @@
 }
 
 .signup_button {
-  margin-top: 10px;
+  margin-top: 50px;
   background-color: transparent;
   width: 130px;
   height: 50px;
