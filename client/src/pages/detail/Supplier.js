@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { getLocalData } from '../../config/localStrage';
-
 import Avatar from 'react-avatar';
-import { Container, Card, Row, Col, Button, OverlayTrigger, Tooltip } from 'react-bootstrap/esm';
 import Swal from 'sweetalert2'
 
+import { getLocalData } from '../../config/localStrage';
 import supplier from '../../hooks/axios/supplier';
 import Propose from './component/Propose';
+
+import { Container, Card, Row, Col, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+
 import './Detail.css';
 
 
@@ -17,7 +18,6 @@ const SupplierDetail = ({ userData }) => {
   const [detail, setDetail] = useState({});
   const [playlist, setPlaylist] = useState([])
   const [show, setShow] = useState(false);
-  console.log("Detail", detail)
 
   useEffect(() => {
     supplier.getDetail(supplierId)
@@ -32,7 +32,6 @@ const SupplierDetail = ({ userData }) => {
       `https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${get_channelId}&maxResults=50&key=${apikey}`
       )
       .then((res) => {
-        console.log(res.data.items);
         setPlaylist(res.data.items)
       })
       .catch((err) => { console.log(err) });
@@ -65,53 +64,48 @@ const SupplierDetail = ({ userData }) => {
   return (
     <Container className='supplierDetail_container'>
       <div className="supplierDetail-content_card-container">
-        
-        
-      <Row>
-        <Col sm={5} className='supplierDetail_col-center'>
-        <Avatar src={detail.profileImgUrl} size="200" />
-        </Col>
-        <Col sm={7}>
-        <Card.Body>
-          <Card.Title className='supplierDetail_title' as='h1'>{detail.channelName}</Card.Title>
-
-          <Row className="mb-2">
-            <Col>
-          <Card.Subtitle sm={5} className="supplierDetail_cardText text-muted">이메일</Card.Subtitle>
-           </Col>
-           <Col sm={7} className='supplierDetail_col-textleft'>
-           <OverlayTrigger
-            placement="right"
-            delay={{ show: 100, hide: 100 }}
-            overlay={renderTooltip}
-            >
-              <a className='supplierDetail_cardText-email text-muted' onClick={clipCopy}>{detail.email}</a>
-    </OverlayTrigger>
-          </Col>
-          </Row>
-          <Row className="mb-2">
-          <Col sm={5}>
-          <Card.Subtitle className="supplierDetail_cardText text-muted">구독자</Card.Subtitle>
+        <Row>
+          <Col sm={5} className='supplierDetail_col-center'>
+            <Avatar src={detail.profileImgUrl} size="200" />
           </Col>
           <Col sm={7}>
-          <Card.Text  className='supplierDetail_cardText text-muted'>{ detail.subscriberCount > 10000 ? (detail.subscriberCount/10000).toFixed(2) + "만명" : detail.subscriberCount + "명"}</Card.Text>
+            <Card.Body>
+              <Card.Title className='supplierDetail_title' as='h1'>{detail.channelName}</Card.Title>
+              <Row className="mb-2">
+                <Col>
+                  <Card.Subtitle sm={5} className="supplierDetail_cardText text-muted">이메일</Card.Subtitle>
+                </Col>
+                <Col sm={7} className='supplierDetail_col-textleft'>
+                  <OverlayTrigger
+                    placement="right"
+                    delay={{ show: 100, hide: 100 }}
+                    overlay={renderTooltip}
+                  >
+                    <a className='supplierDetail_cardText-email text-muted' onClick={clipCopy}>{detail.email}</a>
+                  </OverlayTrigger>
+                </Col>
+              </Row>
+              <Row className="mb-2">
+                <Col sm={5}>
+                  <Card.Subtitle className="supplierDetail_cardText text-muted">구독자</Card.Subtitle>
+                </Col>
+                <Col sm={7}>
+                  <Card.Text className='supplierDetail_cardText text-muted'>{ detail.subscriberCount > 10000 ? (detail.subscriberCount/10000).toFixed(2) + "만명" : detail.subscriberCount + "명"}</Card.Text>
+                </Col>
+              </Row>
+              <Row className="mb-2">
+                <Col sm={5}>
+                  <Card.Subtitle className="supplierDetail_cardText text-muted">총 조회수</Card.Subtitle>
+                </Col>
+                <Col sm={7}>
+                  <Card.Text className='supplierDetail_cardText text-muted'>{detail.viewCount} 회</Card.Text>
+                </Col>
+              </Row>
+              <Card.Text className='supplierDetail_cardText mb-2'><a href={detail.channelUrl}>채널 바로가기</a></Card.Text>
+            </Card.Body>
+            <Button variant="outline-dark" onClick={handleShow}>제안하기</Button>
           </Col>
-          </Row>
-          <Row className="mb-2">
-          <Col sm={5}>
-          <Card.Subtitle className="supplierDetail_cardText text-muted">총 조회수</Card.Subtitle>
-          </Col>
-          <Col sm={7}>
-          <Card.Text  className='supplierDetail_cardText text-muted'>{detail.viewCount} 회</Card.Text>
-          </Col>
-          </Row>
-          <Card.Text  className='supplierDetail_cardText mb-2'><a href={detail.channelUrl}>채널 바로가기</a></Card.Text>
-        </Card.Body>
-        <Button variant="outline-dark" onClick={handleShow}>제안하기</Button>
-        </Col>
         </Row>
-        
-        
       </div>
       <div className='youtubeVideo'>
         {playlist && playlist.map((video, idx) => {

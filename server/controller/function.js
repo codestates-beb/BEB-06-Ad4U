@@ -1,4 +1,4 @@
-const { Advertisement, Advertisement_has_Supplier, Supplier, Client_has_Supplier } = require('../models/index');
+const { Advertisement, Advertisement_has_Supplier, Supplier } = require('../models/index');
 const { Op } = require('sequelize');
 
 module.exports = {

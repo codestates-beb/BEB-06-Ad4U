@@ -1,13 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import Swal from 'sweetalert2'
+import Avatar from 'react-avatar';
+
 import client from '../../../hooks/axios/client';
 import { myBucket, S3_BUCKET } from '../../../config/awsS3';
 import { getLocalData } from '../../../config/localStrage';
-import Swal from 'sweetalert2'
 
-import Avatar from 'react-avatar';
-import { Container, Row, Col, Card, ListGroup, Form, Button, Modal } from 'react-bootstrap';
-
+import { Container, Row, Form, Modal } from 'react-bootstrap';
 
 import '../Client.css';
 
@@ -17,7 +16,7 @@ const ClientEditInfo = ({ userData, show, setShow }) => {
   const accessToken = getLocalData('accessToken');
   const isClient = getLocalData('isClient');
 
-  const { id, userId, company_name, company_number, email, intro, profileImgUrl } = userData;
+  const { userId, intro, profileImgUrl } = userData;
 
   const uploadFile = (e) => {
     const file = e.target.files[0];
@@ -44,7 +43,7 @@ const ClientEditInfo = ({ userData, show, setShow }) => {
   const onSubmit = async (e) => {
 
     try {
-      e.preventDefault(); //버튼을 눌러도 새로고침 되지않도록 함
+      e.preventDefault(); 
 
       let imgUrl;
       newProfileImgUrl ? imgUrl = newProfileImgUrl : imgUrl = profileImgUrl;
@@ -76,8 +75,8 @@ const ClientEditInfo = ({ userData, show, setShow }) => {
           <Form.Group className="mb-3">
             <Row>
               { newProfileImgUrl
-              ? <Avatar src={newProfileImgUrl} alt="profile_img" />
-              : <Avatar src={profileImgUrl} alt="profile_img" />}
+                ? <Avatar src={newProfileImgUrl} alt="profile_img" />
+                : <Avatar src={profileImgUrl} alt="profile_img" />}
               <Form.Label>이미지 업로드</Form.Label>
               <Form.Control type="file" onChange={uploadFile}/>
             </Row>

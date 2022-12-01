@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
+
 import { getLocalData } from '../../../config/localStrage';
 import ad from '../../../hooks/axios/ad';
 import client from '../../../hooks/axios/client';
-import { Container, Row, Col, Card, ListGroup, Form, Button, Modal, Toast } from 'react-bootstrap';
-import Swal from 'sweetalert2';
 
+import { Container, Row, Col, ListGroup, Button, Modal } from 'react-bootstrap';
 
 import '../Detail.css';
 
@@ -29,9 +29,8 @@ const Propose = ({ show, setShow, userData, supplierId }) => {
     .catch(err => console.log(err.response.data))
   }, [userId])
 
-
   const ListItem = ({ idx, data }) => {
-    const { id, title, cost, content } = data;
+    const { id, title, cost } = data;
 
     const sendPropose = async (adId) => {
       try {

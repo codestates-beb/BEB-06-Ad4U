@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Accordion, Col, Row, Container } from 'react-bootstrap';
+import React from 'react';
+
 import Stage0 from './ClientManageMent/Stage0';
 import Stage1 from './ClientManageMent/Stage1';
 import Stage2 from './ClientManageMent/Stage2';
 import Stage3 from './ClientManageMent/Stage3';
 import Stage4 from './ClientManageMent/Stage4';
 import Stage5 from './ClientManageMent/Stage5';
+
+import { Accordion, Col } from 'react-bootstrap';
+
 import '../Client.css';
 
 const ClientAd = ({ idx, adList, setIsLoading }) => {
-  const { id, title, status } = adList;
+  const { title, status } = adList;
  
   const Rendering = () => {
     if (adList && status === 0) return <Stage0 adList={adList} setIsLoading={setIsLoading} />; 

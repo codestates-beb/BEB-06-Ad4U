@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import Dropdown from 'react-bootstrap/Dropdown';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Modal from 'react-bootstrap/Modal';
-import { Row, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
-import './UploadPage.css';
+import axios from 'axios';
 
 import { myBucket, S3_BUCKET } from '../../../../config/awsS3';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import {exchange} from '../../../../hooks/axios/coinGecko';
 
+import { Button, Dropdown, Form, InputGroup, Modal }from 'react-bootstrap';
 
+import './UploadPage.css';
 
 const UploadPage = () => {
 
   const [modalShow, setModalShow] = useState(false);
-
+  const [vsCurrencies, setVsCurrencies] = useState("krw");
+  const [ethPrice, setEthPrice] = useState(0);
+  const [curCost, setCurCost] = useState("");
   const [AdInfo, setAdInfo] = useState({
     title: "",
     content: "",
@@ -26,12 +24,7 @@ const UploadPage = () => {
     isClient: true
   });
 
-  const [vsCurrencies, setVsCurrencies] = useState("krw");
-  const [ethPrice, setEthPrice] = useState(0);
-  const [curCost, setCurCost] = useState("");
-
   const navigate = useNavigate();
-
 
   useEffect(() => {
     vsChange(curCost)
@@ -51,60 +44,16 @@ const UploadPage = () => {
 
   const handleAdCost = async (e) => {
     setCurCost(e.target.value);
-    const cost = e.target.value;
-    const coinGeckoUrl = `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=${vsCurrencies}`;
-    const options = {
-      url: coinGeckoUrl,
-      method: 'GET',
-      headers: { "Content-Type": "application/json" }
-    }
-    var toEth = 0;
-    await axios.request(options)
-      .then(res => {
-        if (vsCurrencies == "krw") {
-          toEth = (1 / res.data.ethereum.krw) * cost;
-          console.log(toEth)
-          setEthPrice(toEth)
-        } else if (vsCurrencies == "usd") {
-          toEth = (1 / res.data.ethereum.usd) * cost;
-          setEthPrice(toEth)
-        } else if (vsCurrencies == "eur") {
-          toEth = (1 / res.data.ethereum.eur) * cost;
-          setEthPrice(toEth)
-        }
-      })
-      .catch(err => console.log(err))
-
+    var toEth = await exchange(e.target.value, vsCurrencies);
+    setEthPrice(toEth);
     AdInfo.cost = toEth;
     setAdInfo(AdInfo)
   }
 
   const vsChange = async (curCost) => {
-    const cost = curCost;
-    const coinGeckoUrl = `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=${vsCurrencies}`;
-    const options = {
-      url: coinGeckoUrl,
-      method: 'GET',
-      headers: { "Content-Type": "application/json" }
-    }
-    var toEth = 0;
-    await axios.request(options)
-      .then(res => {
-        if (vsCurrencies == "krw") {
-          toEth = (1 / res.data.ethereum.krw) * cost;
-          console.log(toEth)
-          setEthPrice(toEth)
-        } else if (vsCurrencies == "usd") {
-          toEth = (1 / res.data.ethereum.usd) * cost;
-          setEthPrice(toEth)
-        } else if (vsCurrencies == "eur") {
-          toEth = (1 / res.data.ethereum.eur) * cost;
-          setEthPrice(toEth)
-        }
-      })
-      .catch(err => console.log(err))
-
-    AdInfo.cost = toEth;
+    var toEth = await exchange(curCost,vsCurrencies);
+    setEthPrice(toEth);
+    AdInfo.cost = toEth
     setAdInfo(AdInfo)
   }
 
@@ -133,7 +82,6 @@ const UploadPage = () => {
 
   const preview = async (e) => {
     e.preventDefault();
-    //AdInfo 유효성 검사
     var checkVaild = 0;
     console.log(AdInfo.content)
 
@@ -166,7 +114,6 @@ const UploadPage = () => {
   }
 
   const handleSubmit = async () => {
-    // test용 access Token
     setModalShow(false)
     console.log(AdInfo.imgUrl);
     var accessToken = window.localStorage.getItem('accessToken');
@@ -201,7 +148,6 @@ const UploadPage = () => {
           })
         }
       })
-
   }
 
   return (
@@ -256,18 +202,16 @@ const UploadPage = () => {
         centered
       >
         <Modal.Header>
-
           <Modal.Title>
             {AdInfo.title}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <img src={AdInfo.imgUrl} className="adImg" />
+          <img src={AdInfo.imgUrl} className="adImg" alt='adImg'/>
           <h4>제안 금액 : {AdInfo.cost} ETH</h4>
           <br></br>
           <p className='aDContent'>{AdInfo.content}</p>
         </Modal.Body>
-
         <Modal.Footer>
           <Button variant="primary" type="submit" onClick={handleSubmit}>
             Submit
@@ -276,7 +220,6 @@ const UploadPage = () => {
         </Modal.Footer>
       </Modal>
     </Form>
-
   );
 }
 

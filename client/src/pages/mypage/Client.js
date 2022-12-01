@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router';
 import { useNavigate, Link } from 'react-router-dom';
+import Avatar from 'react-avatar';
+
 import auth from '../../hooks/axios/auth';
 import { getLocalData } from '../../config/localStrage';
 import Contract from './component/Contract';
 import ClientAd from './component/ClientAd';
 import Emptypage from '../../component/Emptypage';
-import './Client.css';
-import Avatar from 'react-avatar';
-import img from '../../dummyfiles/img1.png';
 import Status from './component/Status';
 import ClientEditInfo from './component/ClientEditInfo';
-import { Col, Row, Container, Spinner, Card, ListGroup } from 'react-bootstrap';
-import axios from 'axios';
 import UploadPage from './component/Upload/UploadPage';
 import Loading from '../../component/Loading';
+import img from '../../dummyfiles/img1.png';
+
+import { Col, Row, Container,  Card, ListGroup } from 'react-bootstrap';
+
+import './Client.css';
 
 const ClientMypage = () => {
   const accessToken = getLocalData("accessToken");
@@ -41,8 +43,7 @@ const ClientMypage = () => {
   }, [accessToken, isClient]);
 
   const FilterAd = ({ adList, status }) => {
-    //status가 초기값("")인경우 필터링 하지않음
-    if (status === 2) { //2일때는 2, 3 모두 보이게
+    if (status === 2) { 
       const filteredAdList = adList.filter((el) => el.status === 2 || el.status === 3);
       return filteredAdList.map((adList, idx) => <ClientAd key={idx} idx={idx} adList={adList} setIsLoading={setIsLoading}/>);
     }
@@ -52,19 +53,6 @@ const ClientMypage = () => {
     } else return adList.map((adList, idx) => <ClientAd key={idx} idx={idx} adList={adList} setIsLoading={setIsLoading}/>);
   }
 
-  // const handleLoading = () => {
-  //   setIsLoading(true);
-  //   axios.post("")
-  //   .then(() => )
-  //   .then(() => {setIsLoading(false)
-  //   }
-  //   .catch(() => {
-  //     console.log(err)
-  //     setIsLoading(false);
-  //   }))
-  // }
-
-  //default
   const Mypage = ({ adList, setStatus }) => {
     return (
       <>
@@ -86,8 +74,8 @@ const ClientMypage = () => {
               <div className="profile-content">
                 <div className="profile-content_card-container" onClick={() => navigate(`/detail/client/${userData.id}`)}>
                   { userData.profileImgUrl 
-                  ? <Avatar src={userData.profileImgUrl} size="100" round={true}/>
-                  : <Avatar src={img} size="100" round={true}/>}
+                    ? <Avatar src={userData.profileImgUrl} size="100" round={true}/>
+                    : <Avatar src={img} size="100" round={true}/>}
                   <Card.Body>
                     <Card.Title className='mt-3' 
                       key={userData.id}>
@@ -107,13 +95,13 @@ const ClientMypage = () => {
           </Col>
           <Col xl={9} >
             {isLoading
-            ? <Loading />
-            : <Routes>
-                <Route path="/" element={<Mypage adList={adList} setStatus={setStatus} />} />        
-                <Route path='/upload' element={<UploadPage />} />
-                <Route path="/contract/:adId" element={<Contract userData={userData} adList={adList}  setIsLoading={setIsLoading} />} />
-                <Route path="*" element={<Emptypage />} />
-              </Routes>}
+              ? <Loading />
+              : <Routes>
+                  <Route path="/" element={<Mypage adList={adList} setStatus={setStatus} />} />        
+                  <Route path='/upload' element={<UploadPage />} />
+                  <Route path="/contract/:adId" element={<Contract userData={userData} adList={adList}  setIsLoading={setIsLoading} />} />
+                  <Route path="*" element={<Emptypage />} />
+                </Routes>}
           </Col>        
         </Row>
         <ClientEditInfo userData={userData} show={show} setShow={setShow} />

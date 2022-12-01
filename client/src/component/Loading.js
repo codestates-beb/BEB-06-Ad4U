@@ -1,5 +1,7 @@
 import React from 'react';
-import { Container, Spinner } from 'react-bootstrap';
+
+import {  Spinner } from 'react-bootstrap';
+
 import './NFE.css';
 
 const Loading = () => {

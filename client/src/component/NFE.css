@@ -1,5 +1,4 @@
 /* Nav css */
-
 .navbar {
   position: fixed;
   top: 0;
@@ -13,6 +12,7 @@
   transition-timing-function: ease-in;
   transition: all 0.5s;
 }
+
 .nav_clear{
   background-color: rgba(1, 10, 14, 0.8);
 }

@@ -1,57 +1,59 @@
 .form {
- height: 1000px;
- margin-top: 20px;
+  height: 1000px;
+  margin-top: 20px;
 }
 
 .form h5 {
-    color: white;
+  color: white;
 }
 
 .adContent {
-    white-space: pre-wrap;
-    font-size: large;
-    color: black;
+  white-space: pre-wrap;
+  font-size: large;
+  color: black;
 }
 
 .aDContent {
-    white-space: pre-wrap;
-    font-size: large;
-    color: black;
+  white-space: pre-wrap;
+  font-size: large;
+  color: black;
 }
 
 .adImg {
-    width: 50%;
-    height: 50%;   
+  width: 50%;
+  height: 50%;   
 }
 
 .titleMessage {
-    color : #ffffff;
-    display: none;
+  color : #ffffff;
+  display: none;
 }
+
 .costMessage {
-    color : #ffffff;
-    display: none;
+  color : #ffffff;
+  display: none;
 }
+
 .contentMessage {
-    color : #ffffff;
-    display: none;
+  color : #ffffff;
+  display: none;
 }
 
 h5 {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .alert {
-    color: red;
-    font-size: small;
+  color: red;
+  font-size: small;
 }
 
 .exchange {
-    margin: auto;
-    align-items: center;
-    padding: auto 10px;
-    width: 20px;
-    height: 20px;
+  margin: auto;
+  align-items: center;
+  padding: auto 10px;
+  width: 20px;
+  height: 20px;
 }
 
 .upload_btn {
@@ -61,6 +63,7 @@ h5 {
   color: inherit;
   border: 3px solid white;
 }
+
 .upload_btn span {
   color: white;
 }

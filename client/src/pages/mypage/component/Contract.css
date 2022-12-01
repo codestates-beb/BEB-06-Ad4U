@@ -1,159 +1,161 @@
 .form {
-    height: 1000px;
-    margin-top: 20px;
-   }
-   
-   .form h5 {
-       color: white;
-   }
-   
-   .adContent {
-       white-space: pre-wrap;
-       font-size: large;
-   }
-   
-   .adImg {
-       width: 50%;
-       height: 50%;   
-   }
-   
-   .titleMessage {
-       display: none;
-   }
-   .costMessage {
-       display: none;
-   }
-   .contentMessage {
-       display: none;
-   }
-   
-   h5 {
-       font-weight: bold;
-   }
-   
-   .alert {
-       color: red;
-       font-size: small;
-   }
-   
-   .exchange {
-       margin: auto;
-       align-items: center;
-       padding: auto 10px;
-       width: 20px;
-       height: 20px;
-   }
-   
-   .upload_btn {
-     padding: 10px 30px;
-     border-radius: 15px;
-     background: none;
-     color: inherit;
-     border: 3px solid white;
-   }
-   .upload_btn span {
-     color: white;
-   }
+  height: 1000px;
+  margin-top: 20px;
+}
+
+.form h5 {
+  color: white;
+}
+
+.adContent {
+  white-space: pre-wrap;
+  font-size: large;
+}
+
+.adImg {
+  width: 50%;
+  height: 50%;   
+}
+
+.titleMessage {
+  display: none;
+}
+
+.costMessage {
+  display: none;
+}
+
+.contentMessage {
+  display: none;
+}
+
+h5 {
+  font-weight: bold;
+}
+
+.alert {
+  color: red;
+  font-size: small;
+}
+
+.exchange {
+  margin: auto;
+  align-items: center;
+  padding: auto 10px;
+  width: 20px;
+  height: 20px;
+}
+
+.upload_btn {
+  padding: 10px 30px;
+  border-radius: 15px;
+  background: none;
+  color: inherit;
+  border: 3px solid white;
+}
+
+.upload_btn span {
+  color: white;
+}
    
 
 .ContractTitle { 
-    color: white;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 30px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .mediaUrlMessage {
-    display: none;
-    color: white;
+  display: none;
+  color: white;
 }
 
 .ContractDate1 {
-    float: left;
-    width: 40%;
-    display: inline-block;
-    text-align: center;
+  float: left;
+  width: 40%;
+  display: inline-block;
+  text-align: center;
 }
 
 .ContractDate2 {
-    float: right;
-    width: 40%;
-    display: inline-block;
-    text-align: center;
+  float: right;
+  width: 40%;
+  display: inline-block;
+  text-align: center;
 }
 
 .dateIcon {
-    color: white;
-    display: inline-block;
-    width: 20%;
-    text-align: center;
-    line-height: 38px;
-    margin: auto;
+  color: white;
+  display: inline-block;
+  width: 20%;
+  text-align: center;
+  line-height: 38px;
+  margin: auto;
 }
 
 .dateMessage {
-    display: none;
-    color: white;
+  display: none;
+  color: white;
 }
 
 .valueMessage {
-    display: none;
-    color: white;
+  display: none;
+  color: white;
 }
 
 .addressMessage {
-    display: none;
-    color: white;
+  display: none;
+  color: white;
 }
 
 h6 {
-    display: block;
-    color: white;
-    font-weight: bold;
-    width: auto;
-    text-align: center;
+  display: block;
+  color: white;
+  font-weight: bold;
+  width: auto;
+  text-align: center;
 }
 
 .modalH3 {
-    text-align: center;
-    font-weight: bold;
-    text-decoration: underline;
+  text-align: center;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .modalH5 {
-    font-weight: bold;
-    
+  font-weight: bold;
 }
 
 .modalSpan {
-    font-size: large;
-    white-space: pre-line;
+  font-size: large;
+  white-space: pre-line;
 }
 
 .modalInput {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .printContract {
-    margin: 5px;
+  margin: 5px;
 }
 
 .signTable {
-    display: block;
+  display: block;
 }
 
 .signLeft {
-    float: left;
-    width: 40%;
-    display: inline-block;
-    word-break: break-all;
-    margin: 5%;
+  float: left;
+  width: 40%;
+  display: inline-block;
+  word-break: break-all;
+  margin: 5%;
 }
 
 .signRight {
-    float: right;
-    width: 40%;
-    display: inline-block;
-    word-break: break-all;
-    margin: 5%;
+  float: right;
+  width: 40%;
+  display: inline-block;
+  word-break: break-all;
+  margin: 5%;
 }

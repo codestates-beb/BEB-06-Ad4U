@@ -1,26 +1,19 @@
-
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import Dropdown from 'react-bootstrap/Dropdown';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Modal from 'react-bootstrap/Modal';
+import { useParams, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
-
-import axios from 'axios';
 import { getLocalData } from '../../../config/localStrage';
-import { Container } from 'react-bootstrap';
 import ContractPrint from './ContractPrint';
 import method from '../../../hooks/web3/sendTransaction';
 import { getContractOwner } from '../../../hooks/web3/queryContract';
 import contract from '../../../hooks/axios/contract'
-import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2'
+import {exchange} from '../../../hooks/axios/coinGecko'
+
+import { Button, Dropdown, Form, InputGroup, Modal, Container } from 'react-bootstrap';
 
 import './Contract.css';
 
-const AdContract = ({ userData, adList, setIsLoading }) => {
+const AdContract = ({  adList, setIsLoading }) => {
   const { adId } = useParams();
   const accessToken = getLocalData('accessToken');
   const isClient = getLocalData('isClient');
@@ -45,14 +38,11 @@ const AdContract = ({ userData, adList, setIsLoading }) => {
     isClient : true
   });
 
-  //multisigAddress, clientAddr, supplierAddr 렌더시 한번만 불러옴 + setAdInfo
   useEffect(() => {
     getAdInfo();
-  },[contractInfo.value]) // 사이트 새로 고침시 주소 데이터 날라감, 제일 중요한 데이터인 value값을 기준으로 바뀔때마다 가져옴
+  },[contractInfo.value])
   
-  // AdInfo 바뀔때마다 contractInfo set
   useEffect(() => {
-    console.log(adInfo)
     setContractInfo({
       mediaUrl : contractInfo.mediaUrl,
       date1 : contractInfo.date1,
@@ -63,7 +53,7 @@ const AdContract = ({ userData, adList, setIsLoading }) => {
       supplierAddr : adInfo.supplierAddr,
       isClient : true
     })
-  },[adInfo]); //새로 고침해도 데이터 유지 
+  },[adInfo]); 
 
   useEffect(() => {
     vsChange(curCost)
@@ -78,8 +68,7 @@ const AdContract = ({ userData, adList, setIsLoading }) => {
       console.log(availableWidthPx);
     }
   }, [])
-
-    // 현재 광고 정보 불러오고, owner 조회 및 저장
+  
     async function getAdInfo() {
       for(let i=0;i<adList.length;i++) {
         if(adList[i].id === parseInt(adId)) {
@@ -95,7 +84,6 @@ const AdContract = ({ userData, adList, setIsLoading }) => {
     }
 
   const handleContractUrl = async (e) => {
-    console.log(contractInfo)
     contractInfo.mediaUrl = e.target.value;
     setContractInfo(contractInfo);
   }
@@ -116,72 +104,23 @@ const AdContract = ({ userData, adList, setIsLoading }) => {
   }
 
   const handleContractCost = async (e) => {
-    console.log(contractInfo)
     setCurCost(e.target.value);
-    const cost =  e.target.value;
-    const coinGeckoUrl = `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=${vsCurrencies}`;
-    const options = {
-      url: coinGeckoUrl,
-      method: 'GET',
-      headers: {"Content-Type": "application/json"}
-    }
-    var toEth = 0;
-    await axios.request(options)
-        .then(res => {
-          if(vsCurrencies == "krw") {
-            toEth = (1/res.data.ethereum.krw)*cost;
-            console.log(toEth);
-            setEthPrice(toEth);
-          } else if (vsCurrencies == "usd") {
-            toEth = (1/res.data.ethereum.usd)*cost;
-            setEthPrice(toEth);
-          } else if (vsCurrencies == "eur") {
-            toEth = (1/res.data.ethereum.eur)*cost;
-            setEthPrice(toEth);
-          }
-        })
-        .catch(err => console.log(err))
-
+    var toEth = await exchange(e.target.value, vsCurrencies);
+    setEthPrice(toEth);
     contractInfo.value = toEth;
     setContractInfo(contractInfo)
   }
 
   const vsChange = async (curCost) => {
-    console.log(contractInfo)
-    const cost =  curCost;
-    const coinGeckoUrl = `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=${vsCurrencies}`;
-    const options = {
-      url: coinGeckoUrl,
-      method: 'GET',
-      headers: {"Content-Type": "application/json"}
-    }
-    var toEth = 0;
-    await axios.request(options)
-        .then(res => {
-          if(vsCurrencies == "krw") {
-            toEth = (1/res.data.ethereum.krw)*cost;
-            console.log(toEth)
-            setEthPrice(toEth)
-          } else if (vsCurrencies == "usd") {
-            toEth = (1/res.data.ethereum.usd)*cost;
-            setEthPrice(toEth)
-          } else if (vsCurrencies == "eur") {
-            toEth = (1/res.data.ethereum.eur)*cost;
-            setEthPrice(toEth)
-          }
-        })
-        .catch(err => console.log(err))
-
+    var toEth = await exchange(curCost,vsCurrencies);
+    setEthPrice(toEth);
     contractInfo.cost = toEth;
     setContractInfo(contractInfo);
   }
 
-
   const handleSubmit = async () => {
-    console.log(tokenURI);
     setIsLoading(true);
 
-    //AdInfo 유효성 검사
     var checkVaild = 0;
     
     if(contractInfo.mediaUrl.length === 0) {
@@ -205,11 +144,9 @@ const AdContract = ({ userData, adList, setIsLoading }) => {
         return;
     }
 
-    //walletAddress 가져오기 : props
     const walletAddress = adInfo.multisigAddress;
-    console.log(walletAddress);
+
     try {
-      //submit Transaction : (walletAddress, _to, _value, _data)
       const tx = await method.submitTransaction(walletAddress,contractInfo.supplierAddr,contractInfo.value,tokenURI);
       var tokenInfo = {
         token_uri: "",
@@ -222,7 +159,6 @@ const AdContract = ({ userData, adList, setIsLoading }) => {
       console.log(tokenInfo);
 
       if (tx) {
-        //DB 상태 업데이트
         const result = await contract.create(accessToken,isClient,adId,tokenInfo);
         if(result) {
           await Swal.fire({

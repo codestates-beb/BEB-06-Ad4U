@@ -2,7 +2,7 @@
 /* ListPage css */
 .list_container {
   margin-top: 200px;
-  height: 1000px;
+  min-height: 1000px;
   font-family: "Montserrat"
 }
 
@@ -32,32 +32,58 @@
   font-family: "Montserrat"
 }
 
-.supplierList_container h1 {
-  color: white;
-  margin-bottom: 20px;
-}
-
 .supplierList-content {
-  margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(280px, 150px));
-  padding:20px 0;
-  gap: 40px;
+  grid-template-columns: repeat(2, minmax(200px, 200px));
+  margin-top: 30px;
+  column-gap: 230px;
+  row-gap: 30px;
+  justify-content: center;
+  font-family: "Montserrat";
+  margin-right: 145px;
 }
 
-.supplierList-content_card-container  {
+.supplierList_card {
+  display: flex;
+  height: 150px;
+  width: 350px;
+  border-radius: 20px;
+  background: white;
+}
+
+.supplierList_card_img {
+  display: flex;
+  width: 150px;
+  overflow: hidden;
+  border-radius: 20px 0 0 20px;
+}
+
+.supplierList_card_img img {
+  width: 100%;
+  border-radius: 20px 0 0 20px;
+  transition: all 0.2s linear;
+}
+
+.supplierList_card_img:hover img {
+  transform: scale(1.4);
+}
+
+.supplierList_card_text {
+  align-self: center;
   text-align: center;
-  padding: 20px 20px;
-  border-radius: 4px;
-  box-shadow: 2px 2px 4px 4px #0c0b1473;
-  cursor: pointer;
-  font-size: 14px;
-  position: relative;
-  background-color: #ffffff;
+  padding: 15px;
+  width: 50%;
 }
 
-.supplierList-content_card-container:hover {
-  transform: scale(1.1);
+.supplierList_card_t1 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 30px;
+}
+
+.supplierList_card_t2 {
+  color: #4e4a67;
+  line-height: 1.5em;
 }
 
 /* clientList css */
@@ -121,45 +147,8 @@
   margin-top: 40%;
   font-weight: 700;
 }
-/* .clientList_container h1 {
-  color: white;
-  margin-bottom: 20px;
-  font-family: "Montserrat"
-}
-
-.clientList-content {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(230px, 150px));
-  padding:20px 0;
-  gap: 40px;
-  margin-top: 20px;
-  font-family: "Montserrat"
-}
-
-.clientList-content_card-container  {
-  text-align: center;
-  padding: 20px 20px;
-  border-radius: 4px;
-  box-shadow: 2px 2px 4px 4px #0c0b1473;
-  cursor: pointer;
-  font-size: 14px;
-  position: relative;
-  background-color: #ffffff;
-}
-
-.clientList-content_card-container:hover {
-  transform: scale(1.1);
-}
-.clientList_companyname {
-  margin-top: 10px;
-} */
 
 /* adList css */
-.adList_container h1 {
-  color: white;
-  margin-bottom: 20px;
-}
-
 .adList-content {
   margin-top: 20px;
   display: grid;
@@ -179,17 +168,23 @@
   position: relative;
   background: -webkit-linear-gradient(#ece9e6, #ffffff);
 }
+
 .adList-content_card-container:hover {
   transform: scale(1.1);
 }
 
-.adList-content_card-container img {
-  height: 201px;
+.adList_img {
+  height: 200px;
   margin-bottom: 10px;
   border-radius: 4px;
 }
 
-.adList_img {
-  height: 192px;
+.adList_title {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 30px;
 }
 
+.adList_name {
+  color: #4e4a67;
+}

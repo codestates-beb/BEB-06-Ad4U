@@ -5,8 +5,9 @@ import AdList from './component/AdList';
 import ClientList from './component/ClientList';
 import SupplierList from './component/SupplierList';
 import Emptypage from '../../component/Emptypage';
-import Container from 'react-bootstrap/esm/Container';
-import { Card, ListGroup, Row, Col } from 'react-bootstrap';
+
+import { Card, ListGroup, Row, Col, Container } from 'react-bootstrap';
+
 import './ListPage.css';
 
 const List = () => {
@@ -24,7 +25,6 @@ const List = () => {
               </ListGroup>
             </Card.Body>
           </Card>
-          
         </Col>
         <Col xl={9}>
           <Routes>

@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import Avatar from 'react-avatar';
+import Swal from 'sweetalert2'
+
 import method from '../../../../hooks/web3/sendTransaction';
 import contract from '../../../../hooks/axios/contract';
 import { getLocalData } from '../../../../config/localStrage';
-import Avatar from 'react-avatar';
 import Img from '../../../../dummyfiles/img1.png';
-import { Container, Row, Col, Card, ListGroup, Form, Button, OverlayTrigger, Popover, CloseButton } from 'react-bootstrap';
-import Swal from 'sweetalert2'
-import Loading from '../../../../component/Loading';
-import { TbTrashX } from 'react-icons/tb';
 import ad from '../../../../hooks/axios/ad';
+
+import { Container, Row, Col } from 'react-bootstrap';
+import { TbTrashX } from 'react-icons/tb';
 
 import '../../Client.css';
 import '../TransactionButton.css';
@@ -20,9 +21,7 @@ const Stage0 = ({ adList, setIsLoading }) => {
   const accessToken = getLocalData('accessToken');
   const isClient = getLocalData('isClient');
 
-    // 1. Multi-Sig Wallet Deploy
     const handleDeploy = async (supplierId, supplierAddr) => {
-      //광고주 지갑주소랑, 크리에이터 지갑주소가 같을 시 에러남, 다른주소로!
       try {
         setIsLoading(true);
         if (accessToken && isClient && supplierId && adId) {
@@ -59,8 +58,8 @@ const Stage0 = ({ adList, setIsLoading }) => {
           <Row>
             <Col className='clientStage0_ImgArea' xl={2}>
               {applicant.profileImgUrl
-              ? <Avatar src={applicant.profileImgUrl} alt="채널이미지" />
-              : <Avatar src={Img} alt="채널 대체이미지" />}
+                ? <Avatar src={applicant.profileImgUrl} alt="채널이미지" />
+                : <Avatar src={Img} alt="채널 대체이미지" />}
             </Col>
             <Col className='clientStage0_contentArea' xl={7}>
               <div>{idx+1}번째 지원자</div>
@@ -119,11 +118,11 @@ const Stage0 = ({ adList, setIsLoading }) => {
     <>
       <Container className='clientManagement_container'>
         {applicant.length === 0 
-        ? <>
-            <div className='clientStage0_emptyArea'>현재 지원자가 없습니다.</div>
-            <hr className='clientDivider_solid' />
-          </>
-        : applicant.map((el, idx)=><ApplicantList key={idx} idx={idx} el={el} />)}
+          ? <>
+              <div className='clientStage0_emptyArea'>현재 지원자가 없습니다.</div>
+              <hr className='clientDivider_solid' />
+            </>
+          : applicant.map((el, idx)=><ApplicantList key={idx} idx={idx} el={el} />)}
         <Col>
           <div className='clientStage0_footer' onClick={() => {
             Swal.fire({
