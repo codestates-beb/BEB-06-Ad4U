@@ -36,7 +36,7 @@ const About = () => {
           </div>
           <div className='about_card'>
             <Card>
-              <Card.Text><GrDocumentUser size="60" className='icon'/>여러분의 모든 광고 활동을 기록하여 NFT로 보관할 수 있습니다.</Card.Text>
+              <Card.Text><GrDocumentUser size="60" className='icon'/>여러분의 모든 광고 활동을 기록하여 보관할 수 있습니다.</Card.Text>
             </Card>
           </div>
         </Col>

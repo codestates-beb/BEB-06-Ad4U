@@ -14,7 +14,7 @@ import './Main.css';
 
 smoothscroll.polyfill();
 
-const Main = ( userData ) => {
+const Main = () => {
   const topClick = () => {
     window.scrollTo(0, 0, { behavior : "smooth" })
   }

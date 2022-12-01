@@ -11,11 +11,11 @@ export const exchange = async (curCost, vsCurrencies) => {
     var toEth = 0;
     await axios.request(options)
       .then(res => {
-        if (vsCurrencies == "krw") {
+        if (vsCurrencies === "krw") {
           toEth = (1 / res.data.ethereum.krw) * cost;
-        } else if (vsCurrencies == "usd") {
+        } else if (vsCurrencies === "usd") {
           toEth = (1 / res.data.ethereum.usd) * cost;
-        } else if (vsCurrencies == "eur") {
+        } else if (vsCurrencies === "eur") {
           toEth = (1 / res.data.ethereum.eur) * cost;
         }
       })

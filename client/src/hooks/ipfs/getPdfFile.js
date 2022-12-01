@@ -1,9 +1,9 @@
 import axios from 'axios';
 import crypto from 'crypto-js';
 import { triggerBase64Download } from 'common-base64-downloader-react';
+
 import lockPdfImg from '../../dummyfiles/document.png';
 import downloadPdfImg from '../../dummyfiles/download-pdf.png';
-import { useState } from 'react';
 
 const handleFileImg = (e) => {
   if(e.target.src === downloadPdfImg) {
@@ -31,7 +31,6 @@ const handleViewPdf = async (token_uri, title, createdAt) => {
   const result = await axios.request(options);
 
   if (result) {
-    //복호화
     const bytes = crypto.AES.decrypt(result.data, secretKey);
     const decrypted = bytes.toString(crypto.enc.Utf8);
     const decrypted_base64 = "data:application/pdf;base64,"+dataURLtoBase64(decrypted);
