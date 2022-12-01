@@ -1,12 +1,7 @@
 import React, { useState, useRef } from 'react';
+import Swal from 'sweetalert2';
 
-import Container from 'react-bootstrap/esm/Container';
-import Row from 'react-bootstrap/esm/Row';
-import Col from 'react-bootstrap/esm/Col';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Swal from 'sweetalert2'
-
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import '../LoginPage.css';
 
 const SupplierSignupForm = ({ email, address, inputAddress, sendSignupData, handleClose }) => {
@@ -45,24 +40,23 @@ const SupplierSignupForm = ({ email, address, inputAddress, sendSignupData, hand
       <Container>
         <Form onSubmit={onSubmit}>
           <Form.Group className="signup_inputArea" as={Row}>
-            <Form.Label>Email</Form.Label>
+            <Form.Label>이메일</Form.Label>
             <Form.Control
               placeholder="Google Email" 
               type="email"
               value={email}
               disabled
-              autoFocus
             />
           </Form.Group>
           <Form.Group className="signup_inputArea" as={Row}>
-            <Form.Label>ID</Form.Label>
+            <Form.Label>아이디</Form.Label>
             <Form.Control 
               type="id" 
               rows={1} 
               ref={idRef}/>
           </Form.Group>
           <Form.Group className="signup_inputArea" as={Row}>
-            <Form.Label>Password</Form.Label>
+            <Form.Label>비밀번호</Form.Label>
             <Form.Control 
               type="password"
               rows={1} 
@@ -70,7 +64,7 @@ const SupplierSignupForm = ({ email, address, inputAddress, sendSignupData, hand
             />
           </Form.Group>
           <Form.Group className="signup_inputArea" as={Row}>
-            <Form.Label>Confirm Password</Form.Label>
+            <Form.Label>비밀번호 확인</Form.Label>
             <Form.Control 
               type="password"
               rows={1} 
@@ -79,37 +73,37 @@ const SupplierSignupForm = ({ email, address, inputAddress, sendSignupData, hand
             <div>{isCorrect ? "" : "비밀번호가 일치하지 않습니다."}</div>
           </Form.Group>
           <Form.Group className="signup_inputArea" as={Row}>
-            <Form.Label>WalletAddress</Form.Label>
-            <Form.Control 
-              type="id"
-              value={address}
-              disabled
-              rows={1} 
-            />
-            <button
-              type="button"
-              onClick={inputAddress}
-            >
-              getAccount
-            </button>
-          </Form.Group>
-          <Row>
-            <Col className="signup_lowerArea">
-              <Button 
-                className="signup_button" 
-                variant="primary" 
-                type="submit"
-              >
-                SignUp
-              </Button>
+            <Form.Label>이더리움 계정</Form.Label>
+            <Col xl={9}>
+              <Form.Control 
+                className='signup_walletInput'
+                type="id"
+                value={address}
+                disabled
+                rows={1} 
+              />
+            </Col>
+            <Col xl={3}>
               <Button
-                className="signup_close_button" 
-                variant="secondary" 
-                onClick={handleClose}
+                className='signup_walletButton'
+                variant="secondary"
+                onClick={inputAddress}
               >
-                Close
+                가져오기
               </Button>
             </Col>
+          </Form.Group>
+          <Row className="signup_lowerArea" >
+            <Col xl={4}/>
+            <Col xl={4}>
+              <button 
+                className="signup_button" 
+                type="submit"
+              >
+                가입하기
+              </button>
+            </Col>
+            <Col xl={4}/>
           </Row>
         </Form>
       </Container>

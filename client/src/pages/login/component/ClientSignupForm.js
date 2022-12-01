@@ -1,12 +1,7 @@
 import React, { useState, useRef } from 'react';
+import Swal from 'sweetalert2';
 
-import Container from 'react-bootstrap/esm/Container';
-import Row from 'react-bootstrap/esm/Row';
-import Col from 'react-bootstrap/esm/Col';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Swal from 'sweetalert2'
-
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import '../LoginPage.css';
 
 const ClientSignupForm = ({ email, sendSignupData, handleClose }) => {
@@ -49,15 +44,38 @@ const ClientSignupForm = ({ email, sendSignupData, handleClose }) => {
       <Container>
         <Form onSubmit={onSubmit}>
           <Form.Group className="signup_inputArea" as={Row}>
-            <Form.Label>Email</Form.Label>
+            <Form.Label>이메일</Form.Label>
             <Form.Control
               placeholder="Google Email" 
               type="email"
               value={email}
               rows={1}
               disabled
-              autoFocus
             />
+          </Form.Group>
+          <Form.Group className="signup_inputArea" as={Row}>
+            <Form.Label>아이디</Form.Label>
+            <Form.Control 
+              type="id" 
+              rows={1} 
+              ref={idRef}/>
+          </Form.Group>
+          <Form.Group className="signup_inputArea" as={Row}>
+            <Form.Label>비밀번호</Form.Label>
+            <Form.Control 
+              type="password"
+              rows={1} 
+              ref={passwordRef}
+            />
+          </Form.Group>
+          <Form.Group className="signup_inputArea" as={Row}>
+            <Form.Label>비밀번호 확인</Form.Label>
+            <Form.Control 
+              type="password"
+              rows={1} 
+              ref={confirmRef}
+            />
+            <div>{isCorrect ? "" : "비밀번호가 일치하지 않습니다."}</div>
           </Form.Group>
           <Form.Group className="signup_inputArea" as={Row}>
             <Form.Label>회사명</Form.Label>
@@ -65,6 +83,7 @@ const ClientSignupForm = ({ email, sendSignupData, handleClose }) => {
               type="text"
               rows={1} 
               ref={company_nameRef}
+              autoFocus
             />
           </Form.Group>
           <Form.Group className="signup_inputArea" as={Row}>
@@ -75,62 +94,17 @@ const ClientSignupForm = ({ email, sendSignupData, handleClose }) => {
               ref={company_numberRef}
             />
           </Form.Group>
-          <Form.Group className="signup_inputArea" as={Row}>
-            <Form.Label>ID</Form.Label>
-            <Form.Control 
-              type="id" 
-              rows={1} 
-              ref={idRef}/>
-          </Form.Group>
-          <Form.Group className="signup_inputArea" as={Row}>
-            <Form.Label>Password</Form.Label>
-            <Form.Control 
-              type="password"
-              rows={1} 
-              ref={passwordRef}
-            />
-          </Form.Group>
-          <Form.Group className="signup_inputArea" as={Row}>
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control 
-              type="password"
-              rows={1} 
-              ref={confirmRef}
-            />
-            <div>{isCorrect ? "" : "비밀번호가 일치하지 않습니다."}</div>
-          </Form.Group>
-          {/* <Form.Group className="signup_inputArea" as={Row}>
-            <Form.Label>WalletAddress</Form.Label>
-            <Form.Control 
-              type="id"
-              value={address}
-              disabled
-              rows={1} 
-            />
-            <button
-              type="button"
-              onClick={inputAddress}
+          <Row className="signup_lowerArea">
+            <Col xl={4}/>
+            <Col xl={4}>
+            <button 
+              className="signup_button" 
+              type="submit"
             >
-              getAccount
+              가입하기
             </button>
-          </Form.Group> */}
-          <Row>
-            <Col className="signup_lowerArea">
-              <Button 
-                className="signup_button" 
-                variant="primary" 
-                type="submit"
-              >
-                SignUp
-              </Button>
-              <Button
-                className="signup_close_button" 
-                variant="secondary" 
-                onClick={handleClose}
-              >
-                Close
-              </Button>
             </Col>
+            <Col xl={4}/>
           </Row>
         </Form>
       </Container>

@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { decodeToken } from 'react-jwt';
 import auth from '../../hooks/axios/auth'; 
-import { setLocalData, getLocalData, clearLocalData } from '../../config/localStrage';
+import { setLocalData  } from '../../config/localStrage';
 import Signup from './component/Signup';
 import LoginForm  from './component/LoginForm';
+import Swal from 'sweetalert2';
 
-import Container from 'react-bootstrap/esm/Container';
-import Row from 'react-bootstrap/esm/Row';
-import Col from 'react-bootstrap/esm/Col';
-import Button from 'react-bootstrap/Button';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-import Swal from 'sweetalert2'
-
+import { Container, Row, Col, Tab, Tabs } from 'react-bootstrap';
+import { FcGoogle } from 'react-icons/fc';
 import './LoginPage.css';
 
 const LoginPage = ({ setUserData }) => {
@@ -34,11 +28,11 @@ const LoginPage = ({ setUserData }) => {
     console.log("authorizationCode", authorizationCode);
     if (authorizationCode) {
       auth.oauth(authorizationCode)
-        .then(res => {
-          setEmail(res.data.email);
-          setShow(true);
-        })
-        .catch(err => alert(err.response.data))
+      .then(res => {
+        setEmail(res.data.email);
+        setShow(true);
+      })
+      .catch(err => alert(err.response.data))
     }
   },[]);
 
@@ -81,10 +75,9 @@ const LoginPage = ({ setUserData }) => {
     <>
       <Container className='loginPage_container'>
         <Tabs
-          as={Row}
+          className='login_tab'
           defaultActiveKey="supplier"
           onSelect={handleIsClient}
-          // className="mb-3"
           justify
         >
           <Tab 
@@ -100,21 +93,23 @@ const LoginPage = ({ setUserData }) => {
             <LoginForm sendLoginData={sendLoginData} />
           </Tab>
         </Tabs>
-        <Row>
-          <Button 
-            as={Col}
-            xs={{ span: 4, offset: 8 }}
-            onClick={googleOath} 
-          >
-            Google 계정으로 간편회원가입
-          </Button>
+        <Row className='login_buttonArea'>
+          <Col xl={3}/>
+          <Col xl={4}>
+            <button className="login_googleSignupButton" onClick={googleOath}>
+              <FcGoogle className='login_googleIcon' size={30}/>  
+              Google 계정으로 간편회원가입
+            </button>
+          </Col>
+          <Col xl={5}/>
         </Row>
+        <button onClick={() => setShow(true)}>123</button>
       </Container>
       <Signup 
-          email={email}
-          show={show} 
-          setShow={setShow}
-        />
+        email={email}
+        show={show} 
+        setShow={setShow}
+      />
     </>
   );
 }

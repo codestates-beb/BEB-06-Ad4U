@@ -1,10 +1,6 @@
 import React, { useRef } from 'react';
 
-import Row from 'react-bootstrap/esm/Row';
-import Col from 'react-bootstrap/esm/Col';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-
+import { Container, Row, Col, Form } from 'react-bootstrap';
 import '../LoginPage.css';
 
 const LoginForm = ({ sendLoginData }) => {
@@ -22,42 +18,43 @@ const LoginForm = ({ sendLoginData }) => {
 
   return(
     <>
-      <Form onSubmit={onSubmit}>
-        <Form.Group 
-          className="login_inputArea"
-          as={Col} 
-          xs={{ span: 7, offset: 2 }}
-        >
-          <Form.Label className='login_text'>ID</Form.Label>
-          <Form.Control
-            type="id"
-            // placeholder="ID"
-            autoFocus
-            ref={idRef}
-          />
-        </Form.Group>
-        <Form.Group
-          className="login_inputArea"
-          as={Col} 
-          xs={{ span: 7, offset: 2 }}
-        >
-          <Form.Label className='login_text'>Password</Form.Label>
-          <Form.Control 
-           type="password"
-          //  placeholder="Password"
-           ref={passwordRef}
-          />
-        </Form.Group>
-          <Col               
-            className="login_button" 
+      <Container>
+        <Form onSubmit={onSubmit}>
+          <Form.Group 
+            className="login_inputArea"
             as={Col} 
-            xs={{ span: 2, offset: 5 }} 
           >
-            <Button variant="primary" type='submit'>
-              LogIn
-            </Button>
-          </Col>
-      </Form>
+            <br />
+            <br />
+            <Form.Label className='login_text'>아이디</Form.Label>
+            <Form.Control
+              type="id"
+              autoFocus
+              ref={idRef}
+            />
+          </Form.Group>
+          <Form.Group
+            className="login_inputArea"
+            as={Col} 
+          >
+            <Form.Label className='login_text'>비밀번호</Form.Label>
+            <Form.Control 
+             type="password"
+             ref={passwordRef}
+            />
+          </Form.Group>
+          <br />
+            <Row>
+              <Col xl={4}/>
+              <Col className='login_buttonArea' xl={4}>
+                <button className="login_button"  type='submit'>
+                  LogIn
+                </button>
+              </Col>
+              <Col xl={4}/>
+            </Row>
+        </Form>
+      </Container>  
     </>
   )
 }
