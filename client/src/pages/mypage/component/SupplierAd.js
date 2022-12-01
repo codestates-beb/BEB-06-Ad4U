@@ -9,16 +9,16 @@ import Stage4 from './SupplierManageMent/Stage4';
 import Stage5 from './SupplierManageMent/Stage5';
 import '../Supplier.css';
 
-const SupplierAd = ({ idx, adList }) => {
+const SupplierAd = ({ idx, adList, setIsLoading }) => {
   const { title, status } = adList;
 
   const Rendering = () => {
-    if (adList && status === 0) return <Stage0 adList={adList} />; 
-    if (adList && status === 1) return <Stage1 adList={adList} />;
-    if (adList && status === 2) return <Stage2 adList={adList} />;
-    if (adList && status === 3) return <Stage3 adList={adList} />;
-    if (adList && status === 4) return <Stage4 adList={adList} />;
-    if (adList && status === 5) return <Stage5 adList={adList} />;
+    if (adList && status === 0) return <Stage0 adList={adList} setIsLoading={setIsLoading} />; 
+    if (adList && status === 1) return <Stage1 adList={adList} setIsLoading={setIsLoading} />;
+    if (adList && status === 2) return <Stage2 adList={adList} setIsLoading={setIsLoading} />;
+    if (adList && status === 3) return <Stage3 adList={adList} setIsLoading={setIsLoading} />;
+    if (adList && status === 4) return <Stage4 adList={adList} setIsLoading={setIsLoading} />;
+    if (adList && status === 5) return <Stage5 adList={adList} setIsLoading={setIsLoading} />;
     else return <div></div>;
   }
 

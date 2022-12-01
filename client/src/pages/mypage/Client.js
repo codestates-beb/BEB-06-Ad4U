@@ -14,6 +14,7 @@ import ClientEditInfo from './component/ClientEditInfo';
 import { Col, Row, Container, Spinner, Card, ListGroup } from 'react-bootstrap';
 import axios from 'axios';
 import UploadPage from './component/Upload/UploadPage';
+import Loading from '../../component/Loading';
 
 const ClientMypage = () => {
   const accessToken = getLocalData("accessToken");
@@ -43,12 +44,12 @@ const ClientMypage = () => {
     //status가 초기값("")인경우 필터링 하지않음
     if (status === 2) { //2일때는 2, 3 모두 보이게
       const filteredAdList = adList.filter((el) => el.status === 2 || el.status === 3);
-      return filteredAdList.map((adList, idx) => <ClientAd key={idx} idx={idx} adList={adList} />);
+      return filteredAdList.map((adList, idx) => <ClientAd key={idx} idx={idx} adList={adList} setIsLoading={setIsLoading}/>);
     }
     if (typeof(status) === 'number') {
       const filteredAdList = adList.filter((el) => el.status === status);
-      return filteredAdList.map((adList, idx) => <ClientAd key={idx} idx={idx} adList={adList} />);
-    } else return adList.map((adList, idx) => <ClientAd key={idx} idx={idx} adList={adList} />);
+      return filteredAdList.map((adList, idx) => <ClientAd key={idx} idx={idx} adList={adList} setIsLoading={setIsLoading}/>);
+    } else return adList.map((adList, idx) => <ClientAd key={idx} idx={idx} adList={adList} setIsLoading={setIsLoading}/>);
   }
 
   // const handleLoading = () => {
@@ -78,43 +79,45 @@ const ClientMypage = () => {
 
   return (
     <>
-    <Container className='clientMypage_container'>
-      <Row className='clientMypage_row' >
-        <Col xl={3} >
-          <Row>
-            <div className="profile-content">
-              <div className="profile-content_card-container" onClick={() => navigate(`/detail/client/${userData.id}`)}>
-                { userData.profileImgUrl 
-                ? <Avatar src={userData.profileImgUrl} size="100" round={true}/>
-                : <Avatar src={img} size="100" round={true}/>}
-                <Card.Body>
-                  <Card.Title className='mt-3' 
-                    key={userData.id}>
-                    {userData.company_name}
-                  </Card.Title>
-                  <ListGroup variant="flush" className='mt-3'>
-                  <ListGroup.Item >{userData.email}</ListGroup.Item>
-                  <ListGroup.Item >{userData.company_number}</ListGroup.Item>
-                  <ListGroup.Item >{userData.userId}</ListGroup.Item>
-                  </ListGroup>
-                </Card.Body>
+      <Container className='clientMypage_container'>
+        <Row className='clientMypage_row' >
+          <Col xl={3} >
+            <Row>
+              <div className="profile-content">
+                <div className="profile-content_card-container" onClick={() => navigate(`/detail/client/${userData.id}`)}>
+                  { userData.profileImgUrl 
+                  ? <Avatar src={userData.profileImgUrl} size="100" round={true}/>
+                  : <Avatar src={img} size="100" round={true}/>}
+                  <Card.Body>
+                    <Card.Title className='mt-3' 
+                      key={userData.id}>
+                      {userData.company_name}
+                    </Card.Title>
+                    <ListGroup variant="flush" className='mt-3'>
+                    <ListGroup.Item >{userData.email}</ListGroup.Item>
+                    <ListGroup.Item >{userData.company_number}</ListGroup.Item>
+                    <ListGroup.Item >{userData.userId}</ListGroup.Item>
+                    </ListGroup>
+                  </Card.Body>
+                </div>
               </div>
-            </div>
-            <Link><button className='clientSide_btn' onClick={() => setShow(true)}><span>정보 수정하기</span></button></Link>
-            <Link to="/mypage/client/upload"><button className='clientSide_btn'><span>광고 업로드</span></button></Link>
-          </Row>
-        </Col>
-        <Col xl={9} >
-          <Routes>
-            <Route path="/" element={<Mypage adList={adList} setStatus={setStatus} />} />        
-            <Route path='/upload' element={<UploadPage />} />
-            <Route path="/contract/:adId" element={<Contract userData={userData} adList={adList} />} />
-            <Route path="*" element={<Emptypage />} />
-          </Routes>
-        </Col>        
-      </Row>
-      <ClientEditInfo userData={userData} show={show} setShow={setShow} />
-    </Container>
+              <Link><button className='clientSide_btn' onClick={() => setShow(true)}><span>정보 수정하기</span></button></Link>
+              <Link to="/mypage/client/upload"><button className='clientSide_btn'><span>광고 업로드</span></button></Link>
+            </Row>
+          </Col>
+          <Col xl={9} >
+            {isLoading
+            ? <Loading />
+            : <Routes>
+                <Route path="/" element={<Mypage adList={adList} setStatus={setStatus} />} />        
+                <Route path='/upload' element={<UploadPage />} />
+                <Route path="/contract/:adId" element={<Contract userData={userData} adList={adList}  setIsLoading={setIsLoading} />} />
+                <Route path="*" element={<Emptypage />} />
+              </Routes>}
+          </Col>        
+        </Row>
+        <ClientEditInfo userData={userData} show={show} setShow={setShow} />
+      </Container>
     </>
   );
 }
