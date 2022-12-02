@@ -68,7 +68,7 @@ const Stage0 = ({ adList, setIsLoading }) => {
               <div>구독자수 {applicant.subscriberCount}</div> 
               <div>조회수 {applicant.viewCount}</div>
             </Col>
-            <Col className='clientStage0_buttonArea' xl={3}>
+            <Col className='clientStage0_buttonArea' xl={2}>
               <button 
                 className='transaction_Button select' 
                 onClick={async () => {

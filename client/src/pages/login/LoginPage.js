@@ -26,14 +26,13 @@ const LoginPage = ({ setUserData }) => {
   useEffect(() => {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
-    console.log("authorizationCode", authorizationCode);
+    
     if (authorizationCode) {
       auth.oauth(authorizationCode)
       .then(res => {
         setEmail(res.data.email);
         setShow(true);
       })
-      .catch(err => alert(err.response.data))
     }
   },[]);
 
@@ -43,7 +42,7 @@ const LoginPage = ({ setUserData }) => {
 
   const sendLoginData = async (loginData) => {
     loginData.isClient = isClient;
-    console.log("LoginData", loginData);
+    
     const { userId, password } = loginData;
     try { 
       if ( userId && password ) {
