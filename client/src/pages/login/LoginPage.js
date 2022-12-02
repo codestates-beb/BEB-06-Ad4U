@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../hooks/axios/auth'; 
-import { setLocalData  } from '../../config/localStrage';
+import { setLocalData, getLocalData, removeLocalData } from '../../config/localStrage';
 import Signup from './component/Signup';
 import LoginForm  from './component/LoginForm';
 import Swal from 'sweetalert2';
@@ -15,6 +15,7 @@ const LoginPage = ({ setUserData }) => {
   const [isClient, setIsClient] = useState(false);
   const [email, setEmail] = useState("");
   const [show, setShow] = useState(false);
+  
   const navigate = useNavigate();
 
   const handleIsClient = (e) => {
@@ -26,18 +27,39 @@ const LoginPage = ({ setUserData }) => {
   useEffect(() => {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
+    const oathSignup = getLocalData("oathSignup");
     
-    if (authorizationCode) {
-      auth.oauth(authorizationCode)
+    if (authorizationCode && oathSignup) {
+      auth.oauth(authorizationCode, oathSignup)
       .then(res => {
         setEmail(res.data.email);
+        removeLocalData("oathSignup");
         setShow(true);
       })
+      .catch(err => {
+        removeLocalData("oathSignup");
+        Swal.fire({
+          icon: 'warning',
+          title: '이미 가입된 계정입니다.',
+        })
+      })
     }
-  },[]);
+  }, []);
 
   const googleOath = async () => {
-    window.location.href = await auth.oauthLink();
+    Swal.fire({
+      icon: 'question',
+      title: 'AD4U 회원가입',
+      showCancelButton: true,
+      confirmButtonText: '크리에이터계정',
+      cancelButtonText: '광고주계정',
+    })
+    .then(res => {
+      setLocalData("oathSignup", res.isConfirmed);
+      return auth.oauthLink(res.isConfirmed)
+        .then(res=> window.location.href = res)
+        .catch(err => console.log(err))
+    })
   }
 
   const sendLoginData = async (loginData) => {

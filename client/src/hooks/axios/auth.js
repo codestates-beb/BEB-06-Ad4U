@@ -11,25 +11,26 @@ const refresh = async () => {
   return result;
 }
 
-const oauthLink = async () => {
+const oauthLink = async (isClient) => {
   const options = {
     url: "http://localhost:3001/users/auth",
     method: 'GET',
     headers: {"Content-Type": "application/json"},
     withCredentials: true,
+    data: isClient,
   }
   const result = await axios.request(options);
   return result.data;
 }
 
-const oauth = async (authorizationCode) => {
-  if (authorizationCode) {
+const oauth = async (authorizationCode, isClient) => {
+  if (authorizationCode && isClient) {
     const options = {
       url: "http://localhost:3001/users/auth",
       method: 'POST',
       headers: {"Content-Type": "application/json"},
       withCredentials: true,
-      data: { code: authorizationCode }
+      data: { code: authorizationCode, isClinet: JSON.parse(isClient) }
     }
     const result = await axios.request(options);
     return result;
