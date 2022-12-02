@@ -189,12 +189,12 @@ const AdContract = ({  adList, setIsLoading }) => {
         <Form className='form'>
           <h1 className='ContractTitle'>광고 대행 계약서</h1>
           <Form.Group className="mb-3">
-            <Form.Label><h5>동영상, 사진을 올릴 매체 URL<span className="alert"> *</span></h5></Form.Label>
+            <Form.Label><h5>동영상, 사진을 올릴 매체 URL<span className="require"> *</span></h5></Form.Label>
             <Form.Control type='text' placeholder="Enter Advertisement Media URL" onChange={handleContractUrl}/>
           </Form.Group>
           <p id="mediaUrl-message" className="mediaUrlMessage">mediaUrl Field Required!!</p>
           <Form.Group controlId="formDate" className="mb-3">
-            <Form.Label><h5>계약 기간<span className="alert"> *</span></h5></Form.Label>
+            <Form.Label><h5>계약 기간<span className="require"> *</span></h5></Form.Label>
             <br />
             <Row>
               <Col xl={5}><Form.Control type="date" className='ContractDate1' onChange={handleContractDate1}/></Col>
@@ -204,7 +204,7 @@ const AdContract = ({  adList, setIsLoading }) => {
           </Form.Group>
           <p id="date-message" className="dateMessage">Date Field Required!!</p>
           <Form.Group>
-            <Form.Label><h5>보수<span className="alert"> *</span></h5></Form.Label>
+            <Form.Label><h5>보수<span className="require"> *</span></h5></Form.Label>
             <InputGroup className="mb-3">
               <Form.Control type='text' placeholder="Enter Advertisement Cost" onChange={handleContractCost}/>
               <Dropdown>
@@ -227,7 +227,7 @@ const AdContract = ({  adList, setIsLoading }) => {
             <Form.Label><h5>기타 사항</h5></Form.Label>
             <Form.Control as="textarea" placeholder="Enter Your Advertisement Contract Info" rows={3} onChange={handleContractContent}/>
           </Form.Group>
-          <Form.Label><h5>계약자 지갑 주소<span className="alert"> *</span></h5></Form.Label>
+          <Form.Label><h5>계약자 지갑 주소<span className="require"> *</span></h5></Form.Label>
           <InputGroup className="mb-3">
             <h6 className='wallet_text'>&ensp;Advertiser&ensp;</h6>
             <Form.Control type="text" placeholder="Enter Your Address" defaultValue={adInfo.clientAddr} disabled />
