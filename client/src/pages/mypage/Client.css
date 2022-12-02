@@ -28,6 +28,10 @@
 }
 
 /* clientEditInfo css */
+.ClientInfo_container {
+  font-family: "Montserrat"
+}
+
 .info_submit {
   width: 100px;
   padding: 10px;
