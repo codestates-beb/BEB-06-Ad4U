@@ -26,7 +26,7 @@ const App = () => {
     auth.refresh()
       .then(res => res.data)
       .then(data => {
-        if (data.message === 'refresh token not provided') return clearLocalData();
+        // if (data.message === 'refresh token not provided') return clearLocalData();
         const { user, jwt_accessToken, isClient } = data;
         if (user && jwt_accessToken && typeof(isClient) === 'boolean') { 
           setLocalData("accessToken", jwt_accessToken);

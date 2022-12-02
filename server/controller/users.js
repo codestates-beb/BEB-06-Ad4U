@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { Client, Supplier, Advertisement, Advertisement_has_Supplier, Client_has_Supplier} = require('../models/index');
+const { Client, Supplier, Advertisement, Advertisement_has_Supplier, Client_has_Supplier } = require('../models/index');
 const jwt = require('jsonwebtoken');
 const client_attributes = ['id', 'userId', 'company_name', 'company_number', 'email', 'profileImgUrl'];
 const supplier_attributes = ['id', 'userId', 'email', 'channelName', 'channelUrl', 'viewCount', 'subscriberCount', 'profileImgUrl', 'address'];
@@ -77,6 +77,7 @@ module.exports = {
         res.status(200).json("logout");
     },
     authCode: async (req, res) => {
+        console.log(req.body)
         const scopes = [
             "openid",
             "profile",
@@ -92,44 +93,45 @@ module.exports = {
         res.status(200).json(authorizationUrl);
     },
     auth: async (req, res) => {
+        console.log(req.body)
         const { isClient, code } = req.body;
         try {
-                const { tokens } = await oauth2Client.getToken(code);
-                const user_info = jwt_decode(tokens.id_token);
+            const { tokens } = await oauth2Client.getToken(code);
+            const user_info = jwt_decode(tokens.id_token);
 
-                if(isClient){ //client
-                    const user = await Client.findOne({
-                        where: { email: user_info.email },
-                    });
-                    let body = {
-                        email: user_info.email,
+            if (isClient) { //client
+                const user = await Client.findOne({
+                    where: { email: user_info.email },
+                });
+                let body = {
+                    email: user_info.email,
+                }
+                if (user) {
+                    if (user.userId) { //회원가입이 되어있을 경우
+                        res.status(400).json("You are already a member");
+                    } else {  //auth 시도하다가 취소했을경우
+                        res.status(200).json({email: user_info.email });
                     }
-                    if (user) {
-                        if (user.userId) { //회원가입이 되어있을 경우
-                            res.status(400).json("You are already a member");
-                        } else {  //auth 시도하다가 취소했을경우
-                            res.status(200).json("continue signup");
-                        }
-                    } else { //첫 auth - refresh token save
-                            Client.create(body)
-                                .then(data => {
-                                    res.status(201).json({ email: user_info.email });
-                                })
-                    }
-                }else{ //supplier
-                    const youtube_info = await axios.get(`https://www.googleapis.com/youtube/v3/channels?access_token=${tokens.access_token}&part=snippet,statistics&mine=true&fields=items&2Fsnippet%2Fthumbnails`);
-                    let body = {
-                        email: user_info.email,
-                        channelName: youtube_info.data.items[0].snippet.title,
-                        subscriberCount: youtube_info.data.items[0].statistics.subscriberCount,
-                        viewCount: youtube_info.data.items[0].statistics.viewCount,
-                        channelUrl: `https://www.youtube.com/channel/${youtube_info.data.items[0].id}`,
-                        profileImgUrl: youtube_info.data.items[0].snippet.thumbnails.default.url,
-                        channel_id: youtube_info.data.items[0].id
-                    }
-                    const user = await Supplier.findOne({
-                        where: { email: user_info.email },
-                    });
+                } else { //첫 auth - refresh token save
+                    Client.create(body)
+                        .then(data => {
+                            res.status(201).json({ email: user_info.email });
+                        })
+                }
+            } else { //supplier
+                const youtube_info = await axios.get(`https://www.googleapis.com/youtube/v3/channels?access_token=${tokens.access_token}&part=snippet,statistics&mine=true&fields=items&2Fsnippet%2Fthumbnails`);
+                let body = {
+                    email: user_info.email,
+                    channelName: youtube_info.data.items[0].snippet.title,
+                    subscriberCount: youtube_info.data.items[0].statistics.subscriberCount,
+                    viewCount: youtube_info.data.items[0].statistics.viewCount,
+                    channelUrl: `https://www.youtube.com/channel/${youtube_info.data.items[0].id}`,
+                    profileImgUrl: youtube_info.data.items[0].snippet.thumbnails.default.url,
+                    channel_id: youtube_info.data.items[0].id
+                }
+                const user = await Supplier.findOne({
+                    where: { email: user_info.email },
+                });
 
                 if (user) {
                     if (user.userId) { //회원가입이 되어있을 경우
@@ -148,7 +150,7 @@ module.exports = {
                                 res.status(201).json({ email: user_info.email });
                             })
                 }
-                }
+            }
 
         } catch (err) {
             res.status(400).json(err.message);
@@ -168,18 +170,21 @@ module.exports = {
             if (client_user || supplier_user) { //아이디 중복확인
                 res.status(400).json("아이디 중복")
             } else {
+                console.log(isClient)
                 if (isClient) {
+                    console.log(1123123)
+                    console.log(body)
                     Client.update(body, {
-                        where: {email:req.body.email}
+                        where: { email: req.body.email }
                     }).then(data => {
-                            res.status(201).json("complete");
-                        })
+                        res.status(201).json("complete");
+                    })
                 } else {
                     Supplier.update(body, {
                         where: { email: req.body.email },
                     }).then(data => {
-                            res.status(201).json("complete");
-                        })
+                        res.status(201).json("complete");
+                    })
                 }
             }
         } catch (err) {
@@ -252,7 +257,7 @@ module.exports = {
                                     model: Advertisement, as: "Advertisement",
                                     attributes: advertisement_attributes,
                                 },
-                                
+
                             ]
                         },
                         {
