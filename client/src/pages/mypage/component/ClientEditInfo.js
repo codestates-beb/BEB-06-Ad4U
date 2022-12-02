@@ -6,7 +6,7 @@ import client from '../../../hooks/axios/client';
 import { myBucket, S3_BUCKET } from '../../../config/awsS3';
 import { getLocalData } from '../../../config/localStrage';
 
-import { Container, Row, Form, Modal } from 'react-bootstrap';
+import { Container, Row, Form, Modal, Button } from 'react-bootstrap';
 
 import '../Client.css';
 
@@ -35,7 +35,7 @@ const ClientEditInfo = ({ userData, show, setShow }) => {
           title: '파일 업로드 실패...',
         })
       }
-      console.log(`File uploaded successfully. ${data.Location}`);
+      
       setNewProfileImgUrl(data.Location);
     });
   }
@@ -50,12 +50,18 @@ const ClientEditInfo = ({ userData, show, setShow }) => {
       
       const result = await client.inputInfo(accessToken, isClient, newIntro, imgUrl);
       if (result) {
-        // Swal("성공적으로 수정되었습니다.");
+        await Swal.fire({
+          icon: 'success',
+          title: '회사 정보 수정 완료',
+        });
         window.location.reload();
       } 
     } catch (err) {
       console.log(err.response.data);
-      alert("fail!");
+      await Swal.fire({
+        icon: 'error',
+        title: '회사 정보 수정 실패..',
+      });
     }
   }
 
@@ -77,12 +83,12 @@ const ClientEditInfo = ({ userData, show, setShow }) => {
               { newProfileImgUrl
                 ? <Avatar src={newProfileImgUrl} alt="profile_img" />
                 : <Avatar src={profileImgUrl} alt="profile_img" />}
-              <Form.Label>이미지 업로드</Form.Label>
+              <Form.Label>회사 로고 업로드</Form.Label>
               <Form.Control type="file" onChange={uploadFile}/>
             </Row>
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label>광고 내용</Form.Label>
+            <Form.Label>회사 소개</Form.Label>
             <Form.Control 
               as="textarea" 
               rows={4} 
