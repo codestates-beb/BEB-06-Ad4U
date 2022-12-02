@@ -65,8 +65,8 @@ const Stage0 = ({ adList, setIsLoading }) => {
               <div>{idx+1}번째 지원자</div>
               <span>채널명 {applicant.channelName}</span>
               <div><a className='clientChannelUrl' href={applicant.channelUrl}>{applicant.channelUrl}</a></div>
-              <div>구독자수 {applicant.subscriberCount}</div> 
-              <div>조회수 {applicant.viewCount}</div>
+              <div>구독자수 {applicant.subscriberCount > 10000 ? (applicant.subscriberCount/10000).toFixed(2) + "만명" : applicant.subscriberCount + "명"}</div> 
+              <div>조회수 {applicant.viewCount > 10000 ? (applicant.viewCount/10000).toFixed(2) + "만회" : applicant.viewCount + "회"}</div>
             </Col>
             <Col className='clientStage0_buttonArea' xl={2}>
               <button 

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import auth from '../../../hooks/axios/auth';
 import SupplierSignupForm  from './SupplierSignupForm';
 import ClientSignupForm  from './ClientSignupForm';
@@ -6,7 +6,7 @@ import { loadWeb3, getCurrentAccount } from '../../../hooks/web3/common';
 import confetti from 'canvas-confetti';
 import Swal from 'sweetalert2'
 
-import { Container, Modal, Button, Tab, Tabs } from 'react-bootstrap';
+import { Container, Modal, Tab, Tabs } from 'react-bootstrap';
 import '../LoginPage.css';
 
 const SignUp = ({ show, setShow, email }) => {
@@ -32,7 +32,7 @@ const SignUp = ({ show, setShow, email }) => {
     console.log("SignupData", signupData);
     try {
       const result = await auth.signup(signupData);
-      if (true) {
+      if (result) {
         await Swal.fire({
           icon: 'success',
           title: '회원가입 완료!',

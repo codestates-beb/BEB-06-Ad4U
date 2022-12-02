@@ -9,7 +9,7 @@ import { getContractOwner } from '../../../hooks/web3/queryContract';
 import contract from '../../../hooks/axios/contract'
 import {exchange} from '../../../hooks/axios/coinGecko'
 
-import { Button, Dropdown, Form, InputGroup, Modal, Container } from 'react-bootstrap';
+import { Button, Dropdown, Form, InputGroup, Modal, Container, Row, Col } from 'react-bootstrap';
 
 import './Contract.css';
 
@@ -196,9 +196,11 @@ const AdContract = ({  adList, setIsLoading }) => {
           <Form.Group controlId="formDate" className="mb-3">
             <Form.Label><h5>계약 기간<span className="alert"> *</span></h5></Form.Label>
             <br />
-            <Form.Control type="date" className='ContractDate1' onChange={handleContractDate1}/>
-            <h1 className='dateIcon'> ~ </h1>
-            <Form.Control type="date" className='ContractDate2' onChange={handleContractDate2}/>
+            <Row>
+              <Col xl={5}><Form.Control type="date" className='ContractDate1' onChange={handleContractDate1}/></Col>
+              <Col xl={2}><h1 className='dateIcon'> ~ </h1></Col>
+              <Col xl={5}><Form.Control type="date" className='ContractDate2' onChange={handleContractDate2}/></Col>
+            </Row>
           </Form.Group>
           <p id="date-message" className="dateMessage">Date Field Required!!</p>
           <Form.Group>
@@ -227,39 +229,41 @@ const AdContract = ({  adList, setIsLoading }) => {
           </Form.Group>
           <Form.Label><h5>계약자 지갑 주소<span className="alert"> *</span></h5></Form.Label>
           <InputGroup className="mb-3">
-            <h6>&ensp;Advertiser&ensp;</h6>
-            <Form.Control type="text" placeholder="Enter Your Address" defaultValue={adInfo.clientAddr} disabled/>
+            <h6 className='wallet_text'>&ensp;Advertiser&ensp;</h6>
+            <Form.Control type="text" placeholder="Enter Your Address" defaultValue={adInfo.clientAddr} disabled />
           </InputGroup>
           <InputGroup className="mb-3">
-            <h6>&ensp;Creator&ensp;</h6>
-            <Form.Control type="text" placeholder="Enter Your Contractor Address" defaultValue={adInfo.supplierAddr} disabled/>
+            <h6 className='wallet_text'>&ensp;Creator&ensp;</h6>
+            <Form.Control type="text" placeholder="Enter Your Contractor Address" defaultValue={adInfo.supplierAddr} disabled />
           </InputGroup>
           <p id="address-message" className="addressMessage">Address Field Required!!</p>
-          <Button variant="primary" onClick={() => {setModalShow(true);}}>미리보기</Button>
-          <br />
-          <br />
-          <Button variant="primary" disabled={!previewCheck} onClick={async ()=> {
-            await Swal.fire({
-              title: '해당 계약 내용으로 계약을\n 진행하시겠습니까?',
-              html:
-              '<b>해당 계약서는 한국디지털광고협회 표준 양식으로 작성되었으며,\n 계약 진행시 계약 내용에 대한 수정은 불가합니다.\n 계약금은 앞서 생성하신 스마트컨트랙트에 예치됩니다.</b> ',
-              showCancelButton: true,
-              confirmButtonText: 'Progress',
-            })
-            .then((result) => {
-              if (result.isConfirmed) {
-                window.scrollTo(0, 0);
-                handleSubmit();
-              }
-            })
-          }}>Submit</Button>
+          <Row>
+            <Col>
+              <Button variant="secondary" onClick={() => {setModalShow(true);}}>미리보기</Button>{' '}
+              <Button variant="secondary" disabled={!previewCheck} onClick={async ()=> {
+                await Swal.fire({
+                  title: '해당 계약 내용으로 계약을\n 진행하시겠습니까?',
+                  html:
+                  '<b>해당 계약서는 한국디지털광고협회 표준 양식으로 작성되었으며,\n 계약 진행시 계약 내용에 대한 수정은 불가합니다.\n 계약금은 앞서 생성하신 스마트컨트랙트에 예치됩니다.</b> ',
+                  showCancelButton: true,
+                  confirmButtonText: 'Progress',
+                })
+                .then((result) => {
+                  if (result.isConfirmed) {
+                    window.scrollTo(0, 0);
+                    handleSubmit();
+                  }
+                })
+              }}>Submit</Button>
+            </Col>
+          </Row>
           <Modal
             show={modalShow}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
           >
-            <Modal.Header closeButton>
+            <Modal.Header>
               <Modal.Title>
                 광고 대행 계약서
               </Modal.Title>
@@ -268,7 +272,7 @@ const AdContract = ({  adList, setIsLoading }) => {
               <ContractPrint contractInfo={contractInfo} previewCheck={previewCheck} setTokenURI={setTokenURI} setPreviewCheck={setPreviewCheck}></ContractPrint>
             </Modal.Body>
             <Modal.Footer>
-              <Button onClick={() => setModalShow(false)}>Close</Button>
+              <Button variant="secondary" onClick={() => setModalShow(false)}>Close</Button>
             </Modal.Footer>
           </Modal>
         </Form>

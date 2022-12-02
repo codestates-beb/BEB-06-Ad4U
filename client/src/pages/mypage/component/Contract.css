@@ -58,7 +58,6 @@ h5 {
   color: white;
 }
    
-
 .ContractTitle { 
   color: white;
   font-weight: bold;
@@ -89,9 +88,8 @@ h5 {
   color: white;
   display: inline-block;
   width: 20%;
-  text-align: center;
+  margin-left: 55px;
   line-height: 38px;
-  margin: auto;
 }
 
 .dateMessage {
@@ -109,12 +107,12 @@ h5 {
   color: white;
 }
 
-h6 {
+.wallet_text {
   display: block;
   color: white;
-  font-weight: bold;
-  width: auto;
+  width: 110px;
   text-align: center;
+  margin-top: 9px;
 }
 
 .modalH3 {
