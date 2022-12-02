@@ -406,15 +406,9 @@
 }
 
 .us_card_container {
-<<<<<<< HEAD
   padding: 100px;
   background: linear-gradient(to right, #4568DC,#B06AB3);
   border-radius: 10px;
-=======
-  position: absolute;
-  top: 6070px;
-  left: 18%;
->>>>>>> 426590acfffefac72a9c1dae2282d13cd67d7d61
 }
 
 .us_card {
