@@ -56,7 +56,7 @@
 }
 
 .clientDivider_solid {
-  border-top: 2px solid #999; 
+  border-top: 2px solid black; 
 }
 
 /* stage0 */
@@ -68,6 +68,10 @@
   font-weight: 400;
 }
 
+.clientStage0_contentArea {
+  margin-bottom: 20px;
+}
+
 .clientStage0_ImgArea {
   margin: 10px 0px 20px 10px;
 }
@@ -76,10 +80,6 @@
   margin-left: 40px;
   width: 180px;
   position: relative;
-}
-
-.clientStage0_footer {
-  width: 200px;
 }
 
 .clientStage0_footer {
@@ -98,8 +98,9 @@
 
 .clientStage1_contentArea div {
   margin: auto;
-  color: rgb(8, 110, 161);
+  color: black;
   font-size: large;
+  font-weight: 500;
 }
 
 /* stage2 */
@@ -114,12 +115,14 @@
 
 .clientStage2_contentArea div a {
   text-decoration: none;
+  color: black;
   font-size: large;
+  font-weight: 500;
 }
 
 /* stage3 */
 .clientStage3_contentArea {
-  margin: 30px;
+  margin: auto;
   text-align: center;
 }
 

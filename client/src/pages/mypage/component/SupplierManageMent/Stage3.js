@@ -130,8 +130,8 @@ const Stage3 = ({ adList, setIsLoading }) => {
       <Container className='supplierManagement_container'>
         <Row className='supplierStage3_contentArea'>
           <Col xl={7}>
-            <Row className='supplierStage3_descriptionArea'>{adList.title} 광고계약이 현재 진행중입니다.</Row>
-            <Row className='supplierStage3_detailArea'>confirm으로 계약을 완료시키거나 revoke로 파기할 수 있습니다.</Row>
+            <div className='supplierStage3_descriptionArea'>{adList.title} 광고계약이 현재 진행중입니다.</div>
+            <div className='supplierStage3_detailArea'>confirm으로 계약을 완료시키거나 revoke로 파기할 수 있습니다.</div>
           </Col>
           <Col xl={5}>          
             {confirmCheck

@@ -9,23 +9,22 @@ import { BsGithub } from "react-icons/bs";
 import '../Main.css';
 
 const Us = () => {
-  function handle1Click (e) {
+  const handle1Click = (e) => {
     window.location.href = 'https://github.com/apfl99/BEB-06-Ad4U.git';
   }
-  function handle2Click (e) {
+  const handle2Click = (e) => {
     window.location.href = 'https://github.com/Ellie-kang/BEB-06-Ad4U.git';
   }
-  function handle3Click (e) {
+  const handle3Click = (e) => {
     window.location.href = 'https://github.com/HCW-code/BEB-06-Ad4U.git';
   }
-  function handle4Click (e) {
+  const handle4Click = (e) => {
     window.location.href = 'https://github.com/yiminwook/BEB-06-Ad4U.git';
   }
 
   return (
     <div className='Us_cantainer'>
       <div className='Team4U_title'>Team4U</div>
-      <img src={us_img} alt='usimg'/>
       <Row className='us_card_container'>
         <Col><div className="us_card">
           <Card.Body>

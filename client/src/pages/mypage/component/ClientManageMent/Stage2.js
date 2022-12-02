@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { BsArrowReturnRight } from 'react-icons/bs';
 import { Col, Container } from 'react-bootstrap';
 
 import '../../Client.css';
@@ -13,7 +14,7 @@ const Stage2 = ({ adList }) => {
     <>
       <Container className='clientManagement_container'>
         <Col className='clientStage2_contentArea'>
-          <div><Link to={`/mypage/client/contract/${adId}`}>계약서 작성하러가기</Link></div>
+          <div><BsArrowReturnRight />{' '}<Link to={`/mypage/client/contract/${adId}`}>계약서 작성하러가기</Link></div>
         </Col>
       </Container>
     </>
