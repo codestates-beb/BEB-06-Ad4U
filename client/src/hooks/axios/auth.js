@@ -30,7 +30,7 @@ const oauth = async (authorizationCode, isClient) => {
       method: 'POST',
       headers: {"Content-Type": "application/json"},
       withCredentials: true,
-      data: { code: authorizationCode, isClinet: JSON.parse(isClient) }
+      data: { code: authorizationCode, isClient: JSON.parse(isClient) }
     }
     const result = await axios.request(options);
     return result;

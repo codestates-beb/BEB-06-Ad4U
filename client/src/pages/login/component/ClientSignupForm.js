@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import '../LoginPage.css';
 
-const ClientSignupForm = ({ email, sendSignupData, handleClose }) => {
+const ClientSignupForm = ({ email, sendSignupData }) => {
   
   const [isCorrect, setIsCorrect] = useState(true); //비밀번호 검증
 

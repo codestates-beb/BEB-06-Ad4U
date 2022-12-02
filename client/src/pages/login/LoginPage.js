@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../hooks/axios/auth'; 
-import { setLocalData, getLocalData, removeLocalData } from '../../config/localStrage';
+import { setLocalData, getLocalData } from '../../config/localStrage';
 import Signup from './component/Signup';
 import LoginForm  from './component/LoginForm';
 import Swal from 'sweetalert2';
@@ -33,11 +33,9 @@ const LoginPage = ({ setUserData }) => {
       auth.oauth(authorizationCode, oathSignup)
       .then(res => {
         setEmail(res.data.email);
-        removeLocalData("oathSignup");
         setShow(true);
       })
       .catch(err => {
-        removeLocalData("oathSignup");
         Swal.fire({
           icon: 'warning',
           title: '이미 가입된 계정입니다.',
@@ -51,8 +49,9 @@ const LoginPage = ({ setUserData }) => {
       icon: 'question',
       title: 'AD4U 회원가입',
       showCancelButton: true,
-      confirmButtonText: '크리에이터계정',
-      cancelButtonText: '광고주계정',
+      confirmButtonText: '광고주계정',
+      cancelButtonText: '크리에이터계정',
+      reverseButtons: true,
     })
     .then(res => {
       setLocalData("oathSignup", res.isConfirmed);
