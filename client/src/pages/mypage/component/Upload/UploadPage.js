@@ -158,13 +158,13 @@ const UploadPage = () => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formAdTitle">
-        <Form.Label><h5>광고 제목<span className="alert"> *</span></h5></Form.Label>
+        <Form.Label><h5>광고 제목<span className="require"> *</span></h5></Form.Label>
         <Form.Control type='text' placeholder="Enter Advertisement Title" onChange={handleAdTitle} />
       </Form.Group>
       <p id="title-message" className="titleMessage">Title Field Required!!</p>
 
       <Form.Group>
-        <Form.Label><h5>제안 금액<span className="alert"> *</span></h5></Form.Label>
+        <Form.Label><h5>제안 금액<span className="require"> *</span></h5></Form.Label>
         <InputGroup className="mb-3">
           <Form.Control type='text' placeholder="Enter Advertisement Cost" onChange={handleAdCost} />
           <Dropdown>
@@ -186,7 +186,7 @@ const UploadPage = () => {
       <p id="cost-message" className="costMessage">Cost Field Required!!</p>
 
       <Form.Group className="mb-3" controlId="formAdContent">
-        <Form.Label><h5>광고 내용<span className="alert"> *</span></h5></Form.Label>
+        <Form.Label><h5>광고 내용<span className="require"> *</span></h5></Form.Label>
         <Form.Control as="textarea" placeholder="Enter Your Advertisement Info" rows={10} onChange={handleAdContent} />
       </Form.Group>
       <p id="content-message" className="contentMessage">Content Field Required!!</p>
