@@ -12,7 +12,7 @@ const Stage1 = ({ adList }) => {
     <>
       <Container className='clientManagement_container'>
         {channelName
-          ? <Col className='clientStage1_contentArea'><div>크리에이터 ({channelName} 님)의 컨트랙트 서명을 기다리고 있습니다.</div></Col>
+          ? <Col className='clientStage1_contentArea'><div>{channelName} 님의 컨트랙트 서명을 기다리고 있습니다.</div></Col>
           : <Col className='clientStage1_contentArea'><div>크리에이터의 컨트랙트 서명을 기다리고 있습니다.</div></Col>}
       </Container>
     </>

@@ -144,7 +144,7 @@ const SupplierMypage = () => {
                       <ListGroup variant="flush">
                         {proposeList.length > 0
                         ? proposeList.map((data, idx) => <ListItem key={idx} idx={idx} data={data} />)
-                        : <div>제안받은 광고가 없습니다.</div>}
+                        : <div className='supplierPropose_div'>제안받은 광고가 없습니다.</div>}
                       </ListGroup>
                       </Accordion.Body>
                     </Accordion.Item> 

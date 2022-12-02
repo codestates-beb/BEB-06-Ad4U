@@ -1,5 +1,6 @@
 .completeCol div {
   font-weight: 500;
+  margin-bottom: 10px;
 }
 
 .contractDownload {
@@ -13,18 +14,8 @@
 }
 
 .contractDownloadIcon {
-  width: 30px;
+  width: 25px;
   height: 24px;
   padding-left: 0px;
+  margin-right: 10px;
 }
-
-.completeIcon {
-  width: 30px;
-  height: 40px;
-  float: left;
-  padding-bottom: 10px;
-  padding-left: 0px;
-  padding-right: 10px;
-  margin: auto;
-}
-

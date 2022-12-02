@@ -201,6 +201,10 @@
   text-align : left;
 }
 
+.supplierDetail_cardText>a {
+  text-decoration: none;
+}
+
 .supplierDetail_cardText-email {
   text-align : left;
   cursor: pointer;
