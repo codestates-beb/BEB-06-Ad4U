@@ -406,9 +406,15 @@
 }
 
 .us_card_container {
+<<<<<<< HEAD
   padding: 100px;
   background: linear-gradient(to right, #4568DC,#B06AB3);
   border-radius: 10px;
+=======
+  position: absolute;
+  top: 6070px;
+  left: 18%;
+>>>>>>> 426590acfffefac72a9c1dae2282d13cd67d7d61
 }
 
 .us_card {
@@ -416,10 +422,12 @@
   padding: 20px 20px;
   border-radius: 4px;
   color: white;
-  background-color:  #232526;
+  background-color:#232526;
   font-family: "Montserrat";
   width: 245px;
 }
+
+
 
 
 

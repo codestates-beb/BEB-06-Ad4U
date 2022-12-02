@@ -178,7 +178,7 @@ const UploadPage = () => {
               <Dropdown.Item onClick={() => setVsCurrencies("eur")}>EUR</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-          <img src='https://beb-project3-s3-bucket.s3.ap-northeast-2.amazonaws.com/exchange.png' className='exchange'></img>
+          <img src='https://beb-project3-s3-bucket.s3.ap-northeast-2.amazonaws.com/exchange.png' className='exchange' alt='exchange'></img>
           <Form.Control type='text' placeholder={ethPrice} disabled></Form.Control>
           <InputGroup.Text id="basic-addon2">ETH</InputGroup.Text>
         </InputGroup>
