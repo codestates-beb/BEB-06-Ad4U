@@ -80,7 +80,7 @@ const ClientEditInfo = ({ userData, show, setShow }) => {
         <Form onSubmit={onSubmit}>
           <Form.Group className="mb-3">
             <Row>
-              { newProfileImgUrl
+              {newProfileImgUrl
                 ? <Avatar src={newProfileImgUrl} alt="profile_img" />
                 : <Avatar src={profileImgUrl} alt="profile_img" />}
               <Form.Label>회사 로고 업로드</Form.Label>
@@ -99,9 +99,6 @@ const ClientEditInfo = ({ userData, show, setShow }) => {
           <button className='info_submit'  type="submit">저장하기</button>
         </Form>
         </Modal.Body>
-        {/* <Modal.Footer>
-          <button onClick={() => setShow(false)}>취소하기</button>
-        </Modal.Footer> */}
       </Modal>
     </>
   );
