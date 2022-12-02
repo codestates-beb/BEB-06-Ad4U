@@ -92,47 +92,67 @@ module.exports = {
         res.status(200).json(authorizationUrl);
     },
     auth: async (req, res) => {
-        const { code } = req.body;
+        const { isClient, code } = req.body;
         try {
-            let { tokens } = await oauth2Client.getToken(code);
-            const user_info = jwt_decode(tokens.id_token);
-            const youtube_info = await axios.get(`https://www.googleapis.com/youtube/v3/channels?access_token=${tokens.access_token}&part=snippet,statistics&mine=true&fields=items&2Fsnippet%2Fthumbnails`);
-            let body = {
-                email: user_info.email,
-                channelName: youtube_info.data.items[0].snippet.title,
-                subscriberCount: youtube_info.data.items[0].statistics.subscriberCount,
-                viewCount: youtube_info.data.items[0].statistics.viewCount,
-                channelUrl: `https://www.youtube.com/channel/${youtube_info.data.items[0].id}`,
-                profileImgUrl: youtube_info.data.items[0].snippet.thumbnails.default.url,
-                channel_id: youtube_info.data.items[0].id
-            }
+                const { tokens } = await oauth2Client.getToken(code);
+                const user_info = jwt_decode(tokens.id_token);
 
-            const user = await Supplier.findOne({
-                where: { email: user_info.email },
-            });
-
-            if (user) {
-                if (user.userId) { //회원가입이 되어있을 경우
-                    res.status(400).json("You are already a member")
-                } else {  //auth 시도하다가 취소했을경우
-                    Supplier.update(body, {
+                if(isClient){ //client
+                    const user = await Client.findOne({
                         where: { email: user_info.email },
-                    }).then(data => {
-                        res.status(201).json({ email: user_info.email });
-                    })
-                }
-            } else { //첫 auth - refresh token save
-                body.refreshToken = tokens.refresh_token,
-                    Supplier.create(body)
-                        .then(data => {
+                    });
+                    let body = {
+                        email: user_info.email,
+                    }
+                    if (user) {
+                        if (user.userId) { //회원가입이 되어있을 경우
+                            res.status(400).json("You are already a member");
+                        } else {  //auth 시도하다가 취소했을경우
+                            res.status(200).json("continue signup");
+                        }
+                    } else { //첫 auth - refresh token save
+                            Client.create(body)
+                                .then(data => {
+                                    res.status(201).json({ email: user_info.email });
+                                })
+                    }
+                }else{ //supplier
+                    const youtube_info = await axios.get(`https://www.googleapis.com/youtube/v3/channels?access_token=${tokens.access_token}&part=snippet,statistics&mine=true&fields=items&2Fsnippet%2Fthumbnails`);
+                    let body = {
+                        email: user_info.email,
+                        channelName: youtube_info.data.items[0].snippet.title,
+                        subscriberCount: youtube_info.data.items[0].statistics.subscriberCount,
+                        viewCount: youtube_info.data.items[0].statistics.viewCount,
+                        channelUrl: `https://www.youtube.com/channel/${youtube_info.data.items[0].id}`,
+                        profileImgUrl: youtube_info.data.items[0].snippet.thumbnails.default.url,
+                        channel_id: youtube_info.data.items[0].id
+                    }
+                    const user = await Supplier.findOne({
+                        where: { email: user_info.email },
+                    });
+
+                if (user) {
+                    if (user.userId) { //회원가입이 되어있을 경우
+                        res.status(400).json("You are already a member");
+                    } else {  //auth 시도하다가 취소했을경우
+                        Supplier.update(body, {
+                            where: { email: user_info.email },
+                        }).then(data => {
                             res.status(201).json({ email: user_info.email });
                         })
-            }
+                    }
+                } else { //첫 auth - refresh token save
+                    body.refreshToken = tokens.refresh_token,
+                        Supplier.create(body)
+                            .then(data => {
+                                res.status(201).json({ email: user_info.email });
+                            })
+                }
+                }
+
         } catch (err) {
             res.status(400).json(err.message);
         }
-
-
     },
     signup: async (req, res) => {
         let isClient = req.body.isClient;
@@ -149,15 +169,15 @@ module.exports = {
                 res.status(400).json("아이디 중복")
             } else {
                 if (isClient) {
-                    Client.create(body)
-                        .then(data => {
+                    Client.update(body, {
+                        where: {email:req.body.email}
+                    }).then(data => {
                             res.status(201).json("complete");
                         })
                 } else {
                     Supplier.update(body, {
                         where: { email: req.body.email },
-                    })
-                        .then(data => {
+                    }).then(data => {
                             res.status(201).json("complete");
                         })
                 }
