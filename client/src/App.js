@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import auth from './hooks/axios/auth';
-import { setLocalData, clearLocalData } from './config/localStrage';
+import { setLocalData, removeLocalData, clearLocalData } from './config/localStrage';
 import Swal from 'sweetalert2';
 
 import Nav from './component/Nav';
@@ -26,7 +26,10 @@ const App = () => {
     auth.refresh()
       .then(res => res.data)
       .then(data => {
-        // if (data.message === 'refresh token not provided') return clearLocalData();
+        if (data.message === 'refresh token not provided') {
+          removeLocalData("accessToken");
+          removeLocalData("isClient");
+        }
         const { user, jwt_accessToken, isClient } = data;
         if (user && jwt_accessToken && typeof(isClient) === 'boolean') { 
           setLocalData("accessToken", jwt_accessToken);

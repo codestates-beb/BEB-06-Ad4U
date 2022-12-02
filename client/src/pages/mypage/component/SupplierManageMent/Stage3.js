@@ -135,7 +135,7 @@ const Stage3 = ({ adList, setIsLoading }) => {
           </Col>
           <Col xl={4}>          
             {confirmCheck
-              ? <button className='transaction_Button check' onClick={isConfirmed}>Check!</button> 
+              ? <button className='transaction_Button suppliercheck' onClick={isConfirmed}>Check!</button> 
               : <button className='transaction_Button confirm' onClick={() =>{
                   Swal.fire({
                     title: '계약을 완료하시겠습니까?',

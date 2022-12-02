@@ -54,8 +54,7 @@ const LoginPage = ({ setUserData }) => {
       reverseButtons: true,
     })
     .then(async (res) => {
-      console.log("string" , res.isConfirmed)
-      await setLocalData("oathSignup", res.isConfirmed);
+      setLocalData("oathSignup", res.isConfirmed);
       return auth.oauthLink(res.isConfirmed)
         .then(res=> window.location.href = res)
         .catch(err => console.log(err))
