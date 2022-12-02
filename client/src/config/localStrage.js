@@ -16,5 +16,5 @@ const clearLocalData = () => {
   return window.localStorage.clear();
 }
 
-export { setLocalData, getLocalData, clearLocalData };
+export { setLocalData, getLocalData, removeLocalData, clearLocalData };
 
