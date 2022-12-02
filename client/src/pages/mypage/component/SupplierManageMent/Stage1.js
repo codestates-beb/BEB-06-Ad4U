@@ -46,11 +46,11 @@ const Stage1 = ({ adList, setIsLoading }) => {
     <>
       <Container className='supplierManagement_container'>
         <Row className='supplierStage1_contentArea'>
-          <Col xl={9}>
+          <Col xl={10}>
             <div className='supplierStage1_descriptionArea'>스마트컨트랙트가 블록체인에 배포되었습니다</div>
             <div className='supplierStage1_detailArea'>등록하신 지갑으로 스마트컨트랙트에 서명해주세요</div>
           </Col>
-          <Col xl={3}><button className='transaction_Button sign' onClick={() => {
+          <Col xl={2}><button className='transaction_Button sign' onClick={() => {
             Swal.fire({
               title: '해당 계약에\n 서명하시겠습니까?',
               html:

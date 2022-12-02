@@ -19,8 +19,8 @@ const Stage0 = ({ adList }) => {
     <>
       <Container className='supplierManagement_container'>
         <Row>
-          <Col xl={9} className='supplierStage0_contentArea'><div>현재 광고주가 지원자를 모집중에 있습니다.</div></Col>
-          <Col xl={3} className='supplierStage0_buttonArea '><button className='transaction_Button apply_cancel' onClick={() => supplier.callApplyCancel(accessToken, isClient, adId)}>cancel</button></Col>
+          <Col xl={10} className='supplierStage0_contentArea'><div>현재 광고주가 지원자를 모집중에 있습니다.</div></Col>
+          <Col xl={2} className='supplierStage0_buttonArea'><button className='transaction_Button apply_cancel' onClick={() => supplier.callApplyCancel(accessToken, isClient, adId)}>cancel</button></Col>
         </Row>  
       </Container>
     </>

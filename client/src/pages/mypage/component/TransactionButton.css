@@ -24,9 +24,10 @@
   border: 3px solid #3abbc2;
   color: #3abbc2;
   position: absolute;
-  top: 50%;
+  top: 43%;
   left: 50%;
   transform: translate(-50%, -50%);
+  margin-left: 19px;
 }
 
 
@@ -40,7 +41,8 @@
   border: 3px solid #426454;
   color: #fff;
   background-color: #426454;
-  margin-right: 20px;
+  margin-right: 10px;
+  margin-top: 3px;
 }
 
 /* confirm */
@@ -88,3 +90,14 @@
   color: #fff;
   box-shadow: 0 0 40px 40px #592de9 inset;
 }
+
+/* check */
+.transaction_Button.suppliercheck {
+  border: 3px solid #426454;
+  color: #fff;
+  background-color: #426454;
+  margin-right: 10px;
+  margin-top: 3px;
+  margin-left: 14px;
+}
+
