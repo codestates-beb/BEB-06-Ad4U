@@ -28,7 +28,7 @@ const BusinessPartner = () => {
 
   return (
     <Container className='partner_container'>
-      <h1>Business Partner with us</h1>
+      <h1>Partner with us</h1>
       <h3>파트너사</h3>
       <div className='partner_card_container'>
         {clientList.map((data, idx) => {

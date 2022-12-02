@@ -102,6 +102,7 @@ const SupplierMypage = () => {
   
   return (
     <Container className='supplierMypage_container'>
+      <h1 className='mypage_title'>My Ad4U</h1>
       <Row className='supplierMypage_row' >
         <Col xl={3} >
           <div className="profile-content">
@@ -133,7 +134,6 @@ const SupplierMypage = () => {
           {isLoading
             ? <Loading />
             : <Row>
-                <h1> Supplier Mypage</h1>
                 <Status adList={adList} setStatus={setStatus} />
                 <Container className='supplierMypage_accordion'>
                   {/* 광고제안 */}

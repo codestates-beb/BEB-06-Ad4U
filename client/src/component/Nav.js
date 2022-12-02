@@ -50,7 +50,7 @@ const Nav = ({ userData, setUserData }) => {
   const LoggedIn = ({ userData }) => {
     return (
       <Stack direction="horizontal" gap={4} justify='flex-end'>
-        <button className='navllgout_btn' onClick={deleteUserData}><span>logout</span></button>
+        <button className='navlogin_btn' onClick={deleteUserData}><span>logout</span></button>
         <Link to={`/mypage/${isClient === 'true' ? "client" : "supplier"}`} >
           {userData.profileImgUrl
             ? <Avatar src={userData.profileImgUrl} size="50" round={true}/> 

@@ -26,7 +26,7 @@ const About = () => {
           </div>
           <div className='about_card'>
             <Card>
-              <Card.Text><GrMoney size="60" className='icon'/>중개자가 존재하지 않기때문에, 중개 수수료를 필요로하지 않습니다.</Card.Text>
+              <Card.Text><GrMoney size="60" className='icon'/>중개 수수료를 필요로하지 않습니다.</Card.Text>
             </Card>
           </div>
           <div className='about_card'>
@@ -36,7 +36,7 @@ const About = () => {
           </div>
           <div className='about_card'>
             <Card>
-              <Card.Text><GrDocumentUser size="60" className='icon'/>여러분의 모든 광고 활동을 기록하여 보관할 수 있습니다.</Card.Text>
+              <Card.Text><GrDocumentUser size="60" className='icon'/>여러분의 모든 광고 활동을 기록하여 데이터화 할 수 있습니다.</Card.Text>
             </Card>
           </div>
         </Col>

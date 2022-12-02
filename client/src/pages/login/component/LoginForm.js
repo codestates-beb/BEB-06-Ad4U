@@ -24,8 +24,6 @@ const LoginForm = ({ sendLoginData }) => {
             className="login_inputArea"
             as={Col} 
           >
-            <br />
-            <br />
             <Form.Label className='login_text'>아이디</Form.Label>
             <Form.Control
               type="id"

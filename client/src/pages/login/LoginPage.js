@@ -5,6 +5,7 @@ import { setLocalData  } from '../../config/localStrage';
 import Signup from './component/Signup';
 import LoginForm  from './component/LoginForm';
 import Swal from 'sweetalert2';
+import login_img from './component/login.png';
 
 import { Container, Row, Col, Tab, Tabs } from 'react-bootstrap';
 import { FcGoogle } from 'react-icons/fc';
@@ -37,7 +38,6 @@ const LoginPage = ({ setUserData }) => {
   },[]);
 
   const googleOath = async () => {
-    //서버에서 url을 받아와서 동의 페이지로 이동
     window.location.href = await auth.oauthLink();
   }
 
@@ -87,12 +87,14 @@ const LoginPage = ({ setUserData }) => {
                   eventKey="supplier" 
                   title="크리에이터"
                 >
+                  <img src={login_img} alt='login_img' className='login_img'/>
                   <LoginForm sendLoginData={sendLoginData}/>
                 </Tab>
                 <Tab 
                   eventKey="client" 
                   title="광고주"
                 >
+                  <img src={login_img} alt='login_img' className='login_img'/>
                   <LoginForm sendLoginData={sendLoginData} />
                 </Tab>
               </Tabs>
@@ -118,6 +120,5 @@ const LoginPage = ({ setUserData }) => {
     </>
   );
 }
-
 
 export default LoginPage;

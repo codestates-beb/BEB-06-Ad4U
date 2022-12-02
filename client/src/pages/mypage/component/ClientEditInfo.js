@@ -50,7 +50,7 @@ const ClientEditInfo = ({ userData, show, setShow }) => {
       
       const result = await client.inputInfo(accessToken, isClient, newIntro, imgUrl);
       if (result) {
-        // swal("성공적으로 수정되었습니다.");
+        // Swal("성공적으로 수정되었습니다.");
         window.location.reload();
       } 
     } catch (err) {
@@ -90,12 +90,12 @@ const ClientEditInfo = ({ userData, show, setShow }) => {
               onChange={(e) => setNewIntro(e.target.value)}
               />
           </Form.Group>
-          <button type="submit">저장하기</button>
+          <button className='info_submit'  type="submit">저장하기</button>
         </Form>
         </Modal.Body>
-        <Modal.Footer>
+        {/* <Modal.Footer>
           <button onClick={() => setShow(false)}>취소하기</button>
-        </Modal.Footer>
+        </Modal.Footer> */}
       </Modal>
     </>
   );

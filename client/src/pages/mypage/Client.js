@@ -56,7 +56,6 @@ const ClientMypage = () => {
   const Mypage = ({ adList, setStatus }) => {
     return (
       <>
-        <h1> Client Mypage</h1>
         <Status adList={adList} setStatus={setStatus} />
         <Container className='clientMypage_accordion'>
           <FilterAd adList={adList} status={status} />
@@ -68,6 +67,7 @@ const ClientMypage = () => {
   return (
     <>
       <Container className='clientMypage_container'>
+        <h1 className='mypage_title'>My Ad4U</h1>
         <Row className='clientMypage_row' >
           <Col xl={3} >
             <Row>

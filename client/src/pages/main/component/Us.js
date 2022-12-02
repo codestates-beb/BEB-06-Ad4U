@@ -1,6 +1,7 @@
 import React from 'react';
 
 import us_img from '../imgs/back_Us.png';
+import team4u_img from '../../../dummyfiles/img1.png';
 
 import { Col, Row, Card } from 'react-bootstrap';
 import { BsGithub } from "react-icons/bs";
@@ -12,7 +13,7 @@ const Us = () => {
     window.location.href = 'https://github.com/apfl99/BEB-06-Ad4U.git';
   }
   function handle2Click (e) {
-    window.location.href = 'git@github.com:Ellie-kang/BEB-06-Ad4U.git';
+    window.location.href = 'https://github.com/Ellie-kang/BEB-06-Ad4U.git';
   }
   function handle3Click (e) {
     window.location.href = 'https://github.com/HCW-code/BEB-06-Ad4U.git';

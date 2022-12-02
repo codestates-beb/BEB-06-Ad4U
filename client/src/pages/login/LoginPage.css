@@ -124,3 +124,9 @@
 .signup_button:hover {
   color: rgba(0, 0, 0, 0.763);
 }
+
+.login_img {
+  width: 130px;
+  margin-left: 42.5%;
+  margin-top: 30px;
+}

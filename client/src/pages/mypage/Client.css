@@ -1,12 +1,7 @@
 .clientMypage_container {
-  margin-top: 200px;
+  margin-top: 130px;
   min-height: 1000px;
   font-family: "Montserrat"
-}
-
-.clientMypage_row h1 {
-  color: white;
-  margin-bottom: 30px;
 }
 
 .clientSide_btn span {  
@@ -14,11 +9,10 @@
 }
 
 .clientSide_btn {
-  width: 200px;
-  padding: 10px 50px;
-  margin-left: 25px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  width: 170px;
+  padding: 10px 20px;
+  margin-left: 52px;
+  margin-top: 30px;
   border-radius: 15px;
   background: none;
   color: inherit;
@@ -31,6 +25,20 @@
 
 .clientMypage_accordion {
   margin-top: 20px;
+}
+
+/* clientEditInfo css */
+.info_submit {
+  width: 100px;
+  padding: 10px;
+  border-radius: 15px;
+  background: none;
+  border: 3px solid palevioletred;
+  margin-left: 39%;
+}
+
+.info_submit:hover {
+  transform: scale(1.1);
 }
 
 /* management */
