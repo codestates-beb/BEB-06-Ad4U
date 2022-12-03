@@ -135,7 +135,7 @@ const Stage3 = ({ adList, setIsLoading }) => {
           </Col>
           <Col xl={4}>          
             {confirmCheck
-              ? <button className='transaction_Button suppliercheck' onClick={isConfirmed}>Check!</button> 
+              ? <button className='transaction_Button check' onClick={isConfirmed}>Check!</button> 
               : <button className='transaction_Button confirm' onClick={() =>{
                   Swal.fire({
                     title: '계약을 완료하시겠습니까?',
@@ -155,18 +155,14 @@ const Stage3 = ({ adList, setIsLoading }) => {
                 title: '계약을 파기하시겠습니까?',
                 html:
                 '<b>계약 파기시 예치된 금액은 광고주님에게로 돌아가며,\n 계약은 파기상태로, 되돌릴 수 없습니다.</b> ',
-                showDenyButton: true,
                 showCancelButton: true,
                 confirmButtonText: 'Progress',
-                denyButtonText: `Don't Proceed`,
               }).then((result) => {
-                  if (result.isConfirmed) {
-                    window.scrollTo(0, 0)
-                    handleRevokeConfirmation();
-                  } else if (result.isDenied) {
-                    Swal.fire('계약 파기 취소', '', 'info')
-                  }
-                })
+                if (result.isConfirmed) {
+                  window.scrollTo(0, 0)
+                  handleRevokeConfirmation();
+                }
+              })
             }}>Revoke</button>
             <br />
             <br />

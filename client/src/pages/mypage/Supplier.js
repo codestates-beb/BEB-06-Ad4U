@@ -83,8 +83,8 @@ const SupplierMypage = () => {
         <Row>
           <Col xl={9}>
             <Row className='supplierStage3_descriptionArea'>
-              <Col xl={4}>{idx+1}. {title}</Col>
-              <Col xl={5}>{cost}ETH</Col>
+              <Col xl={5}>{idx+1}. {title}</Col>
+              <Col xl={4}>{cost}ETH</Col>
               <Col xl={3}>{company_name}</Col>
               <Col>
                 <a className='linkToAd' href={"http://localhost:3000/detail/ad/"+adId}>광고 보러가기</a>
@@ -92,8 +92,8 @@ const SupplierMypage = () => {
             </Row>
           </Col>
           <Col xl={3} className="btnGroup">
-            <Button className='acceptBtn' onClick={() => supplier.callApply(accessToken, isClient, adId)}>Accept</Button>
-            <Button className='refuseBtn' onClick={sendRefuse}>Refuse</Button>
+            <Button className='acceptBtn' variant="primary" onClick={() => supplier.callApply(accessToken, isClient, adId)}>Accept</Button>
+            <Button className='refuseBtn' variant="secondary" onClick={sendRefuse}>Refuse</Button>
           </Col>
         </Row>
       </ListGroup.Item>

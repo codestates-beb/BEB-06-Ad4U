@@ -74,7 +74,6 @@ const UploadPage = () => {
           title: '파일 업로드 실패...',
         })
       }
-
       AdInfo.imgUrl = data.Location;
       setAdInfo(AdInfo)
     });
@@ -207,7 +206,7 @@ const UploadPage = () => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <img src={AdInfo.imgUrl} className="adImg" alt='adImg'/>
+          <img src={AdInfo.imgUrl} className="adUpload_img" alt='adImg'/>
           <h4>제안 금액 : {AdInfo.cost} ETH</h4>
           <br></br>
           <p className='aDContent'>{AdInfo.content}</p>

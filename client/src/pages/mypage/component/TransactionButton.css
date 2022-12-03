@@ -48,7 +48,8 @@
 .transaction_Button.confirm {
   border: 3px solid #35d08f;
   color: #35d08f;
-  margin-right: 20px;
+  margin-right: 10px;
+  margin-top: 3px;
 }
 
 .transaction_Button.confirm:hover {
@@ -88,15 +89,5 @@
 .transaction_Button.sign:hover {
   color: #fff;
   box-shadow: 0 0 40px 40px #592de9 inset;
-}
-
-/* check */
-.transaction_Button.suppliercheck {
-  border: 3px solid #426454;
-  color: #fff;
-  background-color: #426454;
-  margin-right: 10px;
-  margin-top: 3px;
-  margin-left: 10px;
 }
 

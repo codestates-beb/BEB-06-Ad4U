@@ -23,7 +23,7 @@ const SignUp = ({ show, setShow, email }) => {
   }
 
   const sendSignupData = async (signupData) => {
-    signupData.isClient = oathSignup;
+    signupData.isClient = JSON.parse(oathSignup);
     console.log("SignupData", signupData);
     try {
       const result = await auth.signup(signupData);

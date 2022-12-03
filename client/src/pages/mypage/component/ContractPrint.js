@@ -7,7 +7,7 @@ import { client } from "../../../config/linkIpfs"
 
 import './Contract.css'
 
-const ContractPrint = ({contractInfo, previewCheck, setTokenURI, setPreviewCheck}) => {
+const ContractPrint = ({ contractInfo, previewCheck, setTokenURI, setPreviewCheck }) => {
 
   useEffect(() => {
     const print = document.getElementById("divToPrint");

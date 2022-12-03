@@ -63,10 +63,10 @@ const AdDetail = ({ userData }) => {
               : <Card.Img variant='top' className='adDetail_card_img' src={nullImg}/> }
           </Row>
           <Row>
-            <h3 className='adTitle'>{detail.title}</h3>
-            <br></br>
-            <br></br>
-            <p className='adContent'>{detail.content}</p>
+            <h3 className='adDetail_Title'>{detail.title}</h3>
+            <br />
+            <br />
+            <p className='adDetail_Content'>{detail.content}</p>
           </Row>
         </Col>
         <Col xl={3}>
@@ -76,7 +76,6 @@ const AdDetail = ({ userData }) => {
             className="adDetail_info_card"
           >
             <Card.Header 
-              as="h5"
               onClick={() => navigate(`/detail/client/${detail.Client.id}`)}
               key={detail.Client.id}
             >

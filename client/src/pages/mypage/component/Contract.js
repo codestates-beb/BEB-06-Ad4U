@@ -7,7 +7,7 @@ import ContractPrint from './ContractPrint';
 import method from '../../../hooks/web3/sendTransaction';
 import { getContractOwner } from '../../../hooks/web3/queryContract';
 import contract from '../../../hooks/axios/contract'
-import {exchange} from '../../../hooks/axios/coinGecko'
+import { exchange } from '../../../hooks/axios/coinGecko'
 
 import { Button, Dropdown, Form, InputGroup, Modal, Container, Row, Col } from 'react-bootstrap';
 

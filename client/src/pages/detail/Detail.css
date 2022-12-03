@@ -53,12 +53,12 @@
   height: 300px;
 }
 
-.adTitle {
+.adDetail_Title {
   color: white;
   font-weight: bolder;
 }
 
-.adContent {
+.adDetail_Content {
   color: white;
   font-size: large;
 }
