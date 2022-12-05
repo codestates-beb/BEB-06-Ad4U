@@ -123,10 +123,11 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
       <a>Frontend</a>
       <ul>
         <li><a>Web3 API 작성</a></li>
-          <li><a>Technical</a></li>
-          <li><a>Technical</a></li>
-          <li><a>Technical</a></li>
-          <li><a>Technical</a></li>
+          <li><a>Aws S3 구축 및 API 작성</a></li>
+          <li><a>Infura IPFS API 작성</a></li>
+          <li><a>광고 업로드 기능 구현</a></li>
+          <li><a>계약서 작성 및 다운로드 기능 구현</a></li>
+          <li><a>광고 상세페이지 보완</a></li>
       </ul>
     </li>
        <li>
