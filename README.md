@@ -4,11 +4,10 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://user-images.githubusercontent.com/72719325/205561063-d6c54654-31c1-4319-8bc1-4d5add334130.png"x alt="Logo" width="80" height="80">
+    <img src="https://user-images.githubusercontent.com/72719325/205561063-d6c54654-31c1-4319-8bc1-4d5add334130.png"x alt="Logo" width="180" height="180">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">Ad4U</h3>
 
   <p align="center">
     An awesome README template to jumpstart your projects!
