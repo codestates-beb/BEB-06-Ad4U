@@ -211,9 +211,6 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
               <li><a>JWT 토큰 인증 방식 구현</a></li>
               <li><a>mypage, refresh api 구현<a><li>
           </ul>
-          <ul>
-             <li><a>main, list, detail, create, delete 등 </a></li>
-          </ul>
           <li><a>Client, Supplier, Advertisement 페이지별 API 구현</a></li>
           <ul>
              <li><a>main, list, detail, create, delete 등 </a></li>
