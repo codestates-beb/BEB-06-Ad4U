@@ -223,11 +223,6 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
              <li><a>apply, cancel, conference, contract, complete 등 </a></li>
           </ul>
       </ul>
-       :star:
-      <a>Smart Contract</a>
-      <ul>
-        <li><a>Smart Contract : 다중 서명, SBT(계약 증명) 발행 코드 등 전체 코드 작성 및 배포</a></li>
-      </ul>
   </ul>
 </details>
 
