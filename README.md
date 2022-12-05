@@ -31,12 +31,8 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li>
-      <a href="#Inspiration">Inspiration</a>
-      <ul>
-        <li><a href="#Technical-Stack">Technical-Stack</a></li>
-      </ul>
-    </li>
+    <li><a href="#Inspiration">Inspiration</a></li>
+    <li><a href="#Technical-Stack">Technical-Stack</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#license">License</a></li>
