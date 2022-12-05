@@ -34,7 +34,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#Technical-Stack">Built With</a></li>
+        <li><a href="#Technical-Stack">Technical-Stack</a></li>
       </ul>
     </li>
     <li>
