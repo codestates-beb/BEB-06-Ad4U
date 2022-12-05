@@ -123,10 +123,10 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
       <a>Frontend</a>
       <ul>
         <li><a>Web3 API 작성</a></li>
-          <li><a>Technical-Stack</a></li>
-          <li><a>Technical-Stack</a></li>
-          <li><a>Technical-Stack</a></li>
-          <li><a>Technical-Stack</a></li>
+          <li><a>Technical</a></li>
+          <li><a>Technical</a></li>
+          <li><a>Technical</a></li>
+          <li><a>Technical</a></li>
       </ul>
     </li>
        <li>
