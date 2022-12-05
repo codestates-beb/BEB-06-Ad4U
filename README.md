@@ -238,26 +238,62 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 
 <!-- Demonstration video -->
 ### Demonstration video
+      
 #### UI
 
 <details>
 <summary>메인페이지</summary>
 <ul>
+<div align="center">
 <img src="https://user-images.githubusercontent.com/72719325/205683163-3728a14f-6c87-46c8-a27c-2308e5de5542.gif" alt="main">
+</div>
 </ul>
 </details>
 
 <details>
 <summary>광고 조회 및 검색</summary>
 <ul>
-<img src="https://user-images.githubusercontent.com/72719325/205684902-79d25881-3f8d-4971-86c7-d3da28da3eb4.gif" alt="search">
+<div align="center">
+<img src="https://user-images.githubusercontent.com/72719325/205684902-79d25881-3f8d-4971-86c7-d3da28da3eb4.gif" alt="search" >
+<div>
 </ul>
 </details>
       
 <details>
 <summary>회원가입 및 로그인</summary>
 <ul>
-<img src="https://user-images.githubusercontent.com/72719325/205685134-2447fb69-4425-4476-ac45-20fd1b58858f.gif" alt="search">
+<div align="center">
+<img src="https://user-images.githubusercontent.com/72719325/205685134-2447fb69-4425-4476-ac45-20fd1b58858f.gif" alt="signuplogin">
+<div>
+</ul>
+</details>
+    
+#### Contract
+
+<details>
+<summary>광고주) 광고 업로드, 삭제 및 제안</summary>
+<ul>
+<div align="center">
+<img src="https://user-images.githubusercontent.com/72719325/205687363-99d8e5dd-f179-4d94-836e-2b238193cd6e.gif" alt="create">
+</div>
+</ul>
+</details>
+
+<details>
+<summary>크리에이터) 광고 지원, 취소</summary>
+<ul>
+<div align="center">
+<img src="https://user-images.githubusercontent.com/72719325/205687532-1d8e9d16-4f67-4642-9146-eae96d0ffcb6.gif" alt="apply" >
+<div>
+</ul>
+</details>
+      
+<details>
+<summary>광고주) 계약 생성</summary>
+<ul>
+<div align="center">
+<img src="https://user-images.githubusercontent.com/72719325/205687763-929bb810-5edf-44ee-9dd5-2785ffd7032c.gif" alt="signuplogin">
+<div>
 </ul>
 </details>
       
