@@ -37,16 +37,19 @@
     <li><a href="#contact">Contact</a></li>
      <li><a href="#Demonstration video">Demonstration video</a></li>
       <details>
-          <summary>Demonstration video</summary>
+          <summary>UI</summary>
         <ul>
          <li><a href="#Preview">main</a></li>
          <li><a href="#Preview">Preview</a></li>
          <li><a href="#Preview">Preview</a></li>
          <li><a href="#Preview">Preview</a></li>
          <li><a href="#Preview">Preview</a></li>
-         <li><a href="#Preview">Preview</a></li>
-         <li><a href="#Preview">Preview</a></li>
-         <li><a href="#Preview">Preview</a></li>
+        </ul>
+        </details>
+      <details>
+          <summary>Contract</summary>
+        <ul>
+         <li><a href="#Preview">main</a></li>
          <li><a href="#Preview">Preview</a></li>
          <li><a href="#Preview">Preview</a></li>
          <li><a href="#Preview">Preview</a></li>
