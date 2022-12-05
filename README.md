@@ -37,7 +37,6 @@
         <li><a href="#Technical-Stack">Technical-Stack</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#license">License</a></li>
