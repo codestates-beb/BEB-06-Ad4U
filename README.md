@@ -35,9 +35,9 @@
     <li><a href="#Technical-Stack">Technical-Stack</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#contact">Contact</a></li>
-      <details>
+    <details>
           <summary href="#Demonstration video">Demonstration video</summary>
-      <ul>
+    <ul>
          <li><a href="#Preview">main</a></li>
          <li><a href="#Preview">Preview</a></li>
          <li><a href="#Preview">Preview</a></li>
@@ -51,7 +51,7 @@
          <li><a href="#Preview">Preview</a></li>
          <li><a href="#Preview">Preview</a></li>
       </ul>
-      </details>
+    </details>
   </ol>
 </details>
 
