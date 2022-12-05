@@ -117,7 +117,7 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
   <summary>팀장 김현우</summary>
   <ol>
     <li>
-      <a>About The Project</a>
+      <a>Project Management</a>
       <ul>
         <li><a>Technical-Stack</a></li>
       </ul>
