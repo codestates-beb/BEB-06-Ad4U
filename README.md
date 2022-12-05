@@ -5,8 +5,6 @@
 <br />
 <div align="center">
     <img src="https://user-images.githubusercontent.com/72719325/205561063-d6c54654-31c1-4319-8bc1-4d5add334130.png" alt="Logo" width="380" height="300">
-  </a>
-
   <h3 align="center">Ad4U</h3>
 
   <p align="center">
@@ -242,8 +240,7 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 ### Demonstration video
       
 #### 메인페이지 <br>
-      
-      ![1 main](https://user-images.githubusercontent.com/72719325/205682896-3e724ae2-3dfe-4db7-9031-96e3ff01bcca.gif)
+      <img src="https://user-images.githubusercontent.com/72719325/205683163-3728a14f-6c87-46c8-a27c-2308e5de5542.gif" alt="mainpage" width="380" height="300">
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
