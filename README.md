@@ -16,7 +16,7 @@
 </div>
 
 <!-- Table of Contents -->
-# :notebook_with_decorative_cover: Table of Contents
+### :notebook_with_decorative_cover: Table of Contents
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
 <!--
@@ -48,7 +48,7 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## Inspiration
+### Inspiration
 
 프로젝트 내용이 들어가야 함
 
@@ -94,7 +94,7 @@
 
 
 <!-- ROADMAP -->
-## Roadmap
+### Roadmap
 
 - [x] Add Changelog
 - [x] Add back to top links
@@ -111,7 +111,7 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 
 
 <!-- Team -->
-## Team
+### Team
 
 <details>
   <summary>팀장 김현우</summary>
@@ -215,7 +215,7 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 
 
 <!-- LICENSE -->
-## License
+### License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
@@ -224,7 +224,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 
 <!-- CONTACT -->
-## Contact
+### Contact
 
 Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
 
@@ -235,7 +235,7 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 
 
 <!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+### Acknowledgments
 
 Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
