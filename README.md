@@ -4,7 +4,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <img src="https://user-images.githubusercontent.com/72719325/205561063-d6c54654-31c1-4319-8bc1-4d5add334130.png" alt="Logo" width="300" height="300">
+    <img src="https://user-images.githubusercontent.com/72719325/205561063-d6c54654-31c1-4319-8bc1-4d5add334130.png" alt="Logo" width="350" height="300">
   </a>
 
   <h3 align="center">Ad4U</h3>
