@@ -125,24 +125,24 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
   <summary>김현우</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a>About The Project</a>
       <ul>
-        <li><a href="#Technical-Stack">Technical-Stack</a></li>
+        <li><a>Technical-Stack</a></li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a>Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a>Prerequisites</a></li>
+        <li><a>Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a>Usage</a></li>
+    <li><a>Roadmap</a></li>
+    <li><a>Contributing</a></li>
+    <li><a>License</a></li>
+    <li><a>Contact</a></li>
+    <li><a>Acknowledgments</a></li>
   </ol>
 </details>
 
