@@ -1,38 +1,150 @@
 .clientMypage_container {
-  position: relative;
-  margin-top: 200px;
-  height: 2000px;
+  margin-top: 130px;
+  min-height: 1000px;
+  font-family: "Montserrat"
 }
 
-.clientMypage_row h1 {
-  color: white;
-  margin-bottom: 30px;
-}
-
-
-.clientupload_btn span {  
+.clientSide_btn span {  
   color: white;
 }
 
-.clientupload_btn {
-  padding: 10px 50px;
-  margin-left: 35px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+.clientSide_btn {
+  width: 170px;
+  padding: 10px 20px;
+  margin-left: 52px;
+  margin-top: 30px;
   border-radius: 15px;
   background: none;
   color: inherit;
   border: 3px solid white;
 }
 
-.clientupload_btn:hover {
+.clientSide_btn:hover {
   transform: scale(1.1);
-}
-
-.accordion {
-  margin-top: 20px;
 }
 
 .clientMypage_accordion {
   margin-top: 20px;
+}
+
+/* clientEditInfo css */
+.ClientInfo_container {
+  font-family: "Montserrat"
+}
+
+.info_submit {
+  width: 100px;
+  padding: 10px;
+  border-radius: 15px;
+  background: none;
+  border: 3px solid palevioletred;
+  margin-left: 39%;
+}
+
+.info_submit:hover {
+  transform: scale(1.1);
+}
+
+/* management */
+.clientManagement_container {
+  margin: auto;
+}
+
+.clientChannelUrl {
+  text-decoration: none;
+  color: rgba(65, 61, 61, 0.834)
+}
+
+.clientDivider_solid {
+  border-top: 2px solid black; 
+}
+
+/* stage0 */
+.clientStage0_emptyArea {
+  height: 50px;
+  text-align: center;
+  margin-top: 25px;
+  font-size: large;
+  font-weight: 400;
+}
+
+.clientStage0_contentArea {
+  margin-bottom: 20px;
+}
+
+.clientStage0_ImgArea {
+  margin: 10px 0px 20px 10px;
+}
+
+.clientStage0_buttonArea {
+  margin-left: 40px;
+  width: 180px;
+  position: relative;
+}
+
+.clientStage0_footer {
+  width: 200px;
+}
+
+.clientStage0_popover {
+  max-width: 100%;
+} 
+
+/* stage1 */
+.clientStage1_contentArea {
+  height: 80px;
+  display: flex;
+}
+
+.clientStage1_contentArea div {
+  margin: auto;
+  color: black;
+  font-size: large;
+  font-weight: 500;
+}
+
+/* stage2 */
+.clientStage2_contentArea {
+  height: 80px;
+  display: flex;
+}
+
+.clientStage2_contentArea div {
+  margin: auto;
+}
+
+.clientStage2_contentArea div a {
+  text-decoration: none;
+  color: black;
+  font-size: large;
+  font-weight: 500;
+}
+
+/* stage3 */
+.clientStage3_contentArea {
+  margin: auto;
+  text-align: center;
+}
+
+.clientStage3_descriptionArea {
+  margin-top: 10px;
+  font-size: large;
+  font-weight: 600;
+}
+
+.clientStage3_detailArea {
+  font-size: small;
+  font-weight: 400;
+}
+
+/* stage4 */
+.clientStage4_contentArea {
+  margin: 30px;
+  text-align: center;
+}
+
+/* stage5 */
+.clientStage5_contentArea {
+  margin: 30px;
+  text-align: center;
 }

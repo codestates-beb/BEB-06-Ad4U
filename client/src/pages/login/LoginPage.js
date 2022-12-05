@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { decodeToken } from 'react-jwt';
 import auth from '../../hooks/axios/auth'; 
+import { setLocalData, getLocalData } from '../../config/localStrage';
 import Signup from './component/Signup';
 import LoginForm  from './component/LoginForm';
+import Swal from 'sweetalert2';
+import login_img from './component/login.png';
 
-import Container from 'react-bootstrap/esm/Container';
-import Row from 'react-bootstrap/esm/Row';
-import Col from 'react-bootstrap/esm/Col';
-import Button from 'react-bootstrap/Button';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-
+import { Container, Row, Col, Tab, Tabs } from 'react-bootstrap';
+import { FcGoogle } from 'react-icons/fc';
 import './LoginPage.css';
 
 const LoginPage = ({ setUserData }) => {
   const [isClient, setIsClient] = useState(false);
   const [email, setEmail] = useState("");
   const [show, setShow] = useState(false);
+  
   const navigate = useNavigate();
 
   const handleIsClient = (e) => {
@@ -29,93 +27,118 @@ const LoginPage = ({ setUserData }) => {
   useEffect(() => {
     const url = new URL(window.location.href);
     const authorizationCode = url.searchParams.get('code');
-    console.log("authorizationCode", authorizationCode);
-    if (authorizationCode) {
-      auth.oauth(authorizationCode)
-        .then(res => {
-          setEmail(res.data.email);
-          setShow(true);
+    const oathSignup = getLocalData("oathSignup");
+    
+    if (authorizationCode && oathSignup) {
+      auth.oauth(authorizationCode, oathSignup)
+      .then(res => {
+        setEmail(res.data.email);
+        setShow(true);
+      })
+      .catch(err => {
+        Swal.fire({
+          icon: 'warning',
+          title: '이미 가입된 계정입니다.',
         })
-        .catch(err => alert(err.response.data))
+      })
     }
-  },[]);
+  }, []);
 
   const googleOath = async () => {
-    const url = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code`+
-    `&access_type=offline`+
-    `&state=ad4u_oauth_login`+
-    `&include_granted_scopes=true`+
-    `&client_id=${process.env.REACT_APP_CLIENT_ID}`+
-    `&scope=openid%20profile%20email%20https://www.googleapis.com/auth/youtube.readonly`+
-    `&redirect_uri=http://localhost:3000/login`;
-    window.location.href=url;
+    Swal.fire({
+      icon: 'question',
+      title: 'AD4U 회원가입',
+      showCancelButton: true,
+      confirmButtonText: '광고주계정',
+      cancelButtonText: '크리에이터계정',
+      reverseButtons: true,
+    })
+    .then(async (res) => {
+      setLocalData("oathSignup", res.isConfirmed);
+      return auth.oauthLink(res.isConfirmed)
+        .then(res=> window.location.href = res)
+        .catch(err => console.log(err))
+    })
   }
 
   const sendLoginData = async (loginData) => {
     loginData.isClient = isClient;
-    console.log("LoginData", loginData);
+    
     const { userId, password } = loginData;
     try { 
       if ( userId && password ) {
       const result = await auth.login(loginData);
         if (result) {
-          const { user } = result.data;
-          user.jwt_accessToken = result.data.jwt_accessToken;
-          user.isClient = result.data.isClient;
-          setUserData(user);
-          navigate('/');
+          const { user, jwt_accessToken, isClient } = result.data;  
+          if (user && jwt_accessToken && typeof(isClient) === 'boolean') {   
+            setLocalData("accessToken", jwt_accessToken);
+            setLocalData("isClient", isClient);
+            setUserData(user);
+            navigate('/');
+          }
         }
       } else {
-        alert("아이디와 비밀번호를 입력해주세요");
+        await Swal.fire({
+          icon: 'warning',
+          title: '아이디와 비밀번호를 입력해주세요.',
+        })
       }
     } catch (err) {
-      alert(err.response.data);
+      await Swal.fire({
+        icon: 'warning',
+        title: '아이디 또는 비밀번호가 잘못되었습니다.',
+      })
     }
   }
   
   return (
     <>
       <Container className='loginPage_container'>
-        <Tabs
-          as={Row}
-          defaultActiveKey="supplier"
-          onSelect={handleIsClient}
-          className="mb-3"
-          justify
-        >
-          <Tab 
-            eventKey="supplier" 
-            title="크리에이터"
-          >
-            <LoginForm sendLoginData={sendLoginData}/>
-          </Tab>
-          <Tab 
-            eventKey="client" 
-            title="광고주"
-          >
-            <LoginForm sendLoginData={sendLoginData} />
-          </Tab>
-        </Tabs>
         <Row>
-          <Button 
-            as={Col}
-            xs={{ span: 4, offset: 8 }}
-            onClick={googleOath} 
-          >
-            Google 계정으로 간편회원가입
-          </Button>
+          <Col xl={2}/>
+            <Col xl={8}>
+              <Tabs
+                className='login_tab'
+                defaultActiveKey="supplier"
+                onSelect={handleIsClient}
+                justify
+              >
+                <Tab 
+                  eventKey="supplier" 
+                  title="크리에이터"
+                >
+                  <img src={login_img} alt='login_img' className='login_img'/>
+                  <LoginForm sendLoginData={sendLoginData}/>
+                </Tab>
+                <Tab 
+                  eventKey="client" 
+                  title="광고주"
+                >
+                  <img src={login_img} alt='login_img' className='login_img'/>
+                  <LoginForm sendLoginData={sendLoginData} />
+                </Tab>
+              </Tabs>
+              <Row className='login_buttonArea'>
+                <Col xl={3}/>
+                <Col xl={4}>
+                  <button className="login_googleSignupButton" onClick={googleOath}>
+                    <FcGoogle className='login_googleIcon' size={30}/>  
+                    Google 계정으로 간편회원가입
+                  </button>
+                </Col>
+                <Col xl={5}/>
+              </Row>
+            </Col>
+          <Col xl={2}/>
         </Row>
       </Container>
       <Signup 
-          email={email}
-          show={show} 
-          setShow={setShow}
-          isClient={isClient}
-          handleIsClient={handleIsClient}
-        />
+        email={email}
+        show={show} 
+        setShow={setShow}
+      />
     </>
   );
 }
-
 
 export default LoginPage;

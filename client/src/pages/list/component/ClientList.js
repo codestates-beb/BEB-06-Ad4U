@@ -1,31 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import client from '../../../hooks/axios/client';
 import SearchBar from './SearchBar';
 
-import Container from 'react-bootstrap/Container';
-import Table from 'react-bootstrap/Table';
-import './ClientList.css';
+import { Container } from 'react-bootstrap';
+
+import '../ListPage.css';
 
 const ClientList = () => {
   const [list, setList] = useState([]);
-  console.log("list", list);
 
-  //필요시 추가, data에 null값이 있을시 에러발생
   const filter = [
     { item: "업체명", eventKey: "company_name" },
   ]
 
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     client.getList()
-    .then(res => setList(res.data))
+    .then(res => {setList(res.data); console.log(res.data)})
     .catch(err => console.log(err.response.data))
   }, [])
 
   const refreshList = (eventKey, input) => {
-    // input이 없으면 필터링 없이  refresh
     client.getList()
     .then(res => res.data)
     .then(data => {
@@ -41,40 +39,34 @@ const ClientList = () => {
     .catch(err => console.log(err.response.data))
   }
 
-  const ClientTable = ({ idx, data }) => {
-    return (
-      <tr>
-        <td>{idx+1}</td>
-        <td 
-          colSpan={3}
-          onClick={() => navigate(`/detail/client/${data.id}`)}
-        >
-          {data.company_name}
-        </td>
-        <td>{data.Advertisements.length}</td>
-      </tr>
-    );
-  }
-
   return (
     <Container className='clientList_container'>
-      <h1>ClientList</h1>
       <SearchBar filter={filter} refreshList={refreshList}/>
-      <Table hover>
-        <thead>
-          <tr>
-            <th></th>
-            <th colSpan={3}>업체명</th>
-            <th>모집중인 광고</th>
-          </tr>
-        </thead>
-        <tbody>
-          {list.length === 0 
-            ? <div className='clientList_container'>검색결과가 없습니다</div>
-            : list.map((data, idx) => <ClientTable key={idx} idx={idx} data={data} />)
-          }
-        </tbody>
-      </Table>
+      {list.length === 0 
+        ? <div className='noresultant'>검색결과가 없습니다</div> 
+        : <div className='partnerList_card_container'>
+          {list && list.map((data, idx) => {
+            return (
+              <div className='partnerList_card'
+              onClick = {() => {
+                navigate(`/detail/client/${data.id}`)
+                window.scrollTo(0,0)
+              }}
+              key={idx}
+              >
+                <div className='partnerList_card_content'>
+                  <div className='partnerList_card_front'>
+                    <img src={data.profileImgUrl} alt='profileImg'/>
+                  </div>
+                  <div className='partnerList_card_back'>
+                    <h3>{data.company_name}</h3>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      }
     </Container>
   );
 }

@@ -1,29 +1,33 @@
-const { Client, Advertisement, Advertisement_has_Supplier, Supplier } = require('../models/index');
-const jwt = require('jsonwebtoken');
-
+const { Client, Advertisement, Advertisement_has_Supplier, Supplier, Client_has_Supplier } = require('../models/index');
+const ad_attributes = ['id', 'title', 'AdimgUrl', 'cost', 'createdAt'];
 
 module.exports = {
     main: async (req, res) => { //최근 10개만
         try {
             let main_ad = await Advertisement.findAll({
-                attributes: ['id', 'title', 'AdimgUrl', 'cost', 'createdAt'],
+                attributes: ad_attributes,
                 where: {
                     status: 0,
                 },
+                include: [
+                    {
+                        model: Client, as: "Client",
+                        attributes: ['id', 'company_name', 'email', 'profileImgUrl'],
+                    }
+                ],
                 order: [['id', 'DESC']],
-                limit: 10,
-                // offset: 5,
+                limit: 10
             });
             res.status(200).json(main_ad);
-        } catch (error) {
-            res.status(400).json(error);
+        } catch (err) {
+            res.status(400).json(err.message);
         }
 
     },
     list: async (req, res) => {
         try {
             let list_ad = await Advertisement.findAll({
-                attributes: ['id', 'title', 'AdimgUrl', 'cost', 'createdAt'],
+                attributes: ad_attributes,
                 where: {
                     status: 0,
                 },
@@ -31,126 +35,114 @@ module.exports = {
                 include: [
                     {
                         model: Client, as: "Client",
-                        attributes: ['id', 'company_name', 'company_number', 'email'],
+                        attributes: ['id', 'company_name', 'email', 'profileImgUrl'],
                     },
                 ]
-                //limit: 10,
-                // offset: 5,
-                
             });
             list_ad.forEach((el) => {
                 el.dataValues.company_name = el.Client.company_name;
             });
 
             res.status(200).json(list_ad);
-        } catch (error) {
-            res.status(400).json(error);
+        } catch (err) {
+            res.status(400).json(err.message);
         }
 
     },
     detail: async (req, res) => {
         try {
-            let ad_datail = await Advertisement.findOne({
-                attributes: ['id', 'title', 'content', 'AdimgUrl', 'cost', 'createdAt'],
+            ad_attributes.push('content');
+            let ad_detail = await Advertisement.findOne({
+                attributes: ad_attributes,
                 where: {
                     id: req.query.id
                 },
                 include: [
                     {
                         model: Client, as: "Client",
-                        attributes: ['id', 'userId', 'company_name', 'company_number', 'email'],
+                        attributes: ['id', 'company_name', 'company_number', 'email', 'profileImgUrl'],
                     },
                     {
                         model: Advertisement_has_Supplier, as: "Advertisement_has_Suppliers",
                         include: [
                             {
                                 model: Supplier, as: "Supplier",
-                                attributes: ['userId'],
+                                attributes: ['id'],
                             }
                         ]
                     }
 
                 ]
-                //limit: 10,
-                // offset: 5,
             });
-            res.status(200).json(ad_datail);
-        } catch (error) {
-            res.status(400).json(error);
+            res.status(200).json(ad_detail);
+        } catch (err) {
+            res.status(400).json(err.message);
         }
 
     },
     create: async (req, res) => { //광고 생성 - client
-        const authorization = req.headers.authorization;
-        const { title, content, AdImgUrl, cost, isClient } = req.body;
-
-        if (!authorization || !isClient) {
-            res.status(401).send({ data: null, message: 'invalid access' });
-        } else {
-            try {
-                const token = authorization.split(' ')[1];
-                const data = jwt.verify(token, process.env.ACCESS_SECRET);
-
-                const body = {
-                    title: title,
-                    content: content,
-                    AdImgUrl: AdImgUrl,
-                    cost: cost,
-                    status: 0,
-                    Client_id: data.user.id
-                }
-                Advertisement.create(body)
-                    .then(data => {
-
-                        res.status(201).json("complete");
-                    }).catch(err => {
-
-                        res.status(400).json("DB error");
-                    });
-            } catch (error) {
-                res.status(400).json(error);
+        const { title, content, AdImgUrl, cost } = req.body;
+        try {
+            const body = {
+                title: title,
+                content: content,
+                AdImgUrl: AdImgUrl,
+                cost: cost,
+                status: 0,
+                Client_id: req.data.user.id
             }
+            Advertisement.create(body)
+                .then(data => {
+                    res.status(201).json("complete");
+                })
+        } catch (err) {
+            res.status(400).json(err.message);
         }
     },
     _delete: async (req, res) => { //광고 삭제 -client
-        const authorization = req.headers.authorization;
-        const { advertisement_id, isClient } = req.body;
-        if(!authorization || !isClient){
-            res.status(401).send({ data: null, message: 'invalid access' });
-        }else{
-            try {
-                const token = authorization.split(' ')[1];
-                const data = jwt.verify(token, process.env.ACCESS_SECRET);
+        const { advertisement_id } = req.body;
 
-                const ad = await Advertisement.findOne({
-                    attributes: ['Client_id'],
-                    where: { id: advertisement_id },
-                })
-            if (ad.Client_id != data.user.id) {
-                res.status(401).send({ data: null, message: 'invalid access' });
+        try {
+            const ad = await Advertisement.findOne({
+                attributes: ['Client_id'],
+                where: { id: advertisement_id },
+            })
+            if (ad.Client_id != req.data.user.id) {
+                res.status(401).json('invalid access');
             } else {
-                        Advertisement_has_Supplier.destroy({
-                            where: {
-                                Advertisement_id: advertisement_id
-                            }
-                        }).then((data) => {
-                            Advertisement.destroy({
-                                where : {
-                                    id: advertisement_id
-                            }})
-                            .then(data => {
-                                res.status(201).json("complete");
-                            }).catch(err => {
-                                res.status(400).json("DB error");
-                            });
-                        }).catch((err)=> {
-                            res.status(400).json("DB error");
-                        })
+                await Advertisement_has_Supplier.destroy({
+                    where: {
+                        Advertisement_id: advertisement_id
+                    }
+                });
+                await Client_has_Supplier.destroy({
+                    where: {
+                        Advertisement_id: advertisement_id
+                    }
+                });
+                await Advertisement.destroy({
+                    where: {
+                        id: advertisement_id
+                    }
+                });
+                res.status(200).json("complete")
             }
-        } catch (error) {
-            res.status(400).json(error);
+        } catch (err) {
+            res.status(400).json(err.message);
         }
+    },
+    allContract: async (req, res) => {
+        try {
+            let list_contract = await Advertisement.findAll({
+                attributes: ['multisigAddress'],
+            });
+            const filter_contract = list_contract.filter((ele) => {
+                return ele.dataValues.multisigAddress != null;
+            })
+            res.status(200).json(filter_contract);
+        } catch (err) {
+            res.status(400).json(err.message);
         }
-        
+
     },
 }

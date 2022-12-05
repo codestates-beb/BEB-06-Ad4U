@@ -1,40 +1,41 @@
 import React, { useState, useRef } from 'react';
+import Swal from 'sweetalert2';
 
-import Container from 'react-bootstrap/esm/Container';
-import Row from 'react-bootstrap/esm/Row';
-import Col from 'react-bootstrap/esm/Col';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import '../LoginPage.css';
 
-const ClientSignupForm = ({ email, account, inputAccount, sendSignupData, handleClose }) => {
+const ClientSignupForm = ({ email, sendSignupData }) => {
   
-  const [isCorrect, setIsClient] = useState(true);
+  const [isCorrect, setIsCorrect] = useState(true); //비밀번호 검증
 
-  let companyNameRef = useRef(null);
   let idRef = useRef(null);
   let passwordRef = useRef(null);
-  let confirmRef = useRef(null);;
+  let confirmRef = useRef(null);
+  let company_nameRef = useRef(null);
+  let company_numberRef = useRef(null);
 
   const onSubmit = async (e) => {
     e.preventDefault(); //버튼을 눌러도 새로고침 되지않도록 함
-    const companyName = companyNameRef.current.value;
     const userId = idRef.current.value;
     const password = passwordRef.current.value;
     const confirm = confirmRef.current.value;
+    const company_name = company_nameRef.current.value;
+    const company_number = company_numberRef.current.value;
 
     if (password === confirm) {
-      const signupData = { companyName, email, userId, password, account };
+      const signupData = { email, userId, password, company_name, company_number };
 
-      if ( companyName && email && userId && password && account ) {
-        setIsClient(true);
+      if ( email && userId && password && company_name && company_number) {
+        setIsCorrect(true);
         sendSignupData(signupData);
       } else {
-        alert("입력되지않은 정보가 있습니다.")
+        await Swal.fire({
+          icon: 'warning',
+          title: '입력되지 않은 정보가 있습니다!',
+        })
       }
     } else {
-      setIsClient(false);
+      setIsCorrect(false);
     }
   }
 
@@ -42,42 +43,33 @@ const ClientSignupForm = ({ email, account, inputAccount, sendSignupData, handle
     <>
       <Container>
         <Form onSubmit={onSubmit}>
-          <Form.Group className="signup_inputArea" as={Row}>
-            <Form.Label>Email</Form.Label>
+          <Form.Group className="signup_inputArea">
+            <Form.Label>이메일</Form.Label>
             <Form.Control
               placeholder="Google Email" 
               type="email"
               value={email}
               rows={1}
               disabled
-              autoFocus
             />
           </Form.Group>
-          <Form.Group className="signup_inputArea" as={Row}>
-            <Form.Label>Company Name</Form.Label>
-            <Form.Control
-              type="text"
-              rows={1} 
-              ref={companyNameRef}
-            />
-          </Form.Group>
-          <Form.Group className="signup_inputArea" as={Row}>
-            <Form.Label>ID</Form.Label>
+          <Form.Group className="signup_inputArea">
+            <Form.Label>아이디</Form.Label>
             <Form.Control 
               type="id" 
               rows={1} 
               ref={idRef}/>
           </Form.Group>
-          <Form.Group className="signup_inputArea" as={Row}>
-            <Form.Label>Password</Form.Label>
+          <Form.Group className="signup_inputArea">
+            <Form.Label>비밀번호</Form.Label>
             <Form.Control 
               type="password"
               rows={1} 
               ref={passwordRef}
             />
           </Form.Group>
-          <Form.Group className="signup_inputArea" as={Row}>
-            <Form.Label>Confirm Password</Form.Label>
+          <Form.Group className="signup_inputArea">
+            <Form.Label>비밀번호 확인</Form.Label>
             <Form.Control 
               type="password"
               rows={1} 
@@ -85,38 +77,34 @@ const ClientSignupForm = ({ email, account, inputAccount, sendSignupData, handle
             />
             <div>{isCorrect ? "" : "비밀번호가 일치하지 않습니다."}</div>
           </Form.Group>
-          <Form.Group className="signup_inputArea" as={Row}>
-            <Form.Label>WalletAddress</Form.Label>
+          <Form.Group className="signup_inputArea">
+            <Form.Label>회사명</Form.Label>
+            <Form.Control 
+              type="text"
+              rows={1} 
+              ref={company_nameRef}
+              autoFocus
+            />
+          </Form.Group>
+          <Form.Group className="signup_inputArea">
+            <Form.Label>사업자번호</Form.Label>
             <Form.Control 
               type="id"
-              value={account}
-              disabled
               rows={1} 
+              ref={company_numberRef}
             />
-            <button
-              type="button"
-              onClick={inputAccount}
-            >
-              getAccount
-            </button>
           </Form.Group>
-          <Row>
-            <Col className="signup_lowerArea">
-              <Button 
-                className="signup_button" 
-                variant="primary" 
-                type="submit"
-              >
-                SignUp
-              </Button>
-              <Button
-                className="signup_close_button" 
-                variant="secondary" 
-                onClick={handleClose}
-              >
-                Close
-              </Button>
+          <Row className="signup_lowerArea">
+            <Col xl={4}/>
+            <Col xl={4}>
+            <button 
+              className="signup_button" 
+              type="submit"
+            >
+              가입하기
+            </button>
             </Col>
+            <Col xl={4}/>
           </Row>
         </Form>
       </Container>

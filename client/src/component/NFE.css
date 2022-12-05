@@ -1,0 +1,76 @@
+/* Nav css */
+.navfix {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  z-index: 1;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition-timing-function: ease-in;
+  transition: all 0.5s;
+}
+
+.nav_clear{
+  background-color: rgba(1, 10, 14, 0.8);
+}
+
+.nav_logo {
+  position: fixed;
+  margin-left: 90px;
+  object-fit: contain;
+  top:11px;
+}
+
+.nav_login {
+  position: fixed;
+  right: 100px;
+  object-fit: contain;
+}
+
+.navlogin_btn span {  
+  color: white;
+}
+
+.navlogin_btn {
+  padding: 6px 25px;
+  border-radius: 15px;
+  background: none;
+  color: inherit;
+  border: 3px solid white;
+}
+
+/* Footer css */
+.footer_container {
+  padding: 40px;
+  text-align: center;
+  color: white;
+}
+
+/* Emptypage css */
+.emptypage {
+  height: 1000px;
+}
+
+/* Loading css */
+.loading_background {
+  position: fixed;
+  width: 100vw;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading_text {
+  font-size: 40px;
+  color: white;
+}
+

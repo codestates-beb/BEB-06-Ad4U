@@ -1,7 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 .supplierMypage_container {
-  position: relative;
-  margin-top: 200px;
-  height: 2000px;
+  margin-top: 130px;
+  min-height: 1000px;
+  font-family: "Montserrat"
+}
+
+.mypage_title {
+  color: white;
+  margin-bottom: 20px;
+  font-weight: 700;
 }
 
 .supplierMypage_row h1 {
@@ -13,10 +20,136 @@
   width: 930px;
 }
 
+.supplierPropose_div {
+  text-align: center;
+  font-size: large;
+  font-weight: 500;
+}
+
+.profile-content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(270px, 500px));
+}
+
+.profile-content_card-container {
+  text-align: center;
+  padding: 20px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+  background-color: white;
+}
+
 .accordion {
   margin-top: 20px;
 }
 
-.supplierMypage_accordion {
-  margin-top: 20px;
+/* management */
+.supplierManagement_container {
+  margin: auto;
+}
+
+.supplierChannelUrl {
+  text-decoration: none;
+  color: rgba(65, 61, 61, 0.834)
+}
+
+.supplierDivider_solid {
+  border-top: 2px solid #999; 
+}
+
+/* stage0 */
+.supplierStage0_contentArea {
+  height: 40px;
+  margin: auto;
+}
+
+.supplierStage0_contentArea div { 
+  margin-top: 10px;
+  font-size: large;
+  font-weight: 500;
+  text-align: center;
+}
+
+.supplierStage0_buttonArea {
+  margin: auto;
+  width: 180px;
+}
+
+/* stage1 */
+.supplierStage1_contentArea {
+  text-align: center;
+}
+
+.supplierStage1_descriptionArea {
+  margin-top: 10px;
+  font-size: large;
+  font-weight: 600;
+}
+
+.supplierStage1_detailArea {
+  font-size: small;
+  font-weight: 400;
+}
+
+/* stage2 */
+.supplierStage2_contentArea {
+  height: 80px;
+  display: flex;
+}
+
+.supplierStage2_contentArea div {
+  margin: auto;
+  font-size: large;
+  font-weight: 500;
+}
+
+/* stage3 */
+.supplierStage3_contentArea {
+  margin: auto;
+  text-align: center;
+}
+
+.supplierStage3_descriptionArea {
+  margin-top: 10px;
+  font-size: large;
+  font-weight: 600;
+}
+
+.supplierStage3_detailArea {
+  font-size: small;
+  font-weight: 400;
+}
+
+/* stage4 */
+.supplierStage4_contentArea {
+  margin: 30px;
+  text-align: center;
+}
+
+/* stage5 */
+.supplierStage5_contentArea {
+  margin: 30px;
+  text-align: center;
+}
+
+/* 제안받은 광고*/
+.linkToAd {
+  margin-top: 10px;
+  font-size: small;
+}
+
+.btnGroup {
+  display: flex;
+}
+
+.acceptBtn {
+  margin: 10px;
+  border: none;
+}
+
+.refuseBtn {
+  margin: 10px;
+  border: none;
 }

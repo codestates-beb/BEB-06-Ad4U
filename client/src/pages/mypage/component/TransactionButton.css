@@ -1,0 +1,93 @@
+.transaction_Button {
+  width: 130px;
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border-radius: 0.6em;
+  cursor: pointer;
+  align-self: center;
+  font-weight: 400;
+  line-height: 1;
+  margin: auto;
+  padding: 20px 10px;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Montserrat';
+  font-weight: 700;
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+/* client */
+/* select */
+.transaction_Button.select {
+  border: 3px solid #3abbc2;
+  color: #3abbc2;
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-left: 19px;
+}
+
+.transaction_Button.select:hover {
+  color: #fff;
+  box-shadow: 0 0 40px 40px #3abbc2 inset;
+}
+
+/* check */
+.transaction_Button.check {
+  border: 3px solid #426454;
+  color: #fff;
+  background-color: #426454;
+  margin-right: 10px;
+  margin-top: 3px;
+}
+
+/* confirm */
+.transaction_Button.confirm {
+  border: 3px solid #35d08f;
+  color: #35d08f;
+  margin-right: 10px;
+  margin-top: 3px;
+}
+
+.transaction_Button.confirm:hover {
+  color: #fff;
+  box-shadow: 0 0 40px 40px #35d08f inset;
+}
+
+/* revoke */
+.transaction_Button.revoke {
+  border: 3px solid #eb3d22;
+  color: #eb3d22;
+}
+
+.transaction_Button.revoke:hover {
+  color: #fff;
+  box-shadow: 0 0 40px 40px #eb3d22 inset;
+}
+
+/* supplier */
+/* apply_cancel */
+.transaction_Button.apply_cancel {
+  border: 3px solid #e9ae2d;
+  color: #e9ae2d;
+}
+
+.transaction_Button.apply_cancel:hover {
+  color: #fff;
+  box-shadow: 0 0 40px 40px #e9ae2d inset;
+}
+
+/* sign */
+.transaction_Button.sign {
+  border: 3px solid #592de9;
+  color: #592de9;
+}
+
+.transaction_Button.sign:hover {
+  color: #fff;
+  box-shadow: 0 0 40px 40px #592de9 inset;
+}
+
