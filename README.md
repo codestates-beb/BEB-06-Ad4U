@@ -240,7 +240,7 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 ### Demonstration video
       
 #### 메인페이지 <br>
-      <img src="https://user-images.githubusercontent.com/72719325/205683163-3728a14f-6c87-46c8-a27c-2308e5de5542.gif" alt="mainpage" width="380" height="300">
+      <img src="[https://user-images.githubusercontent.com/72719325/205683163-3728a14f-6c87-46c8-a27c-2308e5de5542.gif](https://user-images.githubusercontent.com/72719325/205683163-3728a14f-6c87-46c8-a27c-2308e5de5542.gif)" alt="mainpage" width="380" height="300">
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
