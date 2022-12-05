@@ -121,11 +121,15 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
       :star:
       <a>Frontend</a>
       <ul>
-        <li><a>Web3 API 작성</a></li>
+          <li><a>Web3 API 작성</a></li>
           <li><a>Aws S3 구축 및 API 작성</a></li>
           <li><a>Infura IPFS API 작성</a></li>
           <li><a>광고 업로드 기능 구현</a></li>
           <li><a>계약서 작성 및 다운로드 기능 구현</a></li>
+          <ul>
+            <li><a>계약서 작성 : 계약서 다운로드(복사본), 암호화, IPFS 업로드 및 getTokenURI ⇒ 다중 서명 지갑에 Tx 등록 및 SBT 발행</a></li>
+            <li><a>계약서 다운로드 : SBT 컨트랙트 접근 및 해당 계약에 대한 getTokenURI ⇒ IPFS 접근 후 파일 복호화 및 다운로드</a></li>
+          </ul>
           <li><a>광고 상세페이지 보완</a></li>
       </ul>
       :star:
@@ -138,13 +142,13 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 <details>
   <summary>팀원 강영아</summary>
   <ul>
-        :star:
+      :star:
       <a>Project Management</a>
       <ul>
         <li><a>프로젝트 Frontend WorkFlow 기획</a></li>
         <li><a>프로젝트 API & Frontent WireFrame 기획</a></li>
       </ul>
-    :star:
+      :star:
       <a>Frontend</a>
       <ul>
           <li><a>Main page 작성 및 기능구현</a></li>
@@ -161,21 +165,26 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 <details>
   <summary>팀원 이민욱</summary>
   <ul>
-        :star:
+      :star:
       <a>Project Management</a>
       <ul>
-        <li><a>프로젝트 계약 WorkFlow 기획</a></li>
-        <li><a>DB Table 설계</a></li>
+        <li><a>프로젝트 Frontend WorkFlow 기획</a></li>
+        <li><a>프로젝트 API & Frontent WireFrame 기획</a></li>
       </ul>
-    :star:
+      :star:
       <a>Frontend</a>
       <ul>
-        <li><a>Web3 API 작성</a></li>
-          <li><a>Aws S3 구축 및 API 작성</a></li>
-          <li><a>Infura IPFS API 작성</a></li>
-          <li><a>광고 업로드 기능 구현</a></li>
-          <li><a>계약서 작성 및 다운로드 기능 구현</a></li>
-          <li><a>광고 상세페이지 보완</a></li>
+          <li><a>Frontend API 작성</a></li>
+          <li><a>로그인, 로그아웃, 회원가입 페이지 작성 및 기능구현</a></li>
+          <ul>
+            <li><a>Google OAuth Autorization Code를 server에 전송</a></li>
+          </ul>
+          <li><a>Local Storage에 로그인정보를 저장하여 session유지</a></li>
+          <li><a>광고, 광고주, 크리에이터 검색기능 구현</a></li>
+          <li><a>광고 제안하기, 제안받기 기능구현</a></li>
+          <li><a>광고주, 크리에이터 마이페이지 작성 및 기능구현</a></li>
+          <li><a>마이페이지 진행상태별 필터링 기능구현, 컴포넌트 작성</a></li>
+          <li><a>contract confirm flow 개선(confirm check 기능)</a></li>
       </ul>
        :star:
       <a>Smart Contract</a>
@@ -196,7 +205,7 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
     :star:
       <a>Frontend</a>
       <ul>
-        <li><a>Web3 API 작성</a></li>
+          <li><a>Web3 API 작성</a></li>
           <li><a>Aws S3 구축 및 API 작성</a></li>
           <li><a>Infura IPFS API 작성</a></li>
           <li><a>광고 업로드 기능 구현</a></li>
