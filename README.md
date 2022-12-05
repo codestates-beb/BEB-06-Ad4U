@@ -1,15 +1,5 @@
 # BEB-06-Ad4U
-<div align="center">
 
-  <h1>Awesome Readme Template</h1>
-  
-  <p>
-    An awesome README template for your projects! 
-  </p>
-  
-</div>
-
-# Technical-Stack
 
 <div align=center><h1>📚 STACKS</h1></div>
 
