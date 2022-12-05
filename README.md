@@ -36,9 +36,10 @@
     <li><a href="#team">Team</a></li>
     <li><a href="#contact">Contact</a></li>
       
-    <li><details>
-          <summary href="#Demonstration video">Demonstration video</summary>
-    <ul>
+      <li><a href="#Demonstration video">Contact</a></li>
+      <details>
+          <summary>Demonstration video</summary>
+        <ul>
          <li><a href="#Preview">main</a></li>
          <li><a href="#Preview">Preview</a></li>
          <li><a href="#Preview">Preview</a></li>
@@ -52,7 +53,7 @@
          <li><a href="#Preview">Preview</a></li>
          <li><a href="#Preview">Preview</a></li>
       </ul>
-        </details></li>
+        </details>
   </ol>
 </details>
 
