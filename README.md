@@ -186,31 +186,37 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
           <li><a>마이페이지 진행상태별 필터링 기능구현, 컴포넌트 작성</a></li>
           <li><a>contract confirm flow 개선(confirm check 기능)</a></li>
       </ul>
-       :star:
-      <a>Smart Contract</a>
-      <ul>
-        <li><a>Smart Contract : 다중 서명, SBT(계약 증명) 발행 코드 등 전체 코드 작성 및 배포</a></li>
-      </ul>
   </ul>
 </details>
 <details>
   <summary>팀원 홍찬우</summary>
   <ul>
-        :star:
+      :star:
       <a>Project Management</a>
       <ul>
-        <li><a>프로젝트 계약 WorkFlow 기획</a></li>
+        <li><a>백엔드 WorkFlow 기획</a></li>
+        <li><a>컨트랙트 WorkFlow 기획</a></li>
+        <li><a>server API 설계, 문서 작성</a></li>
         <li><a>DB Table 설계</a></li>
       </ul>
-    :star:
-      <a>Frontend</a>
+      :star:
+      <a>Backend</a>
       <ul>
-          <li><a>Web3 API 작성</a></li>
-          <li><a>Aws S3 구축 및 API 작성</a></li>
-          <li><a>Infura IPFS API 작성</a></li>
-          <li><a>광고 업로드 기능 구현</a></li>
-          <li><a>계약서 작성 및 다운로드 기능 구현</a></li>
-          <li><a>광고 상세페이지 보완</a></li>
+          <li><a>AWS RDS 구축</a></li>
+          <li><a>sequalize ORM를 활용하여 DB와 서버 연동</a></li>
+          <li><a>google API 활용하여 회원가입 및 로그인 구현</a></li>
+          <ul>
+          <li><a>JWT 토큰 인증 방식 구현</a></li>
+          </ul>
+          <li><a>미들웨어 구현(사용자 인증)</a></li>
+          <li><a>페이지별 API 구현</a></li>
+          <ul>
+             <li><a>main, list, detail, create, delete 등 </a></li>
+          </ul>
+          <li><a>계약에 대한 서버 API 구현</a></li>
+           <ul>
+             <li><a>apply, cancel, conference, contract, complete 등 </a></li>
+          </ul>
       </ul>
        :star:
       <a>Smart Contract</a>
