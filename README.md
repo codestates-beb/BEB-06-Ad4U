@@ -122,7 +122,7 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 ## Contributing
 
 <details>
-  <summary>김현우</summary>
+  <summary>팀장 김현우</summary>
   <ol>
     <li>
       <a>About The Project</a>
@@ -146,7 +146,7 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
   </ol>
 </details>
 <details>
-  <summary>김현우</summary>
+  <summary>팀원 강영아</summary>
   <ol>
     <li>
       <a>About The Project</a>
@@ -170,7 +170,7 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
   </ol>
 </details>
 <details>
-  <summary>김현우</summary>
+  <summary>팀원 이민욱</summary>
   <ol>
     <li>
       <a>About The Project</a>
@@ -194,7 +194,7 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
   </ol>
 </details>
 <details>
-  <summary>김현우</summary>
+  <summary>팀원 홍찬우</summary>
   <ol>
     <li>
       <a>About The Project</a>
