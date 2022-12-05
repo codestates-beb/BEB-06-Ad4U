@@ -34,7 +34,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#Technical-Stack">Built With</a></li>
       </ul>
     </li>
     <li>
@@ -75,16 +75,7 @@ Use the `BLANK_README.md` to get started.
 
 
 
-### Built With
-
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-# Technical-Stack
-
-<div align=center><h1>📚 STACKS</h1></div>
-
-<div align=center>
-
+### Technical-Stack
 #### Frontend <br />
 
 <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"><img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"><img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white"> 
@@ -124,7 +115,6 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white">
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 
-</div>
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
