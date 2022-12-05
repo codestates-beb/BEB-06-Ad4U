@@ -112,6 +112,55 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 <details>
   <summary>팀장 김현우</summary>
   <ul>
+      :star:
+      <a>Project Management</a>
+      <ul>
+        <li><a>프로젝트 계약 WorkFlow 기획</a></li>
+        <li><a>DB Table 설계</a></li>
+      </ul>
+      :star:
+      <a>Frontend</a>
+      <ul>
+        <li><a>Web3 API 작성</a></li>
+          <li><a>Aws S3 구축 및 API 작성</a></li>
+          <li><a>Infura IPFS API 작성</a></li>
+          <li><a>광고 업로드 기능 구현</a></li>
+          <li><a>계약서 작성 및 다운로드 기능 구현</a></li>
+          <li><a>광고 상세페이지 보완</a></li>
+      </ul>
+      :star:
+      <a>Smart Contract</a>
+      <ul>
+        <li><a>Smart Contract : 다중 서명, SBT(계약 증명) 발행 코드 등 전체 코드 작성 및 배포</a></li>
+      </ul>
+  </ul>
+</details>
+<details>
+  <summary>팀원 강영아</summary>
+  <ul>
+        :star:
+      <a>Project Management</a>
+      <ul>
+        <li><a>프로젝트 Frontend WorkFlow 기획</a></li>
+        <li><a>프로젝트 API & Frontent WireFrame 기획</a></li>
+      </ul>
+    :star:
+      <a>Frontend</a>
+      <ul>
+          <li><a>Main page 작성 및 기능구현</a></li>
+          <li><a>Nav 작성 및 기능구현</a></li>
+          <li><a>List page 작성</a></li>
+          <li><a>기업 detail page 작성 및 기능 구현</a></li>
+          <li><a>Youtube API 활용하여 크리에이터 detail부분에 크리에이터가 유튜브에 올린 영상 보여주기 구현</a></li>
+          <li><a>광고 detail 부분 광고 지원하기, 취소하기 기능 구현</a></li>
+          <li><a>로딩페이지 구현</a></li>
+      </ul>
+
+  </ul>
+</details>
+<details>
+  <summary>팀원 이민욱</summary>
+  <ul>
         :star:
       <a>Project Management</a>
       <ul>
@@ -133,80 +182,33 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
       <ul>
         <li><a>Smart Contract : 다중 서명, SBT(계약 증명) 발행 코드 등 전체 코드 작성 및 배포</a></li>
       </ul>
-    :star:
   </ul>
 </details>
 <details>
-  <summary>팀원 강영아</summary>
-  <ol>
-    <li>
-      <a>About The Project</a>
-      <ul>
-        <li><a>Technical-Stack</a></li>
-      </ul>
-    </li>
-    <li>
-      <a>Getting Started</a>
-      <ul>
-        <li><a>Prerequisites</a></li>
-        <li><a>Installation</a></li>
-      </ul>
-    </li>
-    <li><a>Usage</a></li>
-    <li><a>Roadmap</a></li>
-    <li><a>Contributing</a></li>
-    <li><a>License</a></li>
-    <li><a>Contact</a></li>
-    <li><a>Acknowledgments</a></li>
-  </ol>
-</details>
-<details>
-  <summary>팀원 이민욱</summary>
-  <ol>
-    <li>
-      <a>About The Project</a>
-      <ul>
-        <li><a>Technical-Stack</a></li>
-      </ul>
-    </li>
-    <li>
-      <a>Getting Started</a>
-      <ul>
-        <li><a>Prerequisites</a></li>
-        <li><a>Installation</a></li>
-      </ul>
-    </li>
-    <li><a>Usage</a></li>
-    <li><a>Roadmap</a></li>
-    <li><a>Contributing</a></li>
-    <li><a>License</a></li>
-    <li><a>Contact</a></li>
-    <li><a>Acknowledgments</a></li>
-  </ol>
-</details>
-<details>
   <summary>팀원 홍찬우</summary>
-  <ol>
-    <li>
-      <a>About The Project</a>
+  <ul>
+        :star:
+      <a>Project Management</a>
       <ul>
-        <li><a>Technical-Stack</a></li>
+        <li><a>프로젝트 계약 WorkFlow 기획</a></li>
+        <li><a>DB Table 설계</a></li>
       </ul>
-    </li>
-    <li>
-      <a>Getting Started</a>
+    :star:
+      <a>Frontend</a>
       <ul>
-        <li><a>Prerequisites</a></li>
-        <li><a>Installation</a></li>
+        <li><a>Web3 API 작성</a></li>
+          <li><a>Aws S3 구축 및 API 작성</a></li>
+          <li><a>Infura IPFS API 작성</a></li>
+          <li><a>광고 업로드 기능 구현</a></li>
+          <li><a>계약서 작성 및 다운로드 기능 구현</a></li>
+          <li><a>광고 상세페이지 보완</a></li>
       </ul>
-    </li>
-    <li><a>Usage</a></li>
-    <li><a>Roadmap</a></li>
-    <li><a>Contributing</a></li>
-    <li><a>License</a></li>
-    <li><a>Contact</a></li>
-    <li><a>Acknowledgments</a></li>
-  </ol>
+       :star:
+      <a>Smart Contract</a>
+      <ul>
+        <li><a>Smart Contract : 다중 서명, SBT(계약 증명) 발행 코드 등 전체 코드 작성 및 배포</a></li>
+      </ul>
+  </ul>
 </details>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
