@@ -204,12 +204,17 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
       <ul>
           <li><a>AWS RDS 구축</a></li>
           <li><a>sequalize ORM를 활용하여 DB와 서버 연동</a></li>
-          <li><a>google API 활용하여 회원가입 및 로그인 구현</a></li>
-          <ul>
-          <li><a>JWT 토큰 인증 방식 구현</a></li>
-          </ul>
           <li><a>미들웨어 구현(사용자 인증)</a></li>
-          <li><a>페이지별 API 구현</a></li>
+          <li><a>user API 구현</a></li>
+          <ul>
+              <li><a>google API 활용하여 회원가입 및 로그인 API 구현</a></li>
+              <li><a>JWT 토큰 인증 방식 구현</a></li>
+              <li><a>mypage, refresh api 구현<a><li>
+          </ul>
+          <ul>
+             <li><a>main, list, detail, create, delete 등 </a></li>
+          </ul>
+          <li><a>Client, Supplier, Advertisement 페이지별 API 구현</a></li>
           <ul>
              <li><a>main, list, detail, create, delete 등 </a></li>
           </ul>
