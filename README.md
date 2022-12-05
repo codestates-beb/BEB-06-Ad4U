@@ -36,6 +36,23 @@
     <li><a href="#team">Team</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#Preview">Preview</a></li>
+      <details>
+          <summary>pages</summary>
+      <ul>
+         <li><a href="#Preview">Preview</a></li>
+         <li><a href="#Preview">Preview</a></li>
+         <li><a href="#Preview">Preview</a></li>
+         <li><a href="#Preview">Preview</a></li>
+         <li><a href="#Preview">Preview</a></li>
+         <li><a href="#Preview">Preview</a></li>
+         <li><a href="#Preview">Preview</a></li>
+         <li><a href="#Preview">Preview</a></li>
+         <li><a href="#Preview">Preview</a></li>
+         <li><a href="#Preview">Preview</a></li>
+         <li><a href="#Preview">Preview</a></li>
+         <li><a href="#Preview">Preview</a></li>
+      </ul>
+      </details>
   </ol>
 </details>
 
