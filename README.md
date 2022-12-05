@@ -119,22 +119,22 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
     <li>
       <a>Project Management</a>
       <ul>
-        <li><a>Technical-Stack</a></li>
+        <li><a>프로젝트 계약 WorkFlow 기획</a></li>
+        <li><a>DB Table 설계</a></li>
       </ul>
     </li>
     <li>
-      <a>Getting Started</a>
+      <a>Frontend</a>
       <ul>
-        <li><a>Prerequisites</a></li>
-        <li><a>Installation</a></li>
+        <li><a>Technical-Stack</a></li>
       </ul>
     </li>
-    <li><a>Usage</a></li>
-    <li><a>Roadmap</a></li>
-    <li><a>Contributing</a></li>
-    <li><a>License</a></li>
-    <li><a>Contact</a></li>
-    <li><a>Acknowledgments</a></li>
+       <li>
+      <a>Smart Contract</a>
+      <ul>
+        <li><a>Technical-Stack</a></li>
+      </ul>
+    </li>
   </ol>
 </details>
 <details>
