@@ -111,7 +111,7 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 
 <details>
   <summary>팀장 김현우</summary>
-  <ol>
+  <ul>
     <li>
       <a>Project Management</a>
       <ul>
@@ -131,7 +131,7 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
         <li><a>Technical-Stack</a></li>
       </ul>
     </li>
-  </ol>
+  </ul>
 </details>
 <details>
   <summary>팀원 강영아</summary>
