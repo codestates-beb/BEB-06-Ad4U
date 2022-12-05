@@ -10,16 +10,16 @@
 ## Frontend <br />
 
 <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
-<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> <br/>
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
 <img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white"> 
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black"> 
-<img src="https://img.shields.io/badge/React Router DOM-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white"><br/>
+<img src="https://img.shields.io/badge/React Router DOM-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white">
 <img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white">
 <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=Bootstrap&logoColor=white">
-<img src="https://img.shields.io/badge/aws s3-569A31?style=for-the-badge&logo=amazons3&logoColor=black"><br/>
+<img src="https://img.shields.io/badge/aws s3-569A31?style=for-the-badge&logo=amazons3&logoColor=black">
 <img src="https://img.shields.io/badge/ipfs http client-65C2CB?style=for-the-badge&logo=ipfs&logoColor=white">
 <img src="https://img.shields.io/badge/Web3.js-F16822?style=for-the-badge&logo=Web3.js&logoColor=white">
-<img src="https://img.shields.io/badge/env-ECD53F?style=for-the-badge&logo=.env&logoColor=black"><br/>
+<img src="https://img.shields.io/badge/env-ECD53F?style=for-the-badge&logo=.env&logoColor=black">
 
 ## Backend <br />
 
