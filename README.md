@@ -32,7 +32,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#Inspiration">Inspiration</a>
       <ul>
         <li><a href="#Technical-Stack">Technical-Stack</a></li>
       </ul>
@@ -49,7 +49,7 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Inspiration
 
 프로젝트 내용이 들어가야 함
 
