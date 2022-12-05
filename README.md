@@ -238,9 +238,19 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 
 <!-- Demonstration video -->
 ### Demonstration video
-      
-#### 메인페이지 <br>
-      <img src="[https://user-images.githubusercontent.com/72719325/205683163-3728a14f-6c87-46c8-a27c-2308e5de5542.gif](https://user-images.githubusercontent.com/72719325/205683163-3728a14f-6c87-46c8-a27c-2308e5de5542.gif)" alt="mainpage" width="380" height="300">
+#### UI
+##### 메인페이지
 
+![1 main](https://user-images.githubusercontent.com/72719325/205683163-3728a14f-6c87-46c8-a27c-2308e5de5542.gif)
+      
+##### 광고 조회 및 검색
+
+![2 search](https://user-images.githubusercontent.com/72719325/205684902-79d25881-3f8d-4971-86c7-d3da28da3eb4.gif)
+
+##### 회원가입 및 로그인
+     
+![3 signuplogin](https://user-images.githubusercontent.com/72719325/205685134-2447fb69-4425-4476-ac45-20fd1b58858f.gif)
+
+     
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
