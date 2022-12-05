@@ -33,24 +33,24 @@
     <li><a href="#team">Team</a></li>
     <li><a href="#Inspiration">Inspiration</a></li>
     <li><a href="#contact">Contact</a></li>
-     <li><a href="#Demonstration-video">Demonstration video</a></li>
+     <li><a href="#Demonstration-video">Demonstration-video</a></li>
       <details>
           <summary>UI</summary>
         <ul>
-         <li><a href="#Preview">메인페이지</a></li>
-         <li><a href="#Preview">광고 조회 및 검색</a></li>
-         <li><a href="#Preview">회원가입 및 로그인</a></li>
+         <li><a>메인페이지</a></li>
+         <li><a>광고 조회 및 검색</a></li>
+         <li><a>회원가입 및 로그인</a></li>
         </ul>
         </details>
       <details>
           <summary>Contract</summary>
         <ul>
-         <li><a href="#Preview">광고주) 광고 업로드, 삭제 및 제안</a></li>
-         <li><a href="#Preview">크리에이터) 광고 지원, 취소</a></li>
-         <li><a href="#Preview">광고주) 계약 생성</a></li>
-         <li><a href="#Preview">크리에이터) 계약 참여 서명</a></li>
-         <li><a href="#Preview">광고주) 계약서 작성</a></li>
-         <li><a href="#Preview">광고주, 크리에이터) 확인 or 파기 => 계약 완료</a></li>
+         <li><a>광고주) 광고 업로드, 삭제 및 제안</a></li>
+         <li><a>크리에이터) 광고 지원, 취소</a></li>
+         <li><a>광고주) 계약 생성</a></li>
+         <li><a>크리에이터) 계약 참여 서명</a></li>
+         <li><a>광고주) 계약서 작성</a></li>
+         <li><a>광고주, 크리에이터) 확인 or 파기 => 계약 완료</a></li>
         </ul>
         </details>
   </ol>
