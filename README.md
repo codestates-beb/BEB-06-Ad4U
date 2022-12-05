@@ -112,14 +112,13 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
 <details>
   <summary>팀장 김현우</summary>
   <ul>
-    <li>
+        :star:
       <a>Project Management</a>
       <ul>
         <li><a>프로젝트 계약 WorkFlow 기획</a></li>
         <li><a>DB Table 설계</a></li>
       </ul>
-    </li>
-    <li>
+    :star:
       <a>Frontend</a>
       <ul>
         <li><a>Web3 API 작성</a></li>
@@ -129,13 +128,12 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
           <li><a>계약서 작성 및 다운로드 기능 구현</a></li>
           <li><a>광고 상세페이지 보완</a></li>
       </ul>
-    </li>
-       <li>
+       :star:
       <a>Smart Contract</a>
       <ul>
         <li><a>Smart Contract : 다중 서명, SBT(계약 증명) 발행 코드 등 전체 코드 작성 및 배포</a></li>
       </ul>
-    </li>
+    :star:
   </ul>
 </details>
 <details>
