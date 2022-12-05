@@ -296,6 +296,32 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 <div>
 </ul>
 </details>
+
+<details>
+<summary>크리에이터) 계약 참여 서명</summary>
+<ul>
+<div align="center">
+<img src="https://user-images.githubusercontent.com/72719325/205687363-99d8e5dd-f179-4d94-836e-2b238193cd6e.gif" alt="create">
+</div>
+</ul>
+</details>
+
+<details>
+<summary>광고주) 계약서 작성</summary>
+<ul>
+<div align="center">
+<img src="https://user-images.githubusercontent.com/72719325/205687532-1d8e9d16-4f67-4642-9146-eae96d0ffcb6.gif" alt="apply" >
+<div>
+</ul>
+</details>
       
+<details>
+<summary>광고주, 크리에이터) 확인 or 파기 => 완료</summary>
+<ul>
+<div align="center">
+<img src="https://user-images.githubusercontent.com/72719325/205687763-929bb810-5edf-44ee-9dd5-2785ffd7032c.gif" alt="signuplogin">
+<div>
+</ul>
+</details>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
