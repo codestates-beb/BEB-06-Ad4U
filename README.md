@@ -11,7 +11,6 @@
 
   <p align="center">
     광고 중개 플랫폼서비스 Ad4U
-    <strong>Explore the docs »</strong></a>
     <br />
   </p>
 </div>
