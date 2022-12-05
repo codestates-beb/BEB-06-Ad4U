@@ -35,11 +35,10 @@
     <li><a href="#Technical-Stack">Technical-Stack</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#Preview">Preview</a></li>
       <details>
-          <summary>pages</summary>
+          <summary href="#Demonstration video">Demonstration video</summary>
       <ul>
-         <li><a href="#Preview">Preview</a></li>
+         <li><a href="#Preview">main</a></li>
          <li><a href="#Preview">Preview</a></li>
          <li><a href="#Preview">Preview</a></li>
          <li><a href="#Preview">Preview</a></li>
@@ -235,8 +234,8 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 
 
 
-<!-- Pages -->
-### Preview
+<!-- Demonstration video -->
+### Demonstration video
 
 Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
