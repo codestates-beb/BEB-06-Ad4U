@@ -122,13 +122,17 @@ See the [open issues](https://github.com/othneildrew/Best-README-Template/issues
     <li>
       <a>Frontend</a>
       <ul>
-        <li><a>Technical-Stack</a></li>
+        <li><a>Web3 API 작성</a></li>
+          <li><a>Technical-Stack</a></li>
+          <li><a>Technical-Stack</a></li>
+          <li><a>Technical-Stack</a></li>
+          <li><a>Technical-Stack</a></li>
       </ul>
     </li>
        <li>
       <a>Smart Contract</a>
       <ul>
-        <li><a>Technical-Stack</a></li>
+        <li><a>Smart Contract : 다중 서명, SBT(계약 증명) 발행 코드 등 전체 코드 작성 및 배포</a></li>
       </ul>
     </li>
   </ul>
