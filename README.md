@@ -10,7 +10,7 @@
   <h3 align="center">Ad4U</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    광고 중개 플랫폼서비스 Ad4U
     <strong>Explore the docs »</strong></a>
     <br />
   </p>
