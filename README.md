@@ -292,7 +292,7 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 <summary>광고주) 계약 생성</summary>
 <ul>
 <div align="center">
-<img src="https://user-images.githubusercontent.com/72719325/205687763-929bb810-5edf-44ee-9dd5-2785ffd7032c.gif" alt="signuplogin">
+<img src="https://user-images.githubusercontent.com/72719325/205687763-929bb810-5edf-44ee-9dd5-2785ffd7032c.gif" alt="conference">
 <div>
 </ul>
 </details>
@@ -301,7 +301,7 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 <summary>크리에이터) 계약 참여 서명</summary>
 <ul>
 <div align="center">
-<img src="https://user-images.githubusercontent.com/72719325/205687363-99d8e5dd-f179-4d94-836e-2b238193cd6e.gif" alt="create">
+<img src="https://user-images.githubusercontent.com/72719325/205689231-ec0a821e-969c-47d2-97a4-afe3c808687f.gif" alt="sign">
 </div>
 </ul>
 </details>
@@ -310,7 +310,7 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 <summary>광고주) 계약서 작성</summary>
 <ul>
 <div align="center">
-<img src="https://user-images.githubusercontent.com/72719325/205687532-1d8e9d16-4f67-4642-9146-eae96d0ffcb6.gif" alt="apply" >
+<img src="https://user-images.githubusercontent.com/72719325/205689355-de86dbc6-32d0-4655-82a5-1630a38fd863.gif" alt="contract" >
 <div>
 </ul>
 </details>
@@ -318,9 +318,16 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 <details>
 <summary>광고주, 크리에이터) 확인 or 파기 => 완료</summary>
 <ul>
+<li><a>광고주</a>
 <div align="center">
-<img src="https://user-images.githubusercontent.com/72719325/205687763-929bb810-5edf-44ee-9dd5-2785ffd7032c.gif" alt="signuplogin">
+<img src="https://user-images.githubusercontent.com/72719325/205689739-96699802-9043-4dcf-8a9b-ad821362b3e1.gif" alt="clientcomplete">
 <div>
+</li>
+<li><a>크리에이터</a>
+<div align="center">
+<img src="https://user-images.githubusercontent.com/72719325/205689747-1de2636b-9309-4e49-ac86-e342bb7da6f8.gif" alt="suppliercomplete">
+<div>
+</li>
 </ul>
 </details>
 
