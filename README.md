@@ -31,9 +31,9 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#Inspiration">Inspiration</a></li>
     <li><a href="#Technical-Stack">Technical-Stack</a></li>
     <li><a href="#team">Team</a></li>
+    <li><a href="#Inspiration">Inspiration</a></li>
     <li><a href="#contact">Contact</a></li>
      <li><a href="#Demonstration video">Demonstration video</a></li>
       <details>
@@ -59,13 +59,6 @@
 </details>
 
 
-
-<!-- ABOUT THE PROJECT -->
-### Inspiration
-
-프로젝트 내용이 들어가야 함
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -224,6 +217,14 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+      
+<!-- ABOUT THE PROJECT -->
+### Inspiration
+
+프로젝트 내용이 들어가야 함
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- CONTACT -->
