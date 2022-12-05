@@ -5,7 +5,7 @@
 
 <div align=center><h1>📚 STACKS</h1></div>
 
-<div align=center>
+
 
 ## Frontend <br />
 
@@ -47,5 +47,3 @@
 <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"><br/>
 <img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white">
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"><br/>
-
-</div>
