@@ -30,7 +30,6 @@
     <li><a href="#Technical-Stack">Technical-Stack</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#Inspiration">Inspiration</a></li>
-    <li><a href="#contact">Contact</a></li>
      <li><a href="#Demonstration-video">Demonstration-video</a></li>
       <details>
           <summary>UI</summary>
@@ -221,10 +220,12 @@
 
 첫번째. **높은 중개수수료**
 마케팅 대행사를 거치면 중개수수료가 발생합니다. 광고 제품의 종류에 따라, 마케팅 목표에 따라, 인플루언서에 따라, 여러 조건들을 따져 중개수수료를 책정합니다. 숨고에 따르면 인플루언서 마케팅 예상 견적 비용은 평균 월 123.3만원으로 산출되었습니다. (최저 비용 : 30만원 / 최고 비용 : 300만원)
+
 <div align="center">
 <img width="700" alt="insp" src="https://user-images.githubusercontent.com/72719325/205801152-8de0f7c5-faa7-4af8-8a13-83e8094896b3.png">
-</div>
-두번째. **계약서 작성 및** **광고비 정산**
+</div><br>
+
+두번째. **계약서 작성 및 광고비 정산**
 상호 계약의 원활한 진행을 위해 계약서를 필히 작성해야하지만 대부분의 광고 진행이 계약서 없이 진행되는 경우가 많습니다. 그러므로 크리에이터 활동을 하다보면 광고비 정산이 늦어지는 경우가 비일비재합니다. 이는 기업과 크리에이터 간의 신뢰문제가 발생할 수 있습니다.
 
 세번째. **단방향 선택** 
@@ -236,7 +237,7 @@
 
 계약 완료 기준, 발생되는 수수료는 계약 건당 평균 14만원이며, 이외 중개수수료는 0원입니다.
 
-### **광고주 계약금  미리 예치, 전자서명**
+### **광고주 계약금 미리 예치, 전자서명**
 
 스마트 컨트랙트 상에서 전자계약서가 생성되면서 **광고주가 계약금을 예치**하게하였고, **전자서명**으로 쉽고 빠르게 안전한 계약 체결이 가능합니다.
 :: 기본 계약 템플릿 제공, 따로 계약 사항 추가 가능
@@ -247,17 +248,6 @@
 광고주측에서 크리에이터에게 광고 제안을 보낼 수도 있을 뿐만 아니라, 크리에이터가 광고를 선택하여 지원할 수 있게 하였습니다.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-<!-- CONTACT -->
-### Contact
-
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- Demonstration video -->
