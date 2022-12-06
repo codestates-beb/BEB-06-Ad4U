@@ -32,7 +32,6 @@
 <!-- TABLE OF CONTENTS -->
 
   <ol>
-    <li><a href="#Technical-Stack">Technical-Stack</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#Inspiration">Inspiration</a></li>
      <li><a href="#Demonstration-video">Demonstration-video</a></li>
