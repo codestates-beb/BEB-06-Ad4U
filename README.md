@@ -98,6 +98,7 @@
 <details>
   <summary>팀장 김현우</summary>
   <ul>
+      :white_check_mark:<a href="https://github.com/apfl99">https://github.com/apfl99</a><br>
       :star:
       <a>Project Management</a>
       <ul>
@@ -128,6 +129,7 @@
 <details>
   <summary>팀원 강영아</summary>
   <ul>
+      :white_check_mark:<a href="https://github.com/Ellie-kang">https://github.com/Ellie-kang</a><br>
       :star:
       <a>Project Management</a>
       <ul>
@@ -151,6 +153,7 @@
 <details>
   <summary>팀원 이민욱</summary>
   <ul>
+      :white_check_mark:<a href="https://github.com/yiminwook">https://github.com/yiminwook</a><br>
       :star:
       <a>Project Management</a>
       <ul>
@@ -177,7 +180,7 @@
 <details>
   <summary>팀원 홍찬우</summary>
   <ul>
-      :white_check_mark:<a href="https://github.com/HCW-code">https://github.com/HCW-code</a>
+      :white_check_mark:<a href="https://github.com/HCW-code">https://github.com/HCW-code</a><br>
       :star:
       <a>Project Management</a>
       <ul>
