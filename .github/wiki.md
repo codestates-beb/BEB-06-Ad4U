@@ -1,4 +1,12 @@
-# Core Configuration
+# Advertisement For You (Ad4U)
+💎 Codestates Blockchain Engineering Bootcamp Final Project 
+<br />
+<br />
+<br />
+
+### ♻️ Core Configuration
+<br />
+
 <p align="center">
   <img src="./wiki_img/core_configuration.png" alt="core_configuration.png" width="800"/>
 </p>
@@ -40,18 +48,25 @@
 
 계약 완료
 
-- 완료는 광고주와 크리에이터가 4번 과정의 계약 내용에 대해 성실히 이행됨을 확인하고, 해당 계약을 성공적으로 종료하는 것입니다.<br /> 
-이에 광고주와 크리에이터 모두 4번 과정의 계약 정보에 Confirm을 함으로써, 해당 계약 정보의 Confirm 횟수가 2회가 되면,<br />
-예치금은 자동으로 크리에이터에게 전송됩니다.
+- 완료는 광고주와 크리에이터가 4번 과정의 계약 내용에 대해 성실히 이행됨을 확인하고,<br />  
+해당 계약을 성공적으로 종료하는 것입니다. 이에 광고주와 크리에이터 모두 4번 과정의 계약 정보에 Confirm을 함으로써,<br />
+해당 계약 정보의 Confirm 횟수가 2회가 되면,예치금은 자동으로 크리에이터에게 전송됩니다.
 
 계약 파기
 
-- 파기는 광고주나 크리에이터 둘 중 한 사람이라도 계약에 대해 마찰이 생겨 계약을 파기해야할 경우, 한 명이라도 4번 과정의 계약 정보에 대해 Revoke를 하게 되면, 그 즉시 계약 파기로 간주하고 예치금은 광고주에게 다시 전송됩니다.
+- 파기는 광고주나 크리에이터 둘 중 한 사람이라도 계약에 대해 마찰이 생겨 계약을 파기해야할 경우,<br /> 
+한 명이라도 4번 과정의 계약 정보에 대해 Revoke를 하게 되면, 그 즉시 계약 파기로 간주하고 예치금은 광고주에게 다시 전송됩니다.
     - 이 때, 계약서(SBT)는 파기되지 않습니다.
 <br />
 <br />
 
-# Wire Frame
+***
+<br />
+
+
+### 🛠 Wire Frame
+<br />
+
 <p align="center">
   <img src="./wiki_img/wire_frame/1.mainLogin.png" alt="1.mainLogin.png" width="800"/>
   <img src="./wiki_img/wire_frame/2.listDetail.png" alt="2.listDetail.png" width="800"/>
@@ -60,14 +75,19 @@
 <br />
 <br />
 
-# Work Flow
+***
 <br />
 
- ### frontend
-  <p align="center">
-    <img src="./wiki_img/work_flow/1.frontend.png" alt="1.frontend.png" width="800"/>
-  </p>
+### 📝 Work Flow
 <br />
+
+
+<p align="center">
+  <img src="./wiki_img/work_flow/1.frontend.png" alt="1.frontend.png" width="800"/>
+</p>
+<br />
+
+#### Frontend
 
 1. 로그인 여부를 확인하여 Nav의 구성이 바뀝니다.
     - 로그인되어있지 않은 경우, 프로필 이미지 대신에 로그인 버튼이 활성화가 됩니다.
@@ -115,7 +135,73 @@
         - **진행중**인 광고에서 컨펌(Confirm) 또는 파기(Revoke) 할 수 있습니다.
         - **진행중**, **완료**, **파기**된 광고의 계약서를 다운받을 수 있습니다.
 
-# Technical-Stack
+***
+<br />
+
+
+<p align="center">
+  <img src="./wiki_img/work_flow/2.backend.png" alt="2.backend.png" width="800"/>
+</p>
+<br />
+
+#### Backend
+<br />
+
+1. 회원가입시 광고주와 크리에이터로 나누어서 회원가입을 진행합니다.
+    - 광고주 : google 계정정보(google email)를 oauth 를 통해 불러오며 그 외의 필요한 정보들을 입력하고 회원가입을 진행합니다.
+    - 크리에이터 : google 계정정보(google email)와 youtube 채널 정보(채널명, 구독자수 등)를<br />
+oauth와 accessToken으로 불러오며 그 외의 필요한 정보들을 입력하고<br /> 
+회원가입을 진행합니다. 크리에이터로 회원가입할때 google에서 받은<br /> 
+refreshToken은 DB에 저장하여 로그인 크리에이터가 로그인할때마다<br /> 
+youtube 채널 정보를 최신화하기 위해 사용합니다.<br />
+2. 광고주 또는 크리에이터로 로그인을 진행하며 이로인해 로그인 했을때 사용할 수 있는 기능들이 달라집니다.<br /> 
+로그인 후 인증은 JWT토큰을 사용하여 구현하였습니다.
+    - 광고주 기능 : 광고모집글 작성, 광고모집글 삭제, 크리에이터에게 광고 제안, 계약 협의, 계약서 작성, 계약서 확인, 계약 confirm/revoke
+    - 크리에이터 기능 : 모집중인 광고에 신청, 광고주가 협의를 진행할 시 이를 수락/거절, 계약서 확인, 계약 confirm/revoke
+3. 광고주는 광고모집 게시글을 작성할 수 있으며 이를 삭제할 수 있습니다.
+4. 크리에이터는 광고모집 게시글에 자신의 채널로 신청할 수 있습니다. 또는 광고주가 광고를 제안할 시에 제안을 수락하면 자동으로 신청됩니다.
+5. 광고주는 신청한 크리에이터들 중에 한 명을 선택 후 협의를 진행합니다. 이때 MultisigWallet이 생성되며 생성된 지갑의 주소를 DB에 저장합니다.
+6. 크리에이터는 협의가 들어왔을때 수락 또는 거절을 할 수 있습니다.
+7. 광고주는 크리에이터가 협의를 끝내고 수락시 계약서를 작성합니다. 이를 체인에 등록하고 SBT로 만들어서 토큰 주소와 id, uri를 DB에 저장합니다.
+8. 계약이 무사히 완료되면 양쪽의 confirm을 통해 계약을 완료할 수 있고 한 명이 revoke를 하면 계약을 파기할 수 있습니다.
+
+***
+<br />
+
+<p align="center">
+  <img src="./wiki_img/work_flow/3.smart_contract.png" alt="3.smart_contract.png" width="800"/>
+</p>
+<br />
+
+#### Smart contract
+<br />
+
+1. Multi-Sig Wallet 배포
+    - 광고주는 자신이 계약할 크리에이터의 주소를 인자값으로 Wallet을 생성함으로써 계약을 시작합니다.
+    - 이 때, Multi-Sig Wallet은 광고주가 Owner로 등록되며, 크리에이터는 Owner 후보로 등록됩니다.
+2. SupplierSign
+    - 크리에이터가 계약에 참여함을 서명하는 함수로, 해당 함수는 1번 과정에서 등록된 Owner 후보 주소로만 서명이 가능합니다.
+    - 이 과정을 통해 Owner가 2명이 되어야만 계약을 진행할 수 있습니다.
+3. SubmitTransaction
+    - 광고주가 계약을 진행하기 위해 계약서를 작성한 후 실행하는 함수로,  계약서 내용에 따라 크리에이터에게, 얼마를 보낼 것인지, 암호화된 계약서 IPFS Link가 인자값으로 들어갑니다.
+    - 이 과정에서 암호화된 계약서 IPFS Link는 계약 증명을 위한 SBT 토큰의 URI로 들어가며, 크리에이터 주소로 발행됩니다.
+    - 또한, 계약 완료시 자동으로 실행될 트랜잭션을 등록합니다.
+        - 트랜잭션에는 크리에이터에게 얼마를 보낼 것인지와 암호화된 계약서 IFPS Link가 데이터로 들어갑니다.
+        - 이 과정에서 계약 금액은 Multi-Sig Wallet에 예치됩니다.
+4. ConfirmTransaction
+    - 광고주와 크리에이터가  등록된 트랜잭션 수행에 대한 승인 의사를 나타낼 수 있는 함수로,  3번 과정에서 등록된 트랜잭션에 대해 실행할 것인지 각자 의견을 Confirm을 통해 나타냅니다.
+    - 3번 과정에서 등록된 트랜잭션의 Confirm 횟수가 2회가 되면, 광고주와 크리에이터 모두 승낙한 것이기 때문에 등록된 트랜잭션이 자동으로 수행되며, 이 경우 크리에이터는 예치금을 받게 됩니다.
+    - 해당 트랜잭션은 실행됨 상태로 저장됩니다.
+5. RevokeTransaction
+    - 광고주나 크리에이터 둘 중 한 명이 등록된 트랜잭션 수행에 대한 거부 의사를 나타낼 수 있는 함수로, 3번 과정에서 등록된 트랜잭션에 대해 거부할 것인지 각자 의견을 Revoke를 통해 나타냅니다.
+    - 이 경우, 한 명이라도 Revoke를 통해 거부 의사를 나타낸다면, 파기로 간주하고 예치금은 광고주에게 돌아갑니다.
+    - 해당 트랜잭션은 파기됨 상태로 저장됩니다.
+
+***
+<br />
+
+### 📦 Technical-Stack
+<br />
 
 <p align="center">
   Frontend
