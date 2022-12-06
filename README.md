@@ -177,6 +177,7 @@
 <details>
   <summary>팀원 홍찬우</summary>
   <ul>
+      :white_check_mark:<p href="https://github.com/HCW-code">https://github.com/HCW-code</p>
       :star:
       <a>Project Management</a>
       <ul>
