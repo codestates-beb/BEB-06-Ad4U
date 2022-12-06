@@ -6,9 +6,10 @@
 <div align="center">
     <img src="https://user-images.githubusercontent.com/72719325/205561063-d6c54654-31c1-4319-8bc1-4d5add334130.png" alt="Logo" width="380" height="300">
   <h3 align="center">Ad4U</h3>
+  <a href="https://pollen-rocket-850.notion.site/Advertisement-For-You-Ad4U-66aa4aec4aa64fddbff4a875512caa1b">소개 문서 : [노션 링크]</a>
 
   <p align="center">
-    광고 중개 플랫폼서비스 Ad4U
+    광고 중개 플랫폼서비스
     <br />
   </p>
 </div>
