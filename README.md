@@ -98,7 +98,6 @@
 <details>
   <summary>팀장 김현우</summary>
   <ul>
-      :white_check_mark:<a href="https://github.com/apfl99">https://github.com/apfl99</a><br>
       :star:
       <a>Project Management</a>
       <ul>
@@ -125,11 +124,11 @@
         <li><a>Smart Contract : 다중 서명, SBT(계약 증명) 발행 코드 등 전체 코드 작성 및 배포</a></li>
       </ul>
   </ul>
+  <div align="right">:white_check_mark:<a href="https://github.com/apfl99">https://github.com/apfl99</a></div>
 </details>
 <details>
   <summary>팀원 강영아</summary>
   <ul>
-      :white_check_mark:<a href="https://github.com/Ellie-kang">https://github.com/Ellie-kang</a><br>
       :star:
       <a>Project Management</a>
       <ul>
@@ -149,11 +148,11 @@
       </ul>
 
   </ul>
+  <div align="right">:white_check_mark:<a href="https://github.com/Ellie-kang">https://github.com/Ellie-kang</a></a></div>
 </details>
 <details>
   <summary>팀원 이민욱</summary>
   <ul>
-      :white_check_mark:<a href="https://github.com/yiminwook">https://github.com/yiminwook</a><br>
       :star:
       <a>Project Management</a>
       <ul>
@@ -176,11 +175,11 @@
           <li><a>contract confirm flow 개선(confirm check 기능)</a></li>
       </ul>
   </ul>
+  <div align="right">:white_check_mark:<a href="https://github.com/yiminwook">https://github.com/yiminwook</a></div>
 </details>
 <details>
   <summary>팀원 홍찬우</summary>
   <ul>
-      :white_check_mark:<a href="https://github.com/HCW-code">https://github.com/HCW-code</a><br>
       :star:
       <a>Project Management</a>
       <ul>
@@ -211,6 +210,7 @@
           </ul>
       </ul>
   </ul>
+  <div align="right">:white_check_mark:<a href="https://github.com/HCW-code">https://github.com/HCW-code</a></div>
 </details>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
