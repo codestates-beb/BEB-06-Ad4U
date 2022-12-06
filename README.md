@@ -26,7 +26,6 @@
 
 <!-- TABLE OF CONTENTS -->
 
-### Table of Contents
   <ol>
     <li><a href="#Technical-Stack">Technical-Stack</a></li>
     <li><a href="#team">Team</a></li>
