@@ -73,7 +73,6 @@
   <img src="./wiki_img/wire_frame/3.mypage.png" alt="3.mypage.png" width="800"/>
 </p>
 <br />
-<br />
 
 ***
 <br />
@@ -81,13 +80,13 @@
 ### 📝 Work Flow
 <br />
 
+#### Frontend
+<br />
 
 <p align="center">
   <img src="./wiki_img/work_flow/1.frontend.png" alt="1.frontend.png" width="800"/>
 </p>
 <br />
-
-#### Frontend
 
 1. 로그인 여부를 확인하여 Nav의 구성이 바뀝니다.
     - 로그인되어있지 않은 경우, 프로필 이미지 대신에 로그인 버튼이 활성화가 됩니다.
@@ -138,13 +137,12 @@
 ***
 <br />
 
+#### Backend
+<br />
 
 <p align="center">
   <img src="./wiki_img/work_flow/2.backend.png" alt="2.backend.png" width="800"/>
 </p>
-<br />
-
-#### Backend
 <br />
 
 1. 회원가입시 광고주와 크리에이터로 나누어서 회원가입을 진행합니다.
@@ -168,12 +166,23 @@ youtube 채널 정보를 최신화하기 위해 사용합니다.<br />
 ***
 <br />
 
+#### DB schema
+<br />
+
 <p align="center">
-  <img src="./wiki_img/work_flow/3.smart_contract.png" alt="3.smart_contract.png" width="800"/>
+  <img src="./wiki_img/db_schema.png" alt="db_schema.png" width="800"/>
 </p>
 <br />
 
+***
+<br />
+
 #### Smart contract
+<br />
+
+<p align="center">
+  <img src="./wiki_img/work_flow/3.smart_contract.png" alt="3.smart_contract.png" width="800"/>
+</p>
 <br />
 
 1. Multi-Sig Wallet 배포
